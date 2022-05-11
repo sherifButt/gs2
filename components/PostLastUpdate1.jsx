@@ -83,18 +83,18 @@ const PostLastUpdate = () => {
                         Like
                      </p>
                   </div>
-                  <div className='flex flex-col gap-2 justify-start items-center'>
+                  <div className='flex flex-col gap-2 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
                      <img
-                        className='block hover:scale-125 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'
+                        className='block '
                         src='/assets/images/share.svg'
                      />
                      <p className='block text-[1.06rem] text-black '>
                         Share
                      </p>
                   </div>
-                  <div className='flex flex-col gap-2 justify-start items-center'>
+                  <div className='flex flex-col gap-2 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
                      <img
-                        className='block hover:scale-125 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'
+                        className='block  '
                         src='/assets/images/comment.svg'
                      />
                      <p className='block text-[1.06rem] text-black '>
