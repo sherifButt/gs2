@@ -17,13 +17,13 @@ const PostLastUpdate = () => {
       <div>
          <div className='flex flex-col gap-2 justify-center items-start max-w-md mx-auto p-5 bg-white sm:rounded-xl rounded-none shadow-md sm:mt-6 mt-0 '>
             <div className='flex flex-row flex-wrap sm:flex-nowrap  justify-start items-start w-full'>
-               <div className='flex flex-col gap-10 m-4 sm:m-0 justify-start items-center w-16 h-full'>
+               <div className='flex flex-col gap-10 mb-2 justify-start items-center w-16 h-full'>
                   <img
                      className='block rounded-full w-16'
                      src='/assets/images/image-natasha.png'
                   />
                </div>
-               <div className='flex flex-col gap-2.5 justify-start items-start w-full  pl-5 pb-5'>
+               <div className='flex flex-col gap-2.5 justify-start items-start w-full  pl-0 sm:pl-5 pb-5'>
                   <p className='block text-lg text-black  font-semibold'>
                      {name}
                   </p>
