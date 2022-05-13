@@ -15,7 +15,7 @@ const PostLastUpdate = () => {
 
    return (
       <div>
-         <div className='flex flex-col gap-2 justify-center items-start sm:max-w-md max-w-none mx-auto p-5 bg-white sm:rounded-xl rounded-none  sm:shadow-md sm:mt-6 mt-0 '>
+         <div className='flex flex-col gap-2 justify-center items-start   mx-auto p-5 bg-white sm:max-w-md sm:rounded-xl sm:shadow-md sm:mt-6 sm:border'>
             <div className='flex flex-row flex-wrap sm:flex-nowrap  justify-start items-start w-full'>
                <div className='flex flex-col gap-10 mb-2 justify-start items-center w-16 h-full'>
                   <img
@@ -36,22 +36,22 @@ const PostLastUpdate = () => {
                   <div className='flex flex-row  gap-2.5 justify-start items-center mx-auto xs:mx-0'>
                      <div className='flex flex-wrap  gap-1.5 justify-start items-center'>
                         <img
-                           className='block hover:scale-110 hover:drop-shadow transition duration-300 ease-in-out active:scale-95'
+                           className='block hover:scale-110 hover:drop-shadow hover:-translate-y-1 transition duration-300 ease-in-out active:scale-95'
                            src='/assets/images/love.svg'
                            onClick={() => dispatch(like())}
                         />
                         <img
-                           className='block hover:scale-110 hover:drop-shadow transition duration-300 ease-in-out active:scale-95'
+                           className='block hover:scale-110 hover:drop-shadow hover:-translate-y-1 transition  duration-300 ease-in-out active:scale-95'
                            src='/assets/images/star.svg'
                            onClick={() => dispatch(like())}
                         />
                         <img
-                           className='block hover:scale-110 hover:drop-shadow transition duration-300 ease-in-out active:scale-95'
+                           className='block hover:scale-110 hover:drop-shadow hover:-translate-y-1 transition duration-300 ease-in-out active:scale-95'
                            src='/assets/images/like-green.svg'
                            onClick={() => dispatch(like())}
                         />
                         <img
-                           className='block hover:scale-110 hover:drop-shadow transition duration-300 ease-in-out active:scale-95'
+                           className='block hover:scale-110 hover:drop-shadow hover:-translate-y-1 transition duration-300 ease-in-out active:scale-95'
                            src='/assets/images/fire.svg'
                            onClick={() => dispatch(like())}
                         />
@@ -71,29 +71,29 @@ const PostLastUpdate = () => {
                </div>
                <div className='flex flex-row flex-wrap justify-between items-center w-full'>
                   <div
-                     className='flex flex-col gap-2.5 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'
+                     className='flex flex-col gap-2.5 justify-start items-center  transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'
                      onClick={() => dispatch(like())}>
                      <img
                         className='block   '
                         src='/assets/images/like.svg'
                      />
-                     <p className='block text-lg text-black '>Like</p>
+                     <p className='block text-md text-black '>Like</p>
                   </div>
-                  <div className='flex flex-col gap-2 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
+                  <div className='flex flex-col gap-2 justify-start items-center  transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
                      <img
                         className='block '
                         src='/assets/images/share.svg'
                      />
-                     <p className='block text-lg text-black '>
+                     <p className='block text-md text-black '>
                         Share
                      </p>
                   </div>
-                  <div className='flex flex-col gap-2 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
+                  <div className='flex flex-col gap-2 justify-start items-center  transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
                      <img
                         className='block  '
                         src='/assets/images/comment.svg'
                      />
-                     <p className='block text-lg text-black '>
+                     <p className='block text-md text-black '>
                         Comment
                      </p>
                   </div>
