@@ -15,28 +15,26 @@ const PostLastUpdate = () => {
 
    return (
       <div>
-         <div className='flex flex-col gap-[0.69rem] justify-center items-start max-w-[31.25rem] mx-auto p-[1.06rem] bg-white rounded-xl'>
-            <div className='flex flex-row justify-start items-start w-full'>
-               <div className='flex flex-col gap-10 justify-start items-center'>
+         <div className='flex flex-col gap-2 justify-center items-start max-w-md mx-auto p-5 bg-white sm:rounded-xl rounded-none shadow-md sm:mt-6 mt-0 '>
+            <div className='flex flex-row flex-wrap sm:flex-nowrap  justify-start items-start w-full'>
+               <div className='flex flex-col gap-10 m-4 sm:m-0 justify-start items-center w-16 h-full'>
                   <img
                      className='block rounded-full w-16'
                      src='/assets/images/image-natasha.png'
                   />
                </div>
-               <div className='flex flex-col gap-[0.56rem] justify-start items-start w-full h-full pl-[1.31rem] pb-5'>
+               <div className='flex flex-col gap-2.5 justify-start items-start w-full  pl-5 pb-5'>
                   <p className='block text-lg text-black  font-semibold'>
                      {name}
                   </p>
                   <p className='block text-neutral-500 '>1 day</p>
-                  <p className='block w-full text-black '>
-                     {comment}
-                  </p>
+                  <p className='block  text-black '>{comment}</p>
                </div>
             </div>
             <div className='flex flex-col gap-5 justify-start items-start w-full'>
-               <div className='flex flex-row justify-between items-center w-full py-[1.19rem] border-gray-100 border-b'>
-                  <div className='flex flex-row gap-[0.69rem] justify-start items-center'>
-                     <div className='flex  gap-1.5 justify-start items-center'>
+               <div className='flex flex-row flex-wrap justify-between items-center w-full py-4 border-gray-100 border-b'>
+                  <div className='flex flex-row  gap-2.5 justify-start items-center mx-auto xs:mx-0'>
+                     <div className='flex flex-wrap  gap-1.5 justify-start items-center'>
                         <img
                            className='block hover:scale-110 hover:drop-shadow transition duration-300 ease-in-out active:scale-95'
                            src='/assets/images/love.svg'
@@ -59,36 +57,34 @@ const PostLastUpdate = () => {
                         />
                      </div>
                      <div className='flex flex-row gap-5 justify-end items-center '>
-                        <p className='block text-[1.06rem] text-black  font-bold'>
+                        <p className='block text-lg text-black  font-bold'>
                            {Number(loves + stars + likes + hot)}
                         </p>
                      </div>
                   </div>
-                  <div className='flex flex-row gap-[1.69rem] justify-end items-center'>
-                     <p className='inline-block text-right text-[1.06rem] text-black '>
+                  <div className='flex flex-row gap-4 justify-end  items-center my-4 xs:my-0 mx-auto xs:mx-0'>
+                     <p className='inline-block  text-lg text-black '>
                         {comments.length} comment
                         {comments.length > 1 && 's'}
                      </p>
                   </div>
                </div>
-               <div className='flex flex-row justify-between items-center w-full'>
+               <div className='flex flex-row flex-wrap justify-between items-center w-full'>
                   <div
-                     className='flex flex-col gap-[0.56rem] justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'
+                     className='flex flex-col gap-2.5 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'
                      onClick={() => dispatch(like())}>
                      <img
                         className='block   '
                         src='/assets/images/like.svg'
                      />
-                     <p className='block text-[1.06rem] text-black '>
-                        Like
-                     </p>
+                     <p className='block text-lg text-black '>Like</p>
                   </div>
                   <div className='flex flex-col gap-2 justify-start items-center hover:scale-110 transition duration-300 ease-in-out active:scale-95 hover:drop-shadow'>
                      <img
                         className='block '
                         src='/assets/images/share.svg'
                      />
-                     <p className='block text-[1.06rem] text-black '>
+                     <p className='block text-lg text-black '>
                         Share
                      </p>
                   </div>
@@ -97,7 +93,7 @@ const PostLastUpdate = () => {
                         className='block  '
                         src='/assets/images/comment.svg'
                      />
-                     <p className='block text-[1.06rem] text-black '>
+                     <p className='block text-lg text-black '>
                         Comment
                      </p>
                   </div>
