@@ -28,20 +28,20 @@
     font-family: "JK Grotesk";
     font-weight: 400;
     font-style: italic;
-    src: url("/fonts/HKGrotesk/HKGrotesk-italic.otf");
+    src: url("/fonts/HKGrotesk/HKGrotesk-Italic.otf");
   }
 
   @font-face {
     font-family: "JK Grotesk";
     font-weight: 500;
-    src: url("/fonts/HKGrotesk/HKGrotesk-medium.otf");
+    src: url("/fonts/HKGrotesk/HKGrotesk-Medium.otf");
   }
 
   @font-face {
     font-family: "JK Grotesk";
     font-weight: 500;
     font-style: italic;
-    src: url("/fonts/HKGrotesk/HKGrotesk-mediumItalic.otf");
+    src: url("/fonts/HKGrotesk/HKGrotesk-MediumItalic.otf");
   }
 
   @font-face {
@@ -60,7 +60,7 @@
   @font-face {
     font-family: "JK Grotesk";
     font-weight: 700;
-    src: url("/fonts/HKGrotesk/HKGrotesk-bold.otf");
+    src: url("/fonts/HKGrotesk/HKGrotesk-Bold.otf");
   }
 
   @font-face {
