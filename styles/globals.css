@@ -1,17 +1,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body{
-  background-color: aliceblue;
-}
-
-@font-face {
-  font-family: "hkgrotesk";
-  src: url("/assets/fonts/HKGrotesk/HKGrotesk-Regular.otf");
-}
 
 
-* {
- 
-  font-family: "hkgrotesk"
+
+@layer base {
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 300;
+    src: url("/fonts/HKGrotesk/HKGrotesk-Light.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 300;
+    font-style: italic;
+    src: url("/fonts/HKGrotesk/HKGrotesk-LightItalic.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 400;
+    src: url("/fonts/HKGrotesk/HKGrotesk-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 400;
+    font-style: italic;
+    src: url("/fonts/HKGrotesk/HKGrotesk-italic.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 500;
+    src: url("/fonts/HKGrotesk/HKGrotesk-medium.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 500;
+    font-style: italic;
+    src: url("/fonts/HKGrotesk/HKGrotesk-mediumItalic.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 600;
+    src: url("/fonts/HKGrotesk/HKGrotesk-SemiBold.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 600;
+    font-style: italic;
+    src: url("/fonts/HKGrotesk/HKGrotesk-SemiBoldItalic.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 700;
+    src: url("/fonts/HKGrotesk/HKGrotesk-bold.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 700;
+    font-style: italic;
+    src: url("/fonts/HKGrotesk/HKGrotesk-boldItalic.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 800;
+    src: url("/fonts/HKGrotesk/HKGrotesk-extrabold.otf");
+  }
+
+  @font-face {
+    font-family: "JK Grotesk";
+    font-weight: 900;
+    src: url("/fonts/HKGrotesk/HKGrotesk-black.otf");
+  }
 }

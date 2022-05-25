@@ -9,5 +9,5 @@ const Home = () => {
    )
 }
 
-// Home.layout = 'L1'
+Home.layout = 'L2'
 export default Home

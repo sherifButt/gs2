@@ -24,8 +24,8 @@ const PostLastUpdate = () => {
                   />
                </div>
                <div className='flex flex-col gap-2.5 justify-start items-start w-full  pl-0 sm:pl-5 pb-5'>
-                  <p className='block text-lg text-black  font-semibold'>
-                     {name}
+                  <p className='block text-lg text-block italic font-normal scratch'>
+                     J{name}
                   </p>
                   <p className='block text-neutral-500 '>1 day</p>
                   <p className='block  text-black '>{comment}</p>
