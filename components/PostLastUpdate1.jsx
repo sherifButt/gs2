@@ -15,7 +15,7 @@ const PostLastUpdate = () => {
 
    return (
       <div>
-         <div className='flex flex-col gap-2 justify-center items-start   mx-auto p-5 bg-white sm:max-w-md sm:rounded-xl sm:shadow-md sm:mt-6 sm:border'>
+         <div className='flex flex-col gap-2 justify-center items-start   mx-auto p-5 bg-white sm:max-w-md sm:rounded-xl sm:shadow-md mt-6 md:mt-0 mb-0 md:mb-10 sm:border'>
             <div className='flex flex-row flex-wrap sm:flex-nowrap  justify-start items-start w-full'>
                <div className='flex flex-col gap-10 mb-2 justify-start items-center w-16 h-full'>
                   <img
