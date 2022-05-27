@@ -11,6 +11,7 @@ import {
    XIcon,
 } from '@heroicons/react/outline'
 
+
 function classNames(...classes) {
    return classes.filter(Boolean).join(' ')
 }
@@ -19,13 +20,14 @@ export default function Example() {
    return (
       <Disclosure
          as='nav'
-         className='bg-gray-800'>
+           className='bg-gray-800'> 
          {({ open }) => (
             <>
                <div className='max-w-7xl mx-auto px-2 sm:px-4 lg:px-8'>
                   <div className='relative flex items-center justify-between h-16'>
                      <div className='flex items-center px-2 lg:px-0'>
-                        <div className='flex-shrink-0'>
+                               <div className='flex-shrink-0'>
+                                  
                            <img
                               className='block lg:hidden h-8 w-auto'
                               src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'

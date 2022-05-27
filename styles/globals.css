@@ -82,3 +82,11 @@
     src: url("/fonts/HKGrotesk/HKGrotesk-black.otf");
   }
 }
+
+@supports (position: sticky) {
+  @media (min-width: config('screens.lg')) {
+    .sticky\?lg\:h-\(screen-16\) {
+      height: ~"calc(100vh - 4rem)";
+    }
+  }
+}

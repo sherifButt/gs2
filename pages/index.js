@@ -8,11 +8,16 @@ const Home = () => {
          <PostLastUpdate />
          <PostLastUpdate />
          <PostLastUpdate />
-        
+         <PostLastUpdate />
+         <PostLastUpdate />
+         <PostLastUpdate />
+         <PostLastUpdate />
+         <PostLastUpdate />
+         <PostLastUpdate />
          
-      </>
+      </> 
    )
 }
 
-Home.layout = 'L3'
+Home.layout = 'L5'
 export default Home

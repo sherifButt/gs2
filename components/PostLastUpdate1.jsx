@@ -2,7 +2,7 @@ import { Transition } from '@headlessui/react'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {like} from '../redux/features/postsSlicer'
-const PostLastUpdate = () => {
+const PostLastUpdate = (props) => {
 
    const dispatch = useDispatch()
    const {
@@ -14,8 +14,8 @@ const PostLastUpdate = () => {
    } = useSelector(store => store.posts.Posts)
 
    return (
-      <div>
-         <div className='flex flex-col gap-2 justify-center items-start   mx-auto p-5 bg-white sm:max-w-md sm:rounded-xl sm:shadow-md mt-6 md:mt-0 mb-0 md:mb-10 sm:border'>
+      <div {...props}>
+         <div className=' flex flex-col gap-2 justify-center items-start   mx-auto md:mx-0 p-5 bg-white sm:max-w-md sm:rounded-xl sm:shadow-md mt-6 md:mt-0 mb-0 md:mb-10 sm:border '>
             <div className='flex flex-row flex-wrap sm:flex-nowrap  justify-start items-start w-full'>
                <div className='flex flex-col gap-10 mb-2 justify-start items-center w-16 h-full'>
                   <img

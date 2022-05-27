@@ -1,0 +1,17 @@
+.body {
+    /* when modal active */
+    touch-action: none;
+    -webkit-overflow-scrolling: none;
+    overflow: hidden;
+    /* Other browsers */
+    overscroll-behavior: none;
+}
+
+.c-overscroll-inactive {
+    /* when modal active */
+    touch-action: auto;
+    -webkit-overflow-scrolling: auto;
+    overflow: hidden;
+    /* Other browsers */
+    overscroll-behavior: auto;
+}
