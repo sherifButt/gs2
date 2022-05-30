@@ -9,7 +9,7 @@ const LeftSidebar = props => {
             <div className='flex flex-col justify-between h-full'>
                <div className="flex flex-col mt-5 gap-6">
                  <div className='flex  gap-2 ml-4 items-center'>
-                    <Image width={30} height={30}
+                    <Image width={30} height={30} 
                        className='block'
                        src='/assets/images/icon-discover.svg'
                     />

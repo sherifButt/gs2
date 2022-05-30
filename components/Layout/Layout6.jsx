@@ -1,15 +1,15 @@
 import React from 'react'
 import Header from './Header'
-import Navbar from '../navbar-2'
+import Navbar from './Navbar'
 import Footer from './Footer'
 import LeftSidebar from '../left-sidebar-1'
 import RightSidebar from '../right-sidebar-1'
 
 const Layout = ({ children }) => {
    return (
-      <div className='bg-gray-100 relative flex  grow '>
+      <div className='bg-gray-100 relative flex grow '>
          <Header />
-         <Navbar className='bg-yellow-400  w-full flex  justify-between  h-20  z-50 fixed top-0 items-center ' />
+         <Navbar className='bg-yellow-400  w-full flex justify-between  h-20  z-50 fixed top-0' />
          <div className='md:container mx-auto max-auto flex grow '>
             <div className=' flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl'>
                {/* Left */}

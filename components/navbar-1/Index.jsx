@@ -1,33 +1,21 @@
 import { Fragment } from 'react'
-import {
-   Disclosure,
-   Menu,
-   Transition,
-} from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
-import {
-   BellIcon,
-   MenuIcon,
-   XIcon,
-} from '@heroicons/react/outline'
-
+import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
 function classNames(...classes) {
    return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Example(props) {
    return (
-      <Disclosure
-         as='nav'
-           className='bg-gray-800'> 
+      <Disclosure as='nav' className='bg-gray-800 '>
          {({ open }) => (
-            <>
-               <div className='max-w-7xl mx-auto px-2 sm:px-4 lg:px-8'>
+            <div {...props}>
+               <div className=' mx-auto container max-w-5xl '>
                   <div className='relative flex items-center justify-between h-16'>
                      <div className='flex items-center px-2 lg:px-0'>
-                               <div className='flex-shrink-0'>
-                                  
+                        <div className='flex-shrink-0'>
                            <img
                               className='block lg:hidden h-8 w-auto'
                               src='https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg'
@@ -114,8 +102,7 @@ export default function Example() {
                               type='button'
                               className='flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                               <span className='sr-only'>
-                                 View
-                                 notifications
+                                 View notifications
                               </span>
                               <BellIcon
                                  className='h-6 w-6'
@@ -130,8 +117,7 @@ export default function Example() {
                               <div>
                                  <Menu.Button className='bg-gray-800 rounded-full flex text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'>
                                     <span className='sr-only'>
-                                       Open user
-                                       menu
+                                       Open user menu
                                     </span>
                                     <img
                                        className='h-8 w-8 rounded-full'
@@ -150,9 +136,7 @@ export default function Example() {
                                  leaveTo='transform opacity-0 scale-95'>
                                  <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
                                     <Menu.Item>
-                                       {({
-                                          active,
-                                       }) => (
+                                       {({ active }) => (
                                           <a
                                              href='#'
                                              className={classNames(
@@ -161,15 +145,12 @@ export default function Example() {
                                                    : '',
                                                 'block px-4 py-2 text-sm text-gray-700'
                                              )}>
-                                             Your
-                                             Profile
+                                             Your Profile
                                           </a>
                                        )}
                                     </Menu.Item>
                                     <Menu.Item>
-                                       {({
-                                          active,
-                                       }) => (
+                                       {({ active }) => (
                                           <a
                                              href='#'
                                              className={classNames(
@@ -183,9 +164,7 @@ export default function Example() {
                                        )}
                                     </Menu.Item>
                                     <Menu.Item>
-                                       {({
-                                          active,
-                                       }) => (
+                                       {({ active }) => (
                                           <a
                                              href='#'
                                              className={classNames(
@@ -194,8 +173,7 @@ export default function Example() {
                                                    : '',
                                                 'block px-4 py-2 text-sm text-gray-700'
                                              )}>
-                                             Sign
-                                             out
+                                             Sign out
                                           </a>
                                        )}
                                     </Menu.Item>
@@ -286,7 +264,7 @@ export default function Example() {
                      </div>
                   </div>
                </Disclosure.Panel>
-            </>
+            </div>
          )}
       </Disclosure>
    )
