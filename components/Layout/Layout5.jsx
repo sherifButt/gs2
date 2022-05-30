@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Navbar from '../navbar-2'
 import Footer from './Footer'
-import LeftSidebar from '../left-sidebar-1'
+import LeftSidebar from '../left-sidebar-1/index-other'
 import RightSidebar from '../right-sidebar-1'
 
 const Layout = ({ children }) => {
