@@ -33,18 +33,18 @@ const socialMediaIcons = [
 const Footer = () => {
    return (
       <div className='flex flex-col gap-8 justify-end items-start max-w-[10.25rem] mb-10'>
-         <div className='felx flex-col gap-2'>
-            {menu.map(link => (
-               <Link href={link.href} key={link.title} passHref>
+         <div className='flex flex-col gap-2'>
+            {menu.map(item => (
+               <Link href={item.href} key={item.title} passHref>
                   <a className='block text-sm text-gray-600  font-medium ease-in-out duration-300  hover:scale-105 transform-gpu '>
-                     {link.title}
+                     {item.title}
                   </a>
                </Link>
             ))}
          </div>
          <div className='flex gap-2'>
             {socialMediaIcons.map(icon => (
-               <Link href={icon.href} key={link.title} passHref>
+               <Link href={icon.href} key={icon.title} passHref>
                   <a>
                      <Image
                         width={22}
