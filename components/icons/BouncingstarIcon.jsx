@@ -1,14 +1,23 @@
 import React from 'react'
 
-function Icon({ className, fill, stroke, strokeWidth }) {
+function Icon({
+   className,
+   fill,
+   stroke,
+   strokeWidth,
+   width,
+   height,
+   viewBox,
+   fillOpacity,
+}) {
    return (
       <svg
          xmlns='http://www.w3.org/2000/svg'
          width='68'
          height='96'
          fill='none'
-         viewBox='0 0 68 96'>
-       
+         viewBox='0 0 68 96'
+         className={className}>
          <path
             stroke='#909EC1'
             strokeLinecap='round'
