@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import LeftSidebar from '../left-sidebar-1/'
+import LeftSidebar from '../left-sidebar-1'
 import RightSidebar from '../right-sidebar-1'
 
 const Layout = ({ children }) => {
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
                {/* /Right */}
             </div>
          </div>
-      </div>
+      </div> 
    )
 }
 
