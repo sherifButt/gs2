@@ -97,7 +97,7 @@ const NavbarIn = props => {
    const { auth } = useSelector(state => state.auth)
    return (
       <div {...props}>
-         <div className='flex flex-row justify-between items-center  mx-auto w-full mx-20'>
+         <div className="flex flex-row justify-between items-center  mx-auto w-full mx-20 bg-[url('/assets/images/navbar-shade.png')]">
             <div className='flex flex-row gap-20 justify-start items-center'>
                <div>
                   <GivestarIcon />
