@@ -127,8 +127,8 @@ const NavbarIn = props => {
                   </div>
                </div>
                <div className='flex flex-inline gap-4'>
-                  <div class='flex flex-row gap-[3.75rem] justify-end items-center max-w-[14.38rem] mx-auto'>
-                     <div class='flex flex-row gap-[1.69rem] justify-end items-center'>
+                  <div className='flex flex-row gap-[3.75rem] justify-end items-center max-w-[14.38rem] mx-auto'>
+                     <div className='flex flex-row gap-[1.69rem] justify-end items-center'>
                         {loggedInMenu.map(item => (
                            <Link
                               href={item.href}
