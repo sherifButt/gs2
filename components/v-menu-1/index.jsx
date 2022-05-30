@@ -41,9 +41,9 @@ function VerticalMenu() {
    const [selectedMenu, setSelectedMenu] = useState(menu)
    const [userLogin, setUserLogin] = useState(false)
 
-  const dispatch = useDispatch()
-  const {auth} = useSelector(state=>state.auth)
-  
+   const dispatch = useDispatch()
+   const { auth } = useSelector(state => state.auth)
+
    const handleSelectMenu = e => {}
    return (
       <div className='flex flex-col gap-[1.81rem] justify-start items-start  '>
@@ -90,16 +90,15 @@ function VerticalMenu() {
                   together. Join our community today and get involved.
                </p>
 
-               <div className='flex w-full flex-row gap-5 justify-center items-center  py-3 bg-yellow-400 rounded-xl hover:scale-105 ease-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
-                  <Link href="#" passHref>
-                 <a
-                 onClick={()=>dispatch(signin())}>
-                      <p className='block text-center text-gray-600  font-semibold'>
-                         SIGN UP
-                      </p>
-                    </a>
-                  </Link>
-               </div>
+               <Link href='#' passHref>
+                  <a
+                     className='flex w-full flex-row gap-5 justify-center items-center  py-3 bg-yellow-400 rounded-xl hover:scale-105 ease-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'
+                     onClick={() => dispatch(signin())}>
+                     <p className='block text-center text-gray-600  font-semibold'>
+                        SIGN UP
+                     </p>
+                  </a>
+               </Link>
             </div>
          )}
       </div>
