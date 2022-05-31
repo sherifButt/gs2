@@ -1,16 +1,15 @@
 import { Transition } from '@headlessui/react'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {like} from '../redux/features/postsSlicer'
-const PostLastUpdate = (props) => {
-
+import { like } from '../redux/features/postsSlicer'
+const PostLastUpdate = props => {
    const dispatch = useDispatch()
    const {
       id,
-      author:{name},
+      author: { name },
       comment,
-      comments,  
-      impressions: { loves, stars, likes, hot }
+      comments,
+      impressions: { loves, stars, likes, hot },
    } = useSelector(store => store.posts.Posts)
 
    return (

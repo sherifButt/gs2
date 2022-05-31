@@ -14,7 +14,7 @@ const layouts = {
    L3: Layout3,
    L4: Layout4,
    L5: Layout5,
-   L6: Layout6
+   L6: Layout6,
 }
 
 function MyApp({ Component, pageProps }) {

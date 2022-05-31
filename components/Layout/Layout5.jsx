@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
    return (
       <div className='bg-gray-100 relative flex  grow '>
          <Header />
-         <Navbar className="bg-yellow-400  w-full flex  justify-between  h-20  z-50 fixed top-0 items-center shadow " />
+         <Navbar className='bg-yellow-400  w-full flex  justify-between  h-20  z-50 fixed top-0 items-center shadow ' />
          <div className='md:container mx-auto max-auto flex grow '>
             <div className=' flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl'>
                {/* Left */}
@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
                {/* /Middle */}
 
                {/* Right */}
-               <RightSidebar className='flex  grow  w-full  md:w-auto lg:w-350 mt-28  order-2 md:order-none' />
+               <RightSidebar className='flex  grow  w-full  md:w-auto lg:w-350 mt-28  order-2 md:order-none ' />
 
                {/* /Right */}
             </div>
