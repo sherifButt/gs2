@@ -142,7 +142,7 @@ export default function Example() {
                         </p>
                      </div>
                      {menu.map(item => (
-                        <div className='flex flex-row gap-3 justify-start items-start w-full px-[2.31rem] py-3.5 border-gray-100 border-t'>
+                        <div key={item.title} className='flex flex-row gap-3 justify-start items-start w-full px-[2.31rem] py-3.5 border-gray-100 border-t'>
                            <div>
                               <div>
                                  <AvatarUser image={item.image} />

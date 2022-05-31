@@ -63,10 +63,10 @@ export default function Example() {
                </div>
                <div className='py-1'>
                   {menu.map(item => (
-                     <Menu.Item>
+                     <Menu.Item key={item.title}>
                         <Link href={item.href} passHref>
                            <a
-                              key={item.title}
+                              
                               className='text-gray-700 px-4 py-3 text-md flex  gap-2 place-items-center hover:bg-gray-100 hover:text-gray-900'>
                               <item.icon />
                               <p>{item.title}</p>
