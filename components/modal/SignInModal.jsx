@@ -7,9 +7,12 @@ import {
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
 
+const userInetialState = { email: '', password: '' }
+
 export default function SignInModal() {
    const [open, setOpen] = useState(true)
-
+   const [userInfo, setUserInfo] = useState(userInetialState)
+   console.log('userInfo', userInfo)
    return (
       <Transition.Root show={open} as={Fragment}>
          <Dialog as='div' className='relative z-10' onClose={setOpen}>
@@ -25,7 +28,9 @@ export default function SignInModal() {
             </Transition.Child>
 
             <div className='fixed z-10 inset-0 overflow-y-auto'>
-               <div className='flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0'>
+               <form
+                  method='post'
+                  className='flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0'>
                   <Transition.Child
                      as={Fragment}
                      enter='ease-out duration-300'
@@ -58,6 +63,12 @@ export default function SignInModal() {
                               defaultValue=''
                               aria-invalid='true'
                               aria-describedby='email-error'
+                              onChange={e =>
+                                 setUserInfo({
+                                    ...userInfo,
+                                    email: e.target.value,
+                                 })
+                              }
                            />
                            {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
                                  <ExclamationCircleIcon
@@ -87,6 +98,12 @@ export default function SignInModal() {
                               defaultValue=''
                               aria-invalid='true'
                               aria-describedby='password-error'
+                              onChange={e =>
+                                 setUserInfo({
+                                    ...userInfo,
+                                    password: e.target.value,
+                                 })
+                              }
                            />
                            {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
                                  <ExclamationCircleIcon
@@ -106,28 +123,33 @@ export default function SignInModal() {
                               Your password must be less than 4 characters.
                            </p> */}
                         </div>
-                        <div className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl'>
+                        <button
+                                   onClick={ (e) => {
+                                 e.preventDefault()      
+                              console.log('userInfo', userInfo)
+                           }}
+                           className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
                            <p className='block w-[3.90rem] text-center text-black  font-semibold'>
                               SIGN IN
                            </p>
-                        </div>
+                        </button>
                         <p className='block text-center text-xs text-[#7CA982]  font-medium'>
                            TROUBLE SIGNING IN?
                         </p>
                         <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
-                           <p className='block text-right text-xs text-black  font-medium'>
+                           <p className='block text-center text-xs text-black  font-medium'>
                               Don’t have an account?
                            </p>
                            <div className='flex flex-row gap-2.5 justify-start items-center'>
-                              <p className='block text-right text-[0.81rem] text-[#7CA982]  font-semibold'>
+                              <button className='block text-center text-[0.81rem] text-[#7CA982]  font-semibold'>
                                  Sign up now →
-                              </p>
+                              </button>
                               <div></div>
                            </div>
                         </div>
                      </Dialog.Panel>
                   </Transition.Child>
-               </div>
+               </form>
             </div>
          </Dialog>
       </Transition.Root>
