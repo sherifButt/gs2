@@ -34,12 +34,13 @@ export default function SignUpModal() {
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
                      <Dialog.Panel className='flex flex-col gap-7 justify-center  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-10'>
-                        <div className=''>
+                        <div className='hidden sm:block absolute top-0 right-0 pt-4 pr-4'>
                            <button
                               type='button'
-                              className='absolute right-3 top-3 w-8 rounded-full border border-transparent    text-base font-medium text-gray-400 hover:text-white hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm'
+                              className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                               onClick={() => setOpen(false)}>
-                              <XIcon />
+                              <span className='sr-only'>Close</span>
+                              <XIcon className='h-6 w-6' aria-hidden='true' />
                            </button>
                         </div>
 

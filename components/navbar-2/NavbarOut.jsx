@@ -87,7 +87,7 @@ const NavbarOut = props => {
                         </a>
                      </Link>
                   ))}
-                       <SignInModal />
+                       
                        
                </div>
             </div>

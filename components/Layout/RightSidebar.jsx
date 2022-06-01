@@ -6,19 +6,20 @@ const RightSidebar = props => {
       <aside {...props}>
          {props.children}
 
-         <div className='flex flex-col items-center md:items-left md:w-290 lg:w-350'>
+         <div className='flex  flex-col items-center md:items-left  md:w-290 lg:w-350  '>
             {/* Call To Action */}
             <div>
                RightSidebars call to action
             </div>
             {/* /Call To Action */}
 
-            <div className='flex flex-col justify-between mb-auto hidden md:block'>
+            <div className='flex  flex-col justify-between  mb-auto hidden md:block '>
                <PostLastUpdate />
 
                <PostLastUpdate
-               //   className='sticky top-0 '
-               />
+                  className='sticky top-10 '
+                   />
+                   
                <div>footer</div>
             </div>
          </div>

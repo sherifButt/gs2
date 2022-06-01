@@ -20,7 +20,9 @@ const RightSidebar = props => {
                </div>
             </div>
             {/* Moving footer */}
-            <div className='sticky top-28 hidden md:block '>
+               <div
+                   className='sticky top-28 hidden md:block -z-10'
+               >
                <PostLastUpdate />
             </div>
             {/* /Moving footer */}

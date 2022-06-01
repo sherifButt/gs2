@@ -39,10 +39,10 @@ function classNames(...classes) {
 export default function Example() {
     const {foreName,surName,name,phone,email,image,privilege}=useSelector(state=>state.user)
    return (
-      <Menu as='div' className='relative inline-block text-left'>
+      <Menu as='div' className='relative inline-block text-left z-50'>
          <div>
             <Menu.Button className='flex flex-col gap-10 mb-2 justify-start items-center w-12 h-full hover:scale-105 duration-300 ease-in-out   '>
-               <AvatarUser/>
+               <AvatarUser  online streaming needHelp />
             </Menu.Button>
          </div>
 

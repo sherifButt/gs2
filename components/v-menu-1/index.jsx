@@ -5,7 +5,7 @@ import BouncingstarIcon from '../icons/BouncingstarIcon'
 import DiscoverIcon from '../icons/DiscoverIcon'
 import FriendsIcon from '../icons/FriendsIcon'
 import GroupsIcon from '../icons/GroupsIcon'
-import SignInModal from '../modal/SignInModal'
+
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -95,7 +95,7 @@ function VerticalMenu() {
                      </p>
                   </button>
                </Link>
-               <SignInModal />
+               
             </div>
          )}
       </div>

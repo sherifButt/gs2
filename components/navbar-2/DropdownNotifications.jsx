@@ -64,13 +64,13 @@ export default function DropdownNotifications({ data }) {
                                           setNotifications(notifications)
                                        }}
                                        className='order-last  hover:scale-110 hover: active:rotate-6 ease-in-out duration-300 p-2 group peer'>
-                                       <XIcon className='w-4 fill-gray-400 group-hover:fill-gray-500' />
+                                       <XIcon className=' w-4 rounded-full border border-transparent    text-base font-medium text-gray-400 hover:text-gray-100 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm' />
                                     </div>{' '}
                                     <AvatarUser
                                        image={item.image}
                                        className='peer-hover:opacity-50'
                                     />
-                                    <div className='flex flex-col gap-[0.06rem] justify-start items-start w-full text-black   peer-hover:text-gray-400'>
+                                    <div className='flex flex-col gap-[0.06rem] justify-start items-start w-full text-black   peer-hover:line-through'>
                                        <p className='block w-full text-[0.81rem]  font-semibold'>
                                           {item.title}
                                        </p>
