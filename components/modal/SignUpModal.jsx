@@ -6,9 +6,8 @@ import {
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
 
-
 export default function SignUpModal() {
-   const [open, setOpen] = useState(true) 
+   const [open, setOpen] = useState(true)
 
    return (
       <Transition.Root show={open} as={Fragment}>
@@ -34,17 +33,17 @@ export default function SignUpModal() {
                      leave='ease-in duration-200'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-                     <Dialog.Panel className='flex flex-col gap-7 justify-start  relative bg-neutral-100 rounded-xl px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6'>
-                        <div className='mt-5 sm:mt-6'>
+                     <Dialog.Panel className='flex flex-col gap-7 justify-center  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-10'>
+                        <div className=''>
                            <button
                               type='button'
-                              className='inline-flex justify-center w-16 rounded-md border border-transparent shadow-sm px-4 py-2  text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm'
+                              className='absolute right-3 top-3 w-8 rounded-full border border-transparent    text-base font-medium text-gray-400 hover:text-white hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm'
                               onClick={() => setOpen(false)}>
                               <XIcon />
                            </button>
                         </div>
 
-                        <p className='block text-[1.75rem] text-black  font-medium'>
+                        <p className='block text-[1.75rem] text-black text-center font-medium'>
                            Sign in to GiveStar
                         </p>
                         <div>
