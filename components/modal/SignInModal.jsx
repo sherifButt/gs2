@@ -34,9 +34,9 @@ export default function SignInModal() {
                      leave='ease-in duration-200'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-                     <Dialog.Panel className='flex flex-col gap-7 justify-center  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-10'>
-                        <BouncingstarIcon className='absolute -top-6 left-0 scale-x-[-1] rotate-4' />
-                        <div className='hidden sm:block absolute top-0 right-0 pt-4 pr-4'>
+                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
+                        <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 ' />
+                        <div className='hidden sm:block absolute top-0 right-3 pt-4 pr-4'>
                            <button
                               type='button'
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
@@ -68,7 +68,7 @@ export default function SignInModal() {
 
                            <label
                               htmlFor='email'
-                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-thin text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                               Email
                            </label>
                            {/* <p
@@ -96,7 +96,7 @@ export default function SignInModal() {
                               </div> */}
                            <label
                               htmlFor='password'
-                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-thin text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                               Password
                            </label>
 
