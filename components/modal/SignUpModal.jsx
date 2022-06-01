@@ -258,11 +258,11 @@ export default function SignUpModal() {
                            }}
                            className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
                            <p className='block w-[3.90rem] text-center text-black  font-semibold'>
-                              SIGN IN
+                              SIGN SignUpModal
                            </p>
                         </button>
                         <p className='block text-center text-xs text-[#7CA982]  font-medium'>
-                           TROUBLE SIGNING IN?
+                           TROUBLE SIGNING UP?
                         </p>
                         <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
                            <p className='block text-center text-xs text-black  font-medium'>
@@ -270,7 +270,7 @@ export default function SignUpModal() {
                            </p>
                            <div className='flex flex-row gap-2.5 justify-start items-center'>
                               <button className='block text-center text-[0.81rem] text-[#7CA982]  font-semibold'>
-                                 Sign up now →
+                                 Sign in now →
                               </button>
                               <div></div>
                            </div>
