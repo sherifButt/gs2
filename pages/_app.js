@@ -8,6 +8,7 @@ import Layout3 from '../components/Layout/Layout3'
 import Layout4 from '../components/Layout/Layout4'
 import Layout5 from '../components/Layout/Layout5'
 import Layout6 from '../components/Layout/Layout6'
+import SignUpModal from '../components/modal/SignUpModal'
 const layouts = {
    L1: Layout1,
    L2: Layout2,
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }) {
    return (
       <Provider store={store}>
          <Layout>
+            <SignUpModal />
             <Component {...pageProps} />
          </Layout>
       </Provider>

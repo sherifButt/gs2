@@ -10,6 +10,7 @@ import StatsIcon from '../icons/StatsIcon'
 import EmailIcon from '../icons/EmailIcon'
 import DropdownUser from './DropdownUser'
 import DropdownNotifications from './DropdownNotifications'
+import DropdownEmailNotifications from './DropdownEmailNotifications'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -32,7 +33,12 @@ const loggedInMenu = [
       icon: DropdownNotifications,
       active: true,
    },
-   { title: 'Email', href: '#', icon: EmailIcon, active: false },
+   {
+      title: 'Email',
+      href: '#',
+      icon: DropdownEmailNotifications,
+      active: false,
+   },
 ]
 
 const NavbarIn = ({ className }) => {
@@ -74,15 +80,10 @@ const NavbarIn = ({ className }) => {
                   <div className='flex flex-row gap-[3.75rem] justify-end items-center max-w-[14.38rem] mx-auto'>
                      <div className='flex flex-row gap-[1.69rem] justify-end items-center'>
                         {loggedInMenu.map(item => (
-                           <Link
-                              href={item.href}
-                              passHref
-                              key={item.title}>
-                              <a
-                                 
-                                 className=''>
+                           <Link href={item.href} passHref key={item.title}>
+                              <a className=''>
                                  <div className='relative'>
-                                    <AlertIcon className={`absolute  left-4 animate-bounce ${!item.active&&'hidden'}`} />
+                                    
                                     <item.icon className='z-0' />
                                  </div>
                               </a>
@@ -90,8 +91,7 @@ const NavbarIn = ({ className }) => {
                         ))}
                      </div>
                      <div>
-                        
-                               <DropdownUser/>
+                        <DropdownUser />
                      </div>
                   </div>
                </div>

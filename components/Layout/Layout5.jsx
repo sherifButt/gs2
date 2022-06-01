@@ -7,9 +7,9 @@ import RightSidebar from '../right-sidebar-1'
 
 const Layout = ({ children }) => {
    return (
-      <div className='bg-gray-100 relative flex  grow '>
+      <div className='bg-gray-100  flex  grow '>
          <Header />
-         <Navbar className='bg-yellow-400  w-full flex  justify-between  h-20  z-50 fixed top-0 items-center shadow ' />
+         <Navbar className='bg-yellow-400  w-full flex  justify-between  h-20  fixed top-0 items-center shadow ' />
          <div className='md:container mx-auto max-auto flex grow '>
             <div className=' flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl'>
                {/* Left */}
@@ -17,8 +17,8 @@ const Layout = ({ children }) => {
                {/* /Left */}
 
                {/* Middle */}
-               <div className='w-full sm:w-600  relative order-3 md:order-none'>
-                  <main className='flex flex-col order-1 md:mt-28'>
+               <div className='w-full sm:w-600   order-3 md:order-none '>
+                  <main className='flex flex-col order-1 md:mt-28 '>
                      {children}
                   </main>
                </div>

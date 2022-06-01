@@ -5,6 +5,7 @@ import BouncingstarIcon from '../icons/BouncingstarIcon'
 import DiscoverIcon from '../icons/DiscoverIcon'
 import FriendsIcon from '../icons/FriendsIcon'
 import GroupsIcon from '../icons/GroupsIcon'
+import SignInModal from '../modal/SignInModal'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -49,7 +50,7 @@ function VerticalMenu() {
       <div className='flex flex-col gap-[1.81rem] justify-start items-start  '>
          {auth ? (
             selectedMenu.map((item, i) => (
-               <Link href={item.href} key={item.href} passHref>
+               <Link href={item.href} key={item.title} passHref>
                   <a
                      onClick={e => {
                         const selectedMenuCopy = [...selectedMenu]
@@ -60,16 +61,10 @@ function VerticalMenu() {
                         setSelectedMenu([...selectedMenuCopy])
                      }}>
                      <div className='flex flex-row gap-[0.81rem] justify-start items-center ease-in-out duration-300  hover:scale-110'>
-                        {
-                           <item.icon
-                              fill={item.active && '#FED500'}
-                           />
-                        }
+                        {<item.icon fill={item.active ? '#FED500' : ''} />}
                         <p
                            className={`block text-center text-lg text-black  ${
-                              item.active
-                                 ? 'font-semibold'
-                                 : 'font-normal'
+                              item.active ? 'font-semibold' : 'font-normal'
                            }`}>
                            {item.title}
                         </p>
@@ -86,19 +81,21 @@ function VerticalMenu() {
                   Join GiveStar
                </p>
                <p className='block w-[11.88rem] text-black '>
-                  GiveStar users are helping to change the world
-                  together. Join our community today and get involved.
+                  GiveStar users are helping to change the world together. Join
+                  our community today and get involved.
                </p>
 
                <Link href='#' passHref>
-                  <a
+                  <button
+                     type='button'
                      className='flex w-full flex-row gap-5 justify-center items-center  py-3 bg-yellow-400 rounded-xl hover:scale-105 ease-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'
                      onClick={() => dispatch(signin())}>
                      <p className='block text-center text-gray-600  font-semibold'>
                         SIGN UP
                      </p>
-                  </a>
+                  </button>
                </Link>
+               <SignInModal />
             </div>
          )}
       </div>

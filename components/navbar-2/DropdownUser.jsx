@@ -62,8 +62,8 @@ export default function Example() {
                   </p>
                </div>
                <div className='py-1'>
-                  {menu.map(item => (
-                     <Menu.Item key={item.title}>
+                  {menu.map((item,i) => (
+                     <Menu.Item key={i+'_'+item.title}>
                         <Link href={item.href} passHref>
                            <a
                               

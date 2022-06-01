@@ -4,13 +4,14 @@ import { XIcon } from '@heroicons/react/solid'
 import { Fragment, useState } from 'react'
 import AvatarUser from '../avatar/AvatarUser'
 import AlertIcon from '../icons/AlertIcon'
+import EmailIcon from '../icons/EmailIcon'
 // Icons
 import InfoIcon from '../icons/InfoIcon'
 import NotificationIcon from '../icons/NotificationIcon'
 import SettingsIcon from '../icons/SettingsIcon'
 import UserIcon from '../icons/UserIcon'
 
-export default function DropdownNotifications({ data }) {
+export default function DropdownEmailNotification({ data }) {
    const [notifications, setNotifications] = useState(data)
    return (
       <Menu as='div' className=''>
@@ -24,7 +25,7 @@ export default function DropdownNotifications({ data }) {
                         />
                      )
                )}
-               <NotificationIcon />
+               <EmailIcon />
             </Menu.Button>
          </div>
 
@@ -90,7 +91,7 @@ export default function DropdownNotifications({ data }) {
    )
 }
 
-DropdownNotifications.defaultProps = {
+DropdownEmailNotification.defaultProps = {
    data: [
       {
          title: 'Mark Smith started fundraising',

@@ -8,6 +8,8 @@ import AlertIcon from '../icons/AlertIcon'
 import NotificationIcon from '../icons/NotificationIcon'
 import StatsIcon from '../icons/StatsIcon'
 import EmailIcon from '../icons/EmailIcon'
+import SignInModal from '../modal/SignInModal'
+import SignUpModal from '../modal/SignUpModal'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -85,6 +87,8 @@ const NavbarOut = props => {
                         </a>
                      </Link>
                   ))}
+                       <SignInModal />
+                       
                </div>
             </div>
          </div>
