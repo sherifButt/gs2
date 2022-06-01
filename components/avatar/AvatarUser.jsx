@@ -32,13 +32,13 @@ const AvatarUser = ( { className, image, online, needHelp, streaming } ) => {
              {/* /User image */}
              {/* Notification bubble  */}
              <span
-                class={`bottom-0 right-0 absolute  w-1/4 h-1/4 border-2 border-transparent rounded-full
+                className={`bottom-0 right-0 absolute  w-1/4 h-1/4 border-2 border-transparent rounded-full
                 ${online && 'border-white bg-green-400'}
                 ${needHelp && 'border-white bg-red-400'}
                 
                 `}></span>
              <span
-                class={`bottom-0 right-0 absolute  w-1/4 h-1/4 border-2 border-transparent rounded-full
+                className={`bottom-0 right-0 absolute  w-1/4 h-1/4 border-2 border-transparent rounded-full
                 
                 ${online & streaming && ' bg-green-400 animate-ping'}
                 ${needHelp & streaming && ' bg-red-400 animate-ping'}
