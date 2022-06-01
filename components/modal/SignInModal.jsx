@@ -18,42 +18,42 @@ export default function Modal() {
                   <div className='relative w-auto my-6 mx-auto max-w-3xl '>
                      {/*content*/}
                      <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
-                        <div class='flex flex-col gap-7 justify-start items-center max-w-[26.38rem] mx-auto px-10 py-[3.13rem] bg-neutral-100 rounded-xl'>
-                           <p class='block text-[1.75rem] text-black  font-medium'>
+                        <div className='flex flex-col gap-7 justify-start items-center max-w-[26.38rem] mx-auto px-10 py-[3.13rem] bg-neutral-100 rounded-xl'>
+                           <p className='block text-[1.75rem] text-black  font-medium'>
                               Sign in to GiveStar
                            </p>
                            <div>
                               <img
-                                 class='block'
+                                 className='block'
                                  src='./assets/image-11818.535205757396.png'
                               />
-                              <p class='block opacity-50 text-neutral-500 '>
+                              <p className='block opacity-50 text-neutral-500 '>
                                  Email Address
                               </p>
                            </div>
                            <div>
                               <img
-                                 class='block'
+                                 className='block'
                                  src='./assets/image-13356.571695926255.png'
                               />
-                              <p class='block opacity-50 text-neutral-500 '>
+                              <p className='block opacity-50 text-neutral-500 '>
                                  Password
                               </p>
                            </div>
-                           <div class='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl'>
-                              <p class='block w-[3.90rem] text-center text-black  font-semibold'>
+                           <div className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl'>
+                              <p className='block w-[3.90rem] text-center text-black  font-semibold'>
                                  SIGN IN
                               </p>
                            </div>
-                           <p class='block text-center text-xs text-neutral-400  font-medium'>
+                           <p className='block text-center text-xs text-neutral-400  font-medium'>
                               TROUBLE SIGNING IN?
                            </p>
-                           <div class='flex flex-row gap-[0.81rem] justify-start items-center'>
-                              <p class='block text-right text-xs text-black  font-medium'>
+                           <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
+                              <p className='block text-right text-xs text-black  font-medium'>
                                  Don’t have an account?
                               </p>
-                              <div class='flex flex-row gap-2.5 justify-start items-center'>
-                                 <p class='block text-right text-[0.81rem] text-neutral-400  font-semibold'>
+                              <div className='flex flex-row gap-2.5 justify-start items-center'>
+                                 <p className='block text-right text-[0.81rem] text-neutral-400  font-semibold'>
                                     Sign up now
                                  </p>
                                  <div></div>

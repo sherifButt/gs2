@@ -44,7 +44,7 @@ export default function SignUpModal() {
                            </button>
                         </div>
 
-                        <p class='block text-[1.75rem] text-black  font-medium'>
+                        <p className='block text-[1.75rem] text-black  font-medium'>
                            Sign in to GiveStar
                         </p>
                         <div>
@@ -107,20 +107,20 @@ export default function SignUpModal() {
                               Your password must be less than 4 characters.
                            </p>
                         </div>
-                        <div class='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl'>
-                           <p class='block w-[3.90rem] text-center text-black  font-semibold'>
+                        <div className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl'>
+                           <p className='block w-[3.90rem] text-center text-black  font-semibold'>
                               SIGN IN
                            </p>
                         </div>
-                        <p class='block text-center text-xs text-neutral-400  font-medium'>
+                        <p className='block text-center text-xs text-neutral-400  font-medium'>
                            TROUBLE SIGNING IN?
                         </p>
-                        <div class='flex flex-row gap-[0.81rem] justify-start items-center'>
-                           <p class='block text-right text-xs text-black  font-medium'>
+                        <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
+                           <p className='block text-right text-xs text-black  font-medium'>
                               Don’t have an account?
                            </p>
-                           <div class='flex flex-row gap-2.5 justify-start items-center'>
-                              <p class='block text-right text-[0.81rem] text-neutral-400  font-semibold'>
+                           <div className='flex flex-row gap-2.5 justify-start items-center'>
+                              <p className='block text-right text-[0.81rem] text-neutral-400  font-semibold'>
                                  Sign up now
                               </p>
                               <div></div>
