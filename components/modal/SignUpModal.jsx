@@ -42,7 +42,7 @@ export default function SignUpModal() {
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
                      <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
                         <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 ' />
-                        <div className='hidden sm:block absolute top-0 right-3 pt-4 pr-4'>
+                        <div className=' absolute top-0 right-3 pt-4 pr-4'>
                            <button
                               type='button'
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
@@ -62,7 +62,7 @@ export default function SignUpModal() {
                                     name='forename'
                                     id='forename'
                                     className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                                    placeholder='Email'
+                                    placeholder='Fore Name'
                                     defaultValue=''
                                     aria-invalid='true'
                                     aria-describedby='forename-error'
@@ -99,7 +99,7 @@ export default function SignUpModal() {
                                     name='surname'
                                     id='surname'
                                     className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                                    placeholder='Email'
+                                    placeholder='Sur Name'
                                     defaultValue=''
                                     aria-invalid='true'
                                     aria-describedby='surname-error'
@@ -206,7 +206,7 @@ export default function SignUpModal() {
                               name='confirmpassword'
                               id='confirmpassword'
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                              placeholder='Password'
+                              placeholder='Confirm Password'
                               defaultValue=''
                               aria-invalid='true'
                               aria-describedby='confirmpassword-error'
@@ -247,7 +247,9 @@ export default function SignUpModal() {
                               className='ml-2 block text-sm text-gray-900'>
                               I agree to{' '}
                               <sapn className='text-[#7CA982]'>
-                                 <Link href="#" passHref><a>GiveStar Terms of Use</a></Link>
+                                 <Link href='#' passHref>
+                                    <a>GiveStar Terms of Use</a>
+                                 </Link>
                               </sapn>
                            </label>
                         </div>
@@ -258,7 +260,7 @@ export default function SignUpModal() {
                            }}
                            className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
                            <p className='block w-[3.90rem] text-center text-black  font-semibold'>
-                              SIGN SignUpModal
+                              SIGN UP
                            </p>
                         </button>
                         <p className='block text-center text-xs text-[#7CA982]  font-medium'>
