@@ -7,6 +7,8 @@ import {
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
 import Link from 'next/link'
+import AlertWithDismissButton from '../alerts/AlertWithDismissButton'
+import Notifications from './Notifications'
 
 const userInetialState = { forename:'',surname:'',email: '', password: '',confirmpassword:'' }
 
@@ -253,6 +255,11 @@ export default function SignUpModal() {
                               </sapn>
                            </label>
                         </div>
+                        <AlertWithDismissButton
+                           isAlert
+                           isSuccess={false}
+                           message='Hi there!'
+                        />
                         <button
                            onClick={e => {
                               e.preventDefault()
@@ -280,6 +287,7 @@ export default function SignUpModal() {
                      </Dialog.Panel>
                   </Transition.Child>
                </form>
+               <Notifications />
             </div>
          </Dialog>
       </Transition.Root>
