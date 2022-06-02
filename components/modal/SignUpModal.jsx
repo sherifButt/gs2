@@ -62,7 +62,7 @@ export default function SignUpModal() {
                                     name='forename'
                                     id='forename'
                                     className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                                    placeholder='Fore Name'
+                                    placeholder='.'
                                     defaultValue=''
                                     aria-invalid='true'
                                     aria-describedby='forename-error'
