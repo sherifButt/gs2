@@ -55,7 +55,7 @@ export default function SignUpModal() {
                            Sign Up to GiveStar
                         </p>
                         <div className='flex flex-row gap-4 justify-between'>
-                           <div>
+                           <div className='max-h-4'>
                               <div className='relative'>
                                  <input
                                     type='forename'
@@ -82,7 +82,7 @@ export default function SignUpModal() {
 
                                  <label
                                     htmlFor='forename'
-                                    className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                    className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     Fore Name
                                  </label>
                                  {/* <p
@@ -119,7 +119,7 @@ export default function SignUpModal() {
 
                                  <label
                                     htmlFor='surname'
-                                    className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                    className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     Sur Name
                                  </label>
                                  {/* <p
