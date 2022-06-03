@@ -10,12 +10,18 @@ import Link from 'next/link'
 import AlertWithDismissButton from '../alerts/AlertWithDismissButton'
 import Notifications from './Notifications'
 
-const userInetialState = { forename:'',surname:'',email: '', password: '',confirmpassword:'' }
+const userInetialState = {
+   forename: '',
+   surname: '',
+   email: '',
+   password: '',
+   confirmpassword: '',
+}
 
 export default function SignUpModal() {
    const [open, setOpen] = useState(true)
    const [userInfo, setUserInfo] = useState(userInetialState)
-   console.log('userInfo', userInfo)
+   
    return (
       <Transition.Root show={open} as={Fragment}>
          <Dialog as='div' className='relative z-10' onClose={setOpen}>
@@ -50,7 +56,7 @@ export default function SignUpModal() {
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                               onClick={() => setOpen(false)}>
                               <span className='sr-only'>Close</span>
-                              <XIcon className='h-6 w-6' aria-hidden='true' />
+                              <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>
                         </div>
                         <p className='block text-3xl text-black text-center font-medium z-10'>
@@ -255,11 +261,11 @@ export default function SignUpModal() {
                               </sapn>
                            </label>
                         </div>
-                        <AlertWithDismissButton
+                        {/* <AlertWithDismissButton
                            isAlert
                            isSuccess={false}
                            message='Hi there!'
-                        />
+                        /> */}
                         <button
                            onClick={e => {
                               e.preventDefault()

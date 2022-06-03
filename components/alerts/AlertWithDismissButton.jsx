@@ -1,16 +1,25 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { CheckCircleIcon, XIcon, XCircleIcon } from '@heroicons/react/solid'
+import { Transition } from '@headlessui/react'
+import { motion } from 'framer-motion'
 
-export default function AlertWithDismissButton(props) {
-    const [ alert, setAlert ] = useState( { ...props } )
-    const { isAlert, isSuccess, message, description } = alert
-    const [toggleAlert,setToggleAlert]=useState(isAlert)
+export default function AlertWithDismissButton({ isAlert, isSuccess, message, description }) {
+   const [alert, setAlert] = useState({
+      isAlert,
+      isSuccess,
+      message,
+      description,
+   })
+
+   const [show, setShow] = useState(isAlert)
    useEffect(() => {
-      setAlert({ ...props })
-   }, [{ ...props }])
+      setAlert({ isAlert, isSuccess, message, description })
+   }, [isAlert, isSuccess, message, description])
    return (
       <>
-         {toggleAlert && (
+         <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}>
             <div
                className={`rounded-md border p-4  ${
                   isSuccess
@@ -52,14 +61,14 @@ export default function AlertWithDismissButton(props) {
                            <XIcon
                               className='h-5 w-5'
                               aria-hidden='true'
-                              onClick={() => setToggleAlert(!toggleAlert)}
+                              onClick={() => setShow(!show)}
                            />
                         </button>
                      </div>
                   </div>
                </div>
             </div>
-         )}
+         </motion.div>
       </>
    )
 }

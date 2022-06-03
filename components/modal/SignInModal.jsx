@@ -47,7 +47,7 @@ export default function SignInModal() {
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                               onClick={() => setOpen(false)}>
                               <span className='sr-only'>Close</span>
-                              <XIcon className='h-6 w-6' aria-hidden='true' />
+                              <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>
                         </div>
                         <p className='block text-3xl text-black text-center font-medium z-10'>
