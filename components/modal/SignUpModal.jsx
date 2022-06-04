@@ -6,6 +6,10 @@ import {
    XIcon,
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleSignup,toggleSignin,toggleRestorePassword } from '../../redux/features/modalSlicer'
+
 import Link from 'next/link'
 import AlertWithDismissButton from '../alerts/AlertWithDismissButton'
 import Notifications from './Notifications'
@@ -18,13 +22,17 @@ const userInetialState = {
    confirmpassword: '',
 }
 
-export default function SignUpModal() {
-   const [open, setOpen] = useState(true)
+export default function SignUpModal () {
+   
+const dispatch = useDispatch()
+const modal = useSelector(state => state.modal.signup)
+
+   const [show, setShow] = useState(true)
    const [userInfo, setUserInfo] = useState(userInetialState)
    
    return (
-      <Transition.Root show={open} as={Fragment}>
-         <Dialog as='div' className='relative z-10' onClose={setOpen}>
+      <Transition.Root show={modal.show} as={Fragment}>
+         <Dialog as='div' className='relative z-10' onClose={setShow}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -54,7 +62,7 @@ export default function SignUpModal() {
                            <button
                               type='button'
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                              onClick={() => setOpen(false)}>
+                              onClick={() => dispatch(toggleSignup())}>
                               <span className='sr-only'>Close</span>
                               <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>
@@ -276,16 +284,21 @@ export default function SignUpModal() {
                               SIGN UP
                            </p>
                         </button>
-                        <p className='block text-center text-xs text-[#7CA982]  font-medium'>
+                        {/* <p className='block text-center text-xs text-[#7CA982]  font-medium'>
                            TROUBLE SIGNING UP?
-                        </p>
+                        </p> */}
                         <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
                            <p className='block text-center text-xs text-black  font-medium'>
                               Don’t have an account?
                            </p>
                            <div className='flex flex-row gap-2.5 justify-start items-center'>
-                              <button className='block text-center text-[0.81rem] text-[#7CA982]  font-semibold'>
-                                 Sign in now →
+                              <button className='block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
+                                 onClick={ (e) => {
+                                    e.preventDefault()
+                                    dispatch(toggleSignup())
+                                    dispatch( toggleSignin() )
+                                 } }>
+                                 <p>Sign in now →</p>
                               </button>
                               <div></div>
                            </div>

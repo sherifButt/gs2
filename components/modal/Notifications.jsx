@@ -10,7 +10,7 @@ export default function Notifications({
    message,
    description,
 }) {
-   const [show, setShow] = useState(true)
+   const [show, setShow] = useState(isNotification)
    const [notification, setNotification] = useState({
       isNotification,
       isSuccess,
@@ -19,14 +19,15 @@ export default function Notifications({
    })
 
    useEffect(() => {
-      setNotification({ isNotification, isSuccess, message, description })
+      setNotification( { isNotification, isSuccess, message, description } )
+      setShow(isNotification)
    }, [isNotification, isSuccess, message, description])
    return (
       <>
          {/* Global notification live region, render this permanently at the end of the document */}
          <div
             aria-live='assertive'
-            className='absolute right-0 bottom-0 w-full  sm:w-[30rem] sm:left-160 flex flex-row justify-end items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start'>
+            className='fixed right-0 bottom-0 w-full  sm:w-[30rem] sm:left-160 flex flex-row justify-end items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start'>
             <div className='w-full flex flex-col items-center space-y-4 sm:items-end'>
                {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
                <AnimatePresence>

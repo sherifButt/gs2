@@ -7,18 +7,13 @@ import {
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
 import { useSelector, useDispatch } from 'react-redux'
+import { toggleSignin, toggleSignup, toggleRestorePassword } from '../../redux/features/modalSlicer'
 
-import {
-   toggleSignin,
-   toggleSignup,
-   toggleRestorePassword,
-} from '../../redux/features/modalSlicer'
-import Link from 'next/link'
 const userInetialState = { email: '', password: '' }
 
-export default function SignInModal() {
+export default function RestorePasswprdModal() {
    const dispatch = useDispatch()
-   const modal = useSelector(state => state.modal.signin)
+   const modal = useSelector(state => state.modal.restorePassword)
 
    const [show, setShow] = useState(false)
    const [userInfo, setUserInfo] = useState(userInetialState)
@@ -61,7 +56,7 @@ export default function SignInModal() {
                            </button>
                         </div>
                         <p className='block text-3xl text-black text-center font-medium z-10'>
-                           Sign in to GiveStar
+                           Restore Password
                         </p>
                         <div className='relative'>
                            <input
@@ -69,7 +64,7 @@ export default function SignInModal() {
                               name='email'
                               id='email'
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                              placeholder='Email'
+                              placeholder='Email Address'
                               defaultValue=''
                               aria-invalid='true'
                               aria-describedby='email-error'
@@ -90,7 +85,7 @@ export default function SignInModal() {
                            <label
                               htmlFor='email'
                               className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                              Email
+                              Email Address
                            </label>
                            {/* <p
                               className='mt-2 text-sm text-red-600'
@@ -98,76 +93,30 @@ export default function SignInModal() {
                               Your email must include @ sign.
                            </p> */}
                         </div>
-                        <div className='relative'>
-                           <input
-                              type='password'
-                              name='password'
-                              id='password'
-                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                              placeholder='Password'
-                              defaultValue=''
-                              aria-invalid='true'
-                              aria-describedby='password-error'
-                              onChange={e =>
-                                 setUserInfo({
-                                    ...userInfo,
-                                    password: e.target.value,
-                                 })
-                              }
-                           />
-                           {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-                                 <ExclamationCircleIcon
-                                    className='h-5 w-5 text-red-500'
-                                    aria-hidden='true'
-                                 />
-                              </div> */}
-                           <label
-                              htmlFor='password'
-                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                              Password
-                           </label>
 
-                           {/* <p
-                              className='mt-2 text-sm text-red-600'
-                              id='password-error'>
-                              Your password must be less than 4 characters.
-                           </p> */}
-                        </div>
                         <button
                            onClick={e => {
                               e.preventDefault()
                               console.log('userInfo', userInfo)
                            }}
                            className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
-                           <p className='block w-[3.90rem] text-center text-black  font-semibold'>
-                              SIGN IN
+                           <p className='block w-rull text-center text-black  font-semibold'>
+                              Restore Password
                            </p>
                         </button>
-                        <button onClick={e=>{
-                           e.preventDefault()
-                           dispatch(toggleSignin())
-                           dispatch(toggleRestorePassword())
-                        }}>
-                           <p className='block text-center text-xs text-[#7CA982]  font-medium'>
-                              TROUBLE SIGNING IN?
-                           </p>
-                        </button>
+
                         <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
-                           <p className='block text-center text-xs text-black  font-medium'>
-                              Don’t have an account?
-                           </p>
                            <div className='flex flex-row gap-2.5 justify-start items-center'>
-                              
-                                 <button
-                                    className=' block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
-                                 onClick={ (e) => {
-                                       e.preventDefault()
-                                       dispatch(toggleSignin())
-                                       dispatch(toggleSignup())
-                                    }}>
-                                    Sign up now →
-                                 </button>
-                              
+                              <button
+                                 className=' block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
+                                 onClick={e => {
+                                    e.preventDefault()
+                                    dispatch(toggleRestorePassword())
+                                    dispatch(toggleSignup())
+                                 }}>
+                                 ← Back to Sign in
+                              </button>
+
                               <div></div>
                            </div>
                         </div>

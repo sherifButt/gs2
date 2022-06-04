@@ -14,16 +14,14 @@ import SignUpModal from '../modal/SignUpModal'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { signin } from '../../redux/features/authSlicer'
+import { toggleSignin, toggleSignup } from '../../redux/features/modalSlicer'
 
 const mainMenu = [
    { title: 'Charities', href: '#', icon: '', active: false },
    { title: 'Individuals', href: '#', icon: '', active: false },
    { title: 'Companies', href: '#', icon: '', active: false },
 ]
-const signMenu = [
-   { title: 'Sign in', href: '#', icon: '', active: false },
-   { title: 'Sign up', href: '#', icon: '', active: false },
-]
+
 const loggedInMenu = [
    { title: 'Stats', href: '#', icon: StatsIcon, active: false },
    {
@@ -37,6 +35,23 @@ const loggedInMenu = [
 
 const NavbarOut = props => {
    const dispatch = useDispatch()
+   const signMenu = [
+      {
+         title: 'Sign in',
+         href: '#',
+         icon: '',
+         active: false,
+         action: toggleSignin(),
+      },
+      {
+         title: 'Sign up',
+         href: '#',
+         icon: '',
+         active: false,
+         action: toggleSignup(),
+      },
+   ]
+
    const { auth } = useSelector(state => state.auth)
    return (
       <div {...props}>
@@ -81,14 +96,12 @@ const NavbarOut = props => {
                   {signMenu.map(item => (
                      <Link href={item.href} passHref key={item.title}>
                         <a
-                           onClick={() => dispatch(signin())}
+                           onClick={() => dispatch(item.action)}
                            className='block text-center text-lg text-black  font-medium hover:scale-105 duration-300 ease-in-out'>
                            {item.title}
                         </a>
                      </Link>
                   ))}
-                       
-                       
                </div>
             </div>
          </div>

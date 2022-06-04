@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { store } from '../redux/store'
 import { Provider } from 'react-redux'
+import Portal from '../HOC/Portal'
 
 import Layout1 from '../components/Layout/Layout1'
 import Layout2 from '../components/Layout/Layout2'
@@ -10,6 +11,9 @@ import Layout5 from '../components/Layout/Layout5'
 import Layout6 from '../components/Layout/Layout6'
 import SignUpModal from '../components/modal/SignUpModal'
 import Notifications from '../components/modal/Notifications'
+import SignInModal from '../components/modal/SignInModal'
+import RestorePasswprdModal from '../components/modal/RestorePasswprdModal'
+
 const layouts = {
    L1: Layout1,
    L2: Layout2,
@@ -24,8 +28,13 @@ function MyApp({ Component, pageProps }) {
    return (
       <Provider store={store}>
          <Layout>
-            <SignUpModal />
-            <Notifications/>
+            <Portal> 
+               <SignInModal />
+               <SignUpModal />
+               <RestorePasswprdModal/>
+               <Notifications />
+
+            </Portal>
             <Component {...pageProps} />
          </Layout>
       </Provider>
