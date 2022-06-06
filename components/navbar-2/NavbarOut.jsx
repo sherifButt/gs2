@@ -1,20 +1,16 @@
-import React from 'react'
 import Link from 'next/link'
-
-// Icons
-import SearchIcon from '../icons/SearchIcon'
-import GivestarIcon from '../icons/GivestarIcon'
-import AlertIcon from '../icons/AlertIcon'
-import NotificationIcon from '../icons/NotificationIcon'
-import StatsIcon from '../icons/StatsIcon'
-import EmailIcon from '../icons/EmailIcon'
-import SignInModal from '../modal/SignInModal'
-import SignUpModal from '../modal/SignUpModal'
-
+import React from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
 import { toggleSignin, toggleSignup } from '../../redux/features/modalSlicer'
+// Icons
+import EmailIcon from '../icons/EmailIcon'
+import GivestarIcon from '../icons/GivestarIcon'
+import NotificationIcon from '../icons/NotificationIcon'
+import SearchIcon from '../icons/SearchIcon'
+import StatsIcon from '../icons/StatsIcon'
+
+
 
 const mainMenu = [
    { title: 'Charities', href: '#', icon: '', active: false },

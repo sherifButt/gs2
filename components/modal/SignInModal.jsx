@@ -1,31 +1,74 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import BouncingstarIcon from '../icons/BouncingstarIcon'
-import {
-   CheckIcon,
-   XIcon,
-   ExclamationCircleIcon,
-} from '@heroicons/react/outline'
-import { useSelector, useDispatch } from 'react-redux'
 
+// Icons
+import { XIcon } from '@heroicons/react/outline'
+import BouncingstarIcon from '../icons/BouncingstarIcon'
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { signin } from '../../redux/features/authSlicer'
+import { showNotification } from '../../redux/features/modalSlicer'
 import {
+   hideSignin,
+   toggleRestorePassword,
    toggleSignin,
    toggleSignup,
-   toggleRestorePassword,
 } from '../../redux/features/modalSlicer'
-import Link from 'next/link'
+import { useLoginUserMutation } from '../../redux/services/authApi'
+
 const userInetialState = { email: '', password: '' }
 
 export default function SignInModal() {
+   // Redux : Global State
    const dispatch = useDispatch()
    const modal = useSelector(state => state.modal.signin)
-
+   const [loginUser, { data, isError, error }] = useLoginUserMutation()
+   // Local State
    const [show, setShow] = useState(false)
    const [userInfo, setUserInfo] = useState(userInetialState)
-   console.log('userInfo', userInfo)
+
+   useEffect(() => {
+      if (data) {
+         console.log('data', data)
+         // localStorage.setItem("login",JSON.stringify({userLogin:true,token:data.access_token}))
+         dispatch(showNotification())
+         setUserInfo({ ...userInetialState })
+      }
+   }, [data, isError])
+
+   const loginHandler = async e => {
+                              e.preventDefault()
+                              // dispatch(toggleSignin())
+                              // dispatch(signin())
+                              // console.log('userInfo', userInfo)
+                              try {
+                                 const res = await loginUser(userInfo)
+                                   dispatch(
+                                      showNotification({
+                                         isSuccess: true,
+                                         message: 'good boy',
+                                         description:'That was a good login!'
+                                      })
+                                   )
+                              } catch (e) {
+                                 dispatch(
+                                    showNotification({
+                                       isSuccess: false,
+                                       message: 'bad',
+                                 description:'not been able to loggin!'
+                                    })
+                                 )
+                                 console.log('e.message', e)
+                              }
+                           }
+
    return (
       <Transition.Root show={modal.show} as={Fragment}>
-         <Dialog as='div' className='relative z-10' onClose={setShow}>
+         <Dialog
+            as='div'
+            className='relative z-10'
+            onClose={() => dispatch(hideSignin())}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -134,20 +177,18 @@ export default function SignInModal() {
                            </p> */}
                         </div>
                         <button
-                           onClick={e => {
-                              e.preventDefault()
-                              console.log('userInfo', userInfo)
-                           }}
+                           onClick={loginHandler}
                            className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
                            <p className='block w-[3.90rem] text-center text-black  font-semibold'>
                               SIGN IN
                            </p>
                         </button>
-                        <button onClick={e=>{
-                           e.preventDefault()
-                           dispatch(toggleSignin())
-                           dispatch(toggleRestorePassword())
-                        }}>
+                        <button
+                           onClick={e => {
+                              e.preventDefault()
+                              dispatch(toggleSignin())
+                              dispatch(toggleRestorePassword())
+                           }}>
                            <p className='block text-center text-xs text-[#7CA982]  font-medium'>
                               TROUBLE SIGNING IN?
                            </p>
@@ -157,17 +198,16 @@ export default function SignInModal() {
                               Don’t have an account?
                            </p>
                            <div className='flex flex-row gap-2.5 justify-start items-center'>
-                              
-                                 <button
-                                    className=' block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
-                                 onClick={ (e) => {
-                                       e.preventDefault()
-                                       dispatch(toggleSignin())
-                                       dispatch(toggleSignup())
-                                    }}>
-                                    Sign up now →
-                                 </button>
-                              
+                              <button
+                                 className=' block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
+                                 onClick={e => {
+                                    e.preventDefault()
+                                    dispatch(toggleSignin())
+                                    dispatch(toggleSignup())
+                                 }}>
+                                 Sign up now →
+                              </button>
+
                               <div></div>
                            </div>
                         </div>

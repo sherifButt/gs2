@@ -32,8 +32,7 @@ function MyApp({ Component, pageProps }) {
                <SignInModal />
                <SignUpModal />
                <RestorePasswprdModal/>
-               <Notifications />
-
+               <Notifications  />
             </Portal>
             <Component {...pageProps} />
          </Layout>

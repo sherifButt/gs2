@@ -10,6 +10,7 @@ import GroupsIcon from '../icons/GroupsIcon'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { signin } from '../../redux/features/authSlicer'
+import{toggleSignup} from '../../redux/features/modalSlicer'
 
 const menu = [
    {
@@ -89,7 +90,8 @@ function VerticalMenu() {
                   <button
                      type='button'
                      className='flex w-full flex-row gap-5 justify-center items-center  py-3 bg-yellow-400 rounded-xl hover:scale-105 ease-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'
-                     onClick={() => dispatch(signin())}>
+                        onClick={ () => dispatch( toggleSignup() ) }
+                     >
                      <p className='block text-center text-gray-600  font-semibold'>
                         SIGN UP
                      </p>

@@ -23,28 +23,31 @@ const AvatarUser = ( { className, image, online, needHelp, streaming } ) => {
    
     return (
       <div>
-          <div className='relative'>
-             {/* User image */}
-             <img
-                className={`block rounded-full w-12 border-2 border-white ${className}`}
-                src={image}
-             />
-             {/* /User image */}
-             {/* Notification bubble  */}
-             <span
-                className={`bottom-0 right-0 absolute  w-1/4 h-1/4 border-2 border-transparent rounded-full
-                ${online && 'border-white bg-green-400'}
-                ${needHelp && 'border-white bg-red-400'}
-                
-                `}></span>
-             <span
-                className={`bottom-0 right-0 absolute  w-1/4 h-1/4 border-2 border-transparent rounded-full
-                
-                ${online & streaming && ' bg-green-400 animate-ping'}
-                ${needHelp & streaming && ' bg-red-400 animate-ping'}
-                `}></span>
-             {/* /Notification bubble  */}
-          </div>
+          
+             <div className='relative'>
+             {/* User image */ }
+             
+                <img
+                   className={`-z-50 block rounded-full w-12 border-2 border-white ${className}`}
+                   src={image}
+                />
+                {/* /User image */}
+                {/* Notification bubble  */}
+                <span
+                   className={`bottom-0 right-0 absolute z-0  w-1/5 h-1/5 border-2 border-transparent rounded-full
+                   ${online && 'border-white bg-green-400'}
+                   ${needHelp && 'border-white bg-red-400'}
+                   
+                   `}></span>
+                <span
+                   className={`bottom-0 right-0 absolute z-0  w-1/5 h-1/5 border-2 border-transparent rounded-full
+                   
+                   ${online & streaming && ' bg-green-400 animate-ping'}
+                   ${needHelp & streaming && ' bg-red-400 animate-ping'}
+                   `}></span>
+                {/* /Notification bubble  */}
+             </div>
+          
       </div>
    )
 }

@@ -8,7 +8,8 @@ import {
 } from '@heroicons/react/outline'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSignup,toggleSignin,toggleRestorePassword } from '../../redux/features/modalSlicer'
+import { signin } from '../../redux/features/authSlicer'
+import { hideSignup,toggleSignup,toggleSignin,toggleRestorePassword } from '../../redux/features/modalSlicer'
 
 import Link from 'next/link'
 import AlertWithDismissButton from '../alerts/AlertWithDismissButton'
@@ -32,7 +33,10 @@ const modal = useSelector(state => state.modal.signup)
    
    return (
       <Transition.Root show={modal.show} as={Fragment}>
-         <Dialog as='div' className='relative z-10' onClose={setShow}>
+         <Dialog
+            as='div'
+            className='relative z-10 '
+            onClose={() => dispatch(hideSignup())}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -262,11 +266,11 @@ const modal = useSelector(state => state.modal.signup)
                               htmlFor='remember-me'
                               className='ml-2 block text-sm text-gray-900'>
                               I agree to{' '}
-                              <sapn className='text-[#7CA982]'>
+                              <span className='text-[#7CA982]'>
                                  <Link href='#' passHref>
                                     <a>GiveStar Terms of Use</a>
                                  </Link>
-                              </sapn>
+                              </span>
                            </label>
                         </div>
                         {/* <AlertWithDismissButton
@@ -277,6 +281,8 @@ const modal = useSelector(state => state.modal.signup)
                         <button
                            onClick={e => {
                               e.preventDefault()
+                              dispatch(toggleSignup())
+                              dispatch(signin())
                               console.log('userInfo', userInfo)
                            }}
                            className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
@@ -289,15 +295,16 @@ const modal = useSelector(state => state.modal.signup)
                         </p> */}
                         <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
                            <p className='block text-center text-xs text-black  font-medium'>
-                              Don’t have an account?
+                              Don you have an account?
                            </p>
                            <div className='flex flex-row gap-2.5 justify-start items-center'>
-                              <button className='block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
-                                 onClick={ (e) => {
+                              <button
+                                 className='block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
+                                 onClick={e => {
                                     e.preventDefault()
                                     dispatch(toggleSignup())
-                                    dispatch( toggleSignin() )
-                                 } }>
+                                    dispatch(toggleSignin())
+                                 }}>
                                  <p>Sign in now →</p>
                               </button>
                               <div></div>

@@ -7,7 +7,7 @@ import {
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSignin, toggleSignup, toggleRestorePassword } from '../../redux/features/modalSlicer'
+import { toggleSignin, toggleSignup, toggleRestorePassword,hideRestorePassword } from '../../redux/features/modalSlicer'
 
 const userInetialState = { email: '', password: '' }
 
@@ -20,7 +20,7 @@ export default function RestorePasswprdModal() {
    console.log('userInfo', userInfo)
    return (
       <Transition.Root show={modal.show} as={Fragment}>
-         <Dialog as='div' className='relative z-10' onClose={setShow}>
+         <Dialog as='div' className='relative z-10' onClose={()=> dispatch(hideRestorePassword())}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -112,7 +112,7 @@ export default function RestorePasswprdModal() {
                                  onClick={e => {
                                     e.preventDefault()
                                     dispatch(toggleRestorePassword())
-                                    dispatch(toggleSignup())
+                                    dispatch(toggleSignin())
                                  }}>
                                  ← Back to Sign in
                               </button>

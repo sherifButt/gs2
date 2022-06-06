@@ -1,20 +1,17 @@
-import React from 'react'
 import Link from 'next/link'
-
-// Icons
-import SearchIcon from '../icons/SearchIcon'
-import GivestarIcon from '../icons/GivestarIcon'
-import AlertIcon from '../icons/AlertIcon'
-import NotificationIcon from '../icons/NotificationIcon'
-import StatsIcon from '../icons/StatsIcon'
-import EmailIcon from '../icons/EmailIcon'
-import DropdownUser from './DropdownUser'
-import DropdownNotifications from './DropdownNotifications'
-import DropdownEmailNotifications from './DropdownEmailNotifications'
-
+import React from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
+// Components
+import DropdownEmailNotifications from '../dropDown/DropdownEmailNotifications'
+import DropdownNotifications from '../dropDown/DropdownNotifications'
+import DropdownUser from '../dropDown/DropdownUser'
+// Icons
+import GivestarIcon from '../icons/GivestarIcon'
+import SearchIcon from '../icons/SearchIcon'
+import StatsIcon from '../icons/StatsIcon'
+
+
 
 const mainMenu = [
    { title: 'Charities', href: '#', icon: '', active: false },
@@ -71,11 +68,8 @@ const NavbarIn = ({ className }) => {
                </div>
             </div>
             <div className='flex flex-row gap-10 justify-end items-center'>
-               <div>
-                  <div>
-                     <div></div>
-                  </div>
-               </div>
+               
+               
                <div className='flex flex-inline gap-4'>
                   <div className='flex flex-row gap-[3.75rem] justify-end items-center max-w-[14.38rem] mx-auto'>
                      <div className='flex flex-row gap-[1.69rem] justify-end items-center'>

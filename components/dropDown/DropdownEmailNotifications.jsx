@@ -40,7 +40,7 @@ export default function DropdownEmailNotification({ data }) {
             <Menu.Items className='origin-top-right absolute right-0 mt-2  rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none '>
                <div className='flex flex-col justify-start items-center w-[35rem] max-w-[30.13rem] mx-auto pb-4 bg-white rounded-[1.25rem] max-h-[42rem] overflow-scroll'>
                   <div className='flex flex-col  justify-start items-start w-full overflow-scroll'>
-                     <div className='flex flex-row grow justify-between items-center w-full px-[1.94rem] pt-[1.06rem] pb-[0.56rem] sticky top-0 bg-white border-b'>
+                     <div className='flex flex-row grow justify-between items-center w-full px-[1.94rem] pt-[1.06rem] pb-[0.56rem] sticky top-0 bg-white border-b z-10'>
                         <p className='block uppercase text-xs text-neutral-500  font-medium'>
                            today
                         </p>

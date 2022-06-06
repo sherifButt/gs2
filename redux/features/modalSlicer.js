@@ -35,12 +35,14 @@ const modalSlicer = createSlice({
       toggleRestorePassword: state => {
          state.restorePassword.show = !state.restorePassword.show
       },
-      showNotification: (state, { payload }) => {
-         state.notification.show = true
-         state.notification.isSuccess = payload.isSuccess || true
-         state.notification.message = payload.message || null
-         state.notification.message = payload.description || null
-         state.notification.href = payload.href || null
+      showNotification: ( state, { payload } ) => {
+         console.log(payload)
+         
+         state.notification.show = true 
+         state.notification.isSuccess = payload?.isSuccess 
+         state.notification.message = payload?.message 
+         state.notification.description = payload?.description
+         state.notification.href = payload?.href
       },
       hideSignin: state => {
          state.signin.show = false

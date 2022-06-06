@@ -5,7 +5,7 @@ import VerticalMenu from '../v-menu-1'
 
 const LeftSidebar = props => {
    return (
-      <aside {...props}>
+      <div {...props}>
          {props.children}
          <div className='flex w flex-col justify-start h-full  '>
             <div className='flex flex-col justify-between h-full'>
@@ -15,7 +15,7 @@ const LeftSidebar = props => {
                <Footer />
             </div>
          </div>
-      </aside>
+      </div>
    )
 }
 

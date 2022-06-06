@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
    return (
       <div className='relative bg-gray-100  flex  grow z-0'>
          <Header />
-         <Navbar className='bg-yellow-400  w-full flex  justify-between  h-20  fixed top-0 items-center shadow ' />
+         <Navbar className='bg-yellow-400  w-full flex  justify-between  h-20  fixed top-0 items-center shadow z-10' />
          <div className='md:container mx-auto max-auto flex grow '>
             <div className=' flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl'>
                
