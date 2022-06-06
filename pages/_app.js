@@ -11,6 +11,7 @@ import Layout5 from '../components/Layout/Layout5'
 import Layout6 from '../components/Layout/Layout6'
 import SignUpModal from '../components/modal/SignUpModal'
 import Notifications from '../components/modal/Notifications'
+import NotificationsStack from '../components/modal/NotificationsStack'
 import SignInModal from '../components/modal/SignInModal'
 import RestorePasswprdModal from '../components/modal/RestorePasswprdModal'
 
@@ -32,7 +33,8 @@ function MyApp({ Component, pageProps }) {
                <SignInModal />
                <SignUpModal />
                <RestorePasswprdModal/>
-               <Notifications  />
+               {/* <Notifications /> */}
+               <NotificationsStack  isNotification/>
             </Portal>
             <Component {...pageProps} />
          </Layout>

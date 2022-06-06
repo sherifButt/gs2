@@ -5,7 +5,7 @@ const initialState = {
    signup: { show: false },
    restorePassword: { show: false },
    notification: {
-      show: false,
+      show: true,
       isSuccess: true,
       message: 'Successfully Logged in!',
       description: 'Anyone with a link can now view this page.',

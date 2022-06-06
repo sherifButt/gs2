@@ -1,36 +1,116 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import BouncingstarIcon from '../icons/BouncingstarIcon'
-import {
-   CheckIcon,
-   XIcon,
-   ExclamationCircleIcon,
-} from '@heroicons/react/outline'
-
-import { useSelector, useDispatch } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
-import { hideSignup,toggleSignup,toggleSignin,toggleRestorePassword } from '../../redux/features/modalSlicer'
-
+import { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
-import AlertWithDismissButton from '../alerts/AlertWithDismissButton'
-import Notifications from './Notifications'
+import { Dialog, Transition } from '@headlessui/react'
+// Icons
+import { XIcon } from '@heroicons/react/outline'
+import BouncingstarIcon from '../icons/BouncingstarIcon'
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { signin } from '../../redux/features/authSlicer'
+import {
+   addNotification,
+   removeNotification,
+   deleteAllNotifications,
+} from '../../redux/features/notificationSlicer'
+import {
+   hideSignup,
+   toggleSignin,
+   toggleSignup,
+} from '../../redux/features/modalSlicer'
+import { useSignupUserMutation } from '../../redux/services/authApi'
 
 const userInetialState = {
-   forename: '',
-   surname: '',
-   email: '',
-   password: '',
-   confirmpassword: '',
+   FirstName: '',
+   LastName: '',
+   Email: '',
+   Password: '',
+   ConfirmPassword: '',
 }
 
-export default function SignUpModal () {
-   
-const dispatch = useDispatch()
-const modal = useSelector(state => state.modal.signup)
+export default function SignUpModal() {
+   const dispatch = useDispatch()
+   const modal = useSelector(state => state.modal.signup)
+   const [signupUser, { data, isLoading, isError, error }] =
+      useSignupUserMutation()
 
    const [show, setShow] = useState(true)
    const [userInfo, setUserInfo] = useState(userInetialState)
-   
+
+   const signUpHandler = async e => {
+      e.preventDefault()
+      // dispatch(toggleSignup())
+      // dispatch(signin())
+      // console.log('userInfo', userInfo)
+      console.log( 'userInfo', userInfo )
+      
+      // required fields validation
+      if (
+         userInfo.FirstName == '' ||
+         userInfo.LastName == '' ||
+         userInfo.Email == '' ||
+         userInfo.Password == '' ||
+         userInfo.ConfirmPassword == ''
+      ) {
+         dispatch(
+            addNotification({
+               isSuccess: false,
+               message: 'Signing up Failed!',
+               description:
+                  'All fields are required. Please fill in all empty fields and try again',
+            })
+         )
+         return
+      }
+      await signupUser(userInfo)
+   }
+
+   function flattenObject(ob) {
+      var toReturn = {}
+
+      for (var i in ob) {
+         if (!ob.hasOwnProperty(i)) continue
+
+         if (typeof ob[i] == 'object' && ob[i] !== null) {
+            var flatObject = flattenObject(ob[i])
+            for (var x in flatObject) {
+               if (!flatObject.hasOwnProperty(x)) continue
+
+               toReturn[i + '.' + x] = flatObject[x]
+            }
+         } else {
+            toReturn[i] = ob[i]
+         }
+      }
+      return toReturn
+   }
+
+   useEffect(() => {
+      if ( data )
+      {
+         console.log( 'data', data )
+         dispatch(
+            addNotification({
+               isSuccess: true,
+               status: data.status,
+               message: 'Sign up Succeeded!',
+               description: data,
+            })
+         )
+      }
+      if (isError) {
+         console.log('error', flattenObject(data))
+
+         dispatch(
+            addNotification({
+               isSuccess: false,
+               status: error.status,
+               message: 'Sign up Failed!',
+               description: error.data?.error,
+            })
+         )
+      }
+   }, [data, isError])
+
    return (
       <Transition.Root show={modal.show} as={Fragment}>
          <Dialog
@@ -78,18 +158,19 @@ const modal = useSelector(state => state.modal.signup)
                            <div className='max-h-4'>
                               <div className='relative'>
                                  <input
-                                    type='forename'
-                                    name='forename'
-                                    id='forename'
+                                    type='firstname'
+                                    name='firstname'
+                                    id='firstname'
+                                    required
                                     className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                                     placeholder='Fore Name'
                                     defaultValue=''
                                     aria-invalid='true'
-                                    aria-describedby='forename-error'
+                                    aria-describedby='firstname-error'
                                     onChange={e =>
                                        setUserInfo({
                                           ...userInfo,
-                                          forename: e.target.value,
+                                          FirstName: e.target.value,
                                        })
                                     }
                                  />
@@ -101,32 +182,33 @@ const modal = useSelector(state => state.modal.signup)
                                   </div> */}
 
                                  <label
-                                    htmlFor='forename'
+                                    htmlFor='firstname'
                                     className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                                    Fore Name
+                                    First Name
                                  </label>
                                  {/* <p
                                   className='mt-2 text-sm text-red-600'
-                                  id='forename-error'>
-                                  Your forename must include @ sign.
+                                  id='firstname-error'>
+                                  Your firstname must include @ sign.
                                </p> */}
                               </div>
                            </div>
                            <div>
                               <div className='relative'>
                                  <input
-                                    type='surname'
-                                    name='surname'
-                                    id='surname'
+                                    type='lastname'
+                                    name='lastname'
+                                    id='lastname'
+                                    required
                                     className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                                     placeholder='Sur Name'
                                     defaultValue=''
                                     aria-invalid='true'
-                                    aria-describedby='surname-error'
+                                    aria-describedby='lastname-error'
                                     onChange={e =>
                                        setUserInfo({
                                           ...userInfo,
-                                          surname: e.target.value,
+                                          LastName: e.target.value,
                                        })
                                     }
                                  />
@@ -138,14 +220,14 @@ const modal = useSelector(state => state.modal.signup)
                                   </div> */}
 
                                  <label
-                                    htmlFor='surname'
+                                    htmlFor='lastname'
                                     className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                                    Sur Name
+                                    Last Name
                                  </label>
                                  {/* <p
                                   className='mt-2 text-sm text-red-600'
-                                  id='surname-error'>
-                                  Your surname must include @ sign.
+                                  id='lastname-error'>
+                                  Your lastname must include @ sign.
                                </p> */}
                               </div>
                            </div>
@@ -155,6 +237,7 @@ const modal = useSelector(state => state.modal.signup)
                               type='email'
                               name='email'
                               id='email'
+                              required
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Email'
                               defaultValue=''
@@ -163,7 +246,7 @@ const modal = useSelector(state => state.modal.signup)
                               onChange={e =>
                                  setUserInfo({
                                     ...userInfo,
-                                    email: e.target.value,
+                                    Email: e.target.value,
                                  })
                               }
                            />
@@ -190,6 +273,7 @@ const modal = useSelector(state => state.modal.signup)
                               type='password'
                               name='password'
                               id='password'
+                              required
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Password'
                               defaultValue=''
@@ -198,7 +282,7 @@ const modal = useSelector(state => state.modal.signup)
                               onChange={e =>
                                  setUserInfo({
                                     ...userInfo,
-                                    password: e.target.value,
+                                    Password: e.target.value,
                                  })
                               }
                            />
@@ -225,6 +309,7 @@ const modal = useSelector(state => state.modal.signup)
                               type='password'
                               name='confirmpassword'
                               id='confirmpassword'
+                              required
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Confirm Password'
                               defaultValue=''
@@ -233,7 +318,7 @@ const modal = useSelector(state => state.modal.signup)
                               onChange={e =>
                                  setUserInfo({
                                     ...userInfo,
-                                    confirmpassword: e.target.value,
+                                    ConfirmPassword: e.target.value,
                                  })
                               }
                            />
@@ -279,15 +364,13 @@ const modal = useSelector(state => state.modal.signup)
                            message='Hi there!'
                         /> */}
                         <button
-                           onClick={e => {
-                              e.preventDefault()
-                              dispatch(toggleSignup())
-                              dispatch(signin())
-                              console.log('userInfo', userInfo)
-                           }}
-                           className='flex flex-col justify-center items-center w-full py-4 bg-yellow-400 rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'>
+                           disabled={isLoading}
+                           onClick={signUpHandler}
+                           className={`flex flex-col justify-center items-center w-full py-4 ${
+                              isLoading ? 'bg-neural-200' : 'bg-yellow-400'
+                           } rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none`}>
                            <p className='block w-[3.90rem] text-center text-black  font-semibold'>
-                              SIGN UP
+                              {isLoading ? 'Loading...' : 'SIGN UP'}
                            </p>
                         </button>
                         {/* <p className='block text-center text-xs text-[#7CA982]  font-medium'>
@@ -303,7 +386,9 @@ const modal = useSelector(state => state.modal.signup)
                                  onClick={e => {
                                     e.preventDefault()
                                     dispatch(toggleSignup())
-                                    dispatch(toggleSignin())
+                                    setTimeout(() => {
+                                       dispatch(toggleSignin())
+                                    }, 700)
                                  }}>
                                  <p>Sign in now →</p>
                               </button>
@@ -313,7 +398,6 @@ const modal = useSelector(state => state.modal.signup)
                      </Dialog.Panel>
                   </Transition.Child>
                </form>
-               <Notifications />
             </div>
          </Dialog>
       </Transition.Root>

@@ -8,7 +8,15 @@ import BouncingstarIcon from '../icons/BouncingstarIcon'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { signin } from '../../redux/features/authSlicer'
-import { showNotification } from '../../redux/features/modalSlicer'
+import {
+   showNotification,
+   hideNotification,
+} from '../../redux/features/modalSlicer'
+import {
+   addNotification,
+   removeNotification,
+   deleteAllNotifications,
+} from '../../redux/features/notificationSlicer'
 import {
    hideSignin,
    toggleRestorePassword,
@@ -17,51 +25,49 @@ import {
 } from '../../redux/features/modalSlicer'
 import { useLoginUserMutation } from '../../redux/services/authApi'
 
-const userInetialState = { email: '', password: '' }
+const userInitialState = { email: '', password: '' }
 
 export default function SignInModal() {
    // Redux : Global State
    const dispatch = useDispatch()
    const modal = useSelector(state => state.modal.signin)
-   const [loginUser, { data, isError, error }] = useLoginUserMutation()
+   const [loginUser, { data,isLoading, isError, error }] = useLoginUserMutation()
    // Local State
    const [show, setShow] = useState(false)
-   const [userInfo, setUserInfo] = useState(userInetialState)
+   const [ userInfo, setUserInfo ] = useState( userInitialState )
+   
 
    useEffect(() => {
       if (data) {
          console.log('data', data)
-         // localStorage.setItem("login",JSON.stringify({userLogin:true,token:data.access_token}))
-         dispatch(showNotification())
-         setUserInfo({ ...userInetialState })
+          localStorage.setItem("login",JSON.stringify({userLogin:true,token:data.accessToken}))
+         dispatch(
+            addNotification({
+               isSuccess: true,
+               status: data.status,
+               message: 'Signing in Succeeded!',
+               description: data.userId,
+            })
+         )
+         setUserInfo({ email: '', password: '' })
+      }
+      if (isError) {
+         console.log('error', error)
+         dispatch(
+            addNotification({
+               isSuccess: false,
+               status: error.status,
+               message: 'Sign in Failed!',
+               description: error.data?.error,
+            })
+         )
       }
    }, [data, isError])
 
    const loginHandler = async e => {
-                              e.preventDefault()
-                              // dispatch(toggleSignin())
-                              // dispatch(signin())
-                              // console.log('userInfo', userInfo)
-                              try {
-                                 const res = await loginUser(userInfo)
-                                   dispatch(
-                                      showNotification({
-                                         isSuccess: true,
-                                         message: 'good boy',
-                                         description:'That was a good login!'
-                                      })
-                                   )
-                              } catch (e) {
-                                 dispatch(
-                                    showNotification({
-                                       isSuccess: false,
-                                       message: 'bad',
-                                 description:'not been able to loggin!'
-                                    })
-                                 )
-                                 console.log('e.message', e)
-                              }
-                           }
+      e.preventDefault()
+      await loginUser(userInfo)
+   }
 
    return (
       <Transition.Root show={modal.show} as={Fragment}>
@@ -111,9 +117,10 @@ export default function SignInModal() {
                               type='email'
                               name='email'
                               id='email'
+                              required
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Email'
-                              defaultValue=''
+                              defaultValue={userInfo.email}
                               aria-invalid='true'
                               aria-describedby='email-error'
                               onChange={e =>
@@ -146,9 +153,10 @@ export default function SignInModal() {
                               type='password'
                               name='password'
                               id='password'
+                              required
                               className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Password'
-                              defaultValue=''
+                              defaultValue={userInfo.password}
                               aria-invalid='true'
                               aria-describedby='password-error'
                               onChange={e =>
@@ -186,8 +194,10 @@ export default function SignInModal() {
                         <button
                            onClick={e => {
                               e.preventDefault()
-                              dispatch(toggleSignin())
-                              dispatch(toggleRestorePassword())
+                              dispatch(hideSignin())
+                              setTimeout(() => {
+                                 dispatch(toggleRestorePassword())
+                              }, 500)
                            }}>
                            <p className='block text-center text-xs text-[#7CA982]  font-medium'>
                               TROUBLE SIGNING IN?
@@ -202,8 +212,10 @@ export default function SignInModal() {
                                  className=' block text-center text-[0.81rem] text-[#7CA982]  font-semibold'
                                  onClick={e => {
                                     e.preventDefault()
-                                    dispatch(toggleSignin())
-                                    dispatch(toggleSignup())
+                                    dispatch(hideSignin())
+                                    setTimeout(() => {
+                                       dispatch(toggleSignup())
+                                    }, 700)
                                  }}>
                                  Sign up now →
                               </button>

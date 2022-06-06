@@ -17,10 +17,13 @@ export default function RestorePasswprdModal() {
 
    const [show, setShow] = useState(false)
    const [userInfo, setUserInfo] = useState(userInetialState)
-   console.log('userInfo', userInfo)
+   
    return (
       <Transition.Root show={modal.show} as={Fragment}>
-         <Dialog as='div' className='relative z-10' onClose={()=> dispatch(hideRestorePassword())}>
+         <Dialog
+            as='div'
+            className='relative z-10'
+            onClose={() => dispatch(hideRestorePassword())}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -50,7 +53,7 @@ export default function RestorePasswprdModal() {
                            <button
                               type='button'
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                              onClick={() => dispatch(toggleSignin())}>
+                              onClick={() => dispatch(toggleRestorePassword())}>
                               <span className='sr-only'>Close</span>
                               <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>
