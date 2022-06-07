@@ -12,45 +12,32 @@ import {
    deleteAllNotifications,
 } from '../../redux/features/notificationSlicer'
 
-// const opacity = ['opacity-100', 'opacity-80', 'opacity-60', 'opacity-40']
-
-export default function NotificationsStack() {
+export default function NotificationsGroupedStack() {
    // Global State
    const notifications = useSelector(state => state.notification)
    const dispatch = useDispatch()
 
    
-
    return (
       <>
          {/* Global notification live region, render this permanently at the end of the document */}
          <div
             aria-live='assertive'
-            className='fixed right-0 top-0 sm:top-auto sm:bottom-0 w-full  sm:w-[30rem] sm:left-160 flex flex-row justify-end items-end px-4 py-4 sm:py-6 pointer-events-none sm:p-6 sm:items-start  z-20'>
-            <ol className='w-full flex flex-col items-start -space-y-12  sm:-space-y-12 sm:items-end'>
-               {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
+            className='fixed right-0 top-0 sm:top-auto sm:bottom-0 w-full  sm:w-[30rem] sm:left-160 flex flex-row justify-end items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start z-30'>
+            {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
+            <motion.ol className='w-full flex flex-col items-center space-y-4 sm:items-end'>
                <AnimatePresence>
                   {notifications.map((item, i) => (
                      <motion.li
                         layoutId={item.id}
                         key={item.id}
+                        index={i}
                         initial={{ x: 200, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 500, opacity: 0 }}
                         className='w-full'>
-                        <div
-                           className={`max-w-sm w-full ${
-                              notifications.length - i == 1
-                                 ? 'opacity-100 scale-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
-                                 : notifications.length - i == 2
-                                 ? ' blur-[1px] scale-95 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
-                                 : notifications.length - i == 3
-                                 ? ' blur-[2px] scale-90 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
-                                 : notifications.length - i == 4
-                                 ? 'opacity-40 blur-[3px] scale-75 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
-                                 : ''
-                           } bg-neutral-100  shadow-lg rounded-xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden`}>
-                           <div className='p-2 sm:p-4'>
+                        <div className='max-w-sm w-full bg-neutral-100 shadow-lg rounded-xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'>
+                           <div className='p-4'>
                               <div className='flex items-start'>
                                  <div className='flex-shrink-0'>
                                     {item.isSuccess ? (
@@ -108,13 +95,13 @@ export default function NotificationsStack() {
                      </motion.li>
                   ))}
                </AnimatePresence>
-            </ol>
+            </motion.ol>
          </div>
       </>
    )
 }
 
-NotificationsStack.defaultProps = {
+NotificationsGroupedStack.defaultProps = {
    isNotification: false,
    isSuccess: true,
    message: 'Successfully Logged ins!',

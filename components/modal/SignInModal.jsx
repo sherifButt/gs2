@@ -74,7 +74,7 @@ export default function SignInModal() {
          <Dialog
             as='div'
             className='relative z-10'
-            onClose={() => dispatch(hideSignin())}>
+            onClose={() => {/*dispatch(hideSignin())*/}}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -118,7 +118,7 @@ export default function SignInModal() {
                               name='email'
                               id='email'
                               required
-                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
+                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Email'
                               defaultValue={userInfo.email}
                               aria-invalid='true'
@@ -154,7 +154,7 @@ export default function SignInModal() {
                               name='password'
                               id='password'
                               required
-                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
+                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
                               placeholder='Password'
                               defaultValue={userInfo.password}
                               aria-invalid='true'
@@ -197,7 +197,7 @@ export default function SignInModal() {
                               dispatch(hideSignin())
                               setTimeout(() => {
                                  dispatch(toggleRestorePassword())
-                              }, 500)
+                              }, 700)
                            }}>
                            <p className='block text-center text-xs text-[#7CA982]  font-medium'>
                               TROUBLE SIGNING IN?

@@ -23,7 +23,7 @@ export default function RestorePasswprdModal() {
          <Dialog
             as='div'
             className='relative z-10'
-            onClose={() => dispatch(hideRestorePassword())}>
+   onClose={() => {/*dispatch(hideRestorePassword())*/}}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -115,7 +115,7 @@ export default function RestorePasswprdModal() {
                                  onClick={e => {
                                     e.preventDefault()
                                     dispatch(toggleRestorePassword())
-                                    dispatch(toggleSignin())
+                                   setTimeout (()=>{dispatch(toggleSignin())},700)
                                  }}>
                                  ← Back to Sign in
                               </button>

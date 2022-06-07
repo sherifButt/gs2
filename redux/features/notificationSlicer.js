@@ -52,7 +52,8 @@ const notificationSlicer = createSlice({
          state.push({
             id: Math.floor(1000 + Math.random() * 90000000),
             ...payload,
-         })
+         } )
+           if(state.length>=4) state.shift()
       },
       removeNotification: (state, { payload }) => {
          state = state.splice(payload, 1)

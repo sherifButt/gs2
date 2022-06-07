@@ -1,23 +1,18 @@
-import { Fragment, useState, useEffect } from 'react'
-import Link from 'next/link'
 import { Dialog, Transition } from '@headlessui/react'
 // Icons
-import { XIcon } from '@heroicons/react/outline'
-import BouncingstarIcon from '../icons/BouncingstarIcon'
+import { XIcon, ExclamationCircleIcon } from '@heroicons/react/outline'
+import Link from 'next/link'
+import { Fragment, useEffect, useState } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
-import {
-   addNotification,
-   removeNotification,
-   deleteAllNotifications,
-} from '../../redux/features/notificationSlicer'
 import {
    hideSignup,
    toggleSignin,
    toggleSignup,
 } from '../../redux/features/modalSlicer'
+import { addNotification } from '../../redux/features/notificationSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
+import BouncingstarIcon from '../icons/BouncingstarIcon'
 
 const userInetialState = {
    FirstName: '',
@@ -33,23 +28,20 @@ export default function SignUpModal() {
    const [signupUser, { data, isLoading, isError, error }] =
       useSignupUserMutation()
 
-   const [show, setShow] = useState(true)
-   const [userInfo, setUserInfo] = useState(userInetialState)
+   // const [show, setShow] = useState(true)
+   const [values, setValues] = useState(userInetialState)
 
    const signUpHandler = async e => {
       e.preventDefault()
-      // dispatch(toggleSignup())
-      // dispatch(signin())
-      // console.log('userInfo', userInfo)
-      console.log( 'userInfo', userInfo )
-      
+      console.log('values', values)
+
       // required fields validation
       if (
-         userInfo.FirstName == '' ||
-         userInfo.LastName == '' ||
-         userInfo.Email == '' ||
-         userInfo.Password == '' ||
-         userInfo.ConfirmPassword == ''
+         values.FirstName == '' ||
+         values.LastName == '' ||
+         values.Email == '' ||
+         values.Password == '' ||
+         values.ConfirmPassword == ''
       ) {
          dispatch(
             addNotification({
@@ -61,7 +53,7 @@ export default function SignUpModal() {
          )
          return
       }
-      await signupUser(userInfo)
+      await signupUser(values)
    }
 
    function flattenObject(ob) {
@@ -85,9 +77,8 @@ export default function SignUpModal() {
    }
 
    useEffect(() => {
-      if ( data )
-      {
-         console.log( 'data', data )
+      if (data) {
+         console.log('data', data)
          dispatch(
             addNotification({
                isSuccess: true,
@@ -98,7 +89,7 @@ export default function SignUpModal() {
          )
       }
       if (isError) {
-         console.log('error', flattenObject(data))
+         console.log('error', error)
 
          dispatch(
             addNotification({
@@ -116,7 +107,7 @@ export default function SignUpModal() {
          <Dialog
             as='div'
             className='relative z-10 '
-            onClose={() => dispatch(hideSignup())}>
+            onClose={() => {/*dispatch(hideSignup())*/}}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -140,7 +131,7 @@ export default function SignUpModal() {
                      leave='ease-in duration-200'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
+                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100  rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
                         <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 ' />
                         <div className=' absolute top-0 right-3 pt-4 pr-4'>
                            <button
@@ -163,34 +154,34 @@ export default function SignUpModal() {
                                     id='firstname'
                                     required
                                     className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                                    placeholder='Fore Name'
+                                    placeholder='First Name'
                                     defaultValue=''
                                     aria-invalid='true'
                                     aria-describedby='firstname-error'
                                     onChange={e =>
-                                       setUserInfo({
-                                          ...userInfo,
+                                       setValues({
+                                          ...values,
                                           FirstName: e.target.value,
                                        })
                                     }
                                  />
-                                 {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                                 <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
                                      <ExclamationCircleIcon
                                         className='h-5 w-5 text-red-500'
                                         aria-hidden='true'
                                      />
-                                  </div> */}
+                                  </div>
 
                                  <label
                                     htmlFor='firstname'
                                     className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     First Name
                                  </label>
-                                 {/* <p
+                                 <p
                                   className='mt-2 text-sm text-red-600'
                                   id='firstname-error'>
-                                  Your firstname must include @ sign.
-                               </p> */}
+                                  Your firstname should be only letters
+                               </p>
                               </div>
                            </div>
                            <div>
@@ -206,8 +197,8 @@ export default function SignUpModal() {
                                     aria-invalid='true'
                                     aria-describedby='lastname-error'
                                     onChange={e =>
-                                       setUserInfo({
-                                          ...userInfo,
+                                       setValues({
+                                          ...values,
                                           LastName: e.target.value,
                                        })
                                     }
@@ -244,8 +235,8 @@ export default function SignUpModal() {
                               aria-invalid='true'
                               aria-describedby='email-error'
                               onChange={e =>
-                                 setUserInfo({
-                                    ...userInfo,
+                                 setValues({
+                                    ...values,
                                     Email: e.target.value,
                                  })
                               }
@@ -280,8 +271,8 @@ export default function SignUpModal() {
                               aria-invalid='true'
                               aria-describedby='password-error'
                               onChange={e =>
-                                 setUserInfo({
-                                    ...userInfo,
+                                 setValues({
+                                    ...values,
                                     Password: e.target.value,
                                  })
                               }
@@ -316,8 +307,8 @@ export default function SignUpModal() {
                               aria-invalid='true'
                               aria-describedby='confirmpassword-error'
                               onChange={e =>
-                                 setUserInfo({
-                                    ...userInfo,
+                                 setValues({
+                                    ...values,
                                     ConfirmPassword: e.target.value,
                                  })
                               }
@@ -367,8 +358,10 @@ export default function SignUpModal() {
                            disabled={isLoading}
                            onClick={signUpHandler}
                            className={`flex flex-col justify-center items-center w-full py-4 ${
-                              isLoading ? 'bg-neural-200' : 'bg-yellow-400'
-                           } rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md active:scale-100 active:shadow-none`}>
+                              isLoading
+                                 ? 'bg-yellow-500 shadow-none'
+                                 : 'bg-yellow-400'
+                           } rounded-xl hover:scale-105 ease-in-out duration-300 hover:shadow-md hover:shadow-yellow-400/50 active:scale-100 active:shadow-none`}>
                            <p className='block w-[3.90rem] text-center text-black  font-semibold'>
                               {isLoading ? 'Loading...' : 'SIGN UP'}
                            </p>
