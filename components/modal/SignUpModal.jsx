@@ -124,7 +124,7 @@ export default function SignUpModal() {
             <div className='fixed z-10 inset-0 overflow-y-auto'>
                <form
                   method='post'
-                  className='flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0'>
+                  className='flex items-end sm:items-center justify-center min-h-full  text-center'>
                   <Transition.Child
                      as={Fragment}
                      enter='ease-out duration-300'
@@ -133,7 +133,7 @@ export default function SignUpModal() {
                      leave='ease-in duration-200'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100  rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
+                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-t-2xl  sm:rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
                         <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 hidden sm:block' />
                         <div className=' absolute top-0 right-3 pt-4 pr-4'>
                            <button
