@@ -107,7 +107,9 @@ export default function SignUpModal() {
          <Dialog
             as='div'
             className='relative z-10 '
-            onClose={() => {/*dispatch(hideSignup())*/}}>
+            onClose={() => {
+               /*dispatch(hideSignup())*/
+            }}>
             <Transition.Child
                as={Fragment}
                enter='ease-out duration-300'
@@ -132,7 +134,7 @@ export default function SignUpModal() {
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
                      <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100  rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
-                        <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 ' />
+                        <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 hidden sm:block' />
                         <div className=' absolute top-0 right-3 pt-4 pr-4'>
                            <button
                               type='button'
@@ -142,7 +144,7 @@ export default function SignUpModal() {
                               <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>
                         </div>
-                        <p className='block text-3xl text-black text-center font-medium z-10'>
+                        <p className='block text-xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
                            Sign Up to GiveStar
                         </p>
                         <div className='flex flex-row gap-4 justify-between'>
@@ -166,11 +168,11 @@ export default function SignUpModal() {
                                     }
                                  />
                                  <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-                                     <ExclamationCircleIcon
-                                        className='h-5 w-5 text-red-500'
-                                        aria-hidden='true'
-                                     />
-                                  </div>
+                                    <ExclamationCircleIcon
+                                       className='h-5 w-5 text-red-500'
+                                       aria-hidden='true'
+                                    />
+                                 </div>
 
                                  <label
                                     htmlFor='firstname'
@@ -178,10 +180,10 @@ export default function SignUpModal() {
                                     First Name
                                  </label>
                                  <p
-                                  className='mt-2 text-sm text-red-600'
-                                  id='firstname-error'>
-                                  Your firstname should be only letters
-                               </p>
+                                    className='mt-2 text-sm text-red-600'
+                                    id='firstname-error'>
+                                    Your firstname should be only letters
+                                 </p>
                               </div>
                            </div>
                            <div>

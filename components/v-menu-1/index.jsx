@@ -48,7 +48,7 @@ function VerticalMenu() {
 
    const handleSelectMenu = e => {}
    return (
-      <div className='flex flex-col gap-[1.81rem] justify-start items-start  '>
+      <div className='flex flex-col gap-[1.81rem] justify-start items-start my-4 '>
          {auth ? (
             selectedMenu.map((item, i) => (
                <Link href={item.href} key={item.title} passHref>

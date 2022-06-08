@@ -73,7 +73,7 @@ export default function NotificationsGroupedStack() {
                                           aria-hidden='true'
                                        />
                                     </button>{' '}
-                                    {notifications.length > 5 && (
+                                    {notifications.length > 2 && (
                                        <button
                                           type='button'
                                           className='bg-neutral-100 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'

@@ -76,7 +76,7 @@ export default function NotificationsStack() {
                                  <div className='ml-4 flex-shrink-0 flex flex-col items-end justify-between'>
                                     <button
                                        type='button'
-                                       className='bg-neutral-100 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                       className='bg-transparent rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                        onClick={() => {
                                           dispatch(removeNotification(i))
                                        }}>
@@ -86,10 +86,10 @@ export default function NotificationsStack() {
                                           aria-hidden='true'
                                        />
                                     </button>{' '}
-                                    {notifications.length > 5 && (
+                                    {notifications.length > 2 && (
                                        <button
                                           type='button'
-                                          className='bg-neutral-100 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                          className='bg-transparent rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                           onClick={() => {
                                              dispatch(deleteAllNotifications())
                                           }}>
