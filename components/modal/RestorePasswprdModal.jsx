@@ -40,17 +40,17 @@ export default function RestorePasswprdModal() {
             <div className='fixed z-10 inset-0 overflow-y-auto'>
                <form
                   method='post'
-                  className='flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0'>
+                  className='flex items-end sm:items-center justify-center min-h-full text-center'>
                   <Transition.Child
                      as={Fragment}
-                     enter='ease-out duration-300'
-                     enterFrom='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+                     enter='ease-out duration-500'
+                     enterFrom='opacity-100 sm:opacity-0 translate-y-[200px] sm:translate-y-0 sm:scale-95'
                      enterTo='opacity-100 translate-y-0 sm:scale-100'
-                     leave='ease-in duration-200'
+                     leave='ease-in duration-300'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-                     leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
-                        <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 hidden sm:block' />
+                     leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
+                     <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-t-2xl  sm:rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
+                        <BouncingstarIcon className='absolute -top-20 sm:-top-6  sm:left-14 0scale-x-[-1] rotate-4 ' />
                         <div className=' absolute top-0 right-3 pt-4 pr-4'>
                            <button
                               type='button'
@@ -60,7 +60,7 @@ export default function RestorePasswprdModal() {
                               <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>
                         </div>
-                        <p className='block text-lg sm:text-3xl text-left  text-black sm:text-center font-medium'>
+                        <p className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
                            Restore Password
                         </p>
                         <div className='relative'>

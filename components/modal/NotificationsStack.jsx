@@ -34,20 +34,20 @@ export default function NotificationsStack() {
                      <motion.li
                         layoutId={item.id}
                         key={item.id}
-                        initial={{ x: 200, opacity: 0 }}
+                        initial={{ x: 500, opacity: 1 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 500, opacity: 0 }}
                         className='w-full'>
                         <div
                            className={`max-w-sm w-full ${
                               notifications.length - i == 1
-                                 ? 'opacity-100 scale-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
+                                 ? 'opacity-100 scale-100 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-60  '
                                  : notifications.length - i == 2
-                                 ? ' blur-[1px] scale-95 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
+                                 ? ' blur-[1px] scale-95 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-60'
                                  : notifications.length - i == 3
-                                 ? ' blur-[2px] scale-90 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
+                                 ? ' blur-[2px] -mb-4 scale-90 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-60'
                                  : notifications.length - i == 4
-                                 ? 'opacity-40 blur-[3px] scale-75 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'
+                                 ? ' -mb-4 blur-[3px] scale-75 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 '
                                  : ''
                            } bg-neutral-100  shadow-lg rounded-xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden`}>
                            <div className='p-2 sm:p-4'>
