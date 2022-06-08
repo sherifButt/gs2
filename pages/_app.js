@@ -9,7 +9,9 @@ import Layout3 from '../components/Layout/Layout3'
 import Layout4 from '../components/Layout/Layout4'
 import Layout5 from '../components/Layout/Layout5'
 import Layout6 from '../components/Layout/Layout6'
-import SignUpModal from '../components/modal/SignUpModal'
+import SignUpModal from '../components/modal/SignUpModalValidation'
+import Modal from '../components/modal/Modal'
+import SigninForm from '../components/forms/SigninForm'
 
 import Notifications from '../components/modal/NotificationsStack'
 import SignInModal from '../components/modal/SignInModal'
@@ -29,12 +31,13 @@ function MyApp({ Component, pageProps }) {
    return (
       <Provider store={store}>
          <Layout>
-            <Portal> 
+            <Portal>
                <SignInModal />
                <SignUpModal />
-               <RestorePasswprdModal/>
+               <RestorePasswprdModal />
                {/* <Notifications /> */}
-               <Notifications  isNotification/>
+               <Notifications isNotification />
+               {/* <SigninForm isActive /> */}
             </Portal>
             <Component {...pageProps} />
          </Layout>

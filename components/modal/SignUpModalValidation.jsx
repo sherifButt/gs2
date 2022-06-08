@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 // Icons
-import { XIcon, ExclamationCircleIcon } from '@heroicons/react/outline'
+import { XIcon, ExclamationCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { Fragment, useEffect, useState } from 'react'
 // Redux
@@ -179,12 +179,12 @@ export default function SignUpModal() {
                                     className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     First Name
                                  </label>
+                              </div>
                                  <p
                                     className='mt-2 text-sm text-red-600'
                                     id='firstname-error'>
                                     Your firstname should be only letters
                                  </p>
-                              </div>
                            </div>
                            <div>
                               <div className='relative'>
@@ -205,133 +205,139 @@ export default function SignUpModal() {
                                        })
                                     }
                                  />
-                                 {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                                 <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
                                      <ExclamationCircleIcon
                                         className='h-5 w-5 text-red-500'
                                         aria-hidden='true'
                                      />
-                                  </div> */}
+                                  </div>
 
                                  <label
                                     htmlFor='lastname'
                                     className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     Last Name
                                  </label>
-                                 {/* <p
+                              </div>
+                                 <p
                                   className='mt-2 text-sm text-red-600'
                                   id='lastname-error'>
                                   Your lastname must include @ sign.
-                               </p> */}
-                              </div>
+                               </p>
                            </div>
                         </div>
-                        <div className='relative'>
-                           <input
-                              type='email'
-                              name='email'
-                              id='email'
-                              required
-                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                              placeholder='Email'
-                              defaultValue=''
-                              aria-invalid='true'
-                              aria-describedby='email-error'
-                              onChange={e =>
-                                 setValues({
-                                    ...values,
-                                    Email: e.target.value,
-                                 })
-                              }
-                           />
-                           {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-                                 <ExclamationCircleIcon
-                                    className='h-5 w-5 text-red-500'
-                                    aria-hidden='true'
-                                 />
-                              </div> */}
-
-                           <label
-                              htmlFor='email'
-                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                              Email
-                           </label>
-                           {/* <p
-                              className='mt-2 text-sm text-red-600'
-                              id='email-error'>
-                              Your email must include @ sign.
-                           </p> */}
+                        <div>
+                           <div className='relative'>
+                              <input
+                                 type='email'
+                                 name='email'
+                                 id='email'
+                                 required
+                                 className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
+                                 placeholder='Email'
+                                 defaultValue=''
+                                 aria-invalid='true'
+                                 aria-describedby='email-error'
+                                 onChange={e =>
+                                    setValues({
+                                       ...values,
+                                       Email: e.target.value,
+                                    })
+                                 }
+                              />
+                              <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                                    <ExclamationCircleIcon
+                                       className='h-5 w-5 text-red-500'
+                                       aria-hidden='true'
+                                    />
+                                 </div>
+   
+                              <label
+                                 htmlFor='email'
+                                 className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                 Email
+                              </label>
+                           </div>
+                              <p
+                                 className='mt-2 text-sm text-red-600'
+                                 id='email-error'>
+                                 Your email must include @ sign.
+                              </p>
                         </div>
-                        <div className='relative'>
-                           <input
-                              type='password'
-                              name='password'
-                              id='password'
-                              required
-                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                              placeholder='Password'
-                              defaultValue=''
-                              aria-invalid='true'
-                              aria-describedby='password-error'
-                              onChange={e =>
-                                 setValues({
-                                    ...values,
-                                    Password: e.target.value,
-                                 })
-                              }
-                           />
-                           {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-                                 <ExclamationCircleIcon
-                                    className='h-5 w-5 text-red-500'
-                                    aria-hidden='true'
-                                 />
-                              </div> */}
-                           <label
-                              htmlFor='password'
-                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                              Password
-                           </label>
-
-                           {/* <p
-                              className='mt-2 text-sm text-red-600'
-                              id='password-error'>
-                              Your password must be less than 4 characters.
-                           </p> */}
+                        <div>
+                           <div className='relative'>
+                              <input
+                                 type='password'
+                                 name='password'
+                                 id='password'
+                                 required
+                                 className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
+                                 placeholder='Password'
+                                 defaultValue=''
+                                 aria-invalid='true'
+                                 aria-describedby='password-error'
+                                 onChange={e =>
+                                    setValues({
+                                       ...values,
+                                       Password: e.target.value,
+                                    })
+                                 }
+                              />
+                              <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                                    <ExclamationCircleIcon
+                                       className='h-5 w-5 text-red-500'
+                                       aria-hidden='true'
+                                    />
+                                 </div>
+                              <label
+                                 htmlFor='password'
+                                 className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                 Password
+                              </label>
+   
+                           </div>
+                              <p
+                                 className='mt-2 text-sm text-red-600'
+                                 id='password-error'>
+                                 Your password must be less than 4 characters.
+                              </p>
                         </div>
-                        <div className='relative'>
-                           <input
-                              type='password'
-                              name='confirmpassword'
-                              id='confirmpassword'
-                              required
-                              className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
-                              placeholder='Confirm Password'
-                              defaultValue=''
-                              aria-invalid='true'
-                              aria-describedby='confirmpassword-error'
-                              onChange={e =>
-                                 setValues({
-                                    ...values,
-                                    ConfirmPassword: e.target.value,
-                                 })
-                              }
-                           />
-                           {/* <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
-                                 <ExclamationCircleIcon
-                                    className='h-5 w-5 text-red-500'
-                                    aria-hidden='true'
-                                 />
-                              </div> */}
-                           <label
-                              htmlFor='confirmpassword'
-                              className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                              Confirm Password
-                           </label>
-
-                           {/* <p
-                              className='mt-2 text-sm text-red-600'
-                              id='confirmpassword-error'>
-                              Your confirmpassword must be less than 4 characters.
-                           </p> */}
+                        <div>
+                           <div className='relative'>
+                              <input
+                                 type='password'
+                                 name='confirmpassword'
+                                 id='confirmpassword'
+                                 required
+                                 className='mt-1 relative  shadow-sm peer block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900  focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl'
+                                 placeholder='Confirm Password'
+                                 defaultValue=''
+                                 aria-invalid='true'
+                                 aria-describedby='confirmpassword-error'
+                                 onChange={e =>
+                                    setValues({
+                                       ...values,
+                                       ConfirmPassword: e.target.value,
+                                    })
+                                 }
+                              />
+                              <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none'>
+                                    <ExclamationCircleIcon
+                                       className='h-5 w-5 text-red-500'
+                                       aria-hidden='true'
+                                    />
+                                 </div>
+                              <label
+                                 htmlFor='confirmpassword'
+                                 className='absolute ease-out duration-500 -top-4 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-4 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                 Confirm Password
+                              </label>
+   
+                           </div>
+                              <p
+                                 className='mt-2 text-sm text-red-600'
+                                 id='confirmpassword-error'>
+                                 Your confirmpassword must be less than 4 characters.
+                              </p>
                         </div>
                         <div className='flex items-center justify-between'>
                            <input

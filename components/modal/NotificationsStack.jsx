@@ -27,7 +27,7 @@ export default function NotificationsStack() {
          <div
             aria-live='assertive'
             className='fixed right-0 top-0 sm:top-auto sm:bottom-0 w-full  sm:w-[30rem] sm:left-160 flex flex-row justify-end items-end px-4 py-4 sm:py-6 pointer-events-none sm:p-6 sm:items-start  z-20'>
-            <ol className='w-full flex flex-col items-start -space-y-12  sm:-space-y-12 sm:items-end'>
+            <ol className='w-full flex flex-col items-start -space-y-10  sm:-space-y-12 sm:items-end'>
                {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
                <AnimatePresence>
                   {notifications.map((item, i) => (
@@ -45,9 +45,9 @@ export default function NotificationsStack() {
                                  : notifications.length - i == 2
                                  ? ' blur-[1px] scale-95 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-60'
                                  : notifications.length - i == 3
-                                 ? ' blur-[2px] -mb-4 scale-90 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-60'
+                                 ? ' blur-[2px] -mb-2 scale-90 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-60'
                                  : notifications.length - i == 4
-                                 ? ' -mb-4 blur-[3px] scale-75 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 '
+                                 ? ' -mb-3 blur-[3px] scale-75 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 '
                                  : ''
                            } bg-neutral-100  shadow-lg rounded-xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden`}>
                            <div className='p-2 sm:p-4'>
