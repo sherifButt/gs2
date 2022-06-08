@@ -128,11 +128,11 @@ export default function SignUpModal() {
                   <Transition.Child
                      as={Fragment}
                      enter='ease-out duration-500'
-                     enterFrom='opacity-100 sm:opacity-0 translate-y-96 sm:translate-y-0 sm:scale-95'
+                     enterFrom='opacity-100 sm:opacity-0 translate-y-[500px] sm:translate-y-0 sm:scale-95'
                      enterTo='opacity-100 translate-y-0 sm:scale-100'
-                     leave='ease-in duration-200'
+                     leave='ease-in duration-300'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-                     leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
+                     leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
                      <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-t-2xl  sm:rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
                         <BouncingstarIcon className='absolute -top-6  sm:left-14 0scale-x-[-1] rotate-4 hidden sm:block' />
                         <div className=' absolute top-0 right-3 pt-4 pr-4'>
