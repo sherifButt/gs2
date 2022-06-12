@@ -145,7 +145,7 @@ const SignupForm = () => {
                description: data.message,
             })
          )
-         
+
       } else if (error) {
          // console.log('error', error)
          // console.log('data', data)
@@ -190,7 +190,7 @@ const SignupForm = () => {
                         </p> */}
          <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
             <p className='block text-center text-xs text-black  font-medium'>
-               Don't you have an account?
+               Don&apos;t you have an account?
             </p>
             <div className='flex flex-row gap-2.5 justify-start items-center'>
                <button
