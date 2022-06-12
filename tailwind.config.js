@@ -10,7 +10,20 @@ module.exports = {
       './components/**/*.{js,ts,jsx,tsx}',
    ],
    theme: {
-      extend: {
+      extend: {"colors": {
+    "army": {
+      "50": "#aedbb4",
+      "100": "#a4d1aa",
+      "200": "#9ac7a0",
+      "300": "#90bd96",
+      "400": "#86b38c",
+      "500": "#7ca982",
+      "600": "#729f78",
+      "700": "#68956e",
+      "800": "#5e8b64",
+      "900": "#54815a"
+    }
+  },
          boxShadow: {
             top: [
                '0 -35px 30px rgba(0, 0, 0, 0.25)',

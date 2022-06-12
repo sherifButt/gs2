@@ -1,3 +1,4 @@
+
 import { Dialog, Transition } from '@headlessui/react'
 // Icons
 import {
@@ -18,7 +19,7 @@ import { addNotification } from '../../redux/features/notificationSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
 import BouncingstarIcon from '../icons/BouncingstarIcon'
 
-const formInitialState = {
+const valuesInitialState = {
    FirstName: {
       value: '',
       error: '',
@@ -73,7 +74,7 @@ export default function SignUpModal() {
    ] = useSignupUserMutation()
 
    // const [show, setShow] = useState(true)
-   const [values, setValues] = useState(formInitialState)
+   const [values, setValues] = useState(valuesInitialState)
    
    // Handlers (event listeners)
    const inputHandler = e => {
@@ -227,7 +228,7 @@ export default function SignUpModal() {
 
    const toggleFormHandler = e => {
       dispatch(toggleSignup())
-      setValues(formInitialState)
+      setValues(valuesInitialState)
    }
 
    const signUpHandler = async e => {
@@ -446,7 +447,7 @@ export default function SignUpModal() {
                                  )}
                                  <label
                                     htmlFor='FirstName'
-                                    className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                    className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     First Name
                                  </label>
                               </div>
@@ -495,7 +496,7 @@ export default function SignUpModal() {
                                  )}
                                  <label
                                     htmlFor='LastName'
-                                    className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                    className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                     Last Name
                                  </label>
                               </div>
@@ -545,7 +546,7 @@ export default function SignUpModal() {
                               )}
                               <label
                                  htmlFor='Email'
-                                 className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                                 className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                                  E-mail
                               </label>
                            </div>
@@ -593,7 +594,7 @@ export default function SignUpModal() {
                            )}
                            <label
                               htmlFor='Password'
-                              className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                              className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                               Password
                            </label>
                         </div>
@@ -640,7 +641,7 @@ export default function SignUpModal() {
                            )}
                            <label
                               htmlFor='ConfirmPassword'
-                              className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                              className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                               Confirm Password
                            </label>
                         </div>

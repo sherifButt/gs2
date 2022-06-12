@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleSignup } from '../../redux/features/modalSlicer'
 import { addNotification } from '../../redux/features/notificationSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
-
+import BouncingstarIcon from '../icons/BouncingstarIcon'
 export default function Modal({ active, children }) {
    const dispatch = useDispatch()
    const modal = useSelector(state => state.modal.signup)
@@ -50,7 +50,8 @@ export default function Modal({ active, children }) {
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                      leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
                      <Dialog.Panel className='flex flex-col gap-7 justify-center w-full  relative bg-neutral-100 rounded-t-2xl  sm:rounded-xl px-6 pt-5 pb-4 text-left overflow-none shadow-xl transform transition-all sm:my-8 sm:max-w-md sm:w-full sm:p-10'>
-                        <div className='flex justify-end'>
+                        <BouncingstarIcon className='absolute -top-20 sm:-top-6  sm:left-14 0scale-x-[-1] rotate-4 ' />
+                        <div className='flex justify-end z-10'>
                            <button
                               type='button'
                               className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 right-0'
