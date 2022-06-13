@@ -1,6 +1,6 @@
 import { signup as form } from './fomrs'
 import ButtonPrimary from '../buttons/ButtonPrimary'
-import Modal from '../modal/Modal'
+
 import { Dialog, Transition } from '@headlessui/react'
 import validateInput from '../../helpers/validateInput'
 
@@ -49,6 +49,7 @@ const SignupForm = () => {
    // Handle Validation
    const validationHandler = e => {
       const inputIdx = values.findIndex(input => input.name == e.target.name)
+
       validateInput(e, inputIdx, values, setValues)
 
       // Splitting Full name into fistst name and second name
@@ -145,7 +146,6 @@ const SignupForm = () => {
                description: data.message,
             })
          )
-
       } else if (error) {
          // console.log('error', error)
          // console.log('data', data)
@@ -161,17 +161,20 @@ const SignupForm = () => {
          )
       }
    }, [data, isError])
+
    return (
-      <Modal active>
+      <form
+         method='post'
+         className='flex flex-col space-y-6 last:-mt-10'>
          {form?.title && (
-            <Dialog.Title className='-mt-12 -mb-8 block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
+            <h1 className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
                {form.title}
-            </Dialog.Title>
+            </h1>
          )}
          {form?.subtitle && (
-            <Dialog.Description className='block text-l sm:text-l text-left  text-black sm:text-center font-medium'>
+            <h3 className='block text-l sm:text-l text-left  text-black sm:text-center font-medium'>
                {form.subtitle}
-            </Dialog.Description>
+            </h3>
          )}
          <div className='flex flex-row gap-4 justify-between'></div>
          {form.fields.map((field, i) => (
@@ -207,7 +210,7 @@ const SignupForm = () => {
                <div></div>
             </div>
          </div>
-      </Modal>
+      </form>
    )
 }
 

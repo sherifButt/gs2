@@ -12,6 +12,7 @@ import Layout6 from '../components/Layout/Layout6'
 import SignUpModal from '../components/modal/SignUpModalValidation'
 import Modal from '../components/modal/Modal'
 import SignupForm from '../components/forms/SignupForm'
+import ModalSignupForm from '../components/modal/ModalSignupForm'
 
 import Notifications from '../components/modal/NotificationsStack'
 import SignInModal from '../components/modal/SignInModal'
@@ -27,17 +28,19 @@ const layouts = {
 }
 
 function MyApp({ Component, pageProps }) {
-   const Layout = layouts[Component.layout] || Layout1
+   const Layout = ( typeof Component.layout ==='function' ) ? Component.layout : layouts[ Component.layout ] || Layout1
+   console.log('Component.layout', typeof Component.layout)
    return (
       <Provider store={store}>
-         <Layout>
+         <Layout rightSidebar={Component.rightSideBar} leftSidebar={Component.leftSideBar}>
             <Portal>
                <SignInModal />
-               <SignUpModal />
+               {/* <SignUpModal /> */}
                <RestorePasswprdModal />
                {/* <Notifications /> */}
                <Notifications isNotification />
-               <SignupForm isActive />
+               {/* <SignupForm isActive /> */ }
+               <ModalSignupForm/>
             </Portal>
             <Component {...pageProps} />
          </Layout>

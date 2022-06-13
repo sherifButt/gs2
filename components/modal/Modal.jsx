@@ -38,8 +38,8 @@ export default function Modal({ active, children }) {
             </Transition.Child>
 
             <div className='fixed z-10 inset-0 overflow-y-auto'>
-               <form
-                  method='post'
+               <div
+                  
                   className='flex items-end sm:items-center justify-center min-h-full  text-center'>
                   <Transition.Child
                      as={Fragment}
@@ -54,7 +54,7 @@ export default function Modal({ active, children }) {
                         <div className='flex justify-end z-10'>
                            <button
                               type='button'
-                              className=' rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 right-0'
+                              className=' absolute right-10 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                               onClick={() => dispatch(toggleSignup())}>
                               <span className='sr-only'>Close</span>
                               <XIcon className='h-5 w-5' aria-hidden='true' />
@@ -64,7 +64,7 @@ export default function Modal({ active, children }) {
                         {children}
                      </Dialog.Panel>
                   </Transition.Child>
-               </form>
+               </div>
             </div>
          </Dialog>
       </Transition.Root>

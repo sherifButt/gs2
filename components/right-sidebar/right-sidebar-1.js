@@ -10,7 +10,7 @@ const RightSidebar = props => {
             <div>
                {/* Call To Action */}
                {/* <div>RightSidebars call to action</div> */}
-               <VerticalMenu />
+               1<VerticalMenu />
 
                {/* /Call To Action */}
                <div className='  flex-col justify-between  hidden md:block'>
