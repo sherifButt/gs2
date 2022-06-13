@@ -5,7 +5,6 @@ import { Fragment, useEffect, useState } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleSignup } from '../../redux/features/modalSlicer'
-import { addNotification } from '../../redux/features/notificationSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
 import BouncingstarIcon from '../icons/BouncingstarIcon'
 export default function Modal({ active, children }) {
@@ -55,7 +54,7 @@ export default function Modal({ active, children }) {
                            <button
                               type='button'
                               className=' absolute right-10 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                              onClick={() => dispatch(toggleSignup())}>
+                              onClick={() => setShow(false)}>
                               <span className='sr-only'>Close</span>
                               <XIcon className='h-5 w-5' aria-hidden='true' />
                            </button>

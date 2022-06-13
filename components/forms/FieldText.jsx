@@ -27,9 +27,10 @@ const FieldText = ({
                   name={name}
                   id={name}
                   required
-                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-3 pr-10 placeholder-transparent border-red-300 text-gray-900 ${
-                     error && 'border'
-                  } focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-md rounded-xl transition-all ease-out duration-300`}
+                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-3 pr-10 placeholder-transparent  text-gray-900 ${
+                     error &&
+                     'focus:ring-red-500 focus:border-red-500 border-red-300'
+                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 sm:text-md rounded-xl transition-all ease-out duration-300`}
                   placeholder={placeholder}
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
@@ -59,10 +60,11 @@ const FieldText = ({
                      <div
                         className='leading-4  text-sm text-white place-items-center'
                         id='FirstName-error'>
-                         <ExclamationCircleIcon
-                        className='h-5 w-5 text-red-400 inline mr'
-                        aria-hidden='true'
-                     /> {error}
+                        <ExclamationCircleIcon
+                           className='h-5 w-5 text-red-400 inline mr'
+                           aria-hidden='true'
+                        />{' '}
+                        {error}
                      </div>
                   </div>
                )}

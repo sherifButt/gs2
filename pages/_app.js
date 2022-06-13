@@ -13,6 +13,7 @@ import SignUpModal from '../components/modal/SignUpModalValidation'
 import Modal from '../components/modal/Modal'
 import SignupForm from '../components/forms/SignupForm'
 import ModalSignupForm from '../components/modal/ModalSignupForm'
+import ModalSigninForm from '../components/modal/ModalSigninForm'
 
 import Notifications from '../components/modal/NotificationsStack'
 import SignInModal from '../components/modal/SignInModal'
@@ -34,13 +35,14 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
          <Layout rightSidebar={Component.rightSideBar} leftSidebar={Component.leftSideBar}>
             <Portal>
-               <SignInModal />
+               {/* <SignInModal /> */}
                {/* <SignUpModal /> */}
                <RestorePasswprdModal />
                {/* <Notifications /> */}
                <Notifications isNotification />
                {/* <SignupForm isActive /> */ }
                <ModalSignupForm/>
+               <ModalSigninForm/>
             </Portal>
             <Component {...pageProps} />
          </Layout>
