@@ -144,7 +144,7 @@ const SignupForm = () => {
             show={!success}
             leave='ease-in duration-300'
             leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-            leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
+            leaveTo='opacity-0 sm:opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
             <form method='post' className='flex flex-col space-y-6 last:-mt-10'>
                {form?.title && (
                   <h1 className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
