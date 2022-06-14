@@ -1,17 +1,20 @@
-import ButtonPrimary from '../buttons/ButtonPrimary'
+// import {NextResponse,NextRequest}
 import { signin as form } from './fomrs'
-
+// Helpers
 import validateInput from '../../helpers/validateInput'
-
 // Icons
 import { useEffect, useState } from 'react'
-
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleSignin, toggleSignup } from '../../redux/features/modalSlicer'
-
+import {
+   hideSignin,
+   showSignup,
+   showRestorePassword,
+} from '../../redux/features/modalSlicer'
 import { addNotification } from '../../redux/features/notificationSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
+// components
+import ButtonPrimary from '../buttons/ButtonPrimary'
 
 const SignupForm = () => {
    // Global State
@@ -19,8 +22,8 @@ const SignupForm = () => {
    const modal = useSelector(state => state.modal.signin)
    const [signinUser, { data, isLoading, isError, error }] =
       useSignupUserMutation()
+
    // Local State
-   // const [show, setShow] = useState(true)
    const [values, setValues] = useState(form.fields)
    console.log('values', values)
 
@@ -28,17 +31,14 @@ const SignupForm = () => {
    const inputHandler = e => {
       const inputIdx = values.findIndex(input => input.name == e.target.name)
       const isCheckbox = e.target.type === 'checkbox'
-
       const _values = [...values]
       _values[inputIdx].value = isCheckbox ? e.target.checked : e.target.value
-
       setValues(_values)
    }
 
    // Handle Validation
    const validationHandler = e => {
       const inputIdx = values.findIndex(input => input.name == e.target.name)
-
       validateInput(e, inputIdx, values, setValues)
    }
 
@@ -46,14 +46,11 @@ const SignupForm = () => {
    const signinHandler = async e => {
       e.preventDefault()
 
-      // Must pass global form  validation
+      // Global form  validation
       // required fields validation
       const requiredAny = values.find(field => field.required == true)
       // is any required fields are empty
       const isEmptyRequiredFields = values.find(field => field.value == '')
-      // is there any error message
-      const isErrorMessages = values.find(field => field.error != '')
-
       if (requiredAny && isEmptyRequiredFields) {
          const _values = [...values]
          _values.map((field, i) => {
@@ -72,6 +69,8 @@ const SignupForm = () => {
          return
       }
 
+      // is there any error message
+      const isErrorMessages = values.find(field => field.error != '')
       if (isErrorMessages) {
          dispatch(
             addNotification({
@@ -93,33 +92,28 @@ const SignupForm = () => {
          return
       }
 
-      console.log('Form Submitted successfully')
-
       const dataObject = {}
       values.map((field, i) => {
          dataObject = { ...dataObject, [field.name]: field.value }
       })
 
       await signinUser(dataObject)
+      console.log('Form Submitted successfully')
    }
-
    // manage Global state and notifications
    useEffect(() => {
-      if (data) {
-         // console.log('data', data)
+      if ( data )
+      {
+         console.log('data', data)
          dispatch(
             addNotification({
                isSuccess: true,
                status: data.status,
                message: 'Sign up Succeeded!',
-               description: data.message,
+               description: data.email,
             })
          )
       } else if (error) {
-         // console.log('error', error)
-         // console.log('data', data)
-         // console.log('isError', isError)
-
          dispatch(
             addNotification({
                isSuccess: false,
@@ -155,9 +149,14 @@ const SignupForm = () => {
          ))}
          {/* Sign Up Button */}
          <ButtonPrimary text={form.button} actionHandler={signinHandler} />
-         {/* <p className='block text-center text-xs text-army-500 font-medium'>
-                           TROUBLE SIGNING UP?
-                        </p> */}
+
+         <a
+            href='#'
+            onClick={() => dispatch(showRestorePassword())}
+            className='block text-center text-xs text-army-500 font-medium'>
+            TROUBLE SIGNING UP?
+         </a>
+
          <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
             <p className='block text-center text-xs text-black  font-medium'>
                Don&apos;t you have an account?
@@ -167,9 +166,9 @@ const SignupForm = () => {
                   className='block text-center text-[0.81rem] text-army-500  font-semibold'
                   onClick={e => {
                      e.preventDefault()
-                     dispatch(toggleSignup())
+                     dispatch(hideSignin())
                      setTimeout(() => {
-                        dispatch(toggleSignin())
+                        dispatch(showSignup())
                      }, 700)
                   }}>
                   <p>Sign up now →</p>

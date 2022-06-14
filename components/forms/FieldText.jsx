@@ -56,12 +56,12 @@ const FieldText = ({
                )}
 
                {error && (
-                  <div className='peer-hover:z-20  hover:z-20 absolute top-[53px]  border-t-dashed  border-gray-500 z-10 border-r-solid rounded-b-md m-w-2/3 w-[17rem] right-0 mr-4 p-1 bg-gray-900 shadow-lg'>
+                  <div className='peer-hover:z-20 px-2 hover:z-20 absolute top-[53px]  border-t-dashed  border-gray-500 z-10 border-r-solid rounded-b-md m-w-2/3 w-[17rem] right-0 mr-4 p-1 bg-red-50 shadow-md'>
                      <div
-                        className='leading-4  text-sm text-white place-items-center'
+                        className='leading-4  text-sm text-red-700 place-items-center'
                         id='FirstName-error'>
                         <ExclamationCircleIcon
-                           className='h-5 w-5 text-red-400 inline mr'
+                           className='h-5 w-5 text-red-400 inline'
                            aria-hidden='true'
                         />{' '}
                         {error}

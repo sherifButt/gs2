@@ -1,23 +1,21 @@
 import FieldText from './FieldText'
 import FieldCheckbox from './FieldCheckbox'
 export const signin = {
-   
    title: 'Sign in to Give Star',
    subtitle: '',
    button: 'Sign in',
    buttonIcon: '',
    method: 'post',
    next: {
-      id: null,
       title: '',
    },
    previous: {
-      id: null,
       title: '',
    },
    help: {
-      id: null,
-      title: '',
+      title: 'TROUBLE SIGNING UP?',
+      action: '',
+      href: '',
    },
    fields: [
       {
@@ -78,6 +76,7 @@ export const signup = {
          disabled:false,
          hidden:false,
       },
+      
       {
          name: 'FirstName',
          value: '',

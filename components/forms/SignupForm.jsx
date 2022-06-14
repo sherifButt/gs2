@@ -1,24 +1,16 @@
-import { signup as form } from './fomrs'
 import ButtonPrimary from '../buttons/ButtonPrimary'
+import { signup as form } from './fomrs'
 
-import { Dialog, Transition } from '@headlessui/react'
 import validateInput from '../../helpers/validateInput'
 
 // Icons
-import {
-   XIcon,
-   ExclamationCircleIcon,
-   CheckCircleIcon,
-} from '@heroicons/react/solid'
-import Link from 'next/link'
-import React, { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import {
-   hideSignup,
    toggleSignin,
-   toggleSignup,
+   toggleSignup
 } from '../../redux/features/modalSlicer'
 
 import { addNotification } from '../../redux/features/notificationSlicer'
@@ -82,9 +74,7 @@ const SignupForm = () => {
       const requiredAny = values.find(field => field.required == true)
       // is any required fields are empty
       const isEmptyRequiredFields = values.find(field => field.value == '')
-      // is there any error message
-      const isErrorMessages = values.find(field => field.error != '')
-
+   
       if (requiredAny && isEmptyRequiredFields) {
          const _values = [...values]
          _values.map((field, i) => {
@@ -103,6 +93,8 @@ const SignupForm = () => {
          return
       }
 
+// is there any error message
+      const isErrorMessages = values.find(field => field.error != '')
       if (isErrorMessages) {
          dispatch(
             addNotification({
@@ -137,13 +129,13 @@ const SignupForm = () => {
    // manage Global state and notifications
    useEffect(() => {
       if (data) {
-         // console.log('data', data)
+         console.log('data', data)
          dispatch(
             addNotification({
                isSuccess: true,
                status: data.status,
                message: 'Sign up Succeeded!',
-               description: data.message,
+               description: data.data,
             })
          )
       } else if (error) {
