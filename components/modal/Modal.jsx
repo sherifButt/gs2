@@ -37,13 +37,11 @@ export default function Modal({ active, children }) {
             </Transition.Child>
 
             <div className='fixed z-10 inset-0 overflow-y-auto'>
-               <div
-                  
-                  className='flex items-end sm:items-center justify-center min-h-full  text-center'>
+               <div className='flex items-end sm:items-center justify-center min-h-full  text-center'>
                   <Transition.Child
                      as={Fragment}
                      enter='ease-out duration-500'
-                     enterFrom='opacity-100 sm:opacity-0 translate-y-[500px] sm:translate-y-0 sm:scale-95'
+                     enterFrom='opacity-100 sm:opacity-0 translate-y-[340px] sm:translate-y-0 sm:scale-95'
                      enterTo='opacity-100 translate-y-0 sm:scale-100'
                      leave='ease-in duration-300'
                      leaveFrom='opacity-100 translate-y-0 sm:scale-100'

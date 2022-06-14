@@ -11,8 +11,6 @@ import GivestarIcon from '../icons/GivestarIcon'
 import SearchIcon from '../icons/SearchIcon'
 import StatsIcon from '../icons/StatsIcon'
 
-
-
 const mainMenu = [
    { title: 'Charities', href: '#', icon: '', active: false },
    { title: 'Individuals', href: '#', icon: '', active: false },
@@ -68,8 +66,6 @@ const NavbarIn = ({ className }) => {
                </div>
             </div>
             <div className='flex flex-row gap-10 justify-end items-center'>
-               
-               
                <div className='flex flex-inline gap-4'>
                   <div className='flex flex-row gap-[3.75rem] justify-end items-center max-w-[14.38rem] mx-auto'>
                      <div className='flex flex-row gap-[1.69rem] justify-end items-center'>
@@ -77,7 +73,6 @@ const NavbarIn = ({ className }) => {
                            <Link href={item.href} passHref key={item.title}>
                               <a className=''>
                                  <div className='relative'>
-                                    
                                     <item.icon className='z-0' />
                                  </div>
                               </a>

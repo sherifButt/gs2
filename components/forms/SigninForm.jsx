@@ -3,7 +3,7 @@ import { signin as form } from './fomrs'
 // Helpers
 import validateInput from '../../helpers/validateInput'
 // Icons
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -11,21 +11,26 @@ import {
    showSignup,
    showRestorePassword,
 } from '../../redux/features/modalSlicer'
+import { signin } from '../../redux/features/authSlicer'
 import { addNotification } from '../../redux/features/notificationSlicer'
-import { useSignupUserMutation } from '../../redux/services/authApi'
+import { useSigninUserMutation } from '../../redux/services/authApi'
 // components
 import ButtonPrimary from '../buttons/ButtonPrimary'
+import Lottie from '../Lottie'
+import { Transition } from '@headlessui/react'
 
 const SignupForm = () => {
    // Global State
    const dispatch = useDispatch()
    const modal = useSelector(state => state.modal.signin)
+
    const [signinUser, { data, isLoading, isError, error }] =
-      useSignupUserMutation()
+      useSigninUserMutation()
 
    // Local State
    const [values, setValues] = useState(form.fields)
    console.log('values', values)
+   const [success, setSuccess] = useState(false)
 
    // Handlers (event listeners)
    const inputHandler = e => {
@@ -61,7 +66,7 @@ const SignupForm = () => {
          dispatch(
             addNotification({
                isSuccess: false,
-               message: 'Signing up Failed!',
+               message: 'Signing in Failed!',
                description:
                   'All marked Fields are required! Please fill in required empty fields and try again',
             })
@@ -75,7 +80,7 @@ const SignupForm = () => {
          dispatch(
             addNotification({
                isSuccess: false,
-               message: 'Signing up Failed!',
+               message: 'Signing in Failed!',
                description: (
                   <>
                      <p>Please correct your entries!</p>
@@ -102,23 +107,31 @@ const SignupForm = () => {
    }
    // manage Global state and notifications
    useEffect(() => {
-      if ( data )
-      {
+      if (data?.accessToken) {
          console.log('data', data)
+         localStorage.setItem(
+            'login',
+            JSON.stringify({ userLogin: true, token: data.accessToken })
+         )
          dispatch(
             addNotification({
                isSuccess: true,
                status: data.status,
-               message: 'Sign up Succeeded!',
+               message: 'Sign in Succeeded!',
                description: data.email,
             })
          )
-      } else if (error) {
+
+         setValues(form.fields)
+         setSuccess(true)
+         dispatch(signin())
+      } else if (isError) {
+         console.log('error', error)
          dispatch(
             addNotification({
                isSuccess: false,
                status: error.status,
-               message: 'Sign up Failed!',
+               message: 'Sign in Failed!',
                description: error.data?.error || error.error,
             })
          )
@@ -126,57 +139,85 @@ const SignupForm = () => {
    }, [data, isError])
 
    return (
-      <form method='post' className='flex flex-col space-y-6 last:-mt-10'>
-         {form?.title && (
-            <h1 className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
-               {form.title}
-            </h1>
-         )}
-         {form?.subtitle && (
-            <h3 className='block text-l sm:text-l text-left  text-black sm:text-center font-medium'>
-               {form.subtitle}
-            </h3>
-         )}
-         <div className='flex flex-row gap-4 justify-between'></div>
-         {form.fields.map((field, i) => (
-            <field.component
-               {...field}
-               key={field.name}
-               inputHandler={inputHandler}
-               validationHandler={validationHandler}
-               value={values[i].value}
+      <>
+         <Transition
+            show={!success}
+            leave='ease-in duration-300'
+            leaveFrom='opacity-100 translate-y-0 sm:scale-100'
+            leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
+            <form method='post' className='flex flex-col space-y-6 last:-mt-10'>
+               {form?.title && (
+                  <h1 className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
+                     {form.title}
+                  </h1>
+               )}
+               {form?.subtitle && (
+                  <h3 className='block text-l sm:text-l text-left  text-black sm:text-center font-medium'>
+                     {form.subtitle}
+                  </h3>
+               )}
+               <div className='flex flex-row gap-4 justify-between'></div>
+               {form.fields.map((field, i) => (
+                  <field.component
+                     {...field}
+                     key={field.name}
+                     inputHandler={inputHandler}
+                     validationHandler={validationHandler}
+                     value={values[i].value}
+                  />
+               ))}
+               {/* Sign Up Button */}
+               <ButtonPrimary
+                  text={form.button}
+                  actionHandler={signinHandler}
+               />
+
+               <a
+                  href='#'
+                  onClick={() => dispatch(showRestorePassword())}
+                  className='block text-center text-xs text-army-500 font-medium'>
+                  TROUBLE SIGNING UP?
+               </a>
+
+               <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
+                  <p className='block text-center text-xs text-black  font-medium'>
+                     Don&apos;t you have an account?
+                  </p>
+                  <div className='flex flex-row gap-2.5 justify-start items-center'>
+                     <button
+                        className='block text-center text-[0.81rem] text-army-500  font-semibold'
+                        onClick={e => {
+                           e.preventDefault()
+                           dispatch(hideSignin())
+                           setTimeout(() => {
+                              dispatch(showSignup())
+                           }, 700)
+                        }}>
+                        <p>Sign up now →</p>
+                     </button>
+                     <div></div>
+                  </div>
+               </div>
+            </form>
+         </Transition>
+         <Transition
+            show={success}
+            enter='ease-out duration-500'
+            enterFrom='opacity-100 sm:opacity-0 translate-y-4 sm:translate-y-0 sm:scale-50'
+            enterTo='opacity-100 translate-y-0 sm:scale-100'
+            leave='ease-in duration-300'
+            leaveFrom='opacity-100 translate-y-0 sm:scale-100'
+            leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
+            <Lottie
+               className='w-60 h-60 mx-auto -mt-10'
+               loop={false}
+               path='104369-check-motion.json'
             />
-         ))}
-         {/* Sign Up Button */}
-         <ButtonPrimary text={form.button} actionHandler={signinHandler} />
-
-         <a
-            href='#'
-            onClick={() => dispatch(showRestorePassword())}
-            className='block text-center text-xs text-army-500 font-medium'>
-            TROUBLE SIGNING UP?
-         </a>
-
-         <div className='flex flex-row gap-[0.81rem] justify-start items-center'>
-            <p className='block text-center text-xs text-black  font-medium'>
-               Don&apos;t you have an account?
-            </p>
-            <div className='flex flex-row gap-2.5 justify-start items-center'>
-               <button
-                  className='block text-center text-[0.81rem] text-army-500  font-semibold'
-                  onClick={e => {
-                     e.preventDefault()
-                     dispatch(hideSignin())
-                     setTimeout(() => {
-                        dispatch(showSignup())
-                     }, 700)
-                  }}>
-                  <p>Sign up now →</p>
-               </button>
-               <div></div>
-            </div>
-         </div>
-      </form>
+            
+                <p className='text-lg text-center -mt-10'>You are logged in!</p>
+            
+         </Transition>
+      </>
    )
 }
 
