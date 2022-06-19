@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useCallback } from 'react'
 import { Transition } from '@headlessui/react'
 // Icons
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/outline'
@@ -12,58 +12,86 @@ import {
    deleteAllNotifications,
 } from '../../redux/features/notificationSlicer'
 
+// b point
+   const useMediaQuery = width => {
+      const [targetReached, setTargetReached] = useState(false)
+
+      const updateTarget = useCallback(e => {
+         if (e.matches) {
+            setTargetReached(true)
+         } else {
+            setTargetReached(false)
+         }
+      }, [])
+
+      useEffect(() => {
+         const media = window.matchMedia(`(max-width: ${width}px)`)
+         media.addListener(updateTarget)
+
+         // Check on mount (callback is not called until a change occurs)
+         if (media.matches) {
+            setTargetReached(true)
+         }
+
+         return () => media.removeListener(updateTarget)
+      }, [])
+
+      return targetReached
+   }
+
 export default function NotificationsGroupedStack() {
    // Global State
-   const notifications = useSelector(state => state.notification)
+   let notifications = useSelector(state => state.notification)
    const dispatch = useDispatch()
-
    
+    const isBreakpoint = useMediaQuery(768)
+if(isBreakpoint) notifications = notifications.slice(-1)
    return (
       <>
          {/* Global notification live region, render this permanently at the end of the document */}
          <div
             aria-live='assertive'
-            className='fixed right-0 top-0 sm:top-auto sm:bottom-0 w-full  sm:w-[30rem] sm:left-160 flex flex-row justify-end items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start z-30'>
+            className='fixed right-0 top-0 md:top-auto md:bottom-0 w-full  md:w-[30rem] md:left-160 flex flex-row justify-end items-end px-2 py-2 pointer-events-none md:p-6 md:items-start z-30'>
             {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
-            <motion.ol className='w-full flex flex-col items-center space-y-4 sm:items-end'>
-               <AnimatePresence>
+            <motion.ol className='w-full flex flex-col items-center space-y-4 md:items-end'>
+               <AnimatePresence exitBeforeEnter={isBreakpoint}>
                   {notifications.map((item, i) => (
                      <motion.li
                         layoutId={item.id}
                         key={item.id}
-                        index={i}
+                        index={i + '_'}
                         initial={{ x: 200, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: 500, opacity: 0 }}
-                        className='w-full'>
-                        <div className='max-w-sm w-full bg-neutral-100 shadow-lg rounded-xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-gray-200'>
-                           <div className='p-4'>
-                              <div className='flex items-start'>
-                                 <div className='flex-shrink-0'>
+                        className='w-full '>
+                        <div className=' md:max-w-sm w-full  bg-neutral-100/60 shadow-lg rounded-2xl pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60  border-gray-200'>
+                           <div className='p-3'>
+                              <div className='flex items-center '>
+                                 <div className='flex-shrink-0 '>
                                     {item.isSuccess ? (
                                        <CheckCircleIcon
-                                          className='h-6 w-6 text-green-400 '
+                                          className='h-8 w-8 text-green-400 '
                                           aria-hidden='true'
                                        />
                                     ) : (
                                        <XCircleIcon
-                                          className='h-6 w-6 text-red-400'
+                                          className='h-8 w-8 text-red-400'
                                           aria-hidden='true'
                                        />
                                     )}
                                  </div>
                                  <div className='ml-3 w-0 flex-1 pt-0.5'>
-                                    <p className='text-sm font-medium text-gray-900'>
+                                    <p className='text-md  font-medium text-gray-900'>
                                        {item.message}
                                     </p>
-                                    <p className='mt-1 text-sm text-gray-500'>
-                                       {item.description}
+                                    <p className='mt-1 leading-tight text-md md:text-sm text-gray-600'>
+                                       {item.description || '.'}
                                     </p>
                                  </div>
                                  <div className='ml-4 flex-shrink-0 flex flex-col items-end justify-between'>
                                     <button
                                        type='button'
-                                       className='bg-neutral-100 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                       className='bg-transparent rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                        onClick={() => {
                                           dispatch(removeNotification(i))
                                        }}>
@@ -76,7 +104,7 @@ export default function NotificationsGroupedStack() {
                                     {notifications.length > 2 && (
                                        <button
                                           type='button'
-                                          className='bg-neutral-100 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                          className='bg-transparent rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                           onClick={() => {
                                              dispatch(deleteAllNotifications())
                                           }}>

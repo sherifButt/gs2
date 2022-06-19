@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import Footer from '../footer-1'
+import Footer from '../footer/Footer1'
 import VerticalMenu from '../v-menu-1'
 
 const LeftSidebar = props => {

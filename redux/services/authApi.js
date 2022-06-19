@@ -5,10 +5,10 @@ export const authApi = createApi({
    baseQuery: fetchBaseQuery({
       baseUrl: 'https://api.gs2dev.co.uk/',
       // baseUrl: '/',
-    //   mode: 'no-cors',
+      //   mode: 'no-cors',
       prepareHeaders: headers => {
-          headers.set( 'Content-Type', 'application/json' )
-        //   headers.set('Access-Control-Allow-Origin', '*')
+         headers.set('Content-Type', 'application/json')
+         //   headers.set('Access-Control-Allow-Origin', '*')
          // console.log(headers)
          return headers
       },
@@ -19,7 +19,7 @@ export const authApi = createApi({
          query: body => {
             return {
                url: 'api/v1/Users/Login',
-               method: 'post',
+               method: 'POST',
                body,
             }
          },
@@ -29,7 +29,20 @@ export const authApi = createApi({
             return {
                url: 'api/v1/Users/Signup',
                // url: 'api/hello',
-               method: 'post',
+               method: 'POST',
+               body,
+            }
+         },
+      }),
+      restorePassword: builder.mutation({
+         query: body => {
+            return {
+               url: 'api/v1/Users/Forgotpw',
+               // validateStatus: (response, result) =>{
+               //    console.log('response', response)
+               //    response.status === 200 && !result.isError
+               // },
+               method: 'POST',
                body,
             }
          },
@@ -37,4 +50,8 @@ export const authApi = createApi({
    }),
 })
 
-export const { useSigninUserMutation, useSignupUserMutation } = authApi
+export const {
+   useSigninUserMutation,
+   useSignupUserMutation,
+   useRestorePasswordMutation,
+} = authApi

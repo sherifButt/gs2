@@ -14,8 +14,9 @@ import Modal from '../components/modal/Modal'
 import SignupForm from '../components/forms/SignupForm'
 import ModalSignupForm from '../components/modal/ModalSignupForm'
 import ModalSigninForm from '../components/modal/ModalSigninForm'
+import ModalRestorePasswordForm from '../components/modal/ModalRestorePasswordForm'
 
-import Notifications from '../components/modal/NotificationsStack'
+import Notifications from '../components/modal/NotificationsGroupedStack'
 import SignInModal from '../components/modal/SignInModal'
 import RestorePasswprdModal from '../components/modal/RestorePasswprdModal'
 
@@ -29,20 +30,23 @@ const layouts = {
 }
 
 function MyApp({ Component, pageProps }) {
-   const Layout = ( typeof Component.layout ==='function' ) ? Component.layout : layouts[ Component.layout ] || Layout1
+   const Layout =
+      typeof Component.layout === 'function'
+         ? Component.layout
+         : layouts[Component.layout] || Layout5
    console.log('Component.layout', typeof Component.layout)
    return (
       <Provider store={store}>
-         <Layout rightSidebar={Component.rightSideBar} leftSidebar={Component.leftSideBar}>
+         <Layout
+            rightSidebar={Component.rightSideBar}
+            leftSidebar={ Component.leftSideBar }
+         footer={Component.footer}
+         >
             <Portal>
-               {/* <SignInModal /> */}
-               {/* <SignUpModal /> */}
-               <RestorePasswprdModal />
-               {/* <Notifications /> */}
-               <Notifications isNotification />
-               {/* <SignupForm isActive /> */ }
-               <ModalSignupForm/>
-               <ModalSigninForm/>
+               <Notifications/>
+               <ModalSignupForm />
+               <ModalSigninForm />
+               <ModalRestorePasswordForm />
             </Portal>
             <Component {...pageProps} />
          </Layout>

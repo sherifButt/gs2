@@ -2,6 +2,7 @@
 import { signin as form } from './fomrs'
 // Helpers
 import validateInput from '../../helpers/validateInput'
+import { motion, AnimatePresence } from 'framer-motion'
 // Icons
 import { Fragment, useEffect, useState } from 'react'
 // Redux
@@ -29,8 +30,8 @@ const SignupForm = () => {
 
    // Local State
    const [values, setValues] = useState(form.fields)
+   const [isSuccess, setIsSuccess] = useState(false)
    console.log('values', values)
-   const [success, setSuccess] = useState(false)
 
    // Handlers (event listeners)
    const inputHandler = e => {
@@ -117,13 +118,13 @@ const SignupForm = () => {
             addNotification({
                isSuccess: true,
                status: data.status,
-               message: 'Sign in Succeeded!',
+               message: 'You are Signed in!',
                description: data.email,
             })
          )
 
+         setIsSuccess(true)
          setValues(form.fields)
-         setSuccess(true)
          dispatch(signin())
       } else if (isError) {
          console.log('error', error)
@@ -139,13 +140,15 @@ const SignupForm = () => {
    }, [data, isError])
 
    return (
-      <>
-         <Transition
-            show={!success}
-            leave='ease-in duration-300'
-            leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-            leaveTo='opacity-0 sm:opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
-            <form method='post' className='flex flex-col space-y-6 last:-mt-10'>
+      <AnimatePresence exitBeforeEnter>
+         {!isSuccess || !form.confirmation?.isConfirmation ? (
+            <motion.form
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: 30 }}
+               transition={{ delay: 1 }}
+               key='stuff'
+               method='post'
+               className='flex flex-col space-y-6 last:-mt-10'>
                {form?.title && (
                   <h1 className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
                      {form.title}
@@ -168,8 +171,13 @@ const SignupForm = () => {
                ))}
                {/* Sign Up Button */}
                <ButtonPrimary
-                  text={form.button}
+                  idle={form.button.idle}
+                  action={form.button.action}
+                  success={form.button.success}
+                  error={form.button.error}
                   actionHandler={signinHandler}
+                  isLoading={isLoading}
+                  isSuccess={isSuccess}
                />
 
                <a
@@ -198,26 +206,29 @@ const SignupForm = () => {
                      <div></div>
                   </div>
                </div>
-            </form>
-         </Transition>
-         <Transition
-            show={success}
-            enter='ease-out duration-500'
-            enterFrom='opacity-100 sm:opacity-0 translate-y-4 sm:translate-y-0 sm:scale-50'
-            enterTo='opacity-100 translate-y-0 sm:scale-100'
-            leave='ease-in duration-300'
-            leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-            leaveTo='opacity-100 sm:opacity-0 translate-y-full sm:translate-y-0 sm:scale-95'>
-            <Lottie
-               className='w-60 h-60 mx-auto -mt-10'
-               loop={false}
-               path='104369-check-motion.json'
-            />
-            
-                <p className='text-lg text-center -mt-10'>You are logged in!</p>
-            
-         </Transition>
-      </>
+            </motion.form>
+         ) : (
+            <motion.form
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, transition: { duration: 3 } }}
+               transition={{ ease: 'easeOut' }}
+               key='message'
+               className={form?.confirmation?.formHeight || 'h-[335px]'}>
+               <Lottie
+                  className='w-96 h-96 mx-auto -mt-10'
+                  loop={false}
+                  path={
+                     form?.confirmation?.lottiePath ||
+                     `104369-check-motion.json`
+                  }
+               />
+               <p className='text-lg text-center -mt-24'>
+                  {form?.confirmation?.message}
+               </p>
+            </motion.form>
+         )}
+      </AnimatePresence>
    )
 }
 

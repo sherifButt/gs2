@@ -54,12 +54,12 @@ function VerticalMenu() {
                <Link href={item.href} key={item.title} passHref>
                   <a
                      onClick={e => {
-                        const selectedMenuCopy = [...selectedMenu]
-                        selectedMenuCopy[i].active = true
-                        selectedMenuCopy.map((items, idx) => {
+                        const _selectedMenu = [...selectedMenu]
+                        _selectedMenu[i].active = true
+                        _selectedMenu.map((items, idx) => {
                            if (idx != i) return (items.active = false)
                         })
-                        setSelectedMenu([...selectedMenuCopy])
+                        setSelectedMenu([..._selectedMenu])
                      }}>
                      <div className='flex flex-row gap-[0.81rem] justify-start items-center ease-in-out duration-300  hover:scale-110'>
                         {<item.icon fill={item.active ? '#FED500' : ''} />}

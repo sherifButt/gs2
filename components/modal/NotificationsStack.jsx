@@ -70,7 +70,7 @@ export default function NotificationsStack() {
                                        {item.message}
                                     </p>
                                     <p className='mt-1 text-sm text-gray-500'>
-                                       {item.description}
+                                       {item.description||'.'}
                                     </p>
                                  </div>
                                  <div className='ml-4 flex-shrink-0 flex flex-col items-end justify-between'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Modal from './Modal'
-import SignupForm from '../forms/SignupForm'
+import SignupForm from '../forms/SignupForm_00'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'

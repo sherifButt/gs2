@@ -1,21 +1,61 @@
+// Field Components
 import FieldText from './FieldText'
 import FieldCheckbox from './FieldCheckbox'
+
 export const signin = {
    title: 'Sign in to Give Star',
    subtitle: '',
-   button: 'Sign in',
-   buttonIcon: '',
+   button: {
+      icon: '',
+      idle: 'Sign in',
+      action: 'signing...',
+      success: 'Signed in!',
+      error: 'Tray Signing in again!',
+   },
+
    method: 'post',
-   next: {
-      title: '',
-   },
-   previous: {
-      title: '',
-   },
-   help: {
-      title: 'TROUBLE SIGNING UP?',
+   nextForm: {
+      isNextForm: true,
+      title: 'Don &apos;t you have an account?',
+      cta: 'Sign up now →',
       action: '',
-      href: '',
+      href: '#',
+   },
+   previousForm: {
+      title: '',
+   },
+   helpForm: {
+      isHelpForm: true,
+      title: 'TROUBLE SIGNING IN?',
+      action: '',
+      href: '#',
+   },
+   confirmation: {
+      isConfirmation: true,
+      message: 'Your are Logged in!',
+      description: '',
+      href: '/discover',
+      delay: '2400',
+      lottiePath: '',
+      formHeight: 'h-[340px]',
+   },
+   notification: {
+      success: {
+         isNotification: false,
+         isSuccess: true,
+         message: 'Success!',
+         description: 'Your are Logged in!',
+         href: '',
+         delay: '',
+      },
+      error: {
+         isNotification: true,
+         isSuccess: false,
+         message: 'Failed!',
+         description: '',
+         href: '',
+         delay: '',
+      },
    },
    fields: [
       {
@@ -48,19 +88,71 @@ export const signin = {
 }
 
 export const signup = {
-   title: 'Sign in to Give Star',
+   title: 'Sign up to Give Star',
    subtitle: '',
-   button: 'Sign up',
-   buttonIcon: '',
+   button: {
+      icon: '',
+      idle: 'Sign up',
+      action: 'signing...',
+      success: 'Signed up!',
+      error: 'Tray Signing up again!',
+   },
+
    method: 'post',
-   next: {
+   nextForm: {
+      isNextForm: true,
+      title: 'Do you have an account?',
+      cta: 'Sign in now →',
+      action: '',
+      href: '#',
+   },
+   previousForm: {
       title: '',
    },
-   previous: {
-      title: '',
+   helpForm: {
+      isHelpForm: false,
+      title: 'TROUBLE SIGNING UP?',
+      action: '',
+      href: '#',
    },
-   help: {
-      title: '',
+   confirmation: {
+      isConfirmation: true,
+
+      message: (
+         <div>
+            <h1 className='text-xl font-bold'>Welcome to GiveStar!</h1>
+
+            <p>
+               We're excited to have you get started. First, you need to confirm
+               your account. Just go to your email and click the activation
+               link.
+            </p>
+            <p>The GiveStar Team</p>
+         </div>
+      ),
+      description: '',
+      href: '',
+      delay: '',
+      lottiePath: '',
+      formHeight: 'h-[500px]',
+   },
+   notification: {
+      success: {
+         isNotification: true,
+         isSuccess: true,
+         message: 'Success!',
+         description: 'account been created!',
+         href: '',
+         delay: '',
+      },
+      error: {
+         isNotification: true,
+         isSuccess: false,
+         message: 'Failed!',
+         description: '',
+         href: '',
+         delay: '',
+      },
    },
    fields: [
       {
@@ -73,10 +165,10 @@ export const signup = {
          type: 'text',
          required: true,
          component: FieldText,
-         disabled:false,
-         hidden:false,
+         disabled: false,
+         hidden: false,
       },
-      
+
       {
          name: 'FirstName',
          value: '',
@@ -87,8 +179,8 @@ export const signup = {
          type: 'text',
          required: false,
          component: FieldText,
-         disabled:false,
-         hidden:true,
+         disabled: false,
+         hidden: true,
       },
       {
          name: 'LastName',
@@ -100,8 +192,8 @@ export const signup = {
          type: 'text',
          required: false,
          component: FieldText,
-         disabled:false,
-         hidden:true,
+         disabled: false,
+         hidden: true,
       },
       {
          name: 'Email',
@@ -113,8 +205,8 @@ export const signup = {
          type: 'email',
          required: true,
          component: FieldText,
-         disabled:false,
-         hidden:false,
+         disabled: false,
+         hidden: false,
       },
       {
          name: 'Password',
@@ -126,8 +218,8 @@ export const signup = {
          type: 'password',
          required: true,
          component: FieldText,
-         disabled:false,
-         hidden:false,
+         disabled: false,
+         hidden: false,
       },
       {
          name: 'ConfirmPassword',
@@ -139,8 +231,8 @@ export const signup = {
          type: 'password',
          required: true,
          component: FieldText,
-         disabled:false,
-         hidden:false,
+         disabled: false,
+         hidden: false,
       },
       {
          name: 'SignupRequest',
@@ -162,4 +254,83 @@ export const signup = {
       },
    ],
 }
-export const restorePassword = {}
+export const restorePassword = {
+   title: 'Restore Password',
+   subtitle: '',
+   animationHeight: 'h-[300px]',
+   button: {
+      icon: '',
+      idle: 'Restore Password',
+      action: 'Restoring...',
+      success: 'Password Restored!',
+      error: 'Restore again!',
+   },
+
+   method: 'post',
+   nextForm: {
+      isNextForm: true,
+      title: ' ',
+      cta: '← Back to Sign in',
+      action: '',
+      href: '#',
+   },
+   previousForm: {
+      title: '',
+   },
+   helpForm: {
+      isHelpForm: false,
+      title: 'TROUBLE SIGNING IN?',
+      action: '',
+      href: '#',
+   },
+   confirmation: {
+      isConfirmation: true,
+      message: (
+         <div>
+            <h1 className='text-xl font-bold'>Your password Restored!</h1>
+
+            <p>
+               Please go to your email and click on the activation link.
+            </p>
+         </div>
+      ),
+      description: '',
+      href: '',
+      delay: '',
+      lottiePath: '',
+      formHeight: 'h-[300px]',
+   },
+   notification: {
+      success: {
+         isNotification: true,
+         isSuccess: true,
+         message: 'Success!',
+         description: 'Your password reset request been successful!',
+         href: '',
+         delay: '',
+      },
+      error: {
+         isNotification: true,
+         isSuccess: false,
+         message: 'Failed!',
+         description: '',
+         href: '',
+         delay: '',
+      },
+   },
+   fields: [
+      {
+         name: 'Email',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         placeholder: 'Email',
+         type: 'email',
+         required: true,
+         component: FieldText,
+         disabled: false,
+         hidden: false,
+      },
+   ],
+}

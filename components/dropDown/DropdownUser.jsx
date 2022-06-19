@@ -11,6 +11,7 @@ import UserIcon from '../icons/UserIcon'
 import AvatarUser from '../avatar/AvatarUser'
 import { useSelector, useDispatch } from 'react-redux'
 import { signin } from '../../redux/features/authSlicer'
+import DropdownUserMenu from './DropdownUserMenu'
 
 const menu = [
    {
@@ -54,39 +55,7 @@ export default function Example() {
             leaveFrom='transform opacity-100 scale-100'
             leaveTo='transform opacity-0 scale-95'>
             <Menu.Items className='origin-top-right absolute right-0  w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none'>
-               <div className='px-4 py-3'>
-                  <p className='text-md'>Hi, {foreName}</p>
-                  <p className='text-sm font-medium text-gray-900 truncate'>
-                     {email}
-                  </p>
-               </div>
-               <div className='py-1'>
-                  {menu.map((item, i) => (
-                     <Menu.Item key={i + '_' + item.title}>
-                        <Link href={item.href} passHref>
-                           <a className='text-gray-700 px-4 py-3 text-md flex  gap-2 place-items-center hover:bg-gray-100 hover:text-gray-900'>
-                              <item.icon />
-                              <p>{item.title}</p>
-                           </a>
-                        </Link>
-                     </Menu.Item>
-                  ))}
-               </div>
-               <div className='py-1'>
-                  <form method='POST' action='#'>
-                     <Menu.Item>
-                        <button
-                           onClick={e => {
-                              e.preventDefault()
-                              dispatch(signin())
-                           }}
-                           type='submit'
-                           className='block w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
-                           Sign out
-                        </button>
-                     </Menu.Item>
-                  </form>
-               </div>
+               <DropdownUserMenu/>
             </Menu.Items>
          </Transition>
       </Menu>

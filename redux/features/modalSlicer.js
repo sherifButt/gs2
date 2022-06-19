@@ -63,6 +63,13 @@ const modalSlicer = createSlice({
             href: '#',
          }
       },
+      hideAllModals: state => {
+         for ( const key in state )
+         {
+            if ( state[key] == 'notification' ) return state
+            state[key].show = false
+         }
+      }
    },
 })
 
@@ -78,5 +85,6 @@ export const {
    hideSignup,
    hideNotification,
    hideRestorePassword,
+   hideAllModals,
 } = modalSlicer.actions
 export default modalSlicer.reducer

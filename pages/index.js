@@ -1,23 +1,14 @@
 import React from 'react'
 import PostLastUpdate from '../components/PostLastUpdate1'
 import HomePage from '../components/Home'
+import CtaLetsDoSomeGood from '../components/sections/Cta-1'
 const Home = () => {
    return (
       <>
-         {/* <HomePage/> */}
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         <PostLastUpdate />
-         
+         <CtaLetsDoSomeGood/>
       </> 
    )
 }
 
-Home.layout = 'L5'
+Home.layout = 'L6'
 export default Home

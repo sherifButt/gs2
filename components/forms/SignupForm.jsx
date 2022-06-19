@@ -1,10 +1,11 @@
-import ButtonPrimary from '../buttons/ButtonPrimary'
+
+import { useEffect, useState } from 'react'
 import { signup as form } from './fomrs'
 
 import validateInput from '../../helpers/validateInput'
-
+import ButtonPrimary from '../buttons/ButtonPrimary'
 // Icons
-import { useEffect, useState } from 'react'
+
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'

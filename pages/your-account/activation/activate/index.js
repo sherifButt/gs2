@@ -11,10 +11,7 @@ import { CheckCircleIcon } from '@heroicons/react/solid'
 function Activation() {
    const dispatch = useDispatch()
    return (
-      <div className='flex flex-col space-y-4 bg-white rounded-xl p-4'>
-         
-
-         
+      <div className='flex flex-col space-y-4  p-4'>
          <div className='rounded-md bg-green-50 p-4'>
             <div className='flex'>
                <div className='flex-shrink-0'>
@@ -29,13 +26,16 @@ function Activation() {
                   </h3>
                   <div className='mt-2 text-sm text-green-700'>
                      <p>
-                        Please use your email address and password to sign in below
+                        Please use your email address and password to sign in
+                        below
                      </p>
                   </div>
                </div>
             </div>
          </div>
-         <SigninForm />
+         <div className='bg-white rounded-xl p-4'>
+            <SigninForm />
+         </div>
       </div>
    )
 }

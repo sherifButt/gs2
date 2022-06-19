@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Modal from './Modal'
-import SigninForm from '../forms/SigninForm_00'
+import RestorePassword from '../forms/RestorePasswordForm_00'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,14 +9,14 @@ import {
    showSignup
 } from '../../redux/features/modalSlicer'
 
-const ModalSignupForm = () => {
+const ModalRestorePassword = () => {
    const dispatch = useDispatch()
-   const modal = useSelector(state => state.modal.signin)
+   const modal = useSelector(state => state.modal.restorePassword)
    return (
       <Modal active={modal.show}>
-         <SigninForm />
+         <RestorePassword />
       </Modal>
    )
 }
 
-export default ModalSignupForm
+export default ModalRestorePassword
