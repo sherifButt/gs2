@@ -16,7 +16,7 @@ export const signin = {
    method: 'post',
    nextForm: {
       isNextForm: true,
-      title: 'Don &apos;t you have an account?',
+      title: 'Do not you have an account?',
       cta: 'Sign up now →',
       action: '',
       href: '#',
@@ -123,7 +123,7 @@ export const signup = {
             <h1 className='text-xl font-bold'>Welcome to GiveStar!</h1>
 
             <p>
-               We're excited to have you get started. First, you need to confirm
+               We are excited to have you get started. First, you need to confirm
                your account. Just go to your email and click the activation
                link.
             </p>
