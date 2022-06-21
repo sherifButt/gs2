@@ -1,12 +1,15 @@
-import React,{ useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
+
 // Components
 import DropdownEmailNotifications from '../dropDown/DropdownEmailNotifications'
 import DropdownNotifications from '../dropDown/DropdownNotifications'
 import DropdownUser from '../dropDown/DropdownUser'
+
 // Icons
 import GivestarIcon from '../icons/GivestarIcon'
 import SearchIcon from '../icons/SearchIcon'
@@ -20,10 +23,12 @@ const mainMenu = [
    { title: 'Individuals', href: '#', icon: '', active: false },
    { title: 'Companies', href: '#', icon: '', active: false },
 ]
+
 const signMenu = [
    { title: 'Sign in', href: '#', icon: '', active: false },
    { title: 'Sign up', href: '#', icon: '', active: false },
 ]
+
 const loggedInMenu = [
    { title: 'Stats', href: '#', icon: StatsIcon, active: false },
    {
@@ -42,8 +47,8 @@ const loggedInMenu = [
 
 const NavbarIn = ({ className }) => {
    const dispatch = useDispatch()
-   const { auth } = useSelector( state => state.auth )
-   const [ open, setOpen ] = useState( false )
+   const { auth } = useSelector(state => state.auth)
+   const [open, setOpen] = useState(false)
    const menuBackdrop = {
       initial: { opacity: 0 },
       animate: {
@@ -76,8 +81,7 @@ const NavbarIn = ({ className }) => {
       exit: { opacity: 0 },
    }
    return (
-      <div
-         className={`bg-[url("/assets/images/navbar-shade.png")]   ${className}`}>
+      <div className={`bg-menu-texture   ${className}`}>
          {/* mobile menu */}
          <AnimatePresence>
             {open && (
@@ -96,31 +100,30 @@ const NavbarIn = ({ className }) => {
                      animate='animate'
                      exit='exit'
                      key='menu'
-                     className=' absolute top-20 rounded-b-xl pb-8 flex flex-col flex-grow w-full bg-yellow-400 bg-[url("/assets/images/navbar-shade.png")]'
+                     className=' absolute top-20 rounded-b-xl pb-8 flex flex-col flex-grow w-full bg-yellow-400 bg-menu-texture'
                      onClick={() => setOpen(!open)}>
                      <motion.div
                         variants={menuItem}
                         key='sub-menu'
                         className='flex flex-col space-y-8 ml-6 '>
-                        <VerticalMenu/>
+                        <VerticalMenu />
                      </motion.div>
                      <motion.div
                         variants={menuItem}
                         key='sub-menu-signing'
                         className=' mt-4 pt-4  border-t border-yellow-500 flex flex-col gap-8 uppercase'>
-                        <DropdownUserMenu open/>
+                        <DropdownUserMenu open />
                      </motion.div>
                   </motion.div>
                </div>
             )}
          </AnimatePresence>
-         <div className=' z-10 lg:container flex flex-row justify-between items-center gap-4 mx-auto w-full p-5 lg:p-0 bg-[url("/assets/images/navbar-shade.png")] lg:bg-[url("")]'>
+         <div className=' z-10 lg:container flex flex-row justify-between items-center gap-4 mx-auto w-full p-5 lg:p-0 bg-menu-texture lg:bg-empty-texture'>
             <div className='flex flex-row gap-4 justify-start items-center '>
                <div className='flex-shrink-1'>
                   <GivestarIcon
-                     width='32'
                      viewBox='0 0 32 32'
-                     className='block md:hidden'
+                     className='block md:hidden w-8'
                   />
                   <GivestarIcon className='hidden md:block' />
                </div>

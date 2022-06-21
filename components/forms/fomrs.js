@@ -37,7 +37,7 @@ export const signin = {
       href: '/discover',
       delay: '2400',
       lottiePath: '',
-      formHeight: 'h-[340px]',
+      formHeight: 'h-[335px]',
    },
    notification: {
       success: {

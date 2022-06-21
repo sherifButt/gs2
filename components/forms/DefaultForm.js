@@ -157,8 +157,7 @@ function Form({
          if (form.confirmation?.delay || form.confirmation?.href)
            setTimeout( () => {
              dispatch( hideThisForm() )
-             router.push( form.confirmation?.href
-             )
+             if (form.confirmation?.href) router.push(form.confirmation?.href)
            }, form.confirmation?.delay)
       } else if (isError) {
          console.log('error', error)

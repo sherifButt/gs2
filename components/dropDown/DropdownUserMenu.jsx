@@ -1,5 +1,5 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
+import {useRouter} from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import Link from 'next/link'
 
@@ -33,15 +33,18 @@ const menu = [
    },
 ]
 
-export default function DropdownUserMenu(open) {
+export default function DropdownUserMenu ( open ) {
+   const router = useRouter()
+   const  pathname  = router.pathname.split('/').filter(Boolean)
+   console.log('pathname', pathname)
    const dispatch = useDispatch()
    const { foreName, surName, name, phone, email, image, privilege } =
       useSelector(state => state.user)
    return (
       <div>
          <div className='px-4 py-3 flex gab-4'>
-            <div className="mr-3 block lg:hidden">
-               <AvatarUser />
+            <div className='mr-3 block lg:hidden '>
+               <AvatarUser/>
             </div>
             <div>
                <p className='text-md font-bold'>Hi, {foreName}</p>
@@ -52,10 +55,14 @@ export default function DropdownUserMenu(open) {
          </div>
          <div className='py-1'>
             {menu.map((item, i) => (
-               <div key={i + '_' + item.title}>
+               <div
+                  key={i + '_' + item.title}
+                  className='last:border-b last:border-yellow-500 first:border-t first:border-yellow-500 first:mt-2'>
                   <Link href={item.href} passHref>
-                     <a className='text-gray-700 px-4 py-3 text-md flex  gap-2 place-items-center hover:bg-gray-100 hover:text-gray-900'>
-                        <item.icon />
+                     <a
+                        src={item.href}
+                        className='ml-2 text-gray-800 px-4 py-3 text-md flex  gap-2 place-items-center hover:bg-gray-100 hover:text-gray-900 '>
+                        <item.icon className=""/>
                         <p>{item.title}</p>
                      </a>
                   </Link>
@@ -71,7 +78,7 @@ export default function DropdownUserMenu(open) {
                         dispatch(signin())
                      }}
                      type='submit'
-                     className='block w-full text-left px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
+                     className='uppercase block w-full text-left ml-4 px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
                      Sign out
                   </button>
                </div>

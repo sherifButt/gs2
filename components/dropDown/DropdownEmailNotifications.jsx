@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/solid'
 import { Fragment, useState } from 'react'

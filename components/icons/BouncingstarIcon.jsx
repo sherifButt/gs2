@@ -2,13 +2,7 @@ import React from 'react'
 
 function Icon({
    className,
-   fill,
-   stroke,
-   strokeWidth,
-   width,
-   height,
-   viewBox,
-   fillOpacity,
+   
 }) {
    return (
       <svg

@@ -17,25 +17,25 @@ const menu = [
       title: 'Discover',
       icon: DiscoverIcon,
       active: false,
-      href: '#',
+      href: '/discover',
    },
    {
       title: 'Basecamp',
       icon: BasecampIcon,
       active: false,
-      href: '#',
+      href: '/basecamp',
    },
    {
       title: 'Groups',
       icon: GroupsIcon,
       active: false,
-      href: '#',
+      href: '/groups',
    },
    {
       title: 'Friends',
       icon: FriendsIcon,
       active: false,
-      href: '#',
+      href: 'friends',
    },
 ]
 
@@ -62,7 +62,11 @@ function VerticalMenu() {
                         setSelectedMenu([..._selectedMenu])
                      }}>
                      <div className='flex flex-row gap-[0.81rem] justify-start items-center ease-in-out duration-300  hover:scale-110'>
-                        {<item.icon fill={item.active ? '#FED500' : ''} />}
+                        {
+                           <item.icon
+                              className={`${item.active ? '#FED500' : ''} w-7 h-7`}
+                           />
+                        }
                         <p
                            className={`block text-center text-lg text-black  ${
                               item.active ? 'font-semibold' : 'font-normal'
@@ -90,14 +94,12 @@ function VerticalMenu() {
                   <button
                      type='button'
                      className='flex w-full flex-row gap-5 justify-center items-center  py-3 bg-yellow-400 rounded-xl hover:scale-105 ease-out duration-300 hover:shadow-md active:scale-100 active:shadow-none'
-                        onClick={ () => dispatch( toggleSignup() ) }
-                     >
+                     onClick={() => dispatch(toggleSignup())}>
                      <p className='block text-center text-gray-600  font-semibold'>
                         SIGN UP
                      </p>
                   </button>
                </Link>
-               
             </div>
          )}
       </div>

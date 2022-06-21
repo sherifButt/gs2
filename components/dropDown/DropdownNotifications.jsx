@@ -1,4 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Menu, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/solid'
 import { Fragment, useState } from 'react'
@@ -36,10 +35,10 @@ export default function DropdownNotifications({ data }) {
             leave='transition ease-in duration-75'
             leaveFrom='transform opacity-100 scale-100'
             leaveTo='transform opacity-0 scale-95'>
-            <Menu.Items className='origin-top-right absolute right-0 mt-2  rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none '>
-               <div className='flex flex-col justify-start items-center w-[35rem] max-w-[30.13rem] mx-auto pb-4 bg-white rounded-[1.25rem] max-h-[42rem] overflow-scroll'>
+            <Menu.Items className='origin-top-right fixed lg:absolute left-0 lg:right-0 lg:left-auto mt-6  lg:mt-2 rounded-b-lg lg:rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none '>
+               <div className='flex flex-col justify-start items-center w-full lg:w-[35rem] max-w-[30.13rem] mx-auto pb-4 bg-white rounded-[1.25rem] max-h-[42rem] overflow-scroll'>
                   <div className='flex flex-col  justify-start items-start w-full overflow-scroll'>
-                     <div className='flex flex-row grow justify-between items-center w-full px-[1.94rem] pt-[1.06rem] pb-[0.56rem] sticky top-0 bg-white border-b z-10'>
+                     <div className='flex flex-row grow justify-between items-center w-full px-4 lg:px-[1.94rem] pt-[1.06rem] pb-[0.56rem] sticky top-0 bg-white border-b z-10'>
                         <p className='block uppercase text-xs text-neutral-500  font-medium'>
                            today
                         </p>
@@ -57,7 +56,7 @@ export default function DropdownNotifications({ data }) {
                               item.active && (
                                  <li
                                     key={i + '_' + item.title}
-                                    className='flex flex-row gap-4 justify-start items-start w-full px-[2.31rem] py-3.5  hover:bg-gray-100 '>
+                                    className='flex flex-row gap-4 justify-start items-start w-full px-4 lg:px-[2.31rem] py-3.5  hover:bg-gray-100 '>
                                     <div
                                        onClick={() => {
                                           notifications[i].active = false

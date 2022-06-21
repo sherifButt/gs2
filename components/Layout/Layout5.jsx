@@ -7,6 +7,7 @@ import RightSidebar from '../right-sidebar/right-sidebar-1'
 
 const Layout = ( { children, rightSidebar, leftSidebar,footer } ) => {
    
+   // 3 vertical columns
    const _RightSidebar = rightSidebar || RightSidebar
    const _LeftSidebar = leftSidebar || LeftSidebar
    const _Footer = footer || Footer

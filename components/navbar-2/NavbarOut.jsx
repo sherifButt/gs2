@@ -130,9 +130,9 @@ const NavbarOut = props => {
             <div className='flex flex-row gap-20 justify-start items-center'>
                <div className='flex-shrink-1 mr-4'>
                   <GivestarIcon
-                     width='32'
+                     
                      viewBox='0 0 32 32'
-                     className='block md:hidden'
+                     className='block md:hidden w-8'
                   />
                   <GivestarIcon className='hidden md:block' />
                </div>
