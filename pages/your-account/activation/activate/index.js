@@ -90,12 +90,12 @@ function Activation() {
          )}
 
          <div className='bg-white rounded-xl p-4 pt-12 mt-20'>
-            <SigninForm/>
+            <SigninForm href="/your-account"/>
          </div>
       </div>
    )
 }
 Activation.layout = Layout
-Activation.rightSideBar = RightSidebar
-Activation.leftSideBar = LeftSidebar
+Activation.rightSidebar = RightSidebar
+Activation.leftSidebar = LeftSidebar
 export default Activation

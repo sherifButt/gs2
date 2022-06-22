@@ -38,8 +38,8 @@ function MyApp({ Component, pageProps }) {
    return (
       <Provider store={store}>
          <Layout
-            rightSidebar={Component.rightSideBar}
-            leftSidebar={ Component.leftSideBar }
+            rightSidebar={Component.rightSidebar}
+            leftSidebar={ Component.leftSidebar }
          footer={Component.footer}
          >
             <Portal>

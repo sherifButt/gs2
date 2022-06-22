@@ -20,6 +20,6 @@ function Activation () {
    )
 }
 Activation.layout = Layout
-Activation.rightSideBar = RightSidebar
-Activation.leftSideBar = LeftSidebar
+Activation.rightSidebar = RightSidebar
+Activation.leftSidebar = LeftSidebar
 export default Activation

@@ -2,6 +2,7 @@ import React from 'react'
 import ButtonPrimary from '../buttons/ButtonPrimary'
 import PostLastUpdate from '../PostLastUpdate1'
 import VerticalMenu from '../v-menu-1'
+import Event from './Event'
 const RightSidebar = props => {
    return (
       <aside {...props}>
@@ -23,7 +24,11 @@ const RightSidebar = props => {
             </div>
 
             {/* Fixed footer */}
-            <div className='sticky top-28 hidden md:block -z-10'></div>
+            <div className='sticky top-28 hidden md:block -z-10'>
+
+            <Event />
+            {/* <PostLastUpdate /> */}
+            </div>
             {/* /Fixed footer */}
          </div>
       </aside>

@@ -1,3 +1,5 @@
+// 3 (Extra wide) vertical columns middle infinity scroll for (posts/comments/campaigns)
+
 import React from 'react'
 import Header from './Header'
 import Navbar from '../navbar-2'
@@ -12,8 +14,7 @@ const Layout = ({ children }) => {
          <Navbar className='bg-yellow-400 w-full flex justify-between  h-20  z-50 fixed top-0' />
          <div className='container mx-auto max-auto '>
             <div className=' flex flex-row justify-center flex-wrap md:flex-nowrap h-full'>
-              
-               {/* Left */ }
+               {/* Left */}
                <LeftSidebar className='w-60 pt-24  xs:w-88 xl:w-96 hidden md:block  -mt-24 h-screen mb-auto   sticky top-0' />
                {/* /Left */}
 
@@ -27,8 +28,7 @@ const Layout = ({ children }) => {
 
                {/* Right */}
                <RightSidebar className='  w-full  md:w-auto lg:w-350 md:h-full top-0 absolute md:sticky order-2 md:order-none pt-24' />
-               {/* /Right */ }
-               
+               {/* /Right */}
             </div>
          </div>
       </div>

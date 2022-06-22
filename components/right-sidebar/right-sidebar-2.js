@@ -1,6 +1,7 @@
 import React from 'react'
 import PostLastUpdate from '../PostLastUpdate1'
 import VerticalMenu from '../v-menu-1'
+import Event from './Event'
 const RightSidebar = props => {
    return (
       <aside {...props}>
@@ -10,19 +11,20 @@ const RightSidebar = props => {
             <div>
                {/* Call To Action */}
                {/* <div>RightSidebars call to action</div> */}
-               {/* 2<VerticalMenu /> */}
+               2<VerticalMenu />
 
                {/* /Call To Action */}
                <div className='  flex-col justify-between  hidden md:block'>
                   <PostLastUpdate />
                   <PostLastUpdate />
 
-                  <div>footerss</div>
+              
                </div>
             </div>
             {/* Moving footer */}
             <div className='sticky top-28 hidden md:block -z-10'>
-               <PostLastUpdate />
+             {/* <PostLastUpdate /> */}
+               <Event/>
             </div>
             {/* /Moving footer */}
          </div>

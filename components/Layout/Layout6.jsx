@@ -1,4 +1,4 @@
-// Full page no sidebars
+// Full page no sidebars for Landing pages
 
 import React from 'react'
 import Header from './Header'
