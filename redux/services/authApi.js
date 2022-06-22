@@ -47,14 +47,13 @@ export const authApi = createApi({
          invalidatesTags: ['Email'],
       }),
       activateUser: builder.mutation({
-         query: activationData => {
+         query: body => {
             return {
                url: '/Activate',
                method: 'POST',
-               body: activationData,
+               body,
             }
-         },
-         invalidatesTags: ['ActivationData'],
+         }
       }),
    }),
 })

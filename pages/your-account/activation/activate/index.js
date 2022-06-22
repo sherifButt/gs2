@@ -50,7 +50,7 @@ const FaillActivationAlert = ({ message }) => {
                </h3>
                <div className='mt-2 text-sm text-red-700'>
                   <p>
-                     <b>{message}</b>, go back to your email and copy the
+                     <b>{message}</b>, go to your email and copy the
                      verification link then paste it in your browser. and click
                      enter.
                   </p>
@@ -68,7 +68,9 @@ function Activation() {
       useActivateUserMutation()
    const route = useRouter()
    const { userId, activationCode } = route.query
-
+   console.log( 'userId,', userId, )
+   console.log( 'activationCode', activationCode )
+   console.log('{first}', { userId, activationCode })
    useEffect(() => {
       activateUser({ userId, activationCode })
    }, [])
