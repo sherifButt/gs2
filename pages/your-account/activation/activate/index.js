@@ -5,7 +5,7 @@ import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 import { useDispatch } from 'react-redux'
 import { useActivateUserMutation } from '../../../../redux/services/authApi'
 // Components
-import SigninForm from '../../../../components/forms/SigninForm'
+import SigninForm from '../../../../components/forms/SigninForm_00'
 import Layout from '../../../../components/Layout/Layout5'
 import LeftSidebar from '../../../../components/left-sidebar/left-sidebar-1'
 import RightSidebar from '../../../../components/right-sidebar/right-sidebar-2'
@@ -63,22 +63,19 @@ const FaillActivationAlert = ({ message }) => {
 
 function Activation() {
    // const []
-   const dispatch = useDispatch()
+
    const [activateUser, { data, isSuccess, isLoading, isError, error }] =
       useActivateUserMutation()
    const route = useRouter()
    const { userId, activationCode } = route.query
-   
-   
+
    useEffect(() => {
       const activationData = { userId, activationCode }
       console.log('activationData', activationData)
       activateUser(activationData)
    }, [userId, activationCode])
 
-   useEffect(() => {
-      
-   }, [data, isError, isSuccess, error])
+   useEffect(() => {}, [data, isError, isSuccess, error])
 
    return (
       <div className='flex flex-col space-y-4  p-4'>
@@ -93,7 +90,7 @@ function Activation() {
          )}
 
          <div className='bg-white rounded-xl p-4 pt-12 mt-20'>
-            <SigninForm className='' />
+            <SigninForm/>
          </div>
       </div>
    )
