@@ -14,7 +14,7 @@ import { signin } from '../../redux/features/authSlicer'
 import { useRestorePasswordMutation } from '../../redux/services/authApi'
 
 const RestorePasswordForm_00 = () => {
-   const [restorePassword, { data, isLoading, isError, error }] =
+   const [restorePassword, { data, isLoading,isSuccess, isError, error }] =
       useRestorePasswordMutation()
    return (
       <DefaultForm
@@ -25,6 +25,7 @@ const RestorePasswordForm_00 = () => {
          signin={signin}
          submitData={restorePassword}
          data={data}
+         isSuccess={isSuccess}
          isLoading={isLoading}
          isError={isError}
          error={error}

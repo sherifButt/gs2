@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const authApi = createApi({
    reducerPath: 'authApi',
    baseQuery: fetchBaseQuery({
-      baseUrl: 'https://api.gs2dev.co.uk/',
+      baseUrl: 'https://api.gs2dev.co.uk/api/v1/Users',
       // baseUrl: '/',
       //   mode: 'no-cors',
       prepareHeaders: headers => {
@@ -16,36 +16,45 @@ export const authApi = createApi({
 
    endpoints: builder => ({
       signinUser: builder.mutation({
-         query: body => {
+         query: user => {
             return {
-               url: 'api/v1/Users/Login',
+               url: '/Login',
                method: 'POST',
-               body,
+               body: user,
             }
          },
+         invalidatesTags: ['User'],
       }),
       signupUser: builder.mutation({
-         query: body => {
+         query: user => {
             return {
-               url: 'api/v1/Users/Signup',
+               url: '/Signup',
                // url: 'api/hello',
                method: 'POST',
-               body,
+               body: user,
             }
          },
+         invalidatesTags: ['User'],
       }),
       restorePassword: builder.mutation({
-         query: body => {
+         query: email => {
             return {
-               url: 'api/v1/Users/Forgotpw',
-               // validateStatus: (response, result) =>{
-               //    console.log('response', response)
-               //    response.status === 200 && !result.isError
-               // },
+               url: '/Forgotpw',
                method: 'POST',
-               body,
+               body: email,
             }
          },
+         invalidatesTags: ['Email'],
+      }),
+      activateUser: builder.mutation({
+         query: activationData => {
+            return {
+               url: '/Activate',
+               method: 'POST',
+               body: activationData,
+            }
+         },
+         invalidatesTags: ['ActivationData'],
       }),
    }),
 })
@@ -54,4 +63,5 @@ export const {
    useSigninUserMutation,
    useSignupUserMutation,
    useRestorePasswordMutation,
+   useActivateUserMutation
 } = authApi

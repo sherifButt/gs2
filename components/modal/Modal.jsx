@@ -7,16 +7,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { hideAllModals } from '../../redux/features/modalSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
 import BouncingstarIcon from '../icons/BouncingstarIcon'
-export default function Modal({ active, children }) {
-   const dispatch = useDispatch()
-   const modal = useSelector(state => state.modal.signup)
-   const [signupUser, { data, isLoading, isError, error }] =
-      useSignupUserMutation()
 
-   const [show, setShow] = useState(active)
+export default function Modal ( { active, children } ) {
+   
+   const dispatch = useDispatch()
+   
+   const [ show, setShow ] = useState( active )
+   
    useEffect(() => {
       setShow(active)
-   }, [active])
+   }, [ active ] )
+   
    return (
       <Transition.Root show={show} as={Fragment}>
          <Dialog

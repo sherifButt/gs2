@@ -33,10 +33,12 @@ export const signin = {
    confirmation: {
       isConfirmation: true,
       message: 'Your are Logged in!',
+      messageMarginTop: '',
       description: '',
       href: '/discover',
       delay: '2400',
       lottiePath: '',
+      lottieSize: '',
       formHeight: 'h-[335px]',
    },
    notification: {
@@ -123,17 +125,20 @@ export const signup = {
             <h1 className='text-xl font-bold'>Welcome to GiveStar!</h1>
 
             <p>
-               We are excited to have you get started. First, you need to confirm
-               your account. Just go to your email and click the activation
-               link.
+               We are excited to have you get started. First, you need to
+               confirm your account. Just go to your email and click the
+               activation link.
             </p>
             <p>The GiveStar Team</p>
          </div>
       ),
+      messageMarginTop: '-mt-4',
       description: '',
       href: '',
       delay: '',
-      lottiePath: '',
+      lottiePath: 'email-sent.json',
+      lottieSize: 'w-72 h-72',
+
       formHeight: 'h-[500px]',
    },
    notification: {
@@ -157,7 +162,7 @@ export const signup = {
    fields: [
       {
          name: 'FullName',
-         value: '',
+         value: 'John Smith',
          description: '',
          error: '',
          valid: '',
@@ -197,7 +202,7 @@ export const signup = {
       },
       {
          name: 'Email',
-         value: '',
+         value: 'sherif+@give-star.com',
          description: '',
          error: '',
          valid: '',
@@ -210,7 +215,7 @@ export const signup = {
       },
       {
          name: 'Password',
-         value: '',
+         value: '123qweASD',
          description: '',
          error: '',
          valid: '',
@@ -223,7 +228,7 @@ export const signup = {
       },
       {
          name: 'ConfirmPassword',
-         value: '',
+         value: '123qweASD',
          description: '',
          error: '',
          valid: '',
@@ -236,7 +241,7 @@ export const signup = {
       },
       {
          name: 'SignupRequest',
-         value: '',
+         value: true,
          description: '',
          error: '',
          valid: '',
@@ -294,10 +299,12 @@ export const restorePassword = {
             </p>
          </div>
       ),
+      messageMarginTop: '',
       description: '',
       href: '',
       delay: '',
       lottiePath: '',
+      lottieSize:'',
       formHeight: 'h-[300px]',
    },
    notification: {

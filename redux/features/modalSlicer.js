@@ -71,7 +71,9 @@ const modalSlicer = createSlice({
          }
       }
    },
-})
+} )
+
+
 
 export const {
    toggleSignin,

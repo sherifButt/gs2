@@ -14,7 +14,7 @@ import { signin } from '../../redux/features/authSlicer'
 import { useSignupUserMutation } from '../../redux/services/authApi'
 
 const SignupForm_00 = () => {
-   const [signupUser, { data, isLoading, isError, error }] =
+   const [signupUser, { data, isLoading,isSuccess, isError, error }] =
       useSignupUserMutation()
    return (
       <DefaultForm
@@ -25,6 +25,7 @@ const SignupForm_00 = () => {
          signin={signin}
          submitData={signupUser}
          data={data}
+         isSuccess={isSuccess}
          isLoading={isLoading}
          isError={isError}
          error={error}

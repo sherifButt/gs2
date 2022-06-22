@@ -70,7 +70,7 @@ if(isBreakpoint) notifications = notifications.slice(-1)
                                  <div className='flex-shrink-0 '>
                                     {item.isSuccess ? (
                                        <CheckCircleIcon
-                                          className='h-8 w-8 text-green-400 '
+                                          className='h-8 w-8 text-army-500 '
                                           aria-hidden='true'
                                        />
                                     ) : (

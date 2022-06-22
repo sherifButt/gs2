@@ -21,7 +21,8 @@ function Form({
    submitData,
    form,
    data,
-   isLoading,
+  isLoading,
+   isSuccess,
    isError,
    error,
 }) {
@@ -30,10 +31,12 @@ function Form({
 
    // Local State
    const [values, setValues] = useState(form.fields)
-   const [isSuccess, setIsSuccess] = useState(false)
-   console.log('values', values)
-// router
+  //  const [isSuccess, setIsSuccess] = useState(false)
+  console.log( 'values', values )
+  
+   // router
   const router = useRouter()
+  
    // Handlers (event listeners)
    const inputHandler = e => {
       const inputIdx = values.findIndex(input => input.name == e.target.name)
@@ -132,8 +135,23 @@ function Form({
    }
    // manage Global state and notifications
    useEffect(() => {
+      console.log('data', data)
+     if ( !data && isSuccess )
+     {
+        if (form.notification?.success?.isNotification)
+           dispatch(
+              addNotification({
+                 isSuccess: true,
+                 status: data?.status,
+                 message: form.notification?.success?.message || 'Success!',
+                 description:
+                    data?.message ||
+                    data?.data ||
+                    form.notification?.success?.description,
+              })
+           )
+      }
       if (data?.accessToken || data) {
-         console.log('data', data)
          localStorage.setItem(
             'login',
             JSON.stringify({ userLogin: true, token: data.accessToken })
@@ -151,14 +169,14 @@ function Form({
                })
             )
 
-         setIsSuccess(true)
+        //  setIsSuccess(true)
          setValues(form.fields)
          dispatch(signin())
          if (form.confirmation?.delay || form.confirmation?.href)
-           setTimeout( () => {
-             dispatch( hideThisForm() )
-             if (form.confirmation?.href) router.push(form.confirmation?.href)
-           }, form.confirmation?.delay)
+            setTimeout(() => {
+               dispatch(hideThisForm())
+               if (form.confirmation?.href) router.push(form.confirmation?.href)
+            }, form.confirmation?.delay)
       } else if (isError) {
          console.log('error', error)
          if (form.notification?.error?.isNotification)
@@ -258,14 +276,14 @@ function Form({
                key='message'
                className={form?.confirmation?.formHeight || 'h-[335px]'}>
                <Lottie
-                  className='w-96 h-96 mx-auto -mt-10'
+                  className={`${form?.confirmation?.lottieSize?form?.confirmation?.lottieSize:'w-96 h-96'} mx-auto -mt-10`}
                   loop={false}
                   path={
                      form?.confirmation?.lottiePath ||
                      `104369-check-motion.json`
                   }
                />
-               <p className='text-lg text-center -mt-24'>
+               <p className={`text-lg text-center ${form?.confirmation?.messageMarginTop?form?.confirmation?.messageMarginTop:'-mt-24'}`}>
                   {form?.confirmation?.message}
                </p>
             </motion.form>
