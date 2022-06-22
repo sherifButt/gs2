@@ -68,16 +68,16 @@ function Activation() {
       useActivateUserMutation()
    const route = useRouter()
    const { userId, activationCode } = route.query
-   console.log( 'userId,', userId, )
-   console.log( 'activationCode', activationCode )
-   console.log('{first}', { userId, activationCode })
+   
+   
    useEffect(() => {
-      activateUser({ userId, activationCode })
-   }, [])
+      const activationData = { userId, activationCode }
+      console.log('activationData', activationData)
+      activateUser(activationData)
+   }, [userId, activationCode])
 
    useEffect(() => {
-      console.log('data', data)
-      console.log('error', error)
+      
    }, [data, isError, isSuccess, error])
 
    return (
