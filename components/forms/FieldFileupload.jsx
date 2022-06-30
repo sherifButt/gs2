@@ -38,7 +38,7 @@ const FieldFileupload = ({
    return (
       <div className='flex justify-center items-center w-full'>
          <label
-            // for={name}
+            htmlFor={name}
             className={`flex flex-col justify-center items-center w-full h-64 overflow-hidden  bg-white rounded-xl border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 hover:bg-gray-100 `}>
             {fileUrl ? (
                <img className='w-full' src={fileUrl} />
