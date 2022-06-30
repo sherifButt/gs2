@@ -11,7 +11,7 @@ import {
 } from '../../features/modalSlice'
 import { signin } from '../../features/auth/authSlice'
 // fetch
-import { useCreateCampaignMutation } from '../../features/auth/authApiSlice'
+import { useCreateCampaignMutation } from '../../features/campaign/campaignApiSlice'
 
 
 const CreateCampaignForm = ({className,href}) => {
