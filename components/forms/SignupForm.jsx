@@ -12,10 +12,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
    toggleSignin,
    toggleSignup
-} from '../../redux/features/modalSlicer'
+} from '../../features/modalSlice'
 
-import { addNotification } from '../../redux/features/notificationSlicer'
-import { useSignupUserMutation } from '../../redux/services/authApi'
+import { addNotification } from '../../features/notificationSlice'
+import { useSignupUserMutation } from '../../features/auth/authApiSlice'
 
 const SignupForm = () => {
    // Global State

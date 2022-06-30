@@ -1,34 +1,23 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { apiSlice } from '../../app/api/apiSlice'
 
-export const authApi = createApi({
-   reducerPath: 'authApi',
-   baseQuery: fetchBaseQuery({
-      baseUrl: 'https://api.gs2dev.co.uk/api/v1/Users',
-      // baseUrl: '/',
-      //   mode: 'no-cors',
-      prepareHeaders: headers => {
-         headers.set('Content-Type', 'application/json')
-         //   headers.set('Access-Control-Allow-Origin', '*')
-         // console.log(headers)
-         return headers
-      },
-   }),
-
+export const authApiSlice = apiSlice.injectEndpoints({
    endpoints: builder => ({
       signinUser: builder.mutation({
-         query: user => {
+         query: credentials => {
+            console.log(credentials)
             return {
-               url: '/Login',
+               url: '/Users/Login',
+               // url: '/hello',
                method: 'POST',
-               body: user,
+               body: { ...credentials },
             }
          },
-         invalidatesTags: ['User'],
       }),
+
       signupUser: builder.mutation({
          query: user => {
             return {
-               url: '/Signup',
+               url: '/Users/Signup',
                // url: 'api/hello',
                method: 'POST',
                body: user,
@@ -39,7 +28,7 @@ export const authApi = createApi({
       restorePassword: builder.mutation({
          query: email => {
             return {
-               url: '/Forgotpw',
+               url: '/Users/Forgotpw',
                method: 'POST',
                body: email,
             }
@@ -49,11 +38,11 @@ export const authApi = createApi({
       activateUser: builder.mutation({
          query: body => {
             return {
-               url: '/Activate',
+               url: '/Users/Activate',
                method: 'POST',
                body,
             }
-         }
+         },
       }),
    }),
 })
@@ -62,5 +51,5 @@ export const {
    useSigninUserMutation,
    useSignupUserMutation,
    useRestorePasswordMutation,
-   useActivateUserMutation
-} = authApi
+   useActivateUserMutation,
+} = authApiSlice

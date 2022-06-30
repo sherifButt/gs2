@@ -1,6 +1,10 @@
 import '../styles/globals.css'
-import { store } from '../redux/store'
+import { store, persistor } from '../app/store'
 import { Provider } from 'react-redux'
+// persist
+import { PersistGate } from 'redux-persist/integration/react'
+
+
 import Portal from '../HOC/Portal'
 
 import Layout1 from '../components/Layout/Layout1'
@@ -37,19 +41,21 @@ function MyApp({ Component, pageProps }) {
    console.log('Component.layout', typeof Component.layout)
    return (
       <Provider store={store}>
-         <Layout
-            rightSidebar={Component.rightSidebar}
-            leftSidebar={ Component.leftSidebar }
-         footer={Component.footer}
-         >
-            <Portal>
-               <Notifications/>
-               <ModalSignupForm />
-               <ModalSigninForm />
-               <ModalRestorePasswordForm />
-            </Portal>
-            <Component {...pageProps} />
-         </Layout>
+            <Layout
+               rightSidebar={Component.rightSidebar}
+               leftSidebar={Component.leftSidebar}
+               footer={Component.footer}>
+            <PersistGate loading={ null } persistor={ persistor }>
+               <Portal>
+                  <Notifications />
+                  <ModalSignupForm />
+                  <ModalSigninForm />
+                  <ModalRestorePasswordForm />
+               </Portal>
+         
+               <Component {...pageProps} />
+         </PersistGate>
+            </Layout>
       </Provider>
    )
 }

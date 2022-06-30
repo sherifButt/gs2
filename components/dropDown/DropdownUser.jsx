@@ -9,7 +9,7 @@ import UserIcon from '../icons/UserIcon'
 
 import AvatarUser from '../avatar/AvatarUser'
 import { useSelector, useDispatch } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
+import { signin } from '../../features/auth/authSlice'
 import DropdownUserMenu from './DropdownUserMenu'
 
 const menu = [

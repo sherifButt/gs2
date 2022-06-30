@@ -16,6 +16,7 @@ const FieldText = ({
    required,
    setValues,
    values,
+   rows,
    inputHandler,
    validationHandler,
 }) => {
@@ -23,7 +24,7 @@ const FieldText = ({
       <>
          {!hidden && (
             <div className='relative'>
-               <input
+               <textarea
                   type={type}
                   name={name}
                   id={name}
@@ -36,7 +37,8 @@ const FieldText = ({
                   placeholder={placeholder}
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
-                  value={value}
+                  value={ value }
+                  rows={rows||4}
                   onChange={inputHandler}
                   onBlur={validationHandler}
                />

@@ -4,6 +4,7 @@ const initialState = {
    signin: { show: false },
    signup: { show: false },
    restorePassword: { show: false },
+   createCampaign: { show: false },
    notification: {
       show: true,
       isSuccess: true,
@@ -28,6 +29,12 @@ const modalSlicer = createSlice({
       },
       showSignup: state => {
          state.signup.show = true
+      },
+      showCreateCampaign: state => {
+         state.createCampaign.show = true
+      },
+      hideCreateCampaign: state => {
+         state.createCampaign.show = false
       },
       showRestorePassword: state => {
          state.restorePassword.show = true
@@ -70,6 +77,7 @@ const modalSlicer = createSlice({
             state[key].show = false
          }
       }
+      
    },
 } )
 
@@ -87,6 +95,8 @@ export const {
    hideSignup,
    hideNotification,
    hideRestorePassword,
+   showCreateCampaign,
+   hideCreateCampaign,
    hideAllModals,
 } = modalSlicer.actions
 export default modalSlicer.reducer

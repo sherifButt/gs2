@@ -1,7 +1,7 @@
 import { ExclamationCircleIcon,CheckCircleIcon } from '@heroicons/react/solid'
 import React from 'react'
 
-const FieldText = ({
+const FieldCurrency = ({
    id,
    name,
    type,
@@ -23,13 +23,14 @@ const FieldText = ({
       <>
          {!hidden && (
             <div className='relative'>
+               
                <input
                   type={type}
                   name={name}
                   id={name}
                   title={title}
                   required
-                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-3 pr-10 placeholder-transparent  text-gray-900 ${
+                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-7 pr-24 placeholder-transparent  text-gray-900 ${
                      error &&
                      'focus:ring-red-500 focus:border-red-500 border-red-300'
                   } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 sm:text-md rounded-xl transition-all ease-out duration-300`}
@@ -38,8 +39,12 @@ const FieldText = ({
                   aria-describedby={`${name}-error`}
                   value={value}
                   onChange={inputHandler}
-                  onBlur={validationHandler}
-               />
+                  onBlur={ validationHandler }
+                  step={10}
+                  min={100}
+               /><div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none'>
+                  <span className='text-gray-500 '>£</span>
+               </div>
                {error && (
                   <div className='absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none '>
                      <ExclamationCircleIcon
@@ -72,15 +77,29 @@ const FieldText = ({
                )}
                <label
                   htmlFor={name}
-                  className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                  className='absolute ease-out duration-500 -top-5 left-8 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                   {placeholder}
                </label>
+               <div className='absolute inset-y-0 pr-5 right-0 flex items-center'>
+                  <label htmlFor='currency' className='sr-only'>
+                     Currency
+                  </label>
+                  <select
+                     id='currency'
+                     name='currency'
+                     className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-3 border-transparent bg-transparent text-gray-500  pt-1 rounded-md'>
+                     <option>GBP</option>
+                     <option>USD</option>
+                     <option>CAD</option>
+                     <option>EUR</option>
+                  </select>
+               </div>
             </div>
          )}
       </>
    )
 }
-FieldText.defaultProps = {
+FieldCurrency.defaultProps = {
    name: 'FirstName',
    value: '',
    error: '',
@@ -92,4 +111,4 @@ FieldText.defaultProps = {
    hidden: false,
 }
 
-export default FieldText
+export default FieldCurrency

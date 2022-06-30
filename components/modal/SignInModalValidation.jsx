@@ -23,7 +23,7 @@ import {
    toggleSignin,
    toggleSignup,
 } from '../../redux/features/modalSlicer'
-import { useLoginUserMutation } from '../../redux/services/authApi'
+import { useLoginUserMutation } from '../../features/auth/authApiSlice'
 
 const userInitialState = { email: '', password: '' }
 

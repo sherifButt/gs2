@@ -1,6 +1,10 @@
 // Field Components
 import FieldText from './FieldText'
 import FieldCheckbox from './FieldCheckbox'
+import FieldLabel from './FieldLabel'
+import FieldTextarea from './FieldTextarea'
+import FieldFileupload from './FieldFileupload'
+import FieldCurrency from './FieldCurrency'
 
 export const signin = {
    title: 'Sign in to Give Star',
@@ -61,11 +65,12 @@ export const signin = {
    },
    fields: [
       {
-         name: 'Email',
+         name: 'email',
          value: 'ant@there.com',
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Email',
          type: 'email',
          required: true,
@@ -74,11 +79,12 @@ export const signin = {
          hidden: false,
       },
       {
-         name: 'Password',
+         name: 'password',
          value: '@Ahandsomepassword333',
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Password',
          type: 'password',
          required: true,
@@ -135,7 +141,7 @@ export const signup = {
       messageMarginTop: '-mt-4',
       description: '',
       href: '',
-      delay: '',
+      delay: '3700',
       lottiePath: 'email-sent.json',
       lottieSize: 'w-72 h-72',
 
@@ -166,6 +172,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Full Name',
          type: 'text',
          required: true,
@@ -180,6 +187,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'First Name',
          type: 'text',
          required: false,
@@ -193,6 +201,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Last Name',
          type: 'text',
          required: false,
@@ -206,6 +215,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Email',
          type: 'email',
          required: true,
@@ -219,6 +229,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Password',
          type: 'password',
          required: true,
@@ -232,6 +243,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Confirm Password',
          type: 'password',
          required: true,
@@ -245,6 +257,7 @@ export const signup = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Signup Request',
          type: 'checkbox',
          required: true,
@@ -294,17 +307,15 @@ export const restorePassword = {
          <div>
             <h1 className='text-xl font-bold'>Your password Restored!</h1>
 
-            <p>
-               Please go to your email and click on the activation link.
-            </p>
+            <p>Please go to your email and click on the activation link.</p>
          </div>
       ),
       messageMarginTop: '',
       description: '',
       href: '',
-      delay: '',
+      delay: '4000',
       lottiePath: '',
-      lottieSize:'',
+      lottieSize: '',
       formHeight: 'h-[300px]',
    },
    notification: {
@@ -332,6 +343,7 @@ export const restorePassword = {
          description: '',
          error: '',
          valid: '',
+         title: '',
          placeholder: 'Email',
          type: 'email',
          required: true,
@@ -343,7 +355,7 @@ export const restorePassword = {
 }
 
 export const createCampaign = {
-   title: 'Create Campaign',
+   title: '← Create Campaign',
    subtitle: '',
    button: {
       icon: '',
@@ -401,13 +413,24 @@ export const createCampaign = {
    },
    fields: [
       {
+         name:'',
+         forLabel: 'name',
+         text: 'Tell us about your campaign',
+         component: FieldLabel,
+         type: 'label',
+         required: false,
+         disabled: false,
+         hidden: false,
+      },
+      {
          name: 'name',
          value: '',
          description: '',
          error: '',
          valid: '',
+         title: 'The Campaign Name or Event Name.',
          placeholder: 'Campaign/event name',
-         type: 'email',
+         type: 'text',
          required: true,
          component: FieldText,
          disabled: false,
@@ -419,12 +442,118 @@ export const createCampaign = {
          description: '',
          error: '',
          valid: '',
+         title: 'Date when the campaign will go live.',
          placeholder: 'Campaign/event date',
          type: 'date',
          required: true,
          component: FieldText,
          disabled: false,
          hidden: false,
+      },
+      {
+         forLabel:'photo',
+         text: 'Create your Page',
+         component: FieldLabel,
+      },
+
+      {
+         name: 'photo',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: '',
+         title: 'Your page where you will launch your campaign',
+         placeholder: 'Add a Photo',
+         type: 'file',
+         required: true,
+         component: FieldFileupload,
+         disabled: false,
+         hidden: false,
+      },
+      {
+         name: 'pageName',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: '',
+         title: 'Your page where you will launch your campaign',
+         placeholder: 'Page Name',
+         type: 'text',
+         required: true,
+         component: FieldText,
+         disabled: false,
+         hidden: false,
+      },
+      {
+         name: 'fundraisingTarget',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: 'Your page where you will launch your campaign',
+         placeholder: 'Fundraising Target',
+         type: 'number',
+         required: true,
+         component: FieldCurrency,
+         disabled: false,
+         hidden: false,
+      },
+
+      {
+         name: 'description',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: '',
+         title: 'Your campaign description, this will help your supporters connect with your cause.',
+         placeholder: 'Description ...',
+         type: 'text',
+         required: true,
+         component: FieldTextarea,
+         disabled: false,
+         hidden: false,
+         rows: 15,
+      },
+      {
+         forLabel:'stravaCode',
+         text: 'STRAVA integration',
+         component: FieldLabel,
+      },
+      {
+         name: 'stravaCode',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: 'Your page where you will launch your campaign',
+         placeholder: 'Enter STRAVA code',
+         type: 'text',
+         required: true,
+         component: FieldText,
+         disabled: false,
+         hidden: false,
+      },
+      {
+         name: 'SignupRequest',
+         value: true,
+         description: '',
+         error: '',
+         valid: '',
+         title: '',
+         placeholder: 'Signup Request',
+         type: 'checkbox',
+         required: true,
+         component: FieldCheckbox,
+         terms: (
+            <>
+               <span className='text-black'>I agree to </span>Givestar Terms of
+               Use
+            </>
+         ),
+         href: '#',
       },
    ],
 }

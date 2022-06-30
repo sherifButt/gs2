@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 // Redux
 import { useDispatch } from 'react-redux'
-import { addNotification } from '../../redux/features/notificationSlicer'
+import { addNotification } from '../../features/notificationSlice'
 
 // components
 import ButtonPrimary from '../buttons/ButtonPrimary'
@@ -17,12 +17,13 @@ function Form({
    hideThisForm,
    showNextForm,
    showHelpForm,
-   signin,
+   setCredentials,
    submitData,
    form,
+   className,
    data,
-  isLoading,
-   isSuccess,
+   isLoading,
+   // isSuccess,
    isError,
    error,
 }) {
@@ -30,19 +31,25 @@ function Form({
    const dispatch = useDispatch()
 
    // Local State
-   const [values, setValues] = useState(form.fields)
-  //  const [isSuccess, setIsSuccess] = useState(false)
-  console.log( 'values', values )
-  
+
+   const [ values, setValues ] = useState( form.fields )
+   const [isSuccess,setIsSuccess]=useState(false)
+   console.log('values', values)
+
    // router
-  const router = useRouter()
-  
+   const router = useRouter()
+
    // Handlers (event listeners)
    const inputHandler = e => {
       const inputIdx = values.findIndex(input => input.name == e.target.name)
       const isCheckbox = e.target.type === 'checkbox'
+      const isFile = e.target.type === 'file'
       const _values = [...values]
-      _values[inputIdx].value = isCheckbox ? e.target.checked : e.target.value
+      _values[inputIdx].value = isCheckbox
+         ? e.target.checked
+         : isFile
+         ? e.target.files
+         : e.target.value
       setValues(_values)
    }
 
@@ -130,69 +137,50 @@ function Form({
          dataObject = { ...dataObject, [field.name]: field.value }
       })
 
-      await submitData(dataObject)
-      console.log('Form Submitted successfully')
-   }
-   // manage Global state and notifications
-   useEffect(() => {
-      console.log('data', data)
-     if ( !data && isSuccess )
-     {
-        if (form.notification?.success?.isNotification)
-           dispatch(
-              addNotification({
-                 isSuccess: true,
-                 status: data?.status,
-                 message: form.notification?.success?.message || 'Success!',
-                 description:
-                    data?.message ||
-                    data?.data ||
-                    form.notification?.success?.description,
-              })
-           )
-      }
-      if (data?.accessToken || data) {
-         localStorage.setItem(
-            'login',
-            JSON.stringify({ userLogin: true, token: data.accessToken })
-         )
-         if (form.notification?.success?.isNotification)
-            dispatch(
-               addNotification({
-                  isSuccess: true,
-                  status: data.status,
-                  message: form.notification?.success?.message || 'Success!',
-                  description:
-                     data.message ||
-                     data.data ||
-                     form.notification?.success?.description,
-               })
-            )
+      try {
+         const submittedData = await submitData(dataObject).unwrap()
+          
+            if (form.notification?.success?.isNotification)
+               dispatch(
+                  addNotification({
+                     isSuccess: true,
+                     status: submittedData?.status,
+                     message: form.notification?.success?.message || 'Success!',
+                     description:
+                        submittedData?.message ||
+                        submittedData?.data ||
+                        form.notification?.success?.description,
+                  })
+               )
+            setValues(form.fields)
+setIsSuccess(true)
+            if (submittedData?.accessToken) dispatch(setCredentials(submittedData))
 
-        //  setIsSuccess(true)
-         setValues(form.fields)
-         dispatch(signin())
-         if (form.confirmation?.delay || form.confirmation?.href)
-            setTimeout(() => {
-               dispatch(hideThisForm())
-               if (form.confirmation?.href) router.push(form.confirmation?.href)
-            }, form.confirmation?.delay)
-      } else if (isError) {
-         console.log('error', error)
+            if (form.confirmation?.delay || form.confirmation?.href)
+               setTimeout(() => {
+                  dispatch(hideThisForm())
+                  if (form.confirmation?.href)
+                     router.push(form.confirmation?.href)
+               }, form.confirmation?.delay)
+         
+
+         console.log('Form Submitted successfully')
+      } catch (error) {
+         console.error('Form did not Submitted successfully \n Error: ', error)
          if (form.notification?.error?.isNotification)
             dispatch(
                addNotification({
                   isSuccess: false,
-                  status: error.status,
+                  status: error?.status,
                   message: form.notification?.error?.message || 'Failed!',
                   description: error.data?.error || error.error,
                })
             )
       }
-   }, [data, isError])
-
+   }
+   
    return (
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence exitBeforeEnter className={className}>
          {!isSuccess || !form.confirmation?.isConfirmation ? (
             <motion.form
                animate={{ opacity: 1, y: 0 }}
@@ -202,12 +190,12 @@ function Form({
                method='post'
                className='flex flex-col space-y-6 last:-mt-10'>
                {form?.title && (
-                  <h1 className='block text-2xl sm:text-3xl text-left  text-black sm:text-center font-medium'>
+                  <h1 className=' text-2xl sm:text-3xl text-left  text-black  font-semibold'>
                      {form.title}
                   </h1>
                )}
                {form?.subtitle && (
-                  <h3 className='block text-l sm:text-l text-left  text-black sm:text-center font-medium'>
+                  <h3 className='block text-l sm:text-l text-left  text-black  font-medium'>
                      {form.subtitle}
                   </h3>
                )}
@@ -276,14 +264,23 @@ function Form({
                key='message'
                className={form?.confirmation?.formHeight || 'h-[335px]'}>
                <Lottie
-                  className={`${form?.confirmation?.lottieSize?form?.confirmation?.lottieSize:'w-96 h-96'} mx-auto -mt-10`}
+                  className={`${
+                     form?.confirmation?.lottieSize
+                        ? form?.confirmation?.lottieSize
+                        : 'w-96 h-96'
+                  } mx-auto -mt-10`}
                   loop={false}
                   path={
                      form?.confirmation?.lottiePath ||
                      `104369-check-motion.json`
                   }
                />
-               <p className={`text-lg text-center ${form?.confirmation?.messageMarginTop?form?.confirmation?.messageMarginTop:'-mt-24'}`}>
+               <p
+                  className={`text-lg text-center ${
+                     form?.confirmation?.messageMarginTop
+                        ? form?.confirmation?.messageMarginTop
+                        : '-mt-24'
+                  }`}>
                   {form?.confirmation?.message}
                </p>
             </motion.form>

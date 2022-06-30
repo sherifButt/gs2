@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Modal from './Modal'
-import SigninForm from '../forms/SigninForm_00'
+import SigninForm from '../../features/auth/SigninForm_00'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import {
    hideSignup,
    showSignup
-} from '../../redux/features/modalSlicer'
+} from '../../features/modalSlice'
 
 const ModalSignupForm = () => {
    const dispatch = useDispatch()

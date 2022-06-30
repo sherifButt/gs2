@@ -8,17 +8,19 @@ import {
    showSignin,
    hideSignup,
    showRestorePassword,
-} from '../../redux/features/modalSlicer'
-import { signin } from '../../redux/features/authSlicer'
+} from '../../features/modalSlice'
+import { signin } from '../../features/auth/authSlice'
 // fetch
-import { useSignupUserMutation } from '../../redux/services/authApi'
+import { useSignupUserMutation } from '../../features/auth/authApiSlice'
 
-const SignupForm_00 = () => {
+
+const SignupForm_00 = ({className}) => {
    const [signupUser, { data, isLoading,isSuccess, isError, error }] =
       useSignupUserMutation()
    return (
       <DefaultForm
-         form={signup}
+         form={ signup }
+         className={className}
          hideThisForm={hideSignup}
          showNextForm={showSignin}
          showHelpForm={showRestorePassword}

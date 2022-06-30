@@ -1,35 +1,37 @@
 import React from 'react'
 // Form Data
-import { createCampaign as _signin } from './fomrs'
+import { createCampaign as _createCampaign  } from './fomrs'
 // Components
 import DefaultForm from './DefaultForm'
 // GlobalState
 import {
-   hideSignin,
+   hideCreateCampaign,
    showSignup,
    showRestorePassword,
-} from '../../redux/features/modalSlicer'
-import { signin } from '../../redux/features/authSlicer'
+} from '../../features/modalSlice'
+import { signin } from '../../features/auth/authSlice'
 // fetch
-import { useSigninUserMutation } from '../../redux/services/authApi'
+import { useCreateCampaignMutation } from '../../features/auth/authApiSlice'
 
-const SigninForm_00 = ({href}) => {
-   const [signinUser, { data, isLoading,isSuccess, isError, error }] =
-      useSigninUserMutation()
+
+const CreateCampaignForm = ({className,href}) => {
+   const [createCampaign, { data, isLoading, isSuccess, isError, error }] =
+      useCreateCampaignMutation()
    return (
       <DefaultForm
          form={{
-            ..._signin,
+            ..._createCampaign,
             confirmation: {
-               ..._signin.confirmation,
-               href: href ? href : _signin.confirmation.href,
+               ..._createCampaign.confirmation,
+               href: href ? href : _createCampaign.confirmation?.href,
             },
          }}
-         hideThisForm={hideSignin}
+         className={className}
+         hideThisForm={hideCreateCampaign}
          showNextForm={showSignup}
          showHelpForm={showRestorePassword}
          signin={signin}
-         submitData={signinUser}
+         submitData={createCampaign}
          data={data}
          isSuccess={isSuccess}
          isLoading={isLoading}
@@ -39,4 +41,4 @@ const SigninForm_00 = ({href}) => {
    )
 }
 
-export default SigninForm_00
+export default CreateCampaignForm

@@ -130,7 +130,7 @@ const NavbarIn = ({ className }) => {
                <div className=' flex flex-row gap-4 w-full lg:w-auto justify-end items-center'>
                   <div className=' relative rounded-md w-full lg:w-auto shadow-sm '>
                      <input
-                        type='text'
+                        type='search'
                         name='search'
                         id='search'
                         className='focus:ring-indigo-500 focus:border-indigo-500 block w-full lg:w-80 pr-10  sm:text-sm border-gray-300 rounded-xl px-3 py-2'

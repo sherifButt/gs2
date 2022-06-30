@@ -2,7 +2,8 @@
 
 export default function handler(req, res) {
   console.log( 'req', req.body )
-  const {FirstName,LastName,Email} = req.body
+//   const {FirstName,LastName,Email} = req.body
+   console.log(req.body)
    res.status(200).json({
       success: true,
       status: 200,

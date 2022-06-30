@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 // Redux
 import { useDispatch } from 'react-redux'
-import { useActivateUserMutation } from '../../../../redux/services/authApi'
+import { useActivateUserMutation } from '../../../../app/api/authApi'
 // Components
-import SigninForm from '../../../../components/forms/SigninForm_00'
+import SigninForm from '../../../../features/auth/SigninForm_00'
 import Layout from '../../../../components/Layout/Layout5'
 import LeftSidebar from '../../../../components/left-sidebar/left-sidebar-1'
 import RightSidebar from '../../../../components/right-sidebar/right-sidebar-2'

@@ -3,9 +3,10 @@ import CreateCampaignForm from '../../../components/forms/CreateCampaignForm'
 
 const CreateCampaign = () => {
    return (
-      <div clasName="mt-20">
-        
-         <div className="bg-white rounded-xl p-4 pt-20"><CreateCampaignForm /></div>
+      <div className='mt-10 mx-4 lg:mx-10 text-left'>
+         <div >
+            <CreateCampaignForm className='text-center'/>
+         </div>
       </div>
    )
 }

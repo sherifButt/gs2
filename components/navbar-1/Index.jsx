@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleSignin, toggleSignup } from '../../redux/features/modalSlicer'
+import { toggleSignin, toggleSignup } from '../../features/modalSlice'
 // Icons
 import EmailIcon from '../icons/EmailIcon'
 import GivestarIcon from '../icons/GivestarIcon'

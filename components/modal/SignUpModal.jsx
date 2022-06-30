@@ -11,7 +11,7 @@ import {
    toggleSignup,
 } from '../../redux/features/modalSlicer'
 import { addNotification } from '../../redux/features/notificationSlicer'
-import { useSignupUserMutation } from '../../redux/services/authApi'
+import { useSignupUserMutation } from '../../features/auth/authApiSlice'
 import BouncingstarIcon from '../icons/BouncingstarIcon'
 
 const userInetialState = {

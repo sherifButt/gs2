@@ -1,19 +1,20 @@
 import React from 'react'
 // Form Data
-import { signin as _signin } from './fomrs'
+import { signin as _signin } from '../../components/forms/fomrs'
 // Components
-import DefaultForm from './DefaultForm'
+import DefaultForm from '../../components/forms/DefaultForm'
 // GlobalState
 import {
    hideSignin,
    showSignup,
    showRestorePassword,
-} from '../../redux/features/modalSlicer'
-import { signin } from '../../redux/features/authSlicer'
+} from '../modalSlice'
+import { setCredentials } from './authSlice'
 // fetch
-import { useSigninUserMutation } from '../../redux/services/authApi'
+// import { useSigninUserMutation } from '../../app/api/authApi'
+import { useSigninUserMutation } from './authApiSlice.js'
 
-const SigninForm_00 = ({href}) => {
+const SigninForm_00 = ({className,href}) => {
    const [signinUser, { data, isLoading,isSuccess, isError, error }] =
       useSigninUserMutation()
    return (
@@ -25,10 +26,11 @@ const SigninForm_00 = ({href}) => {
                href: href ? href : _signin.confirmation.href,
             },
          }}
+         className={className}
          hideThisForm={hideSignin}
          showNextForm={showSignup}
          showHelpForm={showRestorePassword}
-         signin={signin}
+         setCredentials={setCredentials}
          submitData={signinUser}
          data={data}
          isSuccess={isSuccess}

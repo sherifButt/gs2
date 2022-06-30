@@ -1,13 +1,14 @@
 import React from 'react'
 // Redux
 import { useSelector } from 'react-redux'
+import { selectCurrentAuth } from '../../features/auth/authSlice'
 import NavbarIn from './NavbarIn'
 import NavbarOut from './NavbarOut'
 
 const Navbar = ({ className }) => {
-   const { auth } = useSelector(state => state.auth)
+   const {token} = useSelector(selectCurrentAuth)
    return (
-      auth ? (
+      token ? (
             <div>
                <NavbarIn className={className} />
             </div>

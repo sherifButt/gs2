@@ -8,17 +8,18 @@ import {
    hideSignin,
    showSignin,
    hideRestorePassword,
-} from '../../redux/features/modalSlicer'
-import { signin } from '../../redux/features/authSlicer'
+} from '../../features/modalSlice'
+import { signin } from '../../features/auth/authSlice'
 // fetch
-import { useRestorePasswordMutation } from '../../redux/services/authApi'
+import { useRestorePasswordMutation } from '../../features/auth/authApiSlice'
 
-const RestorePasswordForm_00 = () => {
+const RestorePasswordForm_00 = ({ className}) => {
    const [restorePassword, { data, isLoading,isSuccess, isError, error }] =
       useRestorePasswordMutation()
    return (
       <DefaultForm
-         form={_restorePassword}
+         form={ _restorePassword }
+         className={className}
          hideThisForm={hideRestorePassword}
          showNextForm={showSignin}
          showHelpForm={hideSignin}

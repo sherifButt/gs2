@@ -3,7 +3,7 @@ import ButtonPrimary from '../buttons/ButtonPrimary'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { showSignin, showSignup } from '../../redux/features/modalSlicer'
+import { showSignin, showSignup } from '../../features/modalSlice'
 
 const CtaLetsDoSomeGood = () => {
    const dispatch = useDispatch()

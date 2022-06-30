@@ -5,7 +5,7 @@ import LeftSidebar from '../components/left-sidebar/left-sidebar-1'
 import SignupForm from '../components/forms/SignupForm'
 import ButtonPrimary from '../components/buttons/ButtonPrimary'
 import { useDispatch, useSelector } from 'react-redux'
-import {showSignin} from '../redux/features/modalSlicer'
+import {showSignin} from '../features/modalSlice'
 
 function Activation () {
    const dispatch = useDispatch()

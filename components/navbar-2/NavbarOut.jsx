@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { showSignin, showSignup } from '../../redux/features/modalSlicer'
+import { showSignin, showSignup } from '../../features/modalSlice'
 // Icons
 import EmailIcon from '../icons/EmailIcon'
 import GivestarIcon from '../icons/GivestarIcon'
@@ -151,7 +151,7 @@ const NavbarOut = props => {
             <div className='flex flex-row gap-4 w-full lg:w-auto justify-end items-center'>
                <div className='mt-1 relative rounded-md w-full lg:w-auto shadow-sm '>
                   <input
-                     type='text'
+                     type='search'
                      name='search'
                      id='search'
                      className='focus:ring-indigo-500 focus:border-indigo-500 block w-full lg:w-80   sm:text-sm border-gray-300 rounded-xl px-3 py-2'

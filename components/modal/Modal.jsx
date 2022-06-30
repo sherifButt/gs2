@@ -4,8 +4,8 @@ import { XIcon } from '@heroicons/react/outline'
 import { Fragment, useEffect, useState } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { hideAllModals } from '../../redux/features/modalSlicer'
-import { useSignupUserMutation } from '../../redux/services/authApi'
+import { hideAllModals } from '../../features/modalSlice'
+import { useSignupUserMutation } from '../../features/auth/authApiSlice'
 import BouncingstarIcon from '../icons/BouncingstarIcon'
 
 export default function Modal ( { active, children } ) {

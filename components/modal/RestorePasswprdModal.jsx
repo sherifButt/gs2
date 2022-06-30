@@ -7,7 +7,7 @@ import {
    ExclamationCircleIcon,
 } from '@heroicons/react/outline'
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleSignin, toggleSignup, toggleRestorePassword,hideRestorePassword } from '../../redux/features/modalSlicer'
+import { toggleSignin, toggleSignup, toggleRestorePassword,hideRestorePassword } from '../../features/modalSlice'
 
 const userInetialState = { email: '', password: '' }
 

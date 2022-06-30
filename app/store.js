@@ -1,0 +1,54 @@
+import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
+import {
+   persistStore,
+   persistReducer,
+   FLUSH,
+   REHYDRATE,
+   PAUSE,
+   PERSIST,
+   PURGE,
+   REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+import postsReducer from '../features/postsSlice'
+import authReducer from '../features/auth/authSlice'
+import userReducer from '../features/userSlice'
+import modalReducer from '../features/modalSlice'
+import notificationReducer from '../features/notificationSlice'
+// persist
+
+// import { authApi } from './api/authApi'
+import { apiSlice } from './api/apiSlice'
+
+const persistConfig = {
+   key: 'root',
+   version: 1,
+   storage,
+}
+
+const rootReducer = combineReducers({
+   posts: postsReducer,
+   auth: authReducer,
+   user: userReducer,
+   modal: modalReducer,
+   notification: notificationReducer,
+   [apiSlice.reducerPath]: apiSlice.reducer,
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+   reducer: persistedReducer,
+   middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+         serializableCheck: {
+            /* ignore persistance actions */
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+         },
+      }).concat(apiSlice.middleware),
+   devTools: true,
+})
+
+export let persistor = persistStore(store)

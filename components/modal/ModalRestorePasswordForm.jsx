@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
    hideSignup,
    showSignup
-} from '../../redux/features/modalSlicer'
+} from '../../features/modalSlice'
 
 const ModalRestorePassword = () => {
    const dispatch = useDispatch()

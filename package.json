@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
     "@reduxjs/toolkit": "^1.8.1",
+    "dotenv": "^16.0.1",
     "framer-motion": "^6.3.5",
     "lottie-web": "^5.9.4",
     "next": "12.1.6",
@@ -20,6 +21,8 @@
     "react-dom": "18.1.0",
     "react-redux": "^8.0.1",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "reduxjs-toolkit-persist": "^7.2.1",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {

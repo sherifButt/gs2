@@ -7,23 +7,23 @@ import BouncingstarIcon from '../icons/BouncingstarIcon'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
+import { signin } from '../../features/auth/authSlice'
 import {
    showNotification,
    hideNotification,
-} from '../../redux/features/modalSlicer'
+} from '../../features/modalSlice'
 import {
    addNotification,
    removeNotification,
    deleteAllNotifications,
-} from '../../redux/features/notificationSlicer'
+} from '../../features/notificationSlice'
 import {
    hideSignin,
    toggleRestorePassword,
    toggleSignin,
    toggleSignup,
-} from '../../redux/features/modalSlicer'
-import { useLoginUserMutation } from '../../redux/services/authApi'
+} from '../../features/modalSlice'
+import { useLoginUserMutation } from '../../features/auth/authApiSlice'
 
 const userInitialState = { email: '', password: '' }
 

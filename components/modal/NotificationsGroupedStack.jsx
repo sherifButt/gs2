@@ -6,11 +6,11 @@ import { XIcon } from '@heroicons/react/solid'
 import { motion, AnimatePresence } from 'framer-motion'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { hideNotification } from '../../redux/features/modalSlicer'
+import { hideNotification } from '../../features/modalSlice'
 import {
    removeNotification,
    deleteAllNotifications,
-} from '../../redux/features/notificationSlicer'
+} from '../../features/notificationSlice'
 
 // b point
    const useMediaQuery = width => {

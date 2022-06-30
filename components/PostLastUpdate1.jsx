@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { like } from '../redux/features/postsSlicer'
+import { like } from '../features/postsSlice'
 import AvatarUser from './avatar/AvatarUser'
 const PostLastUpdate = props => {
    const dispatch = useDispatch()

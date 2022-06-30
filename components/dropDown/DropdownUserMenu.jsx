@@ -10,7 +10,7 @@ import UserIcon from '../icons/UserIcon'
 
 import AvatarUser from '../avatar/AvatarUser'
 import { useSelector, useDispatch } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
+import { logOut } from '../../features/auth/authSlice'
 
 const menu = [
    {
@@ -44,7 +44,7 @@ export default function DropdownUserMenu ( open ) {
       <div>
          <div className='px-4 py-3 flex gab-4'>
             <div className='mr-3 block lg:hidden '>
-               <AvatarUser/>
+               <AvatarUser />
             </div>
             <div>
                <p className='text-md font-bold'>Hi, {foreName}</p>
@@ -57,12 +57,12 @@ export default function DropdownUserMenu ( open ) {
             {menu.map((item, i) => (
                <div
                   key={i + '_' + item.title}
-                  className='last:border-b last:border-yellow-500 first:border-t first:border-yellow-500 first:mt-2'>
+                  className='ml-2 lg:ml-0 last:border-b last:border-yellow-500 lg:last:border-gray-200 first:border-t first:border-yellow-500 lg:first:border-gray-200  first:mt-2 lg:first:mt-0'>
                   <Link href={item.href} passHref>
                      <a
                         src={item.href}
-                        className='ml-2 text-gray-800 px-4 py-3 text-md flex  gap-2 place-items-center hover:bg-gray-100 hover:text-gray-900 '>
-                        <item.icon className=""/>
+                        className=' text-gray-800 px-4 py-3 text-md flex  gap-2 place-items-center hover:bg-gray-100 hover:text-gray-900 '>
+                        <item.icon className='' />
                         <p>{item.title}</p>
                      </a>
                   </Link>
@@ -75,10 +75,10 @@ export default function DropdownUserMenu ( open ) {
                   <button
                      onClick={e => {
                         e.preventDefault()
-                        dispatch(signin())
+                        dispatch(logOut())
                      }}
                      type='submit'
-                     className='uppercase block w-full text-left ml-4 px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
+                     className='uppercase block w-full text-left  px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
                      Sign out
                   </button>
                </div>

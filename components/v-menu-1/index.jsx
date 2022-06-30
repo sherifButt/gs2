@@ -1,16 +1,15 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import BasecampIcon from '../icons/BasecampIcon'
 import BouncingstarIcon from '../icons/BouncingstarIcon'
 import DiscoverIcon from '../icons/DiscoverIcon'
 import FriendsIcon from '../icons/FriendsIcon'
 import GroupsIcon from '../icons/GroupsIcon'
 
-
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { signin } from '../../redux/features/authSlicer'
-import{toggleSignup} from '../../redux/features/modalSlicer'
+import { selectCurrentAuth } from '../../features/auth/authSlice'
+import { toggleSignup } from '../../features/modalSlice'
 
 const menu = [
    {
@@ -44,12 +43,12 @@ function VerticalMenu() {
    const [userLogin, setUserLogin] = useState(false)
 
    const dispatch = useDispatch()
-   const { auth } = useSelector(state => state.auth)
+   const { token } = useSelector(selectCurrentAuth)
 
    const handleSelectMenu = e => {}
    return (
       <div className='flex flex-col gap-[1.81rem] justify-start items-start my-4 '>
-         {auth ? (
+         {token ? (
             selectedMenu.map((item, i) => (
                <Link href={item.href} key={item.title} passHref>
                   <a
@@ -64,7 +63,9 @@ function VerticalMenu() {
                      <div className='flex flex-row gap-[0.81rem] justify-start items-center ease-in-out duration-300  hover:scale-110'>
                         {
                            <item.icon
-                              className={`${item.active ? '#FED500' : ''} w-7 h-7`}
+                              className={`${
+                                 item.active ? '#FED500' : ''
+                              } w-7 h-7`}
                            />
                         }
                         <p

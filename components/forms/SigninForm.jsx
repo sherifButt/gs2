@@ -14,7 +14,7 @@ import {
 } from '../../redux/features/modalSlicer'
 import { signin } from '../../redux/features/authSlicer'
 import { addNotification } from '../../redux/features/notificationSlicer'
-import { useSigninUserMutation } from '../../redux/services/authApi'
+import { useSigninUserMutation } from '../../features/auth/authApiSlice'
 // components
 import ButtonPrimary from '../buttons/ButtonPrimary'
 import Lottie from '../Lottie'
