@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 // Redux
 import { useDispatch } from 'react-redux'
-import { useActivateUserMutation } from '../../../../app/api/authApi'
+import { useActivateUserMutation } from '../../../../features/auth/authApiSlice'
 // Components
 import SigninForm from '../../../../features/auth/SigninForm_00'
 import Layout from '../../../../components/Layout/Layout5'
