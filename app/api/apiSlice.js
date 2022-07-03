@@ -4,20 +4,23 @@ import { REHYDRATE } from 'redux-persist'
 
 const baseQuery = fetchBaseQuery({
    baseUrl: process.env.baseUrl,
-   // baseUrl: '/api/',
    // send cookie
    // credentials: 'include',
-   extractRehydrationInfo(action, { reducerPath }) {
-      if (action.type === REHYDRATE) {
-         return action.payload[reducerPath]
-      }
-   },
+
    prepareHeaders: (headers, { getState }) => {
+      const userLocalStorage = JSON.parse(localStorage.getItem( 'user' ))
+      
       const token = getState().auth.token
+      if(!token) token = userLocalStorage.token
       if (token) {
          headers.set('authorization', `Bearer ${token}`)
       }
       return headers
+   },
+   extractRehydrationInfo(action, { reducerPath }) {
+      if (action.type === REHYDRATE) {
+         return action.payload[reducerPath]
+      }
    },
 })
 

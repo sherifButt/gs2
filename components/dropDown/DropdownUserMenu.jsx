@@ -10,6 +10,7 @@ import UserIcon from '../icons/UserIcon'
 
 import AvatarUser from '../avatar/AvatarUser'
 import { useSelector, useDispatch } from 'react-redux'
+import { selectCurrentUser } from '../../features/user/userSlice'
 import { logOut } from '../../features/auth/authSlice'
 
 const menu = [
@@ -38,8 +39,8 @@ export default function DropdownUserMenu ( open ) {
    const  pathname  = router.pathname.split('/').filter(Boolean)
    console.log('pathname', pathname)
    const dispatch = useDispatch()
-   const { foreName, surName, name, phone, email, image, privilege } =
-      useSelector(state => state.user)
+   const { forename, surname, name, phone, email, image, privilege } =
+      useSelector(selectCurrentUser)
    return (
       <div>
          <div className='px-4 py-3 flex gab-4'>
@@ -47,7 +48,7 @@ export default function DropdownUserMenu ( open ) {
                <AvatarUser />
             </div>
             <div>
-               <p className='text-md font-bold'>Hi, {foreName}</p>
+               <p className='text-md font-bold'>Hi, {forename}</p>
                <p className='text-sm font-medium text-gray-900 truncate'>
                   {email}
                </p>

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 // persist
 import { PersistGate } from 'redux-persist/integration/react'
 
-
 import Portal from '../HOC/Portal'
 
 import Layout1 from '../components/Layout/Layout1'
@@ -38,24 +37,26 @@ function MyApp({ Component, pageProps }) {
       typeof Component.layout === 'function'
          ? Component.layout
          : layouts[Component.layout] || Layout5
-   console.log('Component.layout', typeof Component.layout)
+   
+   
+   
    return (
       <Provider store={store}>
-            <Layout
-               rightSidebar={Component.rightSidebar}
-               leftSidebar={Component.leftSidebar}
-               footer={Component.footer}>
-            <PersistGate loading={ null } persistor={ persistor }>
+         <Layout
+            rightSidebar={Component.rightSidebar}
+            leftSidebar={Component.leftSidebar}
+            footer={Component.footer}>
+            {/* <PersistGate persistor={persistor}> */}
                <Portal>
                   <Notifications />
                   <ModalSignupForm />
                   <ModalSigninForm />
                   <ModalRestorePasswordForm />
                </Portal>
-         
+
                <Component {...pageProps} />
-         </PersistGate>
-            </Layout>
+            {/* </PersistGate> */}
+         </Layout>
       </Provider>
    )
 }

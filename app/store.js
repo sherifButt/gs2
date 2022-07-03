@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage'
 
 import postsReducer from '../features/postsSlice'
 import authReducer from '../features/auth/authSlice'
-import userReducer from '../features/userSlice'
+import userReducer from '../features/user/userSlice'
 import modalReducer from '../features/modalSlice'
 import notificationReducer from '../features/notificationSlice'
 // persist
@@ -40,7 +40,7 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-   reducer: persistedReducer,
+   reducer: rootReducer,
    middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
          serializableCheck: {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { selectCurrentUser } from '../../features/user/userSlice'
 
 /**
  *
  * @param {Object} className classes from parent component
- * @param {string} image image path
+ * @param {string} profileImage profileImage path
  * @param {boolean} online user is online
  * @param {boolean} needHelp user need help
  * @param {boolean} streaming user is streaming an activity
@@ -12,21 +13,22 @@ import { useSelector } from 'react-redux'
  */
 const AvatarUser = ({
    className,
-   image,
+   profileImage,
    forename,
-   surname,
+   surName,
    online,
    needHelp,
    streaming,
 }) => {
    // Global State : redux
-   const globalUser = useSelector(state => state.user)
+   const globalUser = useSelector( selectCurrentUser )
+   console.log('globalUser', globalUser)
    // Local State
    const [user, setUser] = useState({
       className: className || globalUser.className,
-      image: image || globalUser.image,
+      profileImage: profileImage || globalUser.profileImage,
       forename: forename || globalUser.forename,
-      surname: surname || globalUser.surname,
+      surName: surName || globalUser.surName,
       online: online || globalUser.online,
       needHelp: needHelp || globalUser.needHelp,
       streaming: streaming || globalUser.streaming,
@@ -35,21 +37,21 @@ const AvatarUser = ({
    useEffect(() => {
       setUser({
          className,
-         image,
+         profileImage,
          forename,
-         surname,
+         surName,
          online,
          needHelp,
          streaming,
       })
-   }, [className, image, forename, surname, online, needHelp, streaming])
+   }, [className, profileImage, forename, surName, online, needHelp, streaming])
 
    // Refresh Local state based on Global state
    useEffect(() => {
       setUser({
-         image: globalUser.image,
+         profileImage: globalUser.profileImage,
          forename: globalUser.forename,
-         surname: globalUser.surname,
+         surName: globalUser.surName,
          online: globalUser.online,
          needHelp: globalUser.needHelp,
          streaming: globalUser.streaming,
@@ -61,20 +63,20 @@ const AvatarUser = ({
    return (
       <div>
          <div className='relative'>
-            {/* User image */}
+            {/* User profileImage */}
 
-            {user.image ? (
+            {user.profileImage ? (
                <img
                   className={`-z-50 block rounded-full w-12 border-2 border-white ${className}`}
-                  src={user.image}
+                  src={user.profileImage}
                />
             ) : (
                <div className='m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-green-500 text-xl text-white uppercase'>
-                  {user.forename.slice(0, 1)}
-                  {user.surname.slice(0, 1)}
+                  {user.forename?.slice(0, 1)}
+                  {user.surName?.slice(0, 1)}
                </div>
             )}
-            {/* /User image */}
+            {/* /User profileImage */}
             {/* Notification bubble  */}
             <span
                className={`bottom-0 right-0 absolute z-0  w-1/5 h-1/5 border-2 border-transparent rounded-full

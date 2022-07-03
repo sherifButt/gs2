@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateCampaignForm from '../../../components/forms/CreateCampaignForm'
+import CreateCampaignForm from '../../../features/campaign/CreateCampaignForm'
 
 const CreateCampaign = () => {
    return (

@@ -3,7 +3,9 @@ import ButtonPrimary from '../buttons/ButtonPrimary'
 import PostLastUpdate from '../PostLastUpdate1'
 import VerticalMenu from '../v-menu-1'
 import Event from './Event'
+import { useRouter } from 'next/router'
 const RightSidebar = props => {
+   const router = useRouter()
    return (
       <aside {...props}>
          {props.children}
@@ -15,6 +17,7 @@ const RightSidebar = props => {
                <ButtonPrimary
                   text='CREATE CAMPAIGN'
                   className='lg:mb-8 w-full lg:w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg '
+                  actionHandler={()=>{router.push('/basecamp/create-campaign')}}
                />
 
                {/* /Call To Action */}

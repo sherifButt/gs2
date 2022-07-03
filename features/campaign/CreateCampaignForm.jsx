@@ -1,17 +1,17 @@
 import React from 'react'
 // Form Data
-import { createCampaign as _createCampaign  } from './fomrs'
+import { createCampaign as _createCampaign  } from '../../components/forms/fomrs'
 // Components
-import DefaultForm from './DefaultForm'
+import DefaultForm from '../../components/forms/DefaultForm'
 // GlobalState
 import {
    hideCreateCampaign,
    showSignup,
    showRestorePassword,
-} from '../../features/modalSlice'
-import { signin } from '../../features/auth/authSlice'
+} from '../modalSlice'
+import { signin } from '../auth/authSlice'
 // fetch
-import { useCreateCampaignMutation } from '../../features/campaign/campaignApiSlice'
+import { useCreateCampaignMutation } from './campaignApiSlice'
 
 
 const CreateCampaignForm = ({className,href}) => {
