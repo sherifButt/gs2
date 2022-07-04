@@ -8,10 +8,10 @@ const baseQuery = fetchBaseQuery({
    // credentials: 'include',
 
    prepareHeaders: (headers, { getState }) => {
-      const userLocalStorage = JSON.parse(localStorage.getItem( 'user' ))
+      // const userLocalStorage = JSON.parse(localStorage.getItem( 'user' ))
       
       const token = getState().auth.token
-      if(!token) token = userLocalStorage.token
+      // if(!token&&userLocalStorage) token = userLocalStorage.token
       if (token) {
          headers.set('authorization', `Bearer ${token}`)
       }
@@ -52,5 +52,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
    baseQuery: baseQueryWithReauth,
+   tagTypes: ['Auth', 'User','Campaign'],
    endpoints: builder => ({}),
 })

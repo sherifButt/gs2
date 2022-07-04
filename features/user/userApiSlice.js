@@ -9,6 +9,8 @@ export const userApiSlice = apiSlice.injectEndpoints({
                   url: '/Users/Me',
             method: 'GET',  }
          },
+         providesTags: [ 'User' ],
+         invalidatesTags:['User']
       }),
    }),
 } )

@@ -13,7 +13,8 @@ module.exports = {
          backgroundImage: {
             'menu-texture': "url('/assets/images/navbar-shade.png')",
             'empty-texture': "url('/assets/images/16x16.png')",
-            'button-texture': "url('/assets/images/givestar-bg-element-03.png')",
+            'button-texture':
+               "url('/assets/images/givestar-bg-element-03.png')",
          },
          colors: {
             river: {
@@ -61,5 +62,6 @@ module.exports = {
       require('@tailwindcss/typography'),
       require('@tailwindcss/aspect-ratio'),
       require('tailwind-scrollbar-hide'),
+      require('@tailwindcss/forms'),
    ],
 }

@@ -415,6 +415,17 @@ export const createCampaign = {
       {
          name:'',
          forLabel: 'name',
+         text: 'Which charity would you like to support?',
+         component: FieldLabel,
+         type: 'label',
+         required: false,
+         disabled: false,
+         hidden: false,
+      },
+      
+      {
+         name:'',
+         forLabel: 'name',
          text: 'Tell us about your campaign',
          component: FieldLabel,
          type: 'label',

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { removeUser } from '../user/userSlice'
 const initialState = {
    authError: false,
    authMessage: '',
@@ -34,7 +34,7 @@ const authSlice = createSlice({
          state.token = accessToken
          state.refreshToken = refreshToken
       },
-      logOut: state => {
+      logOut: (state) => {
          localStorage.setItem(
             'user',
             JSON.stringify({
@@ -48,6 +48,8 @@ const authSlice = createSlice({
          state.user = null
          state.token = null
          state.refreshToken = null
+
+         
       },
    },
 })

@@ -12,6 +12,7 @@ import AvatarUser from '../avatar/AvatarUser'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCurrentUser } from '../../features/user/userSlice'
 import { logOut } from '../../features/auth/authSlice'
+import { removeUser } from '../../features/user/userSlice'
 
 const menu = [
    {
@@ -76,7 +77,9 @@ export default function DropdownUserMenu ( open ) {
                   <button
                      onClick={e => {
                         e.preventDefault()
-                        dispatch(logOut())
+                        dispatch( logOut() )
+                        dispatch( removeUser() )
+                        router.push('/')
                      }}
                      type='submit'
                      className='uppercase block w-full text-left  px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>

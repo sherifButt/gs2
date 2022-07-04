@@ -10,6 +10,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                body: { ...credentials },
             }
          },
+         providesTags:['Auth']
       }),
       
       signupUser: builder.mutation({

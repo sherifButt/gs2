@@ -27,13 +27,19 @@ const SigninForm_00 = ({ className, href }) => {
 
          console.log('-------> data:', data)
          // load user data using id
-         const userData = loadUser.data
-         console.log('-------> userData:', userData)
+         const loadUserFun = async () => {
+            
+            const userData = await loadUser.data
+            // set  user data
+            dispatch(setUser(userData))
+            console.log('-------> userData:', userData)
+         }
+         loadUserFun()
 
-         // set  user data
-         dispatch(setUser(userData))
       }
-   }, [data])
+   }, [ data ] )
+   
+   
 
    return (
       <DefaultForm
