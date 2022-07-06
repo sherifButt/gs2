@@ -5,6 +5,9 @@ import FieldLabel from './FieldLabel'
 import FieldTextarea from './FieldTextarea'
 import FieldFileupload from './FieldFileupload'
 import FieldCurrency from './FieldCurrency'
+import FieldCombobox from './FieldCombobox'
+import FieldSelect from './FieldSelect'
+
 
 export const signin = {
    title: 'Sign in to Give Star',
@@ -387,7 +390,7 @@ export const createCampaign = {
       message: 'Your Campaign been created!',
       messageMarginTop: '',
       description: '',
-      href: '/discover',
+      href: '/basecamp/campaign01',
       delay: '2400',
       lottiePath: '',
       lottieSize: '',
@@ -413,7 +416,7 @@ export const createCampaign = {
    },
    fields: [
       {
-         name:'',
+         name: '',
          forLabel: 'name',
          text: 'Which charity would you like to support?',
          component: FieldLabel,
@@ -422,9 +425,37 @@ export const createCampaign = {
          disabled: false,
          hidden: false,
       },
-      
       {
-         name:'',
+         name: 'createdBy',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: 'UserId',
+         placeholder: 'Add Charity Name',
+         type: 'text',
+         required: false,
+         component: FieldText,
+         disabled: false,
+         hidden: true,
+      },
+      {
+         name: 'charityName',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: 'The Charity Name.',
+         placeholder: 'Add Charity Name',
+         type: 'text',
+         required: false,
+         component: FieldCombobox,
+         disabled: false,
+         hidden: false,
+      },
+
+      {
+         name: '',
          forLabel: 'name',
          text: 'Tell us about your campaign',
          component: FieldLabel,
@@ -462,9 +493,13 @@ export const createCampaign = {
          hidden: false,
       },
       {
-         forLabel:'photo',
+         forLabel: 'photo',
          text: 'Create your Page',
          component: FieldLabel,
+         type: 'label',
+         required: false,
+         disabled: false,
+         hidden: false,
       },
 
       {
@@ -498,7 +533,7 @@ export const createCampaign = {
          hidden: false,
       },
       {
-         name: 'fundraisingTarget',
+         name: 'target',
          value: '',
          description: '',
          error: '',
@@ -529,9 +564,13 @@ export const createCampaign = {
          rows: 15,
       },
       {
-         forLabel:'stravaCode',
+         forLabel: 'stravaCode',
          text: 'STRAVA integration',
          component: FieldLabel,
+         type: 'label',
+         required: false,
+         disabled: false,
+         hidden: false,
       },
       {
          name: 'stravaCode',
@@ -547,24 +586,6 @@ export const createCampaign = {
          disabled: false,
          hidden: false,
       },
-      {
-         name: 'SignupRequest',
-         value: true,
-         description: '',
-         error: '',
-         valid: '',
-         title: '',
-         placeholder: 'Signup Request',
-         type: 'checkbox',
-         required: true,
-         component: FieldCheckbox,
-         terms: (
-            <>
-               <span className='text-black'>I agree to </span>Givestar Terms of
-               Use
-            </>
-         ),
-         href: '#',
-      },
+     
    ],
 }

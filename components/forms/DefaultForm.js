@@ -32,8 +32,8 @@ function Form({
 
    // Local State
 
-   const [ values, setValues ] = useState( form.fields )
-   const [isSuccess,setIsSuccess]=useState(false)
+   const [values, setValues] = useState(form.fields)
+   const [isSuccess, setIsSuccess] = useState(false)
    console.log('values', values)
 
    // router
@@ -85,10 +85,13 @@ function Form({
 
       // Global form  validation
       // required fields validation
-      const requiredAny = values.find(field => field.required == true)
+      // const requiredAny = values.find(field => field.required == true)
       // is any required fields are empty
-      const isEmptyRequiredFields = values.find(field => field.value == '')
-      if (requiredAny && isEmptyRequiredFields) {
+      // const isEmptyRequiredFields = values.find(field => field.value == '')
+      // is required and empty
+      const isRequiredAndEmpty = values.find(field => {if(field.required==true && field.value =='') return true})
+      // if (requiredAny && isEmptyRequiredFields) {
+      if (isRequiredAndEmpty) {
          const _values = [...values]
          _values.map((field, i) => {
             if (!_values[i].value && _values[i].required && !_values[i].error)
@@ -109,7 +112,7 @@ function Form({
       }
 
       // is there any error message
-      const isErrorMessages = values.find(field => field.error != '')
+      const isErrorMessages = values.find(field => {if(field.error != ''&& field.error!=undefined) return true})
       if (isErrorMessages) {
          if (form.notification?.error?.isNotification)
             dispatch(
@@ -139,30 +142,28 @@ function Form({
 
       try {
          const submittedData = await submitData(dataObject).unwrap()
-          
-            if (form.notification?.success?.isNotification)
-               dispatch(
-                  addNotification({
-                     isSuccess: true,
-                     status: submittedData?.status,
-                     message: form.notification?.success?.message || 'Success!',
-                     description:
-                        submittedData?.message ||
-                        submittedData?.data ||
-                        form.notification?.success?.description,
-                  })
-               )
-            setValues(form.fields)
-setIsSuccess(true)
-            if (submittedData?.accessToken) dispatch(setCredentials(submittedData))
 
-            if (form.confirmation?.delay || form.confirmation?.href)
-               setTimeout(() => {
-                  dispatch(hideThisForm())
-                  if (form.confirmation?.href)
-                     router.push(form.confirmation?.href)
-               }, form.confirmation?.delay)
-         
+         if (form.notification?.success?.isNotification)
+            dispatch(
+               addNotification({
+                  isSuccess: true,
+                  status: submittedData?.status,
+                  message: form.notification?.success?.message || 'Success!',
+                  description:
+                     submittedData?.message ||
+                     submittedData?.data ||
+                     form.notification?.success?.description,
+               })
+            )
+         setValues(form.fields)
+         setIsSuccess(true)
+         if (submittedData?.accessToken) dispatch(setCredentials(submittedData))
+
+         if (form.confirmation?.delay || form.confirmation?.href)
+            setTimeout(() => {
+               dispatch(hideThisForm())
+               if (form.confirmation?.href) router.push(form.confirmation?.href)
+            }, form.confirmation?.delay)
 
          console.log('Form Submitted successfully')
       } catch (error) {
@@ -178,7 +179,7 @@ setIsSuccess(true)
             )
       }
    }
-   
+
    return (
       <AnimatePresence exitBeforeEnter className={className}>
          {!isSuccess || !form.confirmation?.isConfirmation ? (

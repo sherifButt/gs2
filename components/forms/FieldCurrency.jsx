@@ -1,5 +1,6 @@
-import { ExclamationCircleIcon,CheckCircleIcon } from '@heroicons/react/solid'
+import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
 import React from 'react'
+import {useLoadCurrencyListMutation} from '../../features/currency/currencyApiSlice'
 
 const FieldCurrency = ({
    id,
@@ -23,7 +24,6 @@ const FieldCurrency = ({
       <>
          {!hidden && (
             <div className='relative'>
-               
                <input
                   type={type}
                   name={name}
@@ -39,10 +39,11 @@ const FieldCurrency = ({
                   aria-describedby={`${name}-error`}
                   value={value}
                   onChange={inputHandler}
-                  onBlur={ validationHandler }
+                  onBlur={validationHandler}
                   step={10}
                   min={100}
-               /><div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none'>
+               />
+               <div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none'>
                   <span className='text-gray-500 '>£</span>
                </div>
                {error && (

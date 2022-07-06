@@ -11,8 +11,7 @@ export const campaignApiSlice = apiSlice.injectEndpoints({
                body: { ...campaign },
             }
          },
-      }),
-
+      } ),
       
    }),
 })
