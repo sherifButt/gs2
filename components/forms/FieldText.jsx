@@ -10,6 +10,10 @@ const FieldText = ({
    valid,
    value,
    title,
+   rightText,
+   rightTextPadding,
+   leftText,
+   leftTextPadding,
    disabled,
    hidden,
    label,
@@ -30,6 +34,10 @@ const FieldText = ({
                   title={title}
                   required
                   className={`peer mt-1 relative shadow-sm block w-full py-3 pl-3 pr-10 placeholder-transparent  text-gray-900 ${
+                     rightText || leftText
+                        ? rightTextPadding || leftTextPadding
+                        : 'pl-3'
+                  } ${
                      error &&
                      'focus:ring-red-500 focus:border-red-500 border-red-300'
                   } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 sm:text-md rounded-xl transition-all ease-out duration-300`}
@@ -72,9 +80,22 @@ const FieldText = ({
                )}
                <label
                   htmlFor={name}
-                  className='absolute ease-out duration-500 -top-5 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
+                  className={`absolute ease-out duration-500 -top-5 ${
+                     rightText || leftText
+                        ? rightTextPadding || leftTextPadding
+                        : 'pl-3'
+                  } block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm`}>
                   {placeholder}
                </label>
+               {rightText && (
+                  <div
+                     className={`absolute inset-y-0 left-0   pl-3
+                      pt-1 flex items-center pointer-events-none`}>
+                     <span className='text-gray-400 '>
+                        {rightText}
+                     </span>
+                  </div>
+               )}
             </div>
          )}
       </>

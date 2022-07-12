@@ -6,13 +6,23 @@ export const charityApiSlice = apiSlice.injectEndpoints({
       loadCharityList: builder.mutation({
          query: charity => {
             return {
-               url: '/Charity/ListHeaders',
+               url: '/Charity/List',
                method: 'POST',
-               body: { ...charity },
+               body: {
+                  limit: 200,
+                  pageOffSet: 0,
+                  listOrderFields: [
+                     {
+                        fieldName: 'name',
+                        isAscending: true,
+                     },
+                  ],
+                  query: charity,
+               },
             }
          },
-        //  providesTags: ['Charity'],
-        //  invalidatesTags: ['Charity'],
+         //  providesTags: ['Charity'],
+         //  invalidatesTags: ['Charity'],
       }),
    }),
 })

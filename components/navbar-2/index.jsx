@@ -17,7 +17,8 @@ const Navbar = ( { className } ) => {
       // loadUser()
       dispatch( setUser( data ) )
       console.log( 'loadUser', data )
-   }, [data])
+   }, [ data ] )
+   
    return token ? (
       <div>
          <NavbarIn className={className} />

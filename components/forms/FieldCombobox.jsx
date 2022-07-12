@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { addNotification } from '../../features/notificationSlice'
+import { useDispatch } from 'react-redux'
 import {
+   SearchIcon,
    ExclamationCircleIcon,
    CheckCircleIcon,
    CheckIcon,
    SelectorIcon,
 } from '@heroicons/react/solid'
 import { Combobox } from '@headlessui/react'
-import FieldCoboboxSelectedItems from './FieldComboboxSelectedItems'
+import FieldComboboxSelectedItems from './FieldComboboxSelectedItems'
 import { useLoadCharityListMutation } from '../../features/charity/charityApiSlice'
 
 function classNames(...classes) {
@@ -18,7 +21,7 @@ const FieldCombobox = ({
    name,
    type,
    placeholder,
-// data,
+   // data,
    valid,
    value,
    title,
@@ -34,55 +37,197 @@ const FieldCombobox = ({
    const [query, setQuery] = useState('')
    const [selectedOption, setSelectedOption] = useState()
    const [selectedOptions, setSelectedOptions] = useState([])
-   const [loadCharityList, { data,isSuccess, isLoading, error, iserror }] =
+   const [loadCharityList, { data, isSuccess, isLoading, error, iserror }] =
       useLoadCharityListMutation()
 
-   const listQuery = {
-      limit: 0,
-      pageOffSet: 0,
-      listOrderFields: [
-         {
-            fieldName: 'string',
-            isAscending: true,
-         },
-      ],
-      query: 'string',
-   }
+   const dispatch = useDispatch()
 
    useEffect(() => {
       const loadData = async () => {
-         const loadData = await loadCharityList( listQuery ).unwrap()
-         // data = loadData.listData
+         const loadData = await loadCharityList(query).unwrap()
       }
       loadData()
-   }, [])
-   useEffect(() => {
-      console.log('data', data)
-   }, [data])
+   }, [query])
 
-   const filteredPeople =
+   const filteredOptions =
       query === ''
          ? data?.listData
          : data?.listData.filter(item => {
               return item.name.toLowerCase().includes(query.toLowerCase())
            })
 
+   const sumDonations = options => {
+      let _selectedOptions
+      let success = true
+
+      if (options) _selectedOptions = [...options]
+      else _selectedOptions = [...selectedOptions]
+
+      // sum donation split fixed
+      const sumDonations = _selectedOptions.reduce((total, item) => {
+         let sum = 0
+         if (!isNaN(item.donationSplit))
+            sum = parseInt(item.donationSplit) + total
+         return sum
+      }, 0)
+      console.log('sumDonations', sumDonations)
+      // sum donation split unfixed
+      const sumDonationsUnfixed = _selectedOptions.reduce((total, item) => {
+         let sum = 0
+         if (!item.edited) sum = item.donationSplit + total
+         return sum
+      }, 0)
+      console.log('sumDonationsUnfixed', sumDonationsUnfixed)
+      let sumDonationFixed = sumDonations - sumDonationsUnfixed
+      console.log('sumDonationFixed', sumDonationFixed)
+
+      const reminder = 100 - sumDonationFixed
+      console.log('reminder', reminder)
+      if (sumDonationFixed >= 100) {
+         // validation
+         success = false
+         dispatch(
+            addNotification({
+               success: success,
+               message: 'Fail to add New charity',
+               description:
+                  'Cannot add new charity as your Total fixed percentages have exceeded 100%, try reducing your fixed percentages by clicking on the lock icon.',
+            })
+         )
+         return {
+            selectedOptions: _selectedOptions,
+            sumDonationFixed,
+            sumDonationsUnfixed,
+            reminder,
+            sumDonations,
+            success,
+         }
+      }
+   }
+   const removeItem = idx => {
+      const _selectedOptions = [...selectedOptions]
+      _selectedOptions.splice(idx, 1)
+      console.log('_selectedOptions--->>', _selectedOptions)
+      _selectedOptions = setDonationSplit({
+         options: _selectedOptions,
+         value: 100 / _selectedOptions.length,
+      })
+      setSelectedOptions(_selectedOptions)
+   }
+
+   const addItem = item => {
+      if (!selectedOptions.includes(item) && selectedOptions.length <= 3) {
+         const _selectedOptions = [...selectedOptions, item]
+         _selectedOptions = setDonationSplit({
+            options: _selectedOptions,
+            value:
+               sumDonations(selectedOptions)?.reminder /
+                  (selectedOptions.length + 1) ||
+               100 / (selectedOptions.length + 1),
+         })
+         setSelectedOptions(_selectedOptions)
+      }
+   }
+
    useEffect(() => {
-      console.log('selectedOptions', selectedOptions)
+      // console.log('selectedOptions', selectedOptions)
+
+      let e = { target: { selectedOptions, type, name } }
+      inputHandler(e)
    }, [selectedOptions])
+
+   const editDonationSplit = ({ value, options, idx }) => {
+      let _selectedOptions
+      let rest = 100 - value
+      if (options) _selectedOptions = [...options]
+      else _selectedOptions = [...selectedOptions]
+
+      _selectedOptions.map((item, _idx) => {
+         if (_idx !== idx && !item.edited) {
+            _selectedOptions[_idx] = {
+               ...item,
+               donationSplit: rest / (_selectedOptions.length - 1),
+            }
+         }
+         if (_idx == idx) {
+            _selectedOptions[_idx] = {
+               ...item,
+               donationSplit: value,
+               edited: true,
+            }
+         }
+      })
+
+      setSelectedOptions(_selectedOptions)
+      console.log('_selectedOptions->', _selectedOptions)
+      console.log('idx', idx)
+
+      return _selectedOptions
+   }
+
+   const setDonationSplit = ({ value, options, idx }) => {
+      let _selectedOptions
+
+      if (options) _selectedOptions = [...options]
+      else _selectedOptions = [...selectedOptions]
+
+      if (sumDonations(_selectedOptions)?.success) return _selectedOptions
+
+      _selectedOptions.map((item, _idx) => {
+         if (!item.edited)
+            _selectedOptions[_idx] = {
+               ...item,
+               donationSplit:
+                  value ||
+                  sumDonations(_selectedOptions)?.reminder /
+                     _selectedOptions.filter(i => i.edited).length ||
+                  0,
+               edited: false,
+            }
+      })
+
+      setSelectedOptions(_selectedOptions)
+      console.log('_selectedOptions->', _selectedOptions)
+      console.log('idx', idx)
+
+      return _selectedOptions
+   }
+
    return (
       <>
          {!hidden && (
             <div className='relative'>
+               <ul className='flex flex-col gap-4 py-4 divide-y-2'>
+                  {selectedOptions.map((item, i) => (
+                     <li key={item.name} className=''>
+                        <FieldComboboxSelectedItems
+                           idx={i}
+                           edited={item.edited}
+                           donationSplit={item.donationSplit}
+                           editDonationSplit={editDonationSplit}
+                           selectedOptions={selectedOptions}
+                           setSelectedOptions={setSelectedOptions}
+                           removeItem={removeItem}
+                           title={item.name}
+                           setDonationSplit={setDonationSplit}
+                           imageUrl={
+                              item.profileImagePath ||
+                              '/assets/images/giveStar_stock_Image.jpg'
+                           }
+                        />
+                     </li>
+                  ))}
+               </ul>
                <Combobox
                   as='div'
                   value={selectedOption}
                   onChange={e => {
                      setSelectedOption(e)
                   }}>
-                  <div className='relative mt-1'>
+                  <div className='relative mt-6'>
                      <Combobox.Input
-                        type={type}
+                        selectedValues={selectedOptions}
+                        type='select'
                         name={name}
                         id={name}
                         title={title}
@@ -93,7 +238,6 @@ const FieldCombobox = ({
                         } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 sm:text-md rounded-xl transition-all ease-out duration-300`}
                         placeholder={placeholder}
                         aria-invalid='true'
-                        // value={item => item?.name}
                         aria-describedby={`${name}-error`}
                         onChange={e => {
                            setQuery(e.target.value)
@@ -101,35 +245,47 @@ const FieldCombobox = ({
                         displayValue={item => item?.name}
                      />
                      <Combobox.Button className='absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none'>
-                        <SelectorIcon
-                           className='h-5 w-5 text-gray-400'
-                           aria-hidden='true'
-                        />
+                        {isLoading ? (
+                           <svg
+                              className='animate-spin -ml-1 mr-1 h-5 w-5 text-gray-400'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'>
+                              <circle
+                                 className='opacity-25'
+                                 cx='12'
+                                 cy='12'
+                                 r='10'
+                                 stroke='currentColor'
+                                 strokeWidth='4'></circle>
+                              <path
+                                 className='opacity-75'
+                                 fill='currentColor'
+                                 d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+                           </svg>
+                        ) : (
+                           <SelectorIcon
+                              className='h-5 w-5 text-gray-400'
+                              aria-hidden='true'
+                           />
+                        )}
                      </Combobox.Button>
                      <Combobox.Label
                         htmlFor={name}
                         className='absolute ease-out duration-500 -top-6 left-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-6 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
-                        {placeholder}
+                        {`${placeholder} (${selectedOptions.length}/4)`}
                      </Combobox.Label>
-                     {filteredPeople?.length > 0 && (
+                     {filteredOptions?.length > 0 && (
                         <Combobox.Options className='absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                           {filteredPeople.map(item => (
+                           {filteredOptions.map(item => (
                               <Combobox.Option
                                  key={item.id}
-                                 value={item}
+                                 type='select'
+                                 name='stuff'
+                                 selectedValues='fffff'
+                                 // value={item}
                                  onClick={e => {
-                                    inputHandler(e)
-
-                                    if (
-                                       !selectedOptions.includes(item) &&
-                                       selectedOptions.length <= 4
-                                    )
-                                       setSelectedOptions([
-                                          ...selectedOptions,
-                                          item,
-                                       ])
-                                    // console.log('selectedOptions', selectedOptions)
-                                    // e.target.value = ''
+                                    addItem(item)
                                  }}
                                  className={({ active }) =>
                                     classNames(
@@ -143,7 +299,10 @@ const FieldCombobox = ({
                                     <>
                                        <div className='flex items-center'>
                                           <img
-                                             src={item.imageUrl}
+                                             src={
+                                                item.profileImagePath ||
+                                                '/assets/images/giveStar_stock_Image.jpg'
+                                             }
                                              alt=''
                                              className='h-6 w-6 flex-shrink-0 rounded-full'
                                           />
@@ -178,16 +337,6 @@ const FieldCombobox = ({
                      )}
                   </div>
                </Combobox>
-               <ul className='flex flex-col gap-4 py-4 divide-y-2'>
-                  {selectedOptions.map((item, i) => (
-                     <li key={item.name} className=''>
-                        <FieldCoboboxSelectedItems
-                           title={item.name}
-                           imageUrl={item.profileImagePath}
-                        />
-                     </li>
-                  ))}
-               </ul>
             </div>
          )}
       </>

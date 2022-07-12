@@ -6,8 +6,9 @@ import validateInput from '../../helpers/validateInput'
 import { useEffect, useState } from 'react'
 
 // Redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addNotification } from '../../features/notificationSlice'
+import { selectCurrentUser } from '../../features/user/userSlice'
 
 // components
 import ButtonPrimary from '../buttons/ButtonPrimary'
@@ -29,9 +30,9 @@ function Form({
 }) {
    // Global State
    const dispatch = useDispatch()
+   const user = useSelector(selectCurrentUser)
 
    // Local State
-
    const [values, setValues] = useState(form.fields)
    const [isSuccess, setIsSuccess] = useState(false)
    console.log('values', values)
@@ -39,17 +40,44 @@ function Form({
    // router
    const router = useRouter()
 
+   useEffect( () => {
+      console.log('user.id', user.id)
+      const _values = [ ...values ]
+      if ( user.id )
+      {
+         _values.map( ( field, idx ) => {
+           if (field.name == 'createdBy')
+              _values[idx].value =  user.id 
+            //  else _values.push({name:'createdBy',value:user.id})
+            console.log('_values', _values)
+         })
+      }
+      
+   }, [user])
+
    // Handlers (event listeners)
    const inputHandler = e => {
       const inputIdx = values.findIndex(input => input.name == e.target.name)
       const isCheckbox = e.target.type === 'checkbox'
+      const isSelect = e.target.type === 'select'
+      isSelect && console.log('e.target', e.target?.selectedOptions)
+
+      console.log('e.target.type', e.target.type)
+      console.log('e.target.name', e.target.name)
+      const isNumber = e.target.type === 'number'
       const isFile = e.target.type === 'file'
+
       const _values = [...values]
-      _values[inputIdx].value = isCheckbox
+      _values[inputIdx].value = isSelect
+         ? [...e.target?.selectedOptions]
+         : isCheckbox
          ? e.target.checked
          : isFile
          ? e.target.files
+         : isNumber
+         ? parseInt(e.target.value)
          : e.target.value
+
       setValues(_values)
    }
 
@@ -89,7 +117,9 @@ function Form({
       // is any required fields are empty
       // const isEmptyRequiredFields = values.find(field => field.value == '')
       // is required and empty
-      const isRequiredAndEmpty = values.find(field => {if(field.required==true && field.value =='') return true})
+      const isRequiredAndEmpty = values.find(field => {
+         if (field.required == true && field.value == '') return true
+      })
       // if (requiredAny && isEmptyRequiredFields) {
       if (isRequiredAndEmpty) {
          const _values = [...values]
@@ -112,7 +142,9 @@ function Form({
       }
 
       // is there any error message
-      const isErrorMessages = values.find(field => {if(field.error != ''&& field.error!=undefined) return true})
+      const isErrorMessages = values.find(field => {
+         if (field.error != '' && field.error != undefined) return true
+      })
       if (isErrorMessages) {
          if (form.notification?.error?.isNotification)
             dispatch(
@@ -136,9 +168,13 @@ function Form({
       }
 
       const dataObject = {}
-      values.map((field, i) => {
-         dataObject = { ...dataObject, [field.name]: field.value }
-      })
+      // filter form values
+      // const filteredFields = form.fields.filter((field,idx)=> (field.type !== 'label'))
+      values
+         .filter((field, idx) => field.type !== 'label')
+         .map((field, i) => {
+            dataObject = { ...dataObject, [field.name]: field.value }
+         })
 
       try {
          const submittedData = await submitData(dataObject).unwrap()
@@ -207,7 +243,7 @@ function Form({
                      key={field.name}
                      inputHandler={inputHandler}
                      validationHandler={validationHandler}
-                     value={values[i].value}
+                     value={values[i]?.value}
                   />
                ))}
                {/* Sign Up Button */}

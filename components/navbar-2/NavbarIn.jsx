@@ -48,7 +48,8 @@ const loggedInMenu = [
 const NavbarIn = ({ className }) => {
    const dispatch = useDispatch()
    const { auth } = useSelector(state => state.auth)
-   const [open, setOpen] = useState(false)
+   const [ open, setOpen ] = useState( false )
+   
    const menuBackdrop = {
       initial: { opacity: 0 },
       animate: {

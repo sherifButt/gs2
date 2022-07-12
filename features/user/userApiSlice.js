@@ -4,17 +4,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
    endpoints: builder => ({
       loadUser: builder.query({
          query: () => {
-             console.log('--------')
-              return {
-                  url: '/Users/Me',
-            method: 'GET',  }
+            console.log('--------')
+            return {
+               url: '/Users/Me',
+               method: 'GET',
+            }
          },
-         providesTags: [ 'User' ],
-         invalidatesTags:['User']
+         providesTags: ['User'],
+         invalidatesTags: ['User'],
       }),
    }),
-} )
-
-
+})
 
 export const { useLoadUserQuery } = userApiSlice
