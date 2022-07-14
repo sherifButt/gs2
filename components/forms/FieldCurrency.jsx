@@ -108,7 +108,7 @@ const FieldCurrency = ({
                      name='currency'
                      className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-8 border-transparent bg-transparent text-gray-500  pt-1 rounded-md'>
                      {fieldData?.map((item, idx) => {
-                        return <option>{item.shortCode}</option>
+                        return <option key={item.id}>{item.shortCode}</option>
                      })}
                   </select>
                </div>

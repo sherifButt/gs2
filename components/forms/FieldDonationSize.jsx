@@ -1,11 +1,12 @@
 import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FieldText from './FieldText'
+import { nanoid } from '@reduxjs/toolkit'
 
 const defaultDonationSizes = [
    {
-      id: 1,
+      id: nanoid(),
       value: 5,
       currencyId: '',
       name: '',
@@ -14,7 +15,7 @@ const defaultDonationSizes = [
       charityId: '',
    },
    {
-      id: 2,
+      id: nanoid(),
       value: 10,
       currencyId: '',
       name: '',
@@ -23,7 +24,7 @@ const defaultDonationSizes = [
       charityId: '',
    },
    {
-      id: 3,
+      id: nanoid(),
       value: 20,
       currencyId: '',
       name: '',
@@ -32,7 +33,7 @@ const defaultDonationSizes = [
       charityId: '',
    },
    {
-      id: 4,
+      id: nanoid(),
       value: 50,
       currencyId: '',
       name: '',
@@ -41,7 +42,7 @@ const defaultDonationSizes = [
       charityId: '',
    },
    {
-      id: 5,
+      id: nanoid(),
       value: 100,
       currencyId: '',
       name: '',
@@ -50,7 +51,7 @@ const defaultDonationSizes = [
       charityId: '',
    },
    {
-      id: 6,
+      id: nanoid(),
       value: 200,
       currencyId: '',
       name: '',
@@ -105,41 +106,97 @@ const FieldDonationSize = ({
    const [_type, setType] = useState('button')
    const _inputHandler = e => {
       const _defaultDonationData = [...defaultDonationData]
-      _defaultDonationData[e.target.id].value = e.target.value
+      _defaultDonationData.map((item, idx) => {
+         if (item.id == e.target.id)
+            _defaultDonationData[idx].value = e.target.value
+      })
+      // _defaultDonationData[e.target.id].value = e.target.value
       setDefaultDonationData(_defaultDonationData)
-inputHandler({ target: _defaultDonationData })
    }
    const _validationHandler = e => {}
+
+   useEffect( () => {
+      console.log('defaultDonationData', defaultDonationData)
+      inputHandler({
+         target: {
+            selectedOptions: defaultDonationData,
+            name: 'defaultDonationSizes',
+            type: 'selectmultiple',
+         },
+      })
+   }, [defaultDonationData])
 
    return (
       <>
          {!hidden && (
             <div className='relative'>
-               <a
-                  className='py-4 text-sm cursor-pointer '
-                  onClick={() => {
-                     _type == 'button' ? setType('text') : setType('button')
-                  }}>
-                  {`${
-                     _type === 'text'
-                        ? '✓ Save Donation Sizes'
-                        : '✎ Edit Donation Sizes'
-                  }`}
-               </a>
+               <div className='flex flex-row justify-between py-4'  >
+                  <div>
+                     <a
+                        className='py-4 text-sm cursor-pointer '
+                        onClick={() => {
+                           _type == 'button'
+                              ? setType('number')
+                              : setType('button')
+                        }}>
+                        {`${
+                           _type === 'number'
+                              ? '✓ Save Donations'
+                              : '✎ Edit Donation Sizes'
+                        }`}
+                     </a>
+                     {                  _type==='number'&&
+                     <div>
+                        <a
+                           className=' text-sm cursor-pointer '
+                           onClick={() => {
+                              const _defaultDonationData = [...defaultDonationData]
+                              _defaultDonationData.push({
+                                 id: nanoid(),
+                                 value:
+                                    _defaultDonationData[
+                                       _defaultDonationData.length - 1
+                                    ].value * 2,
+                                 currencyId: '',
+                                 name: '',
+                                 description: '',
+                                 campaignId: '',
+                                 charityId: '',
+                              })
+                              setDefaultDonationData(_defaultDonationData)
+                           }}>
+                           + Add Button
+                        </a>
+                        <a
+                           className='ml-4  text-sm cursor-pointer '
+                           onClick={() => {
+                              const _defaultDonationData = [...defaultDonationData]
+                              _defaultDonationData.pop()
+                              setDefaultDonationData(_defaultDonationData)
+                           }}>
+                           - Remove Button
+                        </a>
+                     </div>
+                  }
+                  </div>
+
+               </div>
 
                <ul className=' grid grid-cols-2 gap-4 first:focus:border-gray-500'>
                   {defaultDonationData?.map((item, idx) => (
-                     <li>
+                     <li key={item.id}>
                         <FieldText
                            id={item.id}
-                           key={item.id}
+                           
                            value={item.value}
                            placeholder=''
+                           step={5}
+                           min={5}
                            autofocus
                            inputHandler={_inputHandler}
                            validationHandler={_validationHandler}
                            className={` ${
-                              _type == 'text'
+                              _type == 'number'
                                  ? 'bg-white font-normal '
                                  : 'bg-yellow-400 bg-button-texture bg-no-repeat bg-contain'
                            }  text-xl font-bold text-gray-600  bg-[left-10px]`}
