@@ -13,22 +13,7 @@ const validateInput = (e, inputIdx, values, setValues) => {
       _values[inputIdx].valid = ``
       setValues(_values)
    }
-   // 7. if slug required
-   if (e.target.type == 'slug') {
-      if (!values[inputIdx].value.match(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/)) {
-         _values[
-            inputIdx
-         ].error = `${e.target.placeholder} must be alphanumeric characters separated by a single -`
-         _values[inputIdx].valid = ``
-         setValues(_values)
-      }
-      if (values[inputIdx].value.match(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/)) {
-         _values[inputIdx].error = ``
-         _values[inputIdx].valid = `your ${e.target.name} is valid`
-         setValues(_values)
-      }
-   }
-   
+
    // 3. if field is an email.
    if (e.target.type == 'email') {
       if (
@@ -138,6 +123,21 @@ const validateInput = (e, inputIdx, values, setValues) => {
          setValues(_values)
       }
       if (e.target.value == values[PasswordFieldIndex].value) {
+         _values[inputIdx].error = ``
+         _values[inputIdx].valid = `your ${e.target.name} is valid`
+         setValues(_values)
+      }
+   }
+   // 7. if slug required
+   if (e.target.type == 'url') {
+      if (!values[inputIdx].value.match(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/)) {
+         _values[
+            inputIdx
+         ].error = `${e.target.placeholder} must be alphanumeric characters separated by a single -`
+         _values[inputIdx].valid = ``
+         setValues(_values)
+      }
+      if (values[inputIdx].value.match(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/)) {
          _values[inputIdx].error = ``
          _values[inputIdx].valid = `your ${e.target.name} is valid`
          setValues(_values)

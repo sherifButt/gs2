@@ -7,7 +7,11 @@ import FieldFileupload from './FieldFileupload'
 import FieldCurrency from './FieldCurrency'
 import FieldCombobox from './FieldCombobox'
 import FieldSelect from './FieldSelect'
-
+import FieldMultiSelect from './FieldMultiselect'
+import FieldDonationSize from './FieldDonationSize'
+// data queries
+import {useLoadCurrencyListQuery} from '../../features/currency/currencyApiSlice'
+import { useGetByQuickCodeQuery } from '../../features/campaign/campaignApiSlice'
 
 export const signin = {
    title: 'Sign in to Give Star',
@@ -447,7 +451,7 @@ export const createCampaign = {
          valid: '',
          title: 'The Charity Name.',
          placeholder: '+ Add Charity Name',
-         type: 'select',
+         type: 'selectmultiple',
          required: false,
          component: FieldCombobox,
          disabled: false,
@@ -525,14 +529,32 @@ export const createCampaign = {
          valid: '',
          title: 'Create your custome short url',
          placeholder: 'Create Costume URL',
-         type: 'slug',
+         type: 'url',
          rightText: 'https: //give-star.com/',
          rightTextPadding: 'pl-44',
          required: false,
          component: FieldText,
+         data: useGetByQuickCodeQuery,
+         disabled: false,
+         hidden: false,
+         usedSearch: false,
+      },
+      {
+         name: 'baseCurrencyId',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: 'Create your custome short url',
+         placeholder: 'Base Currency',
+         type: 'select',
+         data: useLoadCurrencyListQuery,
+         required: false,
+         component: FieldSelect,
          disabled: false,
          hidden: false,
       },
+
       {
          name: 'target',
          value: '',
@@ -545,7 +567,7 @@ export const createCampaign = {
          min: 100,
          step: 50,
          required: true,
-         component: FieldCurrency,
+         component: FieldText,
          disabled: false,
          hidden: false,
       },
@@ -560,22 +582,37 @@ export const createCampaign = {
          title: 'Your campaign description, this will help your supporters connect with your cause.',
          placeholder: 'Description ...',
          type: 'text',
-
          required: true,
          component: FieldTextarea,
          disabled: false,
          hidden: false,
          rows: 15,
       },
-      // {
-      //    forLabel: 'stravaCode',
-      //    text: 'STRAVA integration',
-      //    component: FieldLabel,
-      //    type: 'label',
-      //    required: false,
-      //    disabled: false,
-      //    hidden: false,
-      // },
+      {
+         forLabel: 'defaultDonationSizes',
+         text: 'Default Donation Sizes',
+         component: FieldLabel,
+         type: 'label',
+         required: false,
+         disabled: false,
+         hidden: false,
+      },
+      {
+         name: 'defaultDonationSizes',
+         value: '',
+         description: '',
+         error: '',
+         valid: '',
+         title: 'Your page where you will launch your campaign',
+         placeholder: 'defaultDonationSizes',
+         type: 'number',
+         min: 100,
+         step: 50,
+         required: true,
+         component: FieldDonationSize,
+         disabled: false,
+         hidden: false,
+      },
       // {
       //    name: 'stravaCode',
       //    value: '',

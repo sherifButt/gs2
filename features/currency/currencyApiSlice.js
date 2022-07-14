@@ -3,18 +3,17 @@ import { apiSlice } from '../../app/api/apiSlice'
 
 export const currencyApiSlice = apiSlice.injectEndpoints({
    endpoints: builder => ({
-      loadCurrencyList: builder.mutation({
-         query: currency => {
+      loadCurrencyList: builder.query({
+         query: () => {
             return {
                url: '/Currency/List',
-               method: 'POST',
-               body: { ...currency },
+               method: 'GET',
             }
          },
-        //  providesTags: ['Currency'],
-        //  invalidatesTags: ['Currency'],
+         providesTags: ['Currency'],
+         invalidatesTags: ['Currency'],
       }),
    }),
 })
 
-export const { useLoadCurrencyListMutation } = currencyApiSlice
+export const { useLoadCurrencyListQuery } = currencyApiSlice

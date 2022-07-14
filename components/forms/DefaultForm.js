@@ -57,9 +57,11 @@ function Form({
 
    // Handlers (event listeners)
    const inputHandler = e => {
-      const inputIdx = values.findIndex(input => input.name == e.target.name)
+      const inputIdx = values.findIndex( input => input.name == e.target.name )
+      
       const isCheckbox = e.target.type === 'checkbox'
       const isSelect = e.target.type === 'select'
+      const isSelectMultiple = e.target.type === 'selectmultiple'
       isSelect && console.log('e.target', e.target?.selectedOptions)
 
       console.log('e.target.type', e.target.type)
@@ -68,7 +70,10 @@ function Form({
       const isFile = e.target.type === 'file'
 
       const _values = [...values]
-      _values[inputIdx].value = isSelect
+      _values[ inputIdx ].value =
+         isSelect
+         ? e.target?.value
+         :isSelectMultiple
          ? [...e.target?.selectedOptions]
          : isCheckbox
          ? e.target.checked
