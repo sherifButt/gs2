@@ -282,7 +282,7 @@ const FieldCombobox = ({
                                  key={item.id}
                                  type='select'
                                  name='stuff'
-                                 selectedValues='fffff'
+                                 
                                  // value={item}
                                  onClick={e => {
                                     addItem(item)

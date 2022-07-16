@@ -117,13 +117,13 @@ const FieldDonationSize = ({
 
    useEffect( () => {
       console.log('defaultDonationData', defaultDonationData)
-      inputHandler({
-         target: {
-            selectedOptions: defaultDonationData,
-            name: 'defaultDonationSizes',
-            type: 'selectmultiple',
-         },
-      })
+      // inputHandler({
+      //    target: {
+      //       selectedOptions: defaultDonationData,
+      //       name: 'defaultDonationSizes',
+      //       type: 'selectmultiple',
+      //    },
+      // })
    }, [defaultDonationData])
 
    return (
@@ -197,9 +197,9 @@ const FieldDonationSize = ({
                            validationHandler={_validationHandler}
                            className={` ${
                               _type == 'number'
-                                 ? 'bg-white font-normal '
-                                 : 'bg-yellow-400 bg-button-texture bg-no-repeat bg-contain'
-                           }  text-xl font-bold text-gray-600  bg-[left-10px]`}
+                                 ? 'bg-white font-normal text-center'
+                                 : 'bg-neutral-400 bg-button-texture- bg-no-repeat bg-contain'
+                           }  text-xl font-bold text-gray-900 px-0`}
                            type={_type}
                         />
                      </li>
