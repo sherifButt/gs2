@@ -4,7 +4,7 @@ import CampaignProfileImage from '../../../components/alerts/CampaignProfileImag
 import StatsBox from '../../../components/stats/StatsBox'
 
 
-const index = () => {
+const Campaign = () => {
     const router = useRouter()
     console.log('router.query.id', router.query.id)
   return (
@@ -28,5 +28,5 @@ const index = () => {
      </div>
   )
 }
-index.layout='L1'
-export default index
+Campaign.layout='L1'
+export default Campaign
