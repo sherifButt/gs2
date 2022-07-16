@@ -4,8 +4,8 @@ const CampaignProfileImage = () => {
   return (
      <div>
         {' '}
-        <div class='flex flex-row justify-between gap-2 items-center w-full mx-auto'>
-           <div class='bg-gray-200 rounded-xl overflow-hidden mx-auto border-4 border-white'>
+        <div className='flex flex-row justify-between gap-2 items-center w-full mx-auto'>
+           <div className='bg-gray-200 rounded-xl overflow-hidden mx-auto border-4 border-white'>
               <div className=''>
                  <img
                     className=' w-40 '

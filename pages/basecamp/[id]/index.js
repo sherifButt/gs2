@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import CampaignProfileImage from '../../../components/alerts/CampaignProfileImage'
+import CampaignProfileImage from '../../../components/avatar/CampaignProfileImage'
 import StatsBox from '../../../components/stats/StatsBox'
 
 
