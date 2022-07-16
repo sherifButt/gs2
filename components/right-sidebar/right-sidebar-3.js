@@ -31,8 +31,7 @@ const RightSidebar = props => {
 
                {/* /Call To Action */}
                <div className='  flex-col justify-between  hidden md:block'>
-                  <PostLastUpdate />
-                  <PostLastUpdate />
+                  {/* <PostLastUpdate /> */}
                </div>
             </div>
             {/* Moving footer */}
