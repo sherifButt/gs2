@@ -2,7 +2,7 @@ import React from 'react'
 import ButtonPrimary from '../buttons/ButtonPrimary'
 import PostLastUpdate from '../PostLastUpdate1'
 import VerticalMenu from '../v-menu-1'
-import Event from './Event'
+import Event from '../cards/EventSimpleCard'
 import { useRouter } from 'next/router'
 const RightSidebar = props => {
    const router = useRouter()

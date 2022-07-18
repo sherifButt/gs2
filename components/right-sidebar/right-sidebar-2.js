@@ -1,7 +1,7 @@
 import React from 'react'
 import PostLastUpdate from '../PostLastUpdate1'
 import VerticalMenu from '../v-menu-1'
-import Event from './Event'
+import Event from '../cards/EventSimpleCard'
 const RightSidebar = props => {
    return (
       <aside {...props}>

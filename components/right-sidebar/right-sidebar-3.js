@@ -3,7 +3,7 @@ import React from 'react'
 import ButtonPrimary from '../buttons/ButtonPrimary'
 import PostLastUpdate from '../PostLastUpdate1'
 import VerticalMenu from '../v-menu-1'
-import Event from './Event'
+import Event from '../cards/EventSimpleCard'
 const RightSidebar = props => {
    const router = useRouter()
    return (
@@ -14,20 +14,6 @@ const RightSidebar = props => {
             <div className='w-full'>
                {/* Call To Action */}
                {/* <div>RightSidebars call to action</div> */}
-               <ButtonPrimary
-                  text='GIVE NOW'
-                  className='lg:mb-4 w-full bg-orange-400 text-white font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg '
-                  actionHandler={() => {
-                     router.push('/basecamp/giv-now')
-                  }}
-               />
-               <ButtonPrimary
-                  text='REGISTER'
-                  className='lg:mb-4 w-full font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg '
-                  actionHandler={() => {
-                     router.push('/basecamp/giv-now')
-                  }}
-               />
 
                {/* /Call To Action */}
                <div className='  flex-col justify-between  hidden md:block'>
@@ -37,6 +23,20 @@ const RightSidebar = props => {
             {/* Moving footer */}
             <div className='sticky top-28 hidden md:block -z-10'>
                {/* <PostLastUpdate /> */}
+               <ButtonPrimary
+                  text='GIVE NOW'
+                  className='lg:mb-4 w-full bg-orange-400 text-white font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
+                  actionHandler={() => {
+                     router.push('/basecamp/giv-now')
+                  }}
+               />
+               <ButtonPrimary
+                  text='REGISTER'
+                  className='lg:mb-4 w-full font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
+                  actionHandler={() => {
+                     router.push('/basecamp/giv-now')
+                  }}
+               />
                <Event />
             </div>
             {/* /Moving footer */}
