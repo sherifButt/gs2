@@ -1,9 +1,8 @@
 import React from 'react'
 
-const FundProgress = () => {
+const Thermometer = () => {
   return (
      <div>
-        {' '}
         <div class='flex flex-col gap-3.5 justify-center items-center max-w-[32.11rem] mx-auto'>
            <div class='flex flex-row justify-between items-center w-full'>
               <p class='block text-[2.13rem] text-neutral-400  font-light'>
@@ -24,4 +23,4 @@ const FundProgress = () => {
   )
 }
 
-export default FundProgress
+export default Thermometer

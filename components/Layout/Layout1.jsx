@@ -19,13 +19,13 @@ const Layout = ({ children, rightSidebar, leftSidebar, footer }) => {
             style={{
                backgroundImage: `url(${bg.src})`,
             }}
-            className='mx-auto max-auto flex grow bg-cover bg-center lg:bg-fixed pt-20 w-full h-60 lg:h-96 bg-yellow-50 '></div>
+            className='mx-auto max-auto flex grow bg-cover bg-center lg:bg-fixed pt-20 w-full h-80 lg:h-96 bg-yellow-50 '></div>
          <div className='md:container mx-auto max-auto flex grow '>
             <div className=' flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl '>
                <_LeftSidebar className='w-80 pt-20  xs:w-88 xl:w-96 hidden lg:block  -mt-20 h-screen mb-auto   sticky top-0' />
 
                {/* Middle */}
-               <div className='w-full sm:w-600 -mt-32   order-3 md:order-none mb-12'>
+               <div className='w-full sm:w-600 -mt-28   order-3 md:order-none mb-12'>
                   <main className='flex flex-col order-1 md:mt-8 px-4'>
                      {children}
                   </main>

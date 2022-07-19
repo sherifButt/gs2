@@ -20,7 +20,7 @@ const Layout = ({ children, rightSidebar, leftSidebar, footer }) => {
                <_LeftSidebar className='w-80 pt-20  xs:w-88 xl:w-96 hidden lg:block  -mt-20 h-screen mb-auto   sticky top-0' />
 
                {/* Middle */}
-               <div className='w-full sm:w-600   order-3 md:order-none '>
+               <div className='w-full sm:w-600   order-3 md:order-none  mb-12'>
                   <main className='flex flex-col order-1 md:mt-8 '>
                      {children}
                   </main>

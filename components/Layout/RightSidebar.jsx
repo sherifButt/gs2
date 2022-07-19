@@ -1,5 +1,5 @@
 import React from 'react'
-import PostLastUpdate from '../PostLastUpdate1'
+import PostLastUpdate from '../cards/PostLastUpdate1'
 
 const RightSidebar = props => {
    return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import PostLastUpdate from '../../components/PostLastUpdate1'
+import PostLastUpdate from '../../components/cards/PostLastUpdate1'
 import RightSidebar from '../../components/right-sidebar/right-sidebar-1'
 import HomePage from '../../components/Home'
 const Discover = () => {

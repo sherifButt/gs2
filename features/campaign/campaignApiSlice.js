@@ -21,8 +21,22 @@ export const campaignApiSlice = apiSlice.injectEndpoints({
                params: { quickCode },
             }
          }
+      }),
+      get: builder.query( {
+         query: arg => {
+            const { query: id, includeTotals } = arg
+            return {
+               url: `/Campaign/get`,
+               method: 'GET',
+               params: { id,includeTotals },
+            }
+         }
       })
    }),
 })
 
-export const { useCreateCampaignMutation,useGetByQuickCodeQuery } = campaignApiSlice
+export const {
+   useCreateCampaignMutation,
+   useGetByQuickCodeQuery,
+   useGetQuery,
+} = campaignApiSlice

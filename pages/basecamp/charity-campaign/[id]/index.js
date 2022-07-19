@@ -1,9 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import CampaignProfileImage from '../../../components/avatar/CampaignProfileImage'
-import StatsBox from '../../../components/stats/StatsBox'
-import FundProgress from '../../../components/stats/FundProgress'
-import SimpleCard from '../../../components/cards/SimpleCard'
+import CampaignProfileImage from '../../../../components/avatar/CampaignProfileImage'
+import StatsBox from '../../../../components/stats/StatsBox'
+import FundProgress from '../../../../components/stats/Thermometer'
+import SimpleCard from '../../../../components/cards/SimpleCard'
 
 const Campaign = () => {
    const router = useRouter()
@@ -22,7 +22,7 @@ const Campaign = () => {
          <SimpleCard
             title='Take Part'
             subTitle=''
-            cta={{ text: 'REGISTER', className: 'bg-gray-500 text-white' }}
+            cta={{ text: 'REGISTER', className: 'bg-neutral-500 text-white' }}
             className='bg-white p-4 rounded-xl'
          />
       </div>
