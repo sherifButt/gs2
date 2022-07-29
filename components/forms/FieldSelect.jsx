@@ -1,5 +1,5 @@
-import { ExclamationCircleIcon,CheckCircleIcon } from '@heroicons/react/solid'
-import React, { useEffect } from 'react'
+import { ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
+import React, { useEffect, useState } from 'react'
 
 const FieldText = ({
    id,
@@ -22,10 +22,15 @@ const FieldText = ({
    values,
    inputHandler,
    validationHandler,
-   data = () => ({ data :null, isLoading:null, isSuccess:null, isError:null,error:null}),
-} ) => {
-
-
+   className,
+   data = () => ({
+      data: null,
+      isLoading: null,
+      isSuccess: null,
+      isError: null,
+      error: null,
+   }),
+}) => {
    const {
       data: fieldData,
       isLoading: fieldIsLoading,
@@ -34,14 +39,23 @@ const FieldText = ({
       isError: fieldIsError,
    } = data()
 
-   useEffect( () => {
+   const [_fieldData, setFieldData] = useState ([
+      {
+         id: '9d6494c0-e364-43f0-b76c-52251df71133',
+         name: 'British Pound',
+         displaySymbol: '£',
+         shortCode: 'GBP',
+      },
+   ])
 
-      if(fieldData)inputHandler({ target: { type, value:fieldData[0]?.id, name } })
-   }, [ fieldData ] )
+   useEffect(() => {
+      if (fieldData)
+         inputHandler({ target: { type, value: fieldData[0]?.id, name } })
+   }, [fieldData])
    return (
       <>
          {!hidden && (
-            <div className='relative'>
+            <div className={`relative ${className}`}>
                <select
                   type='text'
                   name={name}
@@ -58,7 +72,11 @@ const FieldText = ({
                   value={value}
                   onClick={inputHandler}
                   onBlur={validationHandler}>
-                  { fieldData?.map( ( item, idx ) => <option key={item.shortCode} value={item.id} >{ item.shortCode}</option>)}
+                  {fieldData?.map((item, idx) => (
+                     <option key={item.shortCode} value={item.id}>
+                        {item.shortCode}
+                     </option>
+                  ))}
                </select>
 
                <label

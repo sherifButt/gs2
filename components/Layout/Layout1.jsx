@@ -6,11 +6,19 @@ import LeftSidebar from '../left-sidebar/left-sidebar-1'
 import RightSidebar from '../right-sidebar/right-sidebar-3'
 import bg from '../../public/assets/images/Pattern-fill.jpg'
 
-const Layout = ({ children, rightSidebar, leftSidebar, footer }) => {
+const Layout = ({
+   children,
+   rightSidebar,
+   leftSidebar,
+   footer,
+   bannerImagePath,
+}) => {
    // 3 vertical columns middle infinity scroll for (posts/comments/campaigns)
    const _RightSidebar = rightSidebar || RightSidebar
    const _LeftSidebar = leftSidebar || LeftSidebar
    const _Footer = footer || Footer
+
+   console.log('bannerImagePath', bannerImagePath)
    return (
       <div className='relative bg-gray-100 flex flex-col grow z-0'>
          <Header />

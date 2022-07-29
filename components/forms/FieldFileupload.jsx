@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { nanoid } from '@reduxjs/toolkit'
+import { useUploadFileMutation } from '../../features/upload/uploadApiSlice'
 
 const FieldFileupload = ({
    id,
@@ -9,6 +11,7 @@ const FieldFileupload = ({
    valid,
    value,
    title,
+   mediaType,
    disabled,
    hidden,
    label,
@@ -17,23 +20,43 @@ const FieldFileupload = ({
    values,
    inputHandler,
    validationHandler,
-}) => {
-   const [selectedFile, setSelectedFile] = useState()
-   const [fileUrl, setFileUrl] = useState()
+} ) => {
+   const [ uploadFile,{data,isError,isLoading,isSuccess} ] = useUploadFileMutation()
+   const [ selectedFile, setSelectedFile ] = useState()
+   const [selectedFileDat,setSelectedFileData]= useState()
+   const [ selectedFileName, setSelectedFileName ] = useState()
+   
+   const [ fileUrl, setFileUrl ] = useState()
+   
    const [preview, setPreview] = useState()
    // create a preview as a side effect, whenever selected file is changed
    useEffect(() => {
       //   return () => URL.revokeObjectURL(objectUrl)
-   }, [selectedFile, value])
-   const onSelectFile = e => {
+   }, [ selectedFile, value ] )
+   
+   const onSelectFile = async e => {
       if (!e.target.files || e.target.files.length === 0) {
          setSelectedFile(undefined)
          return
       }
 
       // I've kept this example simple by using the first image instead of multiple
-      setSelectedFile(e.target.files[0])
-      setFileUrl(URL.createObjectURL(e.target.files[0]))
+      setSelectedFile( e.target.files[ 0 ] )
+      setSelectedFileName(e.target.files[0].name)
+      setFileUrl( URL.createObjectURL( e.target.files[ 0 ] ) )
+      
+      const fileData = new FormData()
+      fileData.append('file', e.target.files[0],e.target.files[0].name)
+
+      console.log( 'fileData', fileData )
+      
+      const ss = {
+         file: fileData,
+         mediaType,
+         entityId: '31e15467-b7eb-4056-a61d-a350a10619ae',
+      }
+      const uploadFileData = await uploadFile(ss).unwrap()
+      console.log('uploadFileData', uploadFileData)
    }
    return (
       <div className='flex justify-center items-center w-full'>

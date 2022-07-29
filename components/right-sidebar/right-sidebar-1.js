@@ -29,7 +29,7 @@ const RightSidebar = props => {
             {/* Fixed footer */}
             <div className='sticky top-28 hidden md:block -z-10'>
 
-            <Event />
+            {/* <Event /> */}
             {/* <PostLastUpdate /> */}
             </div>
             {/* /Fixed footer */}

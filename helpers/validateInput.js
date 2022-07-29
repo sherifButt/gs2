@@ -43,15 +43,15 @@ const validateInput = (e, inputIdx, values, setValues) => {
       e.target.type == 'text' &&
       e.target.name.toUpperCase() != 'FullName'.toUpperCase()
    ) {
-      if (!values[inputIdx].value.match(/^[A-Za-z0-9]{3,16}$/)) {
+      if (!values[inputIdx].value.match(/^[A-Za-z0-9 ]{3,50}$/)) {
          _values[
             inputIdx
-         ].error = `${e.target.placeholder} should be 3-16 characters and shouldn't include any special character!`
+         ].error = `${e.target.placeholder} should be 3-50 characters including space, and shouldn't include any special character!`
          _values[inputIdx].valid = ``
          setValues(_values)
          return
       }
-      if (values[inputIdx].value.match(/^[A-Za-z0-9]{3,16}$/)) {
+      if (values[inputIdx].value.match(/^[A-Za-z0-9 ]{3,50}$/)) {
          _values[inputIdx].error = ``
          _values[inputIdx].valid = `your ${e.target.name} is valid`
          setValues(_values)
@@ -143,6 +143,34 @@ const validateInput = (e, inputIdx, values, setValues) => {
          setValues(_values)
       }
    }
+   // 8. if field is a Full Name text.
+   // if (
+   //    e.target.type == 'text' &&
+   //    e.target.name.toUpperCase() == 'FullName'.toUpperCase()
+   // ) {
+   //    if (
+   //       !values[inputIdx].value.match(
+   //          /^[A-Za-z]{3,16}([-']?[A-Za-z]+)*( [A-Za-z]{3,16}([-']?[A-Za-z]+)*)+$/
+   //       )
+   //    ) {
+   //       _values[
+   //          inputIdx
+   //       ].error = `${e.target.placeholder} should contain a First name and a Last Name and each should be 3-16 characters and shouldn't include any special character!`
+   //       _values[inputIdx].valid = ``
+   //       setValues(_values)
+   //       return
+   //    }
+   //    if (
+   //       values[inputIdx].value.match(
+   //          /^[A-Za-z]{3,16}([-']?[A-Za-z]+)*( [A-Za-z]{3,16}([-']?[A-Za-z]+)*)+$/
+   //       )
+   //    ) {
+   //       _values[inputIdx].error = ``
+   //       _values[inputIdx].valid = `your ${e.target.name} is valid`
+   //       setValues(_values)
+   //       return
+   //    }
+   // }
 }
 
 export default validateInput

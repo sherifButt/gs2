@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { store, persistor } from '../app/store'
 import { Provider } from 'react-redux'
+import { wrapper } from '../app/store'
 // persist
 import { PersistGate } from 'redux-persist/integration/react'
 
@@ -45,20 +46,22 @@ function MyApp({ Component, pageProps }) {
          <Layout
             rightSidebar={Component.rightSidebar}
             leftSidebar={Component.leftSidebar}
-            footer={Component.footer}>
+            footer={Component.footer}
+            bannerImagePath={Component.bannerImagePath}>
             {/* <PersistGate persistor={persistor}> */}
-               <Portal>
-                  <Notifications />
-                  <ModalSignupForm />
-                  <ModalSigninForm />
-                  <ModalRestorePasswordForm />
-               </Portal>
+            <Portal>
+               <Notifications />
+               <ModalSignupForm />
+               <ModalSigninForm />
+               <ModalRestorePasswordForm />
+            </Portal>
 
-               <Component {...pageProps} />
+            <Component {...pageProps} />
             {/* </PersistGate> */}
          </Layout>
       </Provider>
    )
 }
 
-export default MyApp
+// export default MyApp
+export default wrapper.withRedux(MyApp)

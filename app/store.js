@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
+// import { setupListeners } from '@reduxjs/toolkit/query'
+import { HYDRATE, createWrapper } from 'next-redux-wrapper'
 import {
    persistStore,
    persistReducer,
@@ -41,14 +43,22 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
    reducer: rootReducer,
+   
    middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
          serializableCheck: {
             /* ignore persistance actions */
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            ignoredActions: [ FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER ],
+            
          },
-      }).concat(apiSlice.middleware),
+      } ).concat( apiSlice.middleware ),
+   
    devTools: true,
+   
 })
 
-export let persistor = persistStore(store)
+// setupListeners(store.dispatch())
+
+const initStore = ()=>{return store}
+export let persistor = persistStore( store )
+export const wrapper = createWrapper(initStore)

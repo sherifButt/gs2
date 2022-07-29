@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ExclamationCircleIcon } from '@heroicons/react/solid'
 import React from 'react'
 
-const FieldCheckbox = ({
+const FieldCheckbox = ( {
    id,
    name,
    type,
@@ -20,9 +20,10 @@ const FieldCheckbox = ({
    validationHandler,
    href,
    terms,
-}) => {
+   className,
+} ) => {
    return (
-      <div>
+      <div className={`${className}`}>
          <div className='flex  items-center justify-between relative'>
             <input
                id={name}
@@ -55,12 +56,12 @@ const FieldCheckbox = ({
 }
 FieldCheckbox.defaultProps = {
    id: 1,
-   name: 'FirstName',
+   name: 'checkbox',
    value: '',
    error: '',
    valid: '',
-   placeholder: 'First Name',
-   type: 'text',
+   placeholder: 'Write a message ...',
+   type: 'checkbox',
    required: true,
    disabled: false,
    hidden: false,

@@ -1,7 +1,13 @@
 import React from 'react'
 
-const FieldLabel = ({ forLabel,text }) => {
-    return <label className="text-2xl font-semibold" htmlFor={ forLabel }>{ text}</label>
+const FieldLabel = ({ forLabel, text, className }) => {
+   return (
+      <label
+         className={`text-2xl font-semibold ${className}`}
+         htmlFor={forLabel}>
+         {text}
+      </label>
+   )
 }
 
 export default FieldLabel

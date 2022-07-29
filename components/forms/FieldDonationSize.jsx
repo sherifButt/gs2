@@ -117,13 +117,13 @@ const FieldDonationSize = ({
 
    useEffect( () => {
       console.log('defaultDonationData', defaultDonationData)
-      // inputHandler({
-      //    target: {
-      //       selectedOptions: defaultDonationData,
-      //       name: 'defaultDonationSizes',
-      //       type: 'selectmultiple',
-      //    },
-      // })
+      inputHandler({
+         target: {
+            selectedOptions: defaultDonationData,
+            name: 'defaultDonationSizes',
+            type: 'selectmultiple',
+         },
+      })
    }, [defaultDonationData])
 
    return (
@@ -184,7 +184,7 @@ const FieldDonationSize = ({
 
                <ul className=' grid grid-cols-2 gap-4 first:focus:border-gray-500'>
                   {defaultDonationData?.map((item, idx) => (
-                     <li key={item.id}>
+                     <li key={item.id+item.name}>
                         <FieldText
                            id={item.id}
                            

@@ -17,14 +17,14 @@ const RightSidebar = props => {
                <div className=' fixed top-20 lg:hidden shadow-xl w-full flex flex-row pt-1 rounded-b-xl pb-3 px-3 gap-2 bg-yellow-400'>
                   <ButtonPrimary
                      text='GIVE NOW'
-                     className='lg:mb-4 w-full bg-orange-400 text-white   font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-md py-3'
+                     className='lg:mb-4 w-full bg-orange-400 text-white   font-thin lg:min-w-64 bg-no-repeat bg-contain bg-[left-20px] text-md py-3'
                      actionHandler={() => {
-                        router.push('/basecamp/giv-now')
+                        router.push('/payment')
                      }}
                   />
                   <ButtonPrimary
                      text='FUNDRAISE'
-                     className='lg:mb-4 w-full bg-neutral-600 text-white   font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-md py-3'
+                     className='lg:mb-4 w-full bg-neutral-600 text-white   font-thin lg:min-w-64 bg-no-repeat bg-contain bg-[left-20px] text-md py-3'
                      actionHandler={() => {
                         router.push('/basecamp/giv-now')
                      }}
@@ -36,15 +36,17 @@ const RightSidebar = props => {
                </div>
             </div>
             {/* Moving footer */}
-            <div className='sticky top-28 hidden md:block -z-10'>
+            <div className='sticky top-28 hidden md:block z-10'>
                {/* <PostLastUpdate /> */}
-               <ButtonPrimary
-                  text='GIVE NOW'
-                  className='lg:mb-4 w-full bg-orange-400 text-white font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
-                  actionHandler={() => {
-                     router.push('/basecamp/giv-now')
-                  }}
-               />
+               
+                  <ButtonPrimary
+                     text='GIVE NOW'
+                     className='lg:mb-4 w-full bg-orange-400 text-white font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
+                     actionHandler={() => {
+                        router.push('/payment')
+                     }}
+                  />
+               
                <ButtonPrimary
                   text='FUNDRAISE'
                   className='lg:mb-4 w-full font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'

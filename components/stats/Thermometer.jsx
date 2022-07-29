@@ -1,26 +1,41 @@
 import React from 'react'
 
-const Thermometer = () => {
+const Thermometer = ( { current, max, currency, text,small } ) => {
+   
   return (
      <div>
-        <div class='flex flex-col gap-3.5 justify-center items-center max-w-[32.11rem] mx-auto'>
-           <div class='flex flex-row justify-between items-center w-full'>
-              <p class='block text-[2.13rem] text-neutral-400  font-light'>
-                 £7,250
+        <div
+           className={`flex flex-col gap-3.5 justify-center items-center max-w-[32.11rem] mx-auto`}>
+           <div
+              className={`flex ${
+                 small ? 'flex-col' : 'flex-row items-center '
+              } justify-between w-full`}>
+              <p className='block text-2xl text-army-500  font-light'>
+                 {currency}{current}
               </p>
-              <p class='block text-[1.31rem] text-gray-600  font-light'>
-                 raised of £15,000
+              <p
+                 className={`block ${
+                    small ? 'text-md' : 'text-2xl'
+                 } text-gray-600  font-light`}>
+                 {text} {currency}{max}
               </p>
            </div>
-           <div class='flex flex-col justify-center items-center w-full'>
-                  <div className="w-full h-2 rounded bg-neutral-200">
-                      <div style={ { width: '45%'}} className="h-2 rounded bg-army-500"></div>
+           <div className={`flex flex-col justify-center items-center w-full`}>
+              <div className='w-full h-2 rounded bg-neutral-200'>
+                 <div
+                    style={{ width: `${(current / max) * 100}%` }}
+                    className='h-2 rounded bg-army-500'></div>
               </div>
-              
            </div>
         </div>
      </div>
   )
+}
+Thermometer.defaultProps = {
+   current: '7500',
+   text:'raised of',
+   max: '14000',
+   currency:'£'
 }
 
 export default Thermometer

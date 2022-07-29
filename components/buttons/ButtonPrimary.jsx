@@ -19,7 +19,7 @@ const ButtonPrimary = ({
          <button
             disabled={isLoading}
             onClick={actionHandler}
-            className={`inline-flex justify-center items-center w-full py-4 ${
+            className={`inline-flex justify-center items-center w-full py-3 ${
                isLoading
                   ? `${bgColor} shadow-none text-white`
                   : `bg-yellow-400 hover:scale-105 active:scale-100 hover:shadow-md ${textColor}`

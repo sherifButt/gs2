@@ -12,7 +12,8 @@ const Navbar = ( { className } ) => {
    const dispatch = useDispatch()
    const {data} =  useLoadUserQuery()
    
-   const { token } = useSelector(selectCurrentAuth)
+   const { token } = useSelector( selectCurrentAuth )
+   
    useEffect(() => {
       // loadUser()
       dispatch( setUser( data ) )

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNotification } from '../../features/notificationSlice'
 import { selectCurrentUser } from '../../features/user/userSlice'
+import { nanoid } from '@reduxjs/toolkit'
 
 // components
 import ButtonPrimary from '../buttons/ButtonPrimary'

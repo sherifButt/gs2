@@ -131,8 +131,19 @@ const FieldCombobox = ({
 
    useEffect(() => {
       // console.log('selectedOptions', selectedOptions)
+      const opt = [...selectedOptions]
+      let _selectedOption = opt?.map((option, idx) => {
+         return {
+            id: option.id,
+            charityId: option.id,
+            donationSplit: option.donationSplit,
+         }
+      })
 
-      let e = { target: { selectedOptions, type, name } }
+      console.log('_selectedOptions--->', _selectedOption)
+
+      let e = { target: { selectedOptions: _selectedOption, type, name } }
+
       inputHandler(e)
    }, [selectedOptions])
 
@@ -199,7 +210,7 @@ const FieldCombobox = ({
             <div className='relative'>
                <ul className='flex flex-col gap-4 py-4 divide-y-2'>
                   {selectedOptions.map((item, i) => (
-                     <li key={item.name} className=''>
+                     <li key={item.name + '_' + i} className=''>
                         <FieldComboboxSelectedItems
                            idx={i}
                            edited={item.edited}
@@ -282,7 +293,6 @@ const FieldCombobox = ({
                                  key={item.id}
                                  type='select'
                                  name='stuff'
-                                 
                                  // value={item}
                                  onClick={e => {
                                     addItem(item)

@@ -10,6 +10,7 @@ export const currencyApiSlice = apiSlice.injectEndpoints({
                method: 'GET',
             }
          },
+
          providesTags: ['Currency'],
          invalidatesTags: ['Currency'],
       }),

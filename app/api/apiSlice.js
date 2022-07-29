@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logOut } from '../../features/auth/authSlice'
-import { REHYDRATE } from 'redux-persist'
-
+// import { REHYDRATE } from 'redux-persist'
+import { HYDRATE } from 'next-redux-wrapper'
 const baseQuery = fetchBaseQuery({
    baseUrl: process.env.baseUrl,
    // send cookie
@@ -18,7 +18,7 @@ const baseQuery = fetchBaseQuery({
       return headers
    },
    extractRehydrationInfo(action, { reducerPath }) {
-      if (action.type === REHYDRATE) {
+      if (action.type === REHYDRATE || action.type === HYDRATE) {
          return action.payload[reducerPath]
       }
    },

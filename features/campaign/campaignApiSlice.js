@@ -11,8 +11,10 @@ export const campaignApiSlice = apiSlice.injectEndpoints({
                body: { ...campaign },
             }
          },
+         providesTags: ['Campaign'],
+         invalidatesTags: ['Campaign'],
       }),
-      getByQuickCode: builder.query( {
+      getByQuickCode: builder.query({
          query: arg => {
             const { query: quickCode } = arg
             return {
@@ -20,18 +22,30 @@ export const campaignApiSlice = apiSlice.injectEndpoints({
                method: 'GET',
                params: { quickCode },
             }
-         }
+         },
+         providesTags: ['Campaign'],
+         invalidatesTags: ['Campaign'],
       }),
-      get: builder.query( {
+      get: builder.query({
          query: arg => {
             const { query: id, includeTotals } = arg
             return {
                url: `/Campaign/get`,
                method: 'GET',
-               params: { id,includeTotals },
+               params: { id, includeTotals },
             }
-         }
-      })
+         },
+         providesTags: ['Campaign'],
+         invalidatesTags: ['Campaign'],
+      }),
+
+      getMyList: builder.query({
+         query: () => `/Campaign/MyList`,
+         transformResponse: response =>
+            response.sort((a, b) => new Date(b.created) - new Date(a.created)),
+         providesTags: ['Campaign'],
+         invalidatesTags: ['Campaign'],
+      }),
    }),
 })
 
@@ -39,4 +53,5 @@ export const {
    useCreateCampaignMutation,
    useGetByQuickCodeQuery,
    useGetQuery,
+   useGetMyListQuery,
 } = campaignApiSlice

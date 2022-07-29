@@ -19,11 +19,12 @@ const FieldText = ({
    rows,
    inputHandler,
    validationHandler,
+   className,
 }) => {
    return (
       <>
          {!hidden && (
-            <div className='relative'>
+            <div className={`relative ${className}`}>
                <textarea
                   type={type}
                   name={name}
@@ -83,12 +84,12 @@ const FieldText = ({
    )
 }
 FieldText.defaultProps = {
-   name: 'FirstName',
+   name: 'textarea',
    value: '',
    error: '',
    valid: '',
-   placeholder: 'First Name',
-   type: 'text',
+   placeholder: 'Write a message of support.',
+   type: 'textarea',
    required: true,
    disabled: false,
    hidden: false,
