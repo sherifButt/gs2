@@ -10,7 +10,7 @@ import FieldLabel from '../../components/forms/FieldLabel'
 import { useLoadCurrencyListQuery } from '../../features/currency/currencyApiSlice'
 import ButtonPrimary from '../../components/buttons/ButtonPrimary'
 
-const index = () => {
+const Index = () => {
    const [page, setPage] = useState(0)
    const [donationAmount, setDonationAmount] = useState()
    return (
@@ -179,5 +179,5 @@ const index = () => {
       </div>
    )
 }
-index.layout = 'L2'
-export default index
+Index.layout = 'L2'
+export default Index

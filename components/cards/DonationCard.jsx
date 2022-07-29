@@ -22,12 +22,12 @@ const PostLastUpdate = ({ data },{...props}) => {
                   <p className='block text-neutral-500 '>1 day</p>
                   <p className='block  text-black '>{_data?.donatorMessage}</p>
                </div>
-               <div class='max-w-[8rem] mx-auto w-full'>
-                  <p class='block text-right text-[1.56rem] text-army-500  font-light'>
+               <div className='max-w-[8rem] mx-auto w-full'>
+                  <p className='block text-right text-[1.56rem] text-army-500  font-light'>
                      {_data?.donationCurrencySymbol}
                      {_data?.donationValue}
                   </p>
-                  <p class='block text-right text-neutral-500  font-light '>
+                  <p className='block text-right text-neutral-500  font-light '>
                      +{_data?.donationCurrencySymbol}
                      {_data?.giftAidValue} GiftAid
                   </p>
