@@ -18,7 +18,7 @@ const Index = () => {
          <div className='flex flex-col gap-3 justify-start items-center py-2'>
             <div>
                <p className='block text-center text-xl text-stone-800  font-bold'>
-                  Donate to Alex’s Big Run
+                  Donate to Alex&apos;s Big Run
                </p>
                <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
                   Fundraising on behalf of:
@@ -31,7 +31,7 @@ const Index = () => {
                      src='/assets/images/giveStar_stock_Image.jpg'
                   />
                   <p className='block w-[3.13rem]   text-center text-xs text-stone-800  font-medium'>
-                     Parkinson’s UK
+                     Parkinson&apos;s UK
                   </p>
                </div>
                <div className='flex flex-col gap-1.5 justify-center items-center'>
@@ -58,7 +58,7 @@ const Index = () => {
                      src='/assets/images/giveStar_stock_Image.jpg'
                   />
                   <p className='block w-[3.13rem]   text-center text-xs text-stone-800  font-medium'>
-                     Royal Marsden Cancer Charity
+                     Royal Marshes Cancer Charity
                   </p>
                </div>
             </div>
@@ -95,7 +95,7 @@ const Index = () => {
                <div>
                   <div>
                      <p className='block text-center text-xl text-stone-800  font-bold py-4'>
-                        We don't charge charities fees
+                        We don&apos;t charge charities fees
                      </p>
                      <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
                         GiveStar has a 0% platform fee on donations like these.
@@ -141,25 +141,24 @@ const Index = () => {
                      </p>
                   </div>
                </div>
-               
-                  <div className='flex flex-row justify-between gap-4'>
-                      <ButtonPrimary
-                         className='w-32'
-                         text='Yes'
-                         actionHandler={() => {
-                            setPage(3)
-                         }}
-                      />
-                      <ButtonPrimary
-                           className='w-32 '
-                           bgColor='bg-white'
-                         text='No'
-                         actionHandler={() => {
-                            setPage(4)
-                         }}
-                      />
-                  </div>
-               
+
+               <div className='flex flex-row justify-between gap-4'>
+                  <ButtonPrimary
+                     className='w-32'
+                     text='Yes'
+                     actionHandler={() => {
+                        setPage(3)
+                     }}
+                  />
+                  <ButtonPrimary
+                     className='w-32 '
+                     bgColor='bg-white'
+                     text='No'
+                     actionHandler={() => {
+                        setPage(4)
+                     }}
+                  />
+               </div>
             </div>
          )}
          {page != 2 && (
