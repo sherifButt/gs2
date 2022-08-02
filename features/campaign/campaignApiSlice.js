@@ -48,10 +48,14 @@ export const campaignApiSlice = apiSlice.injectEndpoints({
       }),
    }),
 })
-
+// Export hooks for usage in functional components
 export const {
    useCreateCampaignMutation,
    useGetByQuickCodeQuery,
    useGetQuery,
    useGetMyListQuery,
+   util: { getRunningOperationPromises },
 } = campaignApiSlice
+
+// Export endpoints for use in SSR
+export const { get,getByQuickCode,getMyList } = campaignApiSlice.endpoints

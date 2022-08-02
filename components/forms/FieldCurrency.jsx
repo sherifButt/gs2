@@ -3,30 +3,35 @@ import React, { useEffect, useState } from 'react'
 import { useLoadCurrencyListMutation } from '../../features/currency/currencyApiSlice'
 import SpinningWheel from '../icons/SpinningWheel'
 
-const FieldCurrency = ({
-   id,
-   name,
-   type,
-   placeholder,
-   defaultValue,
-   error,
-   valid,
-   value,
-   title,
-   disabled,
-   hidden,
-   label,
-   className,
-   required,
-   setValues,
-   values,
-   inputHandler,
-   validationHandler,
-   step,
-   min,
-   max,
-   data,
-}) => {
+const FieldCurrency = (
+   {
+      id,
+      name,
+      type,
+      placeholder,
+      defaultValue,
+      error,
+      valid,
+      value,
+      title,
+      disabled,
+      hidden,
+      label,
+      className,
+      required,
+      setValues,
+      values,
+      inputHandler,
+      validationHandler,
+      step,
+      min,
+      max,
+      data,
+      baseCurrency,
+      inputHandlerSelect,
+   },
+   { ...props }
+) => {
    const {
       data: fieldData,
       isLoading: fieldIsLoading,
@@ -34,19 +39,16 @@ const FieldCurrency = ({
       error: fieldError,
       isError: fieldIsError,
    } = data()
-const [currencySymbol,setCurrencySymbol] = useState('£')
-   const [_fieldData, setFieldData] = useState([
-      {
-         id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: 'British Pound',
-         displaySymbol: '£',
-         shortCode: 'GBP',
-      },
-   ])
-   useEffect(() => {
-      // console.log( 'fieldData', ...fieldData )
-      // setFieldData(fieldData)
-   }, [fieldData])
+
+   const [_baseCurrency, setBaseCurrency] = useState(baseCurrency)
+   const [_fieldData, setFieldData] = useState([baseCurrency])
+
+   // useEffect(() => {
+   //    // console.log( 'fieldData', ...fieldData )
+   //    // setFieldData(fieldData)
+   //    console.log('baseCurrency', baseCurrency)
+   //    console.log('_baseCurrency', _baseCurrency)
+   // }, [fieldData])
    return (
       <>
          {!hidden && (
@@ -57,11 +59,11 @@ const [currencySymbol,setCurrencySymbol] = useState('£')
                   id={name}
                   title={title}
                   required
-                  defaultValue={defaultValue||0}
-                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-7 pr-28 placeholder-transparent  text-gray-900 ${
+                  defaultValue={defaultValue || 0}
+                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-7 pr-28 placeholder-transparent  text-army-600 ${
                      error &&
                      'focus:ring-red-500 focus:border-red-500 border-red-300'
-                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 sm:text-md rounded-xl transition-all ease-out duration-300`}
+                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 text-3xl font-bold rounded-xl transition-all ease-out duration-300`}
                   placeholder={placeholder}
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
@@ -73,7 +75,10 @@ const [currencySymbol,setCurrencySymbol] = useState('£')
                />
                <div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none'>
                   <span className='text-gray-400 font-bold'>
-                     {currencySymbol}
+                     {
+                        fieldData?.filter(item => item.id == _baseCurrency)
+                           .displaySymbol
+                     }
                   </span>
                </div>
                {error && (
@@ -119,12 +124,13 @@ const [currencySymbol,setCurrencySymbol] = useState('£')
                      id='currency'
                      name='currency'
                      onChange={e => {
-                        setCurrencySymbol(e.target.value)
+                        inputHandlerSelect(e.target.value)
+                        setBaseCurrency(e.target.value)
                      }}
                      className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-8 border-transparent bg-transparent text-gray-500  pt-1 rounded-md'>
                      {(fieldData || _fieldData)?.map((item, idx) => {
                         return (
-                           <option key={item.id} value={item.displaySymbol}>
+                           <option key={item.id} value={item.id}>
                               {item.shortCode}
                            </option>
                         )

@@ -39,8 +39,6 @@ function MyApp({ Component, pageProps }) {
          ? Component.layout
          : layouts[Component.layout] || Layout5
    
-   
-   
    return (
       <Provider store={store}>
          <Layout
