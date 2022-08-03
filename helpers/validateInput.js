@@ -39,26 +39,26 @@ const validateInput = (e, inputIdx, values, setValues) => {
       }
    }
    // 4. if field is a text.
-   if (
-      e.target.type == 'text' &&
-      e.target.name.toUpperCase() != 'FullName'.toUpperCase()
-   ) {
-      if (!values[inputIdx].value.match(/^[A-Za-z0-9 ]{3,50}$/)) {
-         _values[
-            inputIdx
-         ].error = `${e.target.placeholder} should be 3-50 characters including space, and shouldn't include any special character!`
-         _values[inputIdx].valid = ``
-         setValues(_values)
-         return
-      }
-      if (values[inputIdx].value.match(/^[A-Za-z0-9 ]{3,50}$/)) {
-         _values[inputIdx].error = ``
-         _values[inputIdx].valid = `your ${e.target.name} is valid`
-         setValues(_values)
-         return
-      }
-   }
-   // 4. if field is a Full Name text.
+   // if (
+   //    e.target.type == 'text' &&
+   //    e.target.name.toUpperCase() != 'FullName'.toUpperCase()
+   // ) {
+   //    if (!values[inputIdx].value.match(/^[A-Za-z0-9 ]{3,50}$/)) {
+   //       _values[
+   //          inputIdx
+   //       ].error = `${e.target.placeholder} should be 3-50 characters including space, and shouldn't include any special character!`
+   //       _values[inputIdx].valid = ``
+   //       setValues(_values)
+   //       return
+   //    }
+   //    if (values[inputIdx].value.match(/^[A-Za-z0-9 ]{3,50}$/)) {
+   //       _values[inputIdx].error = ``
+   //       _values[inputIdx].valid = `your ${e.target.name} is valid`
+   //       setValues(_values)
+   //       return
+   //    }
+   // }
+   // 5. if field is a Full Name text.
    if (
       e.target.type == 'text' &&
       e.target.name.toUpperCase() == 'FullName'.toUpperCase()
@@ -86,7 +86,7 @@ const validateInput = (e, inputIdx, values, setValues) => {
          return
       }
    }
-   // 5. if field is a password.
+   // 6. if field is a password.
    if (e.target.type == 'password') {
       if (
          !values[inputIdx].value.match(
@@ -109,7 +109,7 @@ const validateInput = (e, inputIdx, values, setValues) => {
          setValues(_values)
       }
    }
-   // 6. if password matches
+   // 7. if password matches
    if (e.target.name == 'ConfirmPassword') {
       const PasswordFieldIndex = values.findIndex(
          field => field.name == 'Password'
@@ -128,7 +128,7 @@ const validateInput = (e, inputIdx, values, setValues) => {
          setValues(_values)
       }
    }
-   // 7. if slug required
+   // 8. if slug required
    if (e.target.type == 'url') {
       if (!values[inputIdx].value.match(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/)) {
          _values[
@@ -143,7 +143,7 @@ const validateInput = (e, inputIdx, values, setValues) => {
          setValues(_values)
       }
    }
-   // 8. if field is a Full Name text.
+   // 9. if field is a Full Name text.
    // if (
    //    e.target.type == 'text' &&
    //    e.target.name.toUpperCase() == 'FullName'.toUpperCase()

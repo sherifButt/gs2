@@ -23,7 +23,7 @@ const menu = [
    },
    {
       title: 'User Profile',
-      href: '#',
+      href: '/your-account/profile',
       icon: UserIcon,
       active: false,
    },

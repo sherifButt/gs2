@@ -12,19 +12,16 @@ const RightSidebar = props => {
                {/* Call To Action */}
                {/* <div>RightSidebars call to action</div> */}
                2<VerticalMenu />
-
                {/* /Call To Action */}
                <div className='  flex-col justify-between  hidden md:block'>
                   <PostLastUpdate />
                   <PostLastUpdate />
-
-              
                </div>
             </div>
             {/* Moving footer */}
-            <div className='sticky top-28 hidden md:block -z-10'>
-             {/* <PostLastUpdate /> */}
-               <Event/>
+            <div className='sticky top-28 hidden md:block '>
+               {/* <PostLastUpdate /> */}
+               <Event />
             </div>
             {/* /Moving footer */}
          </div>

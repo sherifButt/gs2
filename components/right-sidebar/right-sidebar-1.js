@@ -23,7 +23,7 @@ const RightSidebar = props => {
             </div>
 
             {/* Fixed footer */}
-            <div className='sticky top-28 hidden md:block -z-10'>
+            <div className='sticky top-28 hidden md:block z-10'>
 <ButtonPrimary
                   text='CREATE CAMPAIGN'
                   className='lg:mb-8 w-full lg:w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg '

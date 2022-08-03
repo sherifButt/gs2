@@ -23,7 +23,7 @@ import {
    toggleSignin,
    toggleSignup,
 } from '../../features/modalSlice'
-import { useLoginUserMutation } from '../../features/auth/authApiSlice'
+import { useSigninUserMutation } from '../../features/auth/authApiSlice'
 
 const userInitialState = { email: '', password: '' }
 
@@ -31,7 +31,7 @@ export default function SignInModal() {
    // Redux : Global State
    const dispatch = useDispatch()
    const modal = useSelector(state => state.modal.signin)
-   const [loginUser, { data,isLoading, isError, error }] = useLoginUserMutation()
+   const [signinUser, { data,isLoading, isError, error }] = useSigninUserMutation()
    // Local State
    const [show, setShow] = useState(false)
    const [ userInfo, setUserInfo ] = useState( userInitialState )
@@ -66,7 +66,7 @@ export default function SignInModal() {
 
    const loginHandler = async e => {
       e.preventDefault()
-      await loginUser(userInfo)
+      await signinUser(userInfo)
    }
 
    return (
