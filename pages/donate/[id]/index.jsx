@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FieldCheckbox from '../../../components/forms/FieldCheckbox'
 import FieldCurrency from '../../../components/forms/FieldCurrency'
 import FieldRadialSelect from '../../../components/forms/FieldRadialSelect'
-import FieldText from '../../../components/forms/FieldTextarea'
+import FieldTextarea from '../../../components/forms/FieldTextarea'
 import FieldSelectVoluntaryContribution from '../../../components/forms/FieldSelectVoluntaryContribution'
 import FieldLabel from '../../../components/forms/FieldLabel'
 import { useRouter } from 'next/router'
@@ -18,6 +18,7 @@ import ButtonPrimary from '../../../components/buttons/ButtonPrimary'
 import { useLoadUserQuery } from '../../../features/user/userApiSlice'
 import { selectCurrentUser } from '../../../features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import FieldText from '../../../components/forms/FieldText'
 
 const Donate = ({ data: campaignData }) => {
    const user = useSelector(selectCurrentUser)
@@ -31,7 +32,7 @@ const Donate = ({ data: campaignData }) => {
    //    error: campaignDataError,
    // } = useGetByQuickCodeQuery({ query: router.query.id })
 
-   // console.log('campaignData', campaignData)
+   console.log('campaignData', campaignData)
    const [page, setPage] = useState(0)
 
    const [donationAmount, setDonationAmount] = useState(
@@ -51,6 +52,7 @@ const Donate = ({ data: campaignData }) => {
          donatorEmail: user.email,
       },
       currencyId: campaignData?.baseCurrencyId,
+      baseCurrency: campaignData?.baseCurrency,
       donatorName: user.fullName,
       message: '',
       amount: campaignData?.defaultDonationSizes[2].value,
@@ -64,6 +66,7 @@ const Donate = ({ data: campaignData }) => {
       donationType: 1,
       privateDonation: true,
       donatorEmail: user?.email,
+      voluntaryContribution: donationAmount * 0.1,
    }
 
    const [formData, setFormData] = useState(formInitialData)
@@ -79,7 +82,7 @@ const Donate = ({ data: campaignData }) => {
             <div>
                <p className='block text-center text-xl text-stone-800  font-bold'>
                   Donate to {campaignData?.supporter.forename} &apos;s{' '}
-                  {campaignData?.name} {formData.donatorName}
+                  {campaignData?.name} 
                </p>
                <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
                   Fundraising on behalf of:
@@ -106,156 +109,178 @@ const Donate = ({ data: campaignData }) => {
                ))}
             </div>
          </div>
-         {page == 0 && (
-            <div className='flex flex-col gap-3 justify-start items-center py-4 '>
+         {/* {page == 0 && ( */}
+         <div className='flex flex-col gap-3 justify-start items-center py-4 '>
+            <div>
                <div>
-                  <div>
-                     <p className='block text-center text-xl text-stone-800  font-bold'>
-                        Choose Donation Amount
-                     </p>
-                  </div>
-                  <FieldRadialSelect
-                     data={campaignData?.defaultDonationSizes?.map(
-                        (item, idx) => ({
-                           id: item.id,
-                           name:
-                              campaignData?.baseCurrency.displaySymbol +
-                              item.value,
-                           value: item.value,
-                        })
-                     )}
-                     inputHandler={e => {
-                        setDonationAmount(e)
-                        setFormData({ ...formData, amount: e })
-                     }}
-                  />
-                  <FieldCurrency
-                     className='my-4'
-                     data={useLoadCurrencyListQuery} //List of currencies
-                     value={formData.amount}
-                     inputHandler={e => {
-                        // console.log('FieldCurrency e:', e.target.value)
-                        setDonationAmount(e.target.value)
-                        setFormData({
-                           ...formData,
-                           amount: parseInt(e.target.value),
-                        })
-                     }}
-                     inputHandlerSelect={e => {
-                        console.log('--------')
-                        console.table(e)
-                        console.debug(e)
-                        setFormData({ ...formData, currencyId: e })
-                     }}
-                     min={1}
-                     step={1}
-                     baseCurrency={campaignData?.baseCurrency}
-                  />
-                  <FieldText
-                     className='my-6'
-                     placeholder='Write a message of support...'
-                     rows={2}
-                     inputHandler={e => {
-                        setFormData({ ...formData, message: e.target.value })
-                     }}
-                     value={formData.message}
-                  />
-                  <FieldCheckbox
-                     className='my-4'
-                     terms='Make my donation and message anonymous from public view'
-                     inputHandler={e =>
-                        setFormData({
-                           ...formData,
-                           anonymous: e.target.checked,
-                        })
-                     }
-                     value={formData.anonymous}
-                  />
+                  <p className='block text-center text-xl text-stone-800  font-bold'>
+                     Choose Donation Amount
+                  </p>
                </div>
-            </div>
-         )}
+               <FieldRadialSelect
+                  data={campaignData?.defaultDonationSizes?.map(
+                     (item, idx) => ({
+                        id: item.id,
+                        name:
+                           campaignData?.baseCurrency.displaySymbol +
+                           item.value,
+                        value: item.value,
+                     })
+                  )}
+                  inputHandler={e => {
+                     setDonationAmount(e)
+                     setFormData({ ...formData, amount: e })
+                  }}
+               />
+               <FieldCurrency
+                  className='my-4'
+                  data={useLoadCurrencyListQuery} //List of currencies
+                  value={formData.amount}
+                  inputHandler={e => {
+                     setFormData({
+                        ...formData,
+                        amount: parseInt(e.target.value),
+                     })
+                     setDonationAmount(e.target.value)
+                  }}
+                  inputHandlerSelect={e => {
+                     setFormData({ ...formData, currencyId: e })
+                  }}
+                  inputHandlerBasecurrency={e => {
+                     setFormData({ ...formData, baseCurrency: e })
+                  }}
+                  min={1}
+                  step={1}
+                  baseCurrency={campaignData?.baseCurrency}
+               />
 
-         {page == 1 && (
-            <div className='flex flex-col gap-3 justify-start items-center py-8 '>
+               <FieldTextarea
+                  className='my-6'
+                  placeholder='Write a message of support...'
+                  rows={2}
+                  inputHandler={e => {
+                     setFormData({ ...formData, message: e.target.value })
+                  }}
+                  value={formData.message}
+               />
+
+               <FieldCheckbox
+                  className='my-4'
+                  terms='Make my donation and message anonymous from public view'
+                  inputHandler={e =>
+                     setFormData({
+                        ...formData,
+                        anonymous: e.target.checked,
+                     })
+                  }
+                  value={formData.anonymous}
+               />
+            </div>
+         </div>
+         {/* )} */}
+
+         {/* {page == 1 && ( */}
+         <div className='flex flex-col gap-3 justify-start items-center py-8 '>
+            <div>
                <div>
-                  <div>
-                     <p className='block text-center text-xl text-stone-800  font-bold py-4'>
-                        We don&apos;t charge charities fees
-                     </p>
-                     <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
-                        GiveStar has a 0% platform fee on donations like these.
-                        Adding a small contribution on top of your donation
-                        means we can continue to support more charities and
-                        their incredible work.
-                     </p>
-                  </div>
-                  {/* <FieldLabel
-                  className='my-4 text-xl'
+                  <p className='block text-center text-xl text-stone-800  font-bold py-4'>
+                     We don&apos;t charge charities fees
+                  </p>
+                  <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
+                     GiveStar has a 0% platform fee on donations like these.
+                     Adding a small contribution on top of your donation means
+                     we can continue to support more charities and their
+                     incredible work.
+                  </p>
+               </div>
+
+               <FieldSelectVoluntaryContribution
                   forLabel='givestarSupport'
-                  text='Voluntary Contribution'
-               /> */}
-                  <FieldSelectVoluntaryContribution
-                     forLabel='givestarSupport'
-                     className='my-8 '
-                     placeholder='Voluntary Contribution'
-                     formData={formData}
-                  />
-               </div>
+                  className='mt-12 mb-6'
+                  placeholder='Voluntary Contribution'
+                  donationAmount={donationAmount}
+                  formData={formData}
+                  inputHandler={e => {
+                     setFormData({
+                        ...formData,
+                        voluntaryContribution: Number(e.target.value),
+                     })
+                  }}
+                  value={formData.voluntaryContribution}
+               />
+               <FieldText
+                  id='kko'
+                  name='1545'
+                  className='my-6'
+                  placeholder=''
+                  type='number'
+                  inputHandler={e => {
+                     setFormData({
+                        ...formData,
+                        voluntaryContribution: Number(e.target.value),
+                     })
+                  }}
+                  value={formData.voluntaryContribution}
+                  validationHandler={e => {}}
+                  step={1}
+                  min={0}
+               />
             </div>
-         )}
+         </div>
+         {/* )} */}
 
-         {page == 2 && (
-            <div
-               className='flex flex-col gap-3 justify-between
+         {/* {page == 2 && ( */}
+         <div
+            className='flex flex-col gap-3 justify-between
              items-center py-8 '>
+            <div>
                <div>
-                  <div>
-                     <img
-                        className='mx-auto'
-                        src='/assets/images/giftaidit.png'
-                        alt=''
-                     />
-                     <p className='block text-center text-xl text-stone-800  font-bold py-4'>
-                        Give 25% more for free with Gift Aid
-                     </p>
-                     <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
-                        I confirm that I am a UK taxpayer and I understand that
-                        if I pay less income tax and/or capital gains tax in the
-                        current tax year than the amount of Gift Aid claimed on
-                        all my donations, it is my responsibility to pay the
-                        difference.
-                     </p>
-                  </div>
-               </div>
-
-               <div className='flex flex-row justify-between gap-4'>
-                  <ButtonPrimary
-                     className='w-32'
-                     text='Yes'
-                     actionHandler={() => {
-                        setPage(3)
-                     }}
+                  <img
+                     className='mx-auto'
+                     src='/assets/images/giftaidit.png'
+                     alt=''
                   />
-                  <ButtonPrimary
-                     className='w-32 '
-                     bgColor='bg-white'
-                     text='No'
-                     actionHandler={() => {
-                        setPage(4)
-                     }}
-                  />
+                  <p className='block text-center text-xl text-stone-800  font-bold py-4'>
+                     Give 25% more for free with Gift Aid
+                  </p>
+                  <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
+                     I confirm that I am a UK taxpayer and I understand that if
+                     I pay less income tax and/or capital gains tax in the
+                     current tax year than the amount of Gift Aid claimed on all
+                     my donations, it is my responsibility to pay the
+                     difference.
+                  </p>
                </div>
             </div>
-         )}
-         {page != 2 && (
-            <ButtonPrimary
-               className='w-60'
-               text='Continue'
-               actionHandler={() => {
-                  setPage(page + 1)
-               }}
-            />
-         )}
+
+            <div className='flex flex-row justify-between gap-4'>
+               <ButtonPrimary
+                  className='w-40'
+                  text='Yes'
+                  actionHandler={() => {
+                     setPage(3)
+                  }}
+               />
+               <ButtonPrimary
+                  className='w-40 bg-gray-400 text-gray-50'
+                  bgColor='bg-white'
+                  text='No'
+                  actionHandler={() => {
+                     setPage(4)
+                  }}
+               />
+            </div>
+         </div>
+         {/* )} */}
+         {/* {page != 2 && ( */}
+         <ButtonPrimary
+            className='w-60'
+            text='Continue'
+            actionHandler={() => {
+               setPage(page + 1)
+            }}
+         />
+         {/* )} */}
          {page != 0 && (
             <p className='my-8' onClick={() => setPage(page - 1)}>
                ←previous

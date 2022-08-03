@@ -38,7 +38,7 @@ const FieldText = ({
       isSuccess: null,
       isError: null,
       error: null,
-   } ),
+   }),
    usedSearch,
 }) => {
    const {
@@ -47,10 +47,7 @@ const FieldText = ({
       isSuccess: fieldIsSuccess,
       error: fieldError,
       isError: fieldIsError,
-   } = data( { query: value } )
-   
-   
-   
+   } = data({ query: value })
 
    return (
       <>
@@ -59,7 +56,7 @@ const FieldText = ({
                <input
                   type={type}
                   name={name}
-                  id={id||name}
+                  id={id || name}
                   title={title}
                   required
                   className={`peer mt-1 relative shadow-sm block w-full py-3 pl-3 pr-10 placeholder-transparent  text-gray-900 ${
@@ -73,16 +70,14 @@ const FieldText = ({
                   placeholder={placeholder}
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
-                  value={ value }
+                  value={value}
                   defaultValue={defaultValue}
-                  onChange={ (e) => {
-                     inputHandler( e )
-                  
-                     validationHandler( e )
-                  } }
-                  onBlur={ ( e ) => {
-                  
-                  } }
+                  onChange={e => {
+                     inputHandler(e)
+
+                     validationHandler(e)
+                  }}
+                  onBlur={e => {}}
                   step={step || 10}
                   min={min || 100}
                />
@@ -94,9 +89,9 @@ const FieldText = ({
                      />
                   </div>
                )}
-               {usedSearch?valid && fieldIsError && (
-                  <CheckIcon/>
-               ):valid&&<CheckIcon/>}
+               {usedSearch
+                  ? valid && fieldIsError && <CheckIcon />
+                  : valid && <CheckIcon />}
 
                {error && (
                   <div className='peer-hover:z-20 px-2 hover:z-20 absolute top-[53px]  border-t-dashed  border-gray-500 z-10 border-r-solid rounded-b-md m-w-2/3 w-[17rem] right-0 mr-4 p-1 bg-red-50 shadow-md'>

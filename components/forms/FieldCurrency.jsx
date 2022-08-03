@@ -29,6 +29,7 @@ const FieldCurrency = (
       data,
       baseCurrency,
       inputHandlerSelect,
+      inputHandlerBasecurrency,
    },
    { ...props }
 ) => {
@@ -41,14 +42,11 @@ const FieldCurrency = (
    } = data()
 
    const [_baseCurrency, setBaseCurrency] = useState(baseCurrency)
+   const [selectedCurrencyId, setSelectedCurrencyId] = useState(baseCurrency.id)
    const [_fieldData, setFieldData] = useState([baseCurrency])
 
-   // useEffect(() => {
-   //    // console.log( 'fieldData', ...fieldData )
-   //    // setFieldData(fieldData)
-   //    console.log('baseCurrency', baseCurrency)
-   //    console.log('_baseCurrency', _baseCurrency)
-   // }, [fieldData])
+   
+
    return (
       <>
          {!hidden && (
@@ -60,10 +58,10 @@ const FieldCurrency = (
                   title={title}
                   required
                   defaultValue={defaultValue || 0}
-                  className={`peer mt-1 relative shadow-sm block w-full py-3 pl-7 pr-28 placeholder-transparent  text-army-600 ${
+                  className={`peer text-right  mt-1 relative shadow-sm block w-full py-3 pr-[8rem] pl-4 placeholder-transparent  text-army-600 ${
                      error &&
                      'focus:ring-red-500 focus:border-red-500 border-red-300'
-                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 text-3xl font-bold rounded-xl transition-all ease-out duration-300`}
+                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 text-4xl font-bold rounded-xl transition-all ease-out duration-300`}
                   placeholder={placeholder}
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
@@ -73,12 +71,18 @@ const FieldCurrency = (
                   step={step || 10}
                   min={min || 100}
                />
-               <div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none'>
+               {/* <div className='absolute inset-y-0 right-0 pr-32 pt-1 flex items-center pointer-events-none text-xl'>
                   <span className='text-gray-400 font-bold'>
-                     {
-                        fieldData?.filter(item => item.id == _baseCurrency)
-                           .displaySymbol
-                     }
+                     .00
+                  </span>
+               </div> */}
+               <div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none text-xl'>
+                  <span className='text-gray-400 font-bold'>
+                     {fieldData
+                        ? fieldData?.filter(
+                             item => item.id == selectedCurrencyId
+                          )[0].displaySymbol
+                        : _baseCurrency.displaySymbol}
                   </span>
                </div>
                {error && (
@@ -116,7 +120,7 @@ const FieldCurrency = (
                   className='absolute ease-out duration-500 -top-5 left-8 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm'>
                   {placeholder}
                </label>
-               <div className='absolute inset-y-0 pr-2 right-4 flex items-center'>
+               <div className='absolute inset-y-0 pr-2 right-0 flex items-center border-l pl-4'>
                   <label htmlFor='currency' className='sr-only'>
                      Currency
                   </label>
@@ -125,9 +129,14 @@ const FieldCurrency = (
                      name='currency'
                      onChange={e => {
                         inputHandlerSelect(e.target.value)
-                        setBaseCurrency(e.target.value)
+                        setSelectedCurrencyId(e.target.value)
+                        inputHandlerBasecurrency(
+                           fieldData?.filter(
+                              item => item.id == e.target.value
+                           )[0]
+                        )
                      }}
-                     className='focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-8 border-transparent bg-transparent text-gray-500  pt-1 rounded-md'>
+                     className=' h-full py-0 pl-2 pr-8 border-transparent bg-transparent text-gray-500  pt-1 rounded-md text-xl'>
                      {(fieldData || _fieldData)?.map((item, idx) => {
                         return (
                            <option key={item.id} value={item.id}>

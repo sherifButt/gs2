@@ -24,6 +24,7 @@ const FieldText = ({
    validationHandler,
    className,
    formData,
+   donationAmount,
    data = () => ({
       data: null,
       isLoading: null,
@@ -40,38 +41,75 @@ const FieldText = ({
       isError: fieldIsError,
    } = data()
 
-   const [_fieldData, setFieldData] = useState ([
+   
+
+   const [_fieldData, setFieldData] = useState([
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: '10 % contribution',
-         value: '.1',
+         name: `10 % contribution (£${(formData.amount * 0.1).toFixed(2)})`,
+         value: formData.amount * 0.1,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: '12.5 % contribution',
-         value: '.125',
+         name: `12.5 % contribution (£${(formData.amount * 0.125).toFixed(2)})`,
+         value: formData.amount * 0.125,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: '15 % contribution',
-         value: '.15',
+         name: `15 % contribution (£${(formData.amount * 0.15).toFixed(2)})`,
+         value: formData.amount * 0.15,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: '20 % contribution',
-         value: '.2',
+         name: `20 % contribution (£${(formData.amount * 0.2).toFixed(2)})`,
+         value: formData.amount * 0.2,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
          name: 'Other',
-         value: '0',
+         value: '1',
       },
-   ])
+   ] )
+   
+   const [ selectedFormData, setSelectedFormData ] = useState( _fieldData[ 0 ].value )
 
-   useEffect(() => {
-      if (fieldData)
-         inputHandler({ target: { type, value: fieldData[0]?.id, name } })
-   }, [fieldData])
+   useEffect( () => {
+      setFieldData([
+         {
+            id: '9d6494c0-e364-43f0-b76c-52251df71133',
+            name: `10 % contribution (£${(formData.amount * 0.1).toFixed(2)})`,
+            value: formData.amount * 0.1,
+         },
+         {
+            id: '9d6494c0-e364-43f0-b76c-52251df71133',
+            name: `12.5 % contribution (£${(formData.amount * 0.125).toFixed(
+               2
+            )})`,
+            value: formData.amount * 0.125,
+         },
+         {
+            id: '9d6494c0-e364-43f0-b76c-52251df71133',
+            name: `15 % contribution (£${(formData.amount * 0.15).toFixed(2)})`,
+            value: formData.amount * 0.15,
+         },
+         {
+            id: '9d6494c0-e364-43f0-b76c-52251df71133',
+            name: `20 % contribution (£${(formData.amount * 0.2).toFixed(2)})`,
+            value: formData.amount * 0.2,
+         },
+         {
+            id: '9d6494c0-e364-43f0-b76c-52251df71133',
+            name: 'Other',
+            value: '1',
+         },
+      ])
+
+      // const e = { target: { value: selectedFormData } }
+      
+      // inputHandler(e)
+      // console.log('selectedFormData', _fieldData)
+   }, [donationAmount])
+
    return (
       <>
          {!hidden && (
@@ -90,18 +128,21 @@ const FieldText = ({
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
                   value={value}
-                  onClick={inputHandler}
+                  onChange={ e => {
+                     inputHandler( e )
+                     setSelectedFormData(e)
+                  } }
                   onBlur={validationHandler}>
-                  {(fieldData||_fieldData)?.map((item, idx) => (
-                     <option key={item.shortCode} value={item.id}>
-                        {item.name}({formData.amount*item.value})
+                  {(fieldData || _fieldData)?.map((item, idx) => (
+                     <option key={item.shortCode} value={item.value}>
+                        {item.name}
                      </option>
                   ))}
                </select>
 
                <label
                   htmlFor={name}
-                  className={`absolute ease-out duration-500 -top-5 pl-3 block text-sm font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-5 transition-all peer-focus:text-gray-600 peer-focus:text-sm`}>
+                  className={`absolute ease-out duration-500 -top-8 pl-3 block text-lg font-medium text-gray-700 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-8 transition-all peer-focus:text-gray-600 peer-focus:text-lg`}>
                   {placeholder}
                </label>
             </div>
