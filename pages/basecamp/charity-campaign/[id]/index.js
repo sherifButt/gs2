@@ -13,9 +13,9 @@ import bg from '../../../../public/assets/images/Pattern-fill.jpg'
 const Campaign = () => {
    const router = useRouter()
    // 3 vertical columns middle infinity scroll for (posts/comments/campaigns)
-   const _RightSidebar = rightSidebar || RightSidebar
-   const _LeftSidebar = leftSidebar || LeftSidebar
-   const _Footer = footer || Footer
+   // const _RightSidebar = rightSidebar || RightSidebar
+   // const _LeftSidebar = leftSidebar || LeftSidebar
+   // const _Footer = footer || Footer
    return (
       <div
          style={{
