@@ -73,7 +73,7 @@ export const signin = {
    fields: [
       {
          name: 'email',
-         value: 'ant@there.com',
+         value: '',
          description: '',
          error: '',
          valid: '',
@@ -87,7 +87,7 @@ export const signin = {
       },
       {
          name: 'password',
-         value: '@Ahandsomepassword333',
+         value: '',
          description: '',
          error: '',
          valid: '',
@@ -175,7 +175,7 @@ export const signup = {
    fields: [
       {
          name: 'FullName',
-         value: 'John Smith',
+         value: '',
          description: '',
          error: '',
          valid: '',
@@ -218,7 +218,7 @@ export const signup = {
       },
       {
          name: 'Email',
-         value: 'sherif+@give-star.com',
+         value: '',
          description: '',
          error: '',
          valid: '',
@@ -232,7 +232,7 @@ export const signup = {
       },
       {
          name: 'Password',
-         value: '123qweASD',
+         value: '',
          description: '',
          error: '',
          valid: '',
@@ -246,7 +246,7 @@ export const signup = {
       },
       {
          name: 'ConfirmPassword',
-         value: '123qweASD',
+         value: '',
          description: '',
          error: '',
          valid: '',

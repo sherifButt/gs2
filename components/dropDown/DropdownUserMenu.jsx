@@ -44,7 +44,7 @@ export default function DropdownUserMenu ( open ) {
       useSelector(selectCurrentUser)
    return (
       <div>
-         <div className='px-4 py-3 flex gab-4'>
+         <div className='px-4 py-3 flex gab-4 z-50'>
             <div className='mr-3 block lg:hidden '>
                <AvatarUser />
             </div>

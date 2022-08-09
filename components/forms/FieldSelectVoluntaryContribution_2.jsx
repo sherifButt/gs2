@@ -24,7 +24,6 @@ const FieldText = ({
    validationHandler,
    className,
    formData,
-   setFormData,
    donationAmount,
    data = () => ({
       data: null,
@@ -42,64 +41,47 @@ const FieldText = ({
       isError: fieldIsError,
    } = data()
 
-   const initialDonationList = [
+   
+
+   const [_fieldData, setFieldData] = useState([
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: `10% contribution (${formData.baseCurrency.displaySymbol}${(
-            formData.amount * 0.1
-         ).toFixed(2)})`,
-         value: 0.1,
+         name: `10 % contribution (£${(formData.amount * 0.1).toFixed(2)})`,
+         value: formData.amount * 0.1,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: `12.5% contribution (${formData.baseCurrency.displaySymbol}${(
-            formData.amount * 0.125
-         ).toFixed(2)})`,
-         value: 0.125,
+         name: `12.5 % contribution (£${(formData.amount * 0.125).toFixed(2)})`,
+         value: formData.amount * 0.125,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: `15% contribution (${formData.baseCurrency.displaySymbol}${(
-            formData.amount * 0.15
-         ).toFixed(2)})`,
-         value: 0.15,
+         name: `15 % contribution (£${(formData.amount * 0.15).toFixed(2)})`,
+         value: formData.amount * 0.15,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
-         name: `20% contribution (${formData.baseCurrency.displaySymbol}${(
-            formData.amount * 0.2
-         ).toFixed(2)})`,
-         value: 0.2,
+         name: `20 % contribution (£${(formData.amount * 0.2).toFixed(2)})`,
+         value: formData.amount * 0.2,
       },
       {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
          name: 'Other',
-         value: 0,
+         value: '1',
       },
-   ]
-
-   const [_fieldData, setFieldData] = useState(initialDonationList)
-
-   const [selectedFormData, setSelectedFormData] = useState(_fieldData[0].value)
-
-   useEffect(() => {
-      
-      // const e = { target: { value: selectedFormData } }
-
-      // inputHandler(e)
-      // console.log('selectedFormData', _fieldData)
-   }, [formData])
+   ] )
+   
+   const [ selectedFormData, setSelectedFormData ] = useState( _fieldData[ 0 ].value )
 
    useEffect( () => {
-      setFieldData(initialDonationList)
-      setFormData({
-         ...formData,
-         voluntaryContribution: 
-            selectedFormData *formData.amount
-         ,
-      })
-   }, [ donationAmount ] )
-   
+      
+
+      // const e = { target: { value: selectedFormData } }
+      
+      // inputHandler(e)
+      // console.log('selectedFormData', _fieldData)
+   }, [donationAmount])
+
    return (
       <>
          {!hidden && (
@@ -120,14 +102,29 @@ const FieldText = ({
                   value={value}
                   onChange={e => {
                      inputHandler(e)
-                     setSelectedFormData(e.target.value)
+                     setSelectedFormData(e)
                   }}
                   onBlur={validationHandler}>
-                  {(fieldData || _fieldData)?.map((item, idx) => (
-                     <option key={item.shortCode} value={item.value}>
-                        {item.name}
-                     </option>
-                  ))}
+                  <option
+                     value={0} ss={1}>{`10 % contribution (£${(
+                     formData.amount * 0.1
+                  ).toFixed(2)})`}</option>
+                  <option
+                     value={1}>{`12.5 % contribution (£${(
+                     formData.amount * 0.125
+                  ).toFixed(2)})`}</option>
+                  <option
+                     value={2}>{`10 % contribution (£${(
+                     formData.amount * 0.1
+                  ).toFixed(2)})`}</option>
+                  <option
+                     value={3}>{`10 % contribution (£${(
+                     formData.amount * 0.1
+                  ).toFixed(2)})`}</option>
+                  <option
+                     value={4}>{`10 % contribution (£${(
+                     formData.amount * 0.1
+                  ).toFixed(2)})`}</option>
                </select>
 
                <label

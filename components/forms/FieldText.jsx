@@ -32,6 +32,7 @@ const FieldText = ({
    validationHandler,
    step,
    min,
+   pattern,
    data = () => ({
       data: null,
       isLoading: null,
@@ -55,12 +56,13 @@ const FieldText = ({
             <div className='relative'>
                <input
                   type={type}
-                  name={name}
+                  name={ name }
+                  pattern={pattern}
                   id={id || name}
                   title={title}
                   required
                   className={`peer mt-1 relative shadow-sm block w-full py-3 pl-3 pr-10 placeholder-transparent  text-gray-900 ${
-                     rightText || leftText
+                     (rightText || leftText)
                         ? rightTextPadding || leftTextPadding
                         : 'pl-3'
                   } ${
@@ -117,8 +119,8 @@ const FieldText = ({
                </label>
                {rightText && (
                   <div
-                     className={`absolute inset-y-0 left-0   pl-3
-                      pt-1 flex items-center pointer-events-none`}>
+                     className={`absolute inset-y-0 left-0  pl-3
+                      pt-0 flex items-center pointer-events-none`}>
                      <span className='text-gray-400 '>{rightText}</span>
                   </div>
                )}

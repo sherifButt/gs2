@@ -33,6 +33,8 @@ const FieldCurrency = (
    },
    { ...props }
 ) => {
+
+
    const {
       data: fieldData,
       isLoading: fieldIsLoading,
@@ -58,10 +60,10 @@ const FieldCurrency = (
                   title={title}
                   required
                   defaultValue={defaultValue || 0}
-                  className={`peer text-right  mt-1 relative shadow-sm block w-full py-3 pr-[8rem] pl-4 placeholder-transparent  text-army-600 ${
+                  className={`peer text-right  mt-1 relative shadow-sm block w-full py-1 pr-[8rem] pl-4 placeholder-transparent  text-army-600 ${
                      error &&
                      'focus:ring-red-500 focus:border-red-500 border-red-300'
-                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 text-4xl font-bold rounded-xl transition-all ease-out duration-300`}
+                  } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 text-6xl font-light rounded-xl transition-all ease-out duration-300`}
                   placeholder={placeholder}
                   aria-invalid='true'
                   aria-describedby={`${name}-error`}
@@ -136,7 +138,7 @@ const FieldCurrency = (
                            )[0]
                         )
                      }}
-                     className=' h-full py-0 pl-2 pr-8 border-transparent bg-transparent text-gray-500  pt-1 rounded-md text-xl'>
+                     className=' h-full py-0 pl-2 pr-10 border-transparent bg-transparent text-gray-500  pt-1 rounded-md text-xl'>
                      {(fieldData || _fieldData)?.map((item, idx) => {
                         return (
                            <option key={item.id} value={item.id}>

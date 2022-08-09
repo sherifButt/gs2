@@ -6,7 +6,7 @@ function classNames(...classes) {
    return classes.filter(Boolean).join(' ')
 }
 
-export default function FieldRadialSelect({ data, inputHandler }) {
+export default function FieldRadialSelect({ data, inputHandler, baseCurrency }) {
    const [donation, setDonation] = useState(data[2])
    // useEffect( () => {
    //    setDonation(data[2])
@@ -14,7 +14,7 @@ export default function FieldRadialSelect({ data, inputHandler }) {
    // useEffect(() => {
    // //   inputHandler(donation)
    // }, [data])
-   
+
    return (
       <div className='my-8 mx-auto'>
          <RadioGroup value={donation} onChange={setDonation} className='mt-2'>
@@ -27,8 +27,8 @@ export default function FieldRadialSelect({ data, inputHandler }) {
                      key={option.name}
                      value={option.value}
                      // defaultValue={option[2]}
-                     checked={ idx == 2 }
-                     onClick={()=>inputHandler(option.value)}
+                     checked={idx == 2}
+                     onClick={() => inputHandler(option.value)}
                      className={({ active, checked }) =>
                         classNames(
                            active ? 'ring-2 ring-offset-2 ring-army-500' : '',
@@ -42,7 +42,8 @@ export default function FieldRadialSelect({ data, inputHandler }) {
                         as='span'
                         key={option.value}
                         value={option?.value}>
-                        {option.name ? option.name : <SpinningWheel />}
+                        {baseCurrency?.displaySymbol}
+                        {option.value ? option.value : <SpinningWheel />}
                      </RadioGroup.Label>
                   </RadioGroup.Option>
                ))}

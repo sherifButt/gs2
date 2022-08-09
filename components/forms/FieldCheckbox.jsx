@@ -24,22 +24,22 @@ const FieldCheckbox = ( {
 } ) => {
    return (
       <div className={`${className}`}>
-         <div className='flex  items-center justify-between relative'>
+         <div className='flex   justify-between relative'>
             <input
                id={name}
                name={name}
                type='checkbox'
-               className=' h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
+               className='mt-1 h-4 w-4 text-gary-600 focus:ring-gray-500 border-gray-300 rounded'
                checked={value}
                onChange={inputHandler}
                onBlur={validationHandler}
             />
-            <label htmlFor={name} className='ml-2 block text-sm text-gray-900'>
-               <span className='text-army-500 '>
+            <label htmlFor={name} className='ml-3 block text-sm text-gray-900'>
+               
                   <Link href={href} passHref>
                      <a>{terms}</a>
                   </Link>
-               </span>
+               
             </label>
          </div>
          {error && (
