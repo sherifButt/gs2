@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { SafeChargeCC } from '../../../components/nuvei/SafeCharge'
 import FieldCheckbox from '../../../components/forms/FieldCheckbox'
 import FieldCurrency from '../../../components/forms/FieldCurrency'
 import FieldRadialSelect from '../../../components/forms/FieldRadialSelect'
@@ -20,6 +21,22 @@ import { selectCurrentUser } from '../../../features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import FieldText from '../../../components/forms/FieldText'
 
+const loadScript = src =>
+   new Promise((resolve, reject) => {
+      const scriptElem = Object.assign(document.createElement('script'), {
+         type: 'text/javascript',
+         defer: true,
+         src,
+         onerror: e => {
+            reject(e)
+         },
+      })
+      scriptElem.onload = () => {
+         resolve()
+      }
+      document.body.appendChild(scriptElem)
+   })
+
 const Donate = ({ data: campaignData }) => {
    const user = useSelector(selectCurrentUser)
    const { data: userData } = useLoadUserQuery()
@@ -32,7 +49,8 @@ const Donate = ({ data: campaignData }) => {
    //    error: campaignDataError,
    // } = useGetByQuickCodeQuery({ query: router.query.id })
 
-   console.log('campaignData', campaignData)
+   // console.log('campaignData', campaignData)
+     const [safeCharge, setSafeCharge] = useState(null)
    const [ page, setPage ] = useState( 0 )
    const [giftAid,setGiftAid]=useState(false)
 
@@ -80,7 +98,21 @@ const Donate = ({ data: campaignData }) => {
       console.log('user', user)
       console.table( 'formData', formData )
       console.log('page', page)
-   }, [donationAmount, user, formData,page])
+   }, [ donationAmount, user, formData, page ] )
+   
+   useEffect(() => {
+      loadScript(
+         'https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js' //production
+      ).then(() => {
+         setSafeCharge(
+            window.SafeCharge({
+               merchantId: '806659927845195034',
+               merchantSiteId: '196488',
+            })
+         )
+      })
+   }, [] )
+   
    return (
       <form className='divide-y mx-4 text-center'>
          <div className='flex flex-col gap-3 justify-start items-center py-2 -mt-4 sm:mt-0'>
@@ -186,9 +218,8 @@ const Donate = ({ data: campaignData }) => {
             </div>
          </div>
 
-         
-         
-            {page>=1&&(<div className='flex flex-col gap-3 justify-start items-center py-8 '>
+         {page >= 1 && (
+            <div className='flex flex-col gap-3 justify-start items-center py-8 '>
                <div>
                   <div>
                      <p className='block text-center text-xl text-stone-800  font-bold py-4'>
@@ -196,12 +227,12 @@ const Donate = ({ data: campaignData }) => {
                      </p>
                      <p className='block  text-center text-sm text-stone-800  '>
                         GiveStar has a 0% platform fee on donations like these.
-                        Adding a small contribution on top of your donation means
-                        we can continue to support more charities and their
-                        incredible work.
+                        Adding a small contribution on top of your donation
+                        means we can continue to support more charities and
+                        their incredible work.
                      </p>
                   </div>
-   
+
                   <FieldSelectVoluntaryContribution
                      forLabel='givestarSupport'
                      className='mt-12 mb-6'
@@ -244,9 +275,11 @@ const Donate = ({ data: campaignData }) => {
                      rightTextPadding='pl-6'
                   />
                </div>
-            </div>)}
-          
-            {page>=2&&(<div
+            </div>
+         )}
+
+         {page >= 2 && (
+            <div
                className='flex flex-col gap-3 justify-between
                 items-center py-8 '>
                <div>
@@ -264,7 +297,7 @@ const Donate = ({ data: campaignData }) => {
                            {formData.baseCurrency?.displaySymbol}
                            {formData.amount.toFixed(2)}
                         </p>
-   
+
                         <img
                            src='/assets/images/arrow.png'
                            alt=''
@@ -275,23 +308,23 @@ const Donate = ({ data: campaignData }) => {
                            {(formData.amount * 1.25).toFixed(2)}
                         </p>
                      </div>
-   
+
                      <p className='block  text-center text-sm text-stone-800  '>
-                        I confirm that I am a UK taxpayer and I understand that if
-                        I pay less income tax and/or capital gains tax in the
-                        current tax year than the amount of Gift Aid claimed on all
-                        my donations, it is my responsibility to pay the
+                        I confirm that I am a UK taxpayer and I understand that
+                        if I pay less income tax and/or capital gains tax in the
+                        current tax year than the amount of Gift Aid claimed on
+                        all my donations, it is my responsibility to pay the
                         difference.
                      </p>
                   </div>
                </div>
-   
+
                <div className='flex flex-row justify-between gap-4 my-8'>
                   <ButtonPrimary
                      className='w-40'
                      text='Yes'
                      actionHandler={() => {
-                        setPage( 3 )
+                        setPage(3)
                         setGiftAid(true)
                      }}
                   />
@@ -300,46 +333,147 @@ const Donate = ({ data: campaignData }) => {
                      bgColor='bg-white'
                      text='No'
                      actionHandler={() => {
-                        setPage( 4 )
+                        setPage(4)
                         setGiftAid(false)
                      }}
                   />
                </div>
-            </div>)}
-            
-               {giftAid&&(<div className='flex flex-col gap-3 justify-start items-center py-8 '>
-                  <p className='block  text-xl text-stone-800  font-bold py-4'>
-                     Please accept and read these statements
+            </div>
+         )}
+
+         {giftAid && (
+            <div className='flex flex-col gap-3 justify-start items-center py-8 '>
+               <p className='block  text-xl text-stone-800  font-bold py-4'>
+                  Please accept and read these statements
+               </p>
+               <FieldCheckbox
+                  className='my-4 text-left text-stone-800'
+                  terms='This is my own money. I am not paying in donations made by a third party, e.g. money collected at an event, the pub, a company donation or a donation from a friend or family member.'
+                  inputHandler={e =>
+                     setFormData({
+                        ...formData,
+                        anonymous: e.target.checked,
+                     })
+                  }
+                  value={formData.anonymous}
+               />
+               <FieldCheckbox
+                  className='my-4 text-left text-stone-800'
+                  terms='This donation is not made as part of a sweepstake, raffle or lottery and I am not receiving anything in return for it, e.g. book, auction prize, ticket to an event'
+                  inputHandler={e =>
+                     setFormData({
+                        ...formData,
+                        anonymous: e.target.checked,
+                     })
+                  }
+                  value={formData.anonymous}
+               />
+               <div className='grid grid-cols-2 gap-4 justify-between my-8'>
+                  <FieldText
+                     // hidden={user?.forename}
+                     id='firstName'
+                     name='firstName'
+                     className='my-4'
+                     placeholder='First Name'
+                     type='text'
+                     inputHandler={e => {
+                        setFormData({
+                           ...formData,
+                           firstName: e.target.value,
+                        })
+                     }}
+                     value={formData.firstName}
+                     validationHandler={e => {}}
+                  />
+                  <FieldText
+                     // hidden={user?.surname}
+                     id='lastName'
+                     name='lastName'
+                     className='my-4'
+                     placeholder='Last Name'
+                     type='text'
+                     inputHandler={e => {
+                        setFormData({
+                           ...formData,
+                           lastName: e.target.value,
+                        })
+                     }}
+                     value={formData.lastName}
+                     validationHandler={e => {}}
+                  />
+                  <FieldText
+                     // hidden={user?.surname}
+                     id='addressLine1'
+                     name='addressLine1'
+                     className='my-4'
+                     placeholder='Address First Line'
+                     type='text'
+                     inputHandler={e => {
+                        setFormData({
+                           ...formData,
+                           giftAidRequest: {
+                              ...formData.giftAidRequest,
+                              addressLine1: e.target.value,
+                           },
+                        })
+                     }}
+                     value={formData.giftAidRequest.addressLine1}
+                     validationHandler={e => {}}
+                  />
+                  <FieldText
+                     id='postcode'
+                     name='postcode'
+                     className='my-4'
+                     placeholder='Post Code'
+                     type='text'
+                     inputHandler={e => {
+                        setFormData({
+                           ...formData,
+                           giftAidRequest: {
+                              ...formData.giftAidRequest,
+                              postZipCode: e.target.value,
+                           },
+                        })
+                     }}
+                     value={formData.giftAidRequest.postZipCode}
+                     validationHandler={e => {}}
+                  />
+               </div>
+            </div>
+         )}
+         {page >= 4 && (
+            <>
+               <div className='items-center py-8 '>
+                  <p className='block  text-xl text-stone-800   font-bold py-4'>
+                     Payment method
                   </p>
-                  <FieldCheckbox
-                     className='my-4 text-left text-stone-800'
-                     terms='This is my own money. I am not paying in donations made by a third party, e.g. money collected at an event, the pub, a company donation or a donation from a friend or family member.'
-                     inputHandler={e =>
-                        setFormData({
-                           ...formData,
-                           anonymous: e.target.checked,
-                        })
-                     }
-                     value={formData.anonymous}
-                  />
-                  <FieldCheckbox
-                     className='my-4 text-left text-stone-800'
-                     terms='This donation is not made as part of a sweepstake, raffle or lottery and I am not receiving anything in return for it, e.g. book, auction prize, ticket to an event'
-                     inputHandler={e =>
-                        setFormData({
-                           ...formData,
-                           anonymous: e.target.checked,
-                        })
-                     }
-                     value={formData.anonymous}
-                  />
-                  <div className='grid grid-cols-2 gap-4 justify-between my-8'>
+                  <div className='px-8 pt-8'>
+                     <FieldText
+                        // hidden={user?.forename}
+                        id='email'
+                        name='email'
+                        className='my-6 '
+                        placeholder='Email'
+                        type='text'
+                        inputHandler={e => {
+                           setFormData({
+                              ...formData,
+                              donatorEmail: e.target.value,
+                           })
+                        }}
+                        value={formData.donatorEmail}
+                        validationHandler={e => {}}
+                     />
+                  </div>
+
+                  <div className='flex flex-col  p-8 pt-12  border rounded-3xl bg-gray-50 shadow-xl'>
+                     <SafeChargeCC safeCharge={safeCharge} />
                      <FieldText
                         // hidden={user?.forename}
                         id='firstName'
                         name='firstName'
-                        className='my-4'
-                        placeholder='First Name'
+                        className='my-6 w-full'
+                        placeholder='Card Number '
                         type='text'
                         inputHandler={e => {
                            setFormData({
@@ -351,92 +485,30 @@ const Donate = ({ data: campaignData }) => {
                         validationHandler={e => {}}
                      />
                      <FieldText
-                        // hidden={user?.surname}
-                        id='lastName'
-                        name='lastName'
-                        className='my-4'
-                        placeholder='Last Name'
+                        // hidden={user?.forename}
+                        id='firstName'
+                        name='firstName'
+                        className='my-6 w-full'
+                        placeholder='Card Holder Name'
                         type='text'
                         inputHandler={e => {
                            setFormData({
                               ...formData,
-                              lastName: e.target.value,
+                              firstName: e.target.value,
                            })
                         }}
-                        value={formData.lastName}
+                        value={formData.firstName}
                         validationHandler={e => {}}
                      />
-                     <FieldText
-                        // hidden={user?.surname}
-                        id='addressLine1'
-                        name='addressLine1'
-                        className='my-4'
-                        placeholder='Address First Line'
-                        type='text'
-                        inputHandler={e => {
-                           setFormData({
-                              ...formData,
-                              giftAidRequest: {
-                                 ...formData.giftAidRequest,
-                                 addressLine1: e.target.value,
-                              },
-                           })
-                        }}
-                        value={formData.giftAidRequest.addressLine1}
-                        validationHandler={e => {}}
-                     />
-                     <FieldText
-                        id='postcode'
-                        name='postcode'
-                        className='my-4'
-                        placeholder='Post Code'
-                        type='text'
-                        inputHandler={e => {
-                           setFormData({
-                              ...formData,
-                              giftAidRequest: {
-                                 ...formData.giftAidRequest,
-                                 postZipCode: e.target.value,
-                              },
-                           })
-                        }}
-                        value={formData.giftAidRequest.postZipCode}
-                        validationHandler={e => {}}
-                     />
-                  </div>
-               </div>)}
-               {page>=4&&(<>
-                  <div className='items-center py-8 '>
-                     <p className='block  text-xl text-stone-800   font-bold py-4'>
-                        Payment method
-                     </p>
-                     <div className='px-8 pt-8'>
+                     <div className='flex flex-row gap-4 justify-between'>
                         <FieldText
                            // hidden={user?.forename}
-                           id='email'
-                           name='email'
-                           className='my-6 '
-                           placeholder='Email'
-                           type='text'
-                           inputHandler={e => {
-                              setFormData({
-                                 ...formData,
-                                 donatorEmail: e.target.value,
-                              })
-                           }}
-                           value={formData.donatorEmail}
-                           validationHandler={e => {}}
-                        />
-                     </div>
-         
-                     <div className='flex flex-col  p-8 pt-12  border rounded-3xl bg-gray-50 shadow-xl'>
-                        <FieldText
-                           // hidden={user?.forename}
-                           id='firstName'
-                           name='firstName'
+                           id='Exp'
+                           name='Exp'
                            className='my-6 w-full'
-                           placeholder='Card Number '
-                           type='text'
+                           placeholder='Expire date'
+                           type='tel'
+                           pattern='\d\d/\d\d'
                            inputHandler={e => {
                               setFormData({
                                  ...formData,
@@ -448,10 +520,10 @@ const Donate = ({ data: campaignData }) => {
                         />
                         <FieldText
                            // hidden={user?.forename}
-                           id='firstName'
-                           name='firstName'
+                           id='CSV'
+                           name='CSV'
                            className='my-6 w-full'
-                           placeholder='Card Holder Name'
+                           placeholder='CSV/CVV'
                            type='text'
                            inputHandler={e => {
                               setFormData({
@@ -462,113 +534,81 @@ const Donate = ({ data: campaignData }) => {
                            value={formData.firstName}
                            validationHandler={e => {}}
                         />
-                        <div className='flex flex-row gap-4 justify-between'>
-                           <FieldText
-                              // hidden={user?.forename}
-                              id='Exp'
-                              name='Exp'
-                              className='my-6 w-full'
-                              placeholder='Expire date'
-                              type='tel'
-                              pattern='\d\d/\d\d'
-                              inputHandler={e => {
-                                 setFormData({
-                                    ...formData,
-                                    firstName: e.target.value,
-                                 })
-                              }}
-                              value={formData.firstName}
-                              validationHandler={e => {}}
-                           />
-                           <FieldText
-                              // hidden={user?.forename}
-                              id='CSV'
-                              name='CSV'
-                              className='my-6 w-full'
-                              placeholder='CSV/CVV'
-                              type='text'
-                              inputHandler={e => {
-                                 setFormData({
-                                    ...formData,
-                                    firstName: e.target.value,
-                                 })
-                              }}
-                              value={formData.firstName}
-                              validationHandler={e => {}}
-                           />
-                        </div>
                      </div>
                   </div>
-         
-                  <div className='items-center py-8 '>
-                     <p className='block  text-xl text-stone-800   font-bold py-4'>
-                        Your donation
-                     </p>
-                     <div className='flex flex-col  gap-1 mx-8'>
-                        <div className='flex flex-row justify-between'>
-                           <p>Your donation</p>
-                           <p>
-                              {formData?.baseCurrency?.displaySymbol}
-                              {formData?.amount.toFixed(2)}
-                           </p>
-                        </div>
-                        <div className='flex flex-row justify-between'>
-                           <p>GiveStar Voluntary Contribution</p>
-                           <p>
-                              {formData?.baseCurrency?.displaySymbol}
-                              {formData?.voluntaryContribution.toFixed(2)}
-                           </p>
-                        </div>
-                        <div className='flex flex-row justify-between'>
-                           <p>Gift Aid</p>
-                           <p>
-                              {formData?.baseCurrency?.displaySymbol}
-                              {(formData.amount * 0.25).toFixed(2)}
-                           </p>
-                        </div>
+               </div>
+
+               <div className='items-center py-8 '>
+                  <p className='block  text-xl text-stone-800   font-bold py-4'>
+                     Your donation
+                  </p>
+                  <div className='flex flex-col  gap-1 mx-8'>
+                     <div className='flex flex-row justify-between'>
+                        <p>Your donation</p>
+                        <p>
+                           {formData?.baseCurrency?.displaySymbol}
+                           {formData?.amount.toFixed(2)}
+                        </p>
                      </div>
-                     <div
-                        className='flex flex-col gap-2 px-8 p-4
+                     <div className='flex flex-row justify-between'>
+                        <p>GiveStar Voluntary Contribution</p>
+                        <p>
+                           {formData?.baseCurrency?.displaySymbol}
+                           {formData?.voluntaryContribution.toFixed(2)}
+                        </p>
+                     </div>
+                     <div className='flex flex-row justify-between'>
+                        <p>Gift Aid</p>
+                        <p>
+                           {formData?.baseCurrency?.displaySymbol}
+                           {(formData.amount * 0.25).toFixed(2)}
+                        </p>
+                     </div>
+                  </div>
+                  <div
+                     className='flex flex-col gap-2 px-8 p-4
                       my-8 bg-white rounded-2xl text-xl '>
-                        <div className='flex flex-row justify-between '>
-                           <p>You Pay</p>
-                           <p>
-                              {formData?.baseCurrency?.displaySymbol}
-                              {(
-                                 formData?.voluntaryContribution + formData.amount
-                              ).toFixed(2)}
-                           </p>
-                        </div>
-                        <div className='flex flex-row justify-between'>
-                           <p>Charities recivere</p>
-                           <p>
-                              {formData?.baseCurrency?.displaySymbol}
-                              {(formData.amount * 1.25).toFixed(2)}
-                           </p>
-                        </div>
+                     <div className='flex flex-row justify-between '>
+                        <p>You Pay</p>
+                        <p>
+                           {formData?.baseCurrency?.displaySymbol}
+                           {(
+                              formData?.voluntaryContribution + formData.amount
+                           ).toFixed(2)}
+                        </p>
+                     </div>
+                     <div className='flex flex-row justify-between'>
+                        <p>Charities recivere</p>
+                        <p>
+                           {formData?.baseCurrency?.displaySymbol}
+                           {(formData.amount * 1.25).toFixed(2)}
+                        </p>
                      </div>
                   </div>
-               </>)}
-            
-         
-         
-         {(page!=2)&&(page!=4&&<ButtonPrimary
-            className='w-60'
-            text={`Continue`}
-            actionHandler={() => {
-               setPage(page + 1)
-            }}
-         />)}
+               </div>
+            </>
+         )}
 
-         {page>=4&&(<ButtonPrimary
-            className='w-60'
-            text={`Donate ${formData?.baseCurrency?.displaySymbol}${(
-               formData?.voluntaryContribution + formData.amount
-            ).toFixed(2)} Securely`}
-            actionHandler={() => {}}
-         />)}
+         {page != 2 && page != 4 && (
+            <ButtonPrimary
+               className='w-60'
+               text={`Continue`}
+               actionHandler={() => {
+                  setPage(page + 1)
+               }}
+            />
+         )}
 
-        
+         {page >= 4 && (
+            <ButtonPrimary
+               className='w-60'
+               text={`Donate ${formData?.baseCurrency?.displaySymbol}${(
+                  formData?.voluntaryContribution + formData.amount
+               ).toFixed(2)} Securely`}
+               actionHandler={() => {}}
+            />
+         )}
+
          {/* {page >= 4 && (
             <p className='my-8' onClick={() => setPage(page - 1)}>
                ←previous
