@@ -12,7 +12,7 @@ export const donationApiSlice = apiSlice.injectEndpoints({
             }
          },
       }),
-      
+
       getDonations: builder.query({
          query: arg => {
             const { query: campaignId, count } = arg
@@ -25,14 +25,7 @@ export const donationApiSlice = apiSlice.injectEndpoints({
          providesTags: ['Donation'],
          invalidatesTags: ['Donation'],
       }),
-
-      
    }),
 })
 
-export const {
-   useAddDonationMutation,
-   
-   useGetDonationsQuery,
-   
-} = donationApiSlice
+export const { useAddDonationMutation, useGetDonationsQuery } = donationApiSlice

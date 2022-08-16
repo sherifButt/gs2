@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const ButtonPrimary = ({
    text,
@@ -12,8 +12,10 @@ const ButtonPrimary = ({
    isSuccess,
    success,
    error,
-   className
-}) => {
+   className,
+} ) => {
+   const [ _className, setClassName ] = useState( className )
+   useEffect( () => { setClassName(className)} ,[className])
    return (
       <>
          <button
@@ -23,7 +25,7 @@ const ButtonPrimary = ({
                isLoading
                   ? `${bgColor} shadow-none text-white`
                   : `bg-yellow-400 hover:scale-105 active:scale-100 hover:shadow-md ${textColor}`
-            } rounded-xl ease-in-out duration-300 active:shadow-none text-center  font-semibold uppercase ${className}`}>
+            } rounded-xl ease-in-out duration-300 active:shadow-none text-center  font-semibold uppercase ${_className}`}>
             {isLoading ? (
                <div className='inline-flex'>
                   <svg
@@ -58,7 +60,7 @@ const ButtonPrimary = ({
 ButtonPrimary.defaultProps = {
    
    isLoading: false,
-   actionHandler: e => alert('Sign Up'),
+ 
    bgColor: 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500',
    textColor: 'text-black',
    icon: '',

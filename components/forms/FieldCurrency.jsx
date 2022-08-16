@@ -60,7 +60,7 @@ const FieldCurrency = (
                   title={title}
                   required
                   defaultValue={defaultValue || 0}
-                  className={`peer text-right  mt-1 relative shadow-sm block w-full py-1 pr-[8rem] pl-4 placeholder-transparent  text-army-600 ${
+                  className={`peer text-right  mt-1 relative shadow-sm block w-full py-1 pr-[12rem] pl-4 placeholder-transparent  text-army-600 ${
                      error &&
                      'focus:ring-red-500 focus:border-red-500 border-red-300'
                   } focus:outline-none border focus:ring-gray-300 focus:border-gray-300 border-gray-200 text-6xl font-light rounded-xl transition-all ease-out duration-300`}
@@ -73,11 +73,11 @@ const FieldCurrency = (
                   step={step || 10}
                   min={min || 100}
                />
-               {/* <div className='absolute inset-y-0 right-0 pr-32 pt-1 flex items-center pointer-events-none text-xl'>
-                  <span className='text-gray-400 font-bold'>
+               <div className='absolute inset-y-0 right-0 pr-32 pt-1 flex items-center pointer-events-none '>
+                  <span className='text-army-600 font-light text-6xl'>
                      .00
                   </span>
-               </div> */}
+               </div>
                <div className='absolute inset-y-0 left-0 pl-3 pt-1 flex items-center pointer-events-none text-xl'>
                   <span className='text-gray-400 font-bold'>
                      {fieldData

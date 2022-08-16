@@ -15,6 +15,7 @@ import {
 //Data
 import { useLoadCurrencyListQuery } from '../../../features/currency/currencyApiSlice'
 import { useGetByQuickCodeQuery } from '../../../features/campaign/campaignApiSlice'
+import { useAddDonationMutation } from '../../../features/donation/donationApiSlice'
 import ButtonPrimary from '../../../components/buttons/ButtonPrimary'
 import { useLoadUserQuery } from '../../../features/user/userApiSlice'
 import { selectCurrentUser } from '../../../features/user/userSlice'
@@ -48,18 +49,29 @@ const Donate = ({ data: campaignData }) => {
    //    isLoading: campaignDataIsLoading,
    //    error: campaignDataError,
    // } = useGetByQuickCodeQuery({ query: router.query.id })
-
    // console.log('campaignData', campaignData)
-     const [safeCharge, setSafeCharge] = useState(null)
-   const [ page, setPage ] = useState( 0 )
-   const [giftAid,setGiftAid]=useState(false)
+
+   const [
+      addDonation,
+      {
+         data: addDonationData,
+         isLoading: addDonationIsLoading,
+         error: addDonationError,
+         isError: addDonationIsError,
+      },
+   ] = useAddDonationMutation()
+
+   const [safeCharge, setSafeCharge] = useState(null)
+   const [page, setPage] = useState(0)
+   const [giftAid, setGiftAid] = useState(false)
+   const [donationSummery, setDonationSummery] = useState(false)
 
    const [donationAmount, setDonationAmount] = useState(
       campaignData?.defaultDonationSizes[2].value
    )
 
    const formInitialData = {
-      id: campaignData?.id,
+      id: '00000000-0000-0000-0000-000000000000',
       campaignId: campaignData?.id,
       giftAid: true,
       giftAidRequest: {
@@ -68,7 +80,7 @@ const Donate = ({ data: campaignData }) => {
          addressLine1: '',
          addressLine2: '',
          addressLine3: '',
-         donatorEmail: user?.email,
+         donatorEmail: user?.email || 'sherif@give-star.com',
       },
       currencyId: campaignData?.baseCurrencyId,
       baseCurrency: campaignData?.baseCurrency,
@@ -89,30 +101,72 @@ const Donate = ({ data: campaignData }) => {
       donatorEmail: user?.email,
       voluntaryContribution: donationAmount * 0.1,
       voluntaryContributionValueHolder: 0.1,
+      sessionToken: '',
    }
 
-   const [formData, setFormData] = useState(formInitialData)
+   const formInitialDataII = {
+      id: '00000000-0000-0000-0000-000000000000',
+      campaignId: '227615ec-a36a-47cd-8357-3b4946d61225',
+      giftAid: false,
+      giftAidRequest: {
+         donatorName: 'sheif',
+         postZipCode: 'Cf843nb',
+         addressLine1: 'string',
+         addressLine2: 'string',
+         addressLine3: 'string',
+         donatorEmail: 'sherif@give-star.com',
+      },
+      currencyId: '9d6494c0-e364-43f0-b76c-52251df71133',
+      donatorName: 'sheirf',
+      message: 'the good message',
+      amount: 20,
+      anonymous: true,
+      paymentProviderId: '1e400bd7-ce58-4de1-9d04-92ff539f87e8',
+      supporterId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      feesCovered: true,
+      giftValue: 0,
+      paymentProviderRef: 'string',
+      donationSource: 1,
+      donationType: 2,
+      privateDonation: true,
+      donatorEmail: 'sherif@give_star.com',
+      charityContact: true,
+      giveStarContact: true,
+      stuff: 'sutff',
+      baseCurrency: {
+         id: '9d6494c0-e364-43f0-b76c-52251df71133',
+         name: 'British Pound',
+         displaySymbol: '£',
+         shortCode: 'GBP',
+      },
+   }
+
+   const [formData, setFormData] = useState(formInitialDataII)
+   // const MERCHANT_ID = '1122647993193803847'
+   // const MERCHANT_SITE_ID = '233636'
 
    useEffect(() => {
       // console.log('donationAmount', donationAmount)
       console.log('user', user)
-      console.table( 'formData', formData )
+      console.table('formData', formData)
       console.log('page', page)
-   }, [ donationAmount, user, formData, page ] )
-   
+   }, [donationAmount, user, formData, page])
+
    useEffect(() => {
       loadScript(
          'https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js' //production
       ).then(() => {
          setSafeCharge(
             window.SafeCharge({
-               merchantId: '806659927845195034',
-               merchantSiteId: '196488',
+               env: 'int',
+               merchantId: process.env.MERCHANT_ID,
+               merchantSiteId: process.env.MERCHANT_SITE_ID,
             })
          )
+         
       })
-   }, [] )
-   
+   }, [])
+
    return (
       <form className='divide-y mx-4 text-center'>
          <div className='flex flex-col gap-3 justify-start items-center py-2 -mt-4 sm:mt-0'>
@@ -130,7 +184,7 @@ const Donate = ({ data: campaignData }) => {
                   <div
                      key={item.charityId}
                      className='flex flex-col gap-1.5 justify-center items-center'>
-                     <div className='w-20 h-20 items-center'>
+                     <div className='w-16 h16 md:w-20 md:h-20  items-center'>
                         <img
                            className=' w-20  rounded-xl'
                            src={
@@ -173,7 +227,7 @@ const Donate = ({ data: campaignData }) => {
                />
 
                <FieldCurrency
-                  className='my-4 mt-10'
+                  className='my-6 mt-10'
                   data={useLoadCurrencyListQuery} //List of currencies
                   value={formData.amount}
                   inputHandler={e => {
@@ -190,14 +244,67 @@ const Donate = ({ data: campaignData }) => {
                      setFormData({ ...formData, baseCurrency: e })
                   }}
                   min={1}
-                  step={0.01}
+                  step={1}
                   baseCurrency={campaignData?.baseCurrency}
                />
 
+               <FieldText
+                  // hidden={user?.forename}
+                  id='donatorName'
+                  name='donatorName'
+                  className='my-6'
+                  placeholder='Donator Name'
+                  type='text'
+                  inputHandler={e => {
+                     setFormData({
+                        ...formData,
+                        donatorName: e.target.value,
+                        giftAidRequest: {
+                           ...formData.giftAidRequest,
+                           donatorName: e.target.value,
+                        },
+                     })
+                  }}
+                  value={formData.donatorName}
+                  validationHandler={e => {}}
+               />
+
+               <FieldCheckbox
+                  className='mb-10 text-left'
+                  terms='Make my name anonymous'
+                  inputHandler={e =>
+                     setFormData({
+                        ...formData,
+                        anonymous: e.target.checked,
+                     })
+                  }
+                  value={formData.anonymous}
+               />
+
+               <FieldText
+                  // hidden={user?.forename}
+                  id='email'
+                  name='email'
+                  className='my-6 '
+                  placeholder='Donator Email (for receipts)'
+                  type='text'
+                  inputHandler={e => {
+                     setFormData({
+                        ...formData,
+                        donatorEmail: e.target.value,
+                        giftAidRequest: {
+                           ...formData.giftAidRequest,
+                           donatorEmail: e.target.value,
+                        },
+                     })
+                  }}
+                  value={formData.donatorEmail}
+                  validationHandler={e => {}}
+               />
                <FieldTextarea
                   className='my-6'
                   placeholder='Write a message of support...'
-                  rows={2}
+                  rows={4}
                   inputHandler={e => {
                      setFormData({ ...formData, message: e.target.value })
                   }}
@@ -205,7 +312,7 @@ const Donate = ({ data: campaignData }) => {
                />
 
                <FieldCheckbox
-                  className='my-4 text-left'
+                  className='my-6 text-left'
                   terms='Make my donation and message anonymous from public view'
                   inputHandler={e =>
                      setFormData({
@@ -217,7 +324,7 @@ const Donate = ({ data: campaignData }) => {
                />
             </div>
          </div>
-
+         {/* Voluntary contribution */}
          {page >= 1 && (
             <div className='flex flex-col gap-3 justify-start items-center py-8 '>
                <div>
@@ -269,16 +376,16 @@ const Donate = ({ data: campaignData }) => {
                      }}
                      value={formData.voluntaryContribution}
                      validationHandler={e => {}}
-                     step={0.01}
+                     step={1}
                      // min={ 0 }
                      rightText={formData.baseCurrency?.displaySymbol}
-                     rightTextPadding='pl-6'
+                     rightTextPadding='pl-8'
                   />
                </div>
             </div>
          )}
-
-         {page >= 2 && (
+         {/* Gift Aid */}
+         {page == 2 && (
             <div
                className='flex flex-col gap-3 justify-between
                 items-center py-8 '>
@@ -319,28 +426,29 @@ const Donate = ({ data: campaignData }) => {
                   </div>
                </div>
 
-               <div className='flex flex-row justify-between gap-4 my-8'>
+               <div className='flex flex-row justify-between gap-4 my-8 w-full'>
                   <ButtonPrimary
-                     className='w-40'
                      text='Yes'
                      actionHandler={() => {
-                        setPage(3)
+                        // setPage(3)
                         setGiftAid(true)
+                        setFormData({ ...formData, giftAid: true })
                      }}
                   />
+
                   <ButtonPrimary
-                     className='w-40 bg-gray-300 text-gray-900'
-                     bgColor='bg-white'
+                     className=' text-white bg-gray-400'
                      text='No'
-                     actionHandler={() => {
+                     actionHandler={e => {
+                        e.preventDefault()
+                        setDonationSummery(!donationSummery)
                         setPage(4)
-                        setGiftAid(false)
                      }}
                   />
                </div>
             </div>
          )}
-
+         {/* Gift Aid Information */}
          {giftAid && (
             <div className='flex flex-col gap-3 justify-start items-center py-8 '>
                <p className='block  text-xl text-stone-800  font-bold py-4'>
@@ -441,155 +549,91 @@ const Donate = ({ data: campaignData }) => {
                </div>
             </div>
          )}
-         {page >= 4 && (
-            <>
-               <div className='items-center py-8 '>
-                  <p className='block  text-xl text-stone-800   font-bold py-4'>
-                     Payment method
-                  </p>
-                  <div className='px-8 pt-8'>
-                     <FieldText
-                        // hidden={user?.forename}
-                        id='email'
-                        name='email'
-                        className='my-6 '
-                        placeholder='Email'
-                        type='text'
-                        inputHandler={e => {
-                           setFormData({
-                              ...formData,
-                              donatorEmail: e.target.value,
-                           })
-                        }}
-                        value={formData.donatorEmail}
-                        validationHandler={e => {}}
-                     />
+         {/*4. Donation Summery */}
+         {donationSummery && (
+            <div className='items-center py-8 '>
+               <p className='block  text-xl text-stone-800   font-bold py-4'>
+                  Your donation summery
+               </p>
+               <div className='flex flex-col  gap-1 mx-8'>
+                  <div className='flex flex-row justify-between'>
+                     <p>Your donation</p>
+                     <p>
+                        {formData?.baseCurrency?.displaySymbol}
+                        {formData?.amount.toFixed(2)}
+                     </p>
                   </div>
-
-                  <div className='flex flex-col  p-8 pt-12  border rounded-3xl bg-gray-50 shadow-xl'>
-                     <SafeChargeCC safeCharge={safeCharge} />
-                     <FieldText
-                        // hidden={user?.forename}
-                        id='firstName'
-                        name='firstName'
-                        className='my-6 w-full'
-                        placeholder='Card Number '
-                        type='text'
-                        inputHandler={e => {
-                           setFormData({
-                              ...formData,
-                              firstName: e.target.value,
-                           })
-                        }}
-                        value={formData.firstName}
-                        validationHandler={e => {}}
-                     />
-                     <FieldText
-                        // hidden={user?.forename}
-                        id='firstName'
-                        name='firstName'
-                        className='my-6 w-full'
-                        placeholder='Card Holder Name'
-                        type='text'
-                        inputHandler={e => {
-                           setFormData({
-                              ...formData,
-                              firstName: e.target.value,
-                           })
-                        }}
-                        value={formData.firstName}
-                        validationHandler={e => {}}
-                     />
-                     <div className='flex flex-row gap-4 justify-between'>
-                        <FieldText
-                           // hidden={user?.forename}
-                           id='Exp'
-                           name='Exp'
-                           className='my-6 w-full'
-                           placeholder='Expire date'
-                           type='tel'
-                           pattern='\d\d/\d\d'
-                           inputHandler={e => {
-                              setFormData({
-                                 ...formData,
-                                 firstName: e.target.value,
-                              })
-                           }}
-                           value={formData.firstName}
-                           validationHandler={e => {}}
-                        />
-                        <FieldText
-                           // hidden={user?.forename}
-                           id='CSV'
-                           name='CSV'
-                           className='my-6 w-full'
-                           placeholder='CSV/CVV'
-                           type='text'
-                           inputHandler={e => {
-                              setFormData({
-                                 ...formData,
-                                 firstName: e.target.value,
-                              })
-                           }}
-                           value={formData.firstName}
-                           validationHandler={e => {}}
-                        />
-                     </div>
+                  <div className='flex flex-row justify-between'>
+                     <p>GiveStar Voluntary Contribution</p>
+                     <p>
+                        {formData?.baseCurrency?.displaySymbol}
+                        {formData?.voluntaryContribution.toFixed(2)}
+                     </p>
+                  </div>
+                  <div className='flex flex-row justify-between'>
+                     <p>Gift Aid</p>
+                     <p>
+                        {formData?.baseCurrency?.displaySymbol}
+                        {(formData.amount * (giftAid ? 0.25 : 0)).toFixed(2)}
+                     </p>
                   </div>
                </div>
-
-               <div className='items-center py-8 '>
-                  <p className='block  text-xl text-stone-800   font-bold py-4'>
-                     Your donation
-                  </p>
-                  <div className='flex flex-col  gap-1 mx-8'>
-                     <div className='flex flex-row justify-between'>
-                        <p>Your donation</p>
-                        <p>
-                           {formData?.baseCurrency?.displaySymbol}
-                           {formData?.amount.toFixed(2)}
-                        </p>
-                     </div>
-                     <div className='flex flex-row justify-between'>
-                        <p>GiveStar Voluntary Contribution</p>
-                        <p>
-                           {formData?.baseCurrency?.displaySymbol}
-                           {formData?.voluntaryContribution.toFixed(2)}
-                        </p>
-                     </div>
-                     <div className='flex flex-row justify-between'>
-                        <p>Gift Aid</p>
-                        <p>
-                           {formData?.baseCurrency?.displaySymbol}
-                           {(formData.amount * 0.25).toFixed(2)}
-                        </p>
-                     </div>
-                  </div>
-                  <div
-                     className='flex flex-col gap-2 px-8 p-4
+               <div
+                  className='flex flex-col gap-2 px-8 p-4
                       my-8 bg-white rounded-2xl text-xl '>
-                     <div className='flex flex-row justify-between '>
-                        <p>You Pay</p>
-                        <p>
-                           {formData?.baseCurrency?.displaySymbol}
-                           {(
-                              formData?.voluntaryContribution + formData.amount
-                           ).toFixed(2)}
-                        </p>
-                     </div>
-                     <div className='flex flex-row justify-between'>
-                        <p>Charities recivere</p>
-                        <p>
-                           {formData?.baseCurrency?.displaySymbol}
-                           {(formData.amount * 1.25).toFixed(2)}
-                        </p>
-                     </div>
+                  <div className='flex flex-row justify-between '>
+                     <p>You Pay</p>
+                     <p>
+                        {formData?.baseCurrency?.displaySymbol}
+                        {(
+                           formData?.voluntaryContribution + formData.amount
+                        ).toFixed(2)}
+                     </p>
+                  </div>
+                  <div className='flex flex-row justify-between'>
+                     <p>Charities recivere</p>
+                     <p>
+                        {formData?.baseCurrency?.displaySymbol}
+                        {(formData.amount * (giftAid ? 1.25 : 1)).toFixed(2)}
+                     </p>
                   </div>
                </div>
-            </>
+            </div>
+         )}
+         {/*5. Payment Method */}
+         {page >= 5 && (
+            <div className='items-center py-8 '>
+               {addDonationIsLoading && <p>/</p>}
+               <p className='block  text-xl text-stone-800   font-bold py-4'>
+                  Payment method
+               </p>
+
+               <div className='flex flex-col  p-8 pt-12  border rounded-3xl bg-gray-50 shadow-xl'>
+                  <SafeChargeCC
+                     safeCharge={safeCharge}
+                     donationId={
+                        addDonationData?.data?.paymentResponse.clientRequestId
+                     }
+                     emailAddress={formData?.donatorEmail}
+                     donatorName={formData?.donatorName}
+                     sessionToken={
+                        addDonationData?.data?.paymentResponse.sessionToken
+                     }
+                     merchantId={
+                        addDonationData?.data?.paymentResponse.merchantId
+                     }
+                     merchantSiteId={
+                        addDonationData?.data?.paymentResponse.merchantSiteId
+                     }
+                     donationAmount={formData?.amount}
+                     volounTarlyContrubution={formData.volounTarlyContrubution}
+                     currencySymbol={formData.baseCurrency.displaySymbol}
+                  />
+               </div>
+            </div>
          )}
 
-         {page != 2 && page != 4 && (
+         {page != 2 && page != 4 && page != 5 && (
             <ButtonPrimary
                className='w-60'
                text={`Continue`}
@@ -599,13 +643,19 @@ const Donate = ({ data: campaignData }) => {
             />
          )}
 
-         {page >= 4 && (
+         {donationSummery && page != 5 && (
             <ButtonPrimary
                className='w-60'
-               text={`Donate ${formData?.baseCurrency?.displaySymbol}${(
-                  formData?.voluntaryContribution + formData.amount
-               ).toFixed(2)} Securely`}
-               actionHandler={() => {}}
+               // text={`Donate ${formData?.baseCurrency?.displaySymbol}${(
+               //    formData?.voluntaryContribution + formData.amount
+               // ).toFixed(2)} Securely`
+               text={`Continue to Payment`}
+               isLoading={addDonationIsLoading}
+               actionHandler={e => {
+                  e.preventDefault()
+                  setPage(5)
+                  addDonation(formData)
+               }}
             />
          )}
 
