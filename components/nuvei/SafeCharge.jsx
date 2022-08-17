@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNotification } from '../../features/notificationSlice'
 import { useRouter } from 'next/router'
 
- const SafeChargeCC = memo(
+const SafeChargeCC = memo(
    ({
       safeCharge,
       donationId,
@@ -18,7 +18,7 @@ import { useRouter } from 'next/router'
       donationAmount,
       volounTarlyContrubution,
       currencySymbol,
-   } ) => {
+   }) => {
       const route = useRouter()
       const dispatch = useDispatch()
       const [cardN, setCardN] = useState(null)

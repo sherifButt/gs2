@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SafeChargeCC } from '../../../components/nuvei/SafeCharge'
+import  SafeChargeCC  from '../../../components/nuvei/SafeCharge'
 import FieldCheckbox from '../../../components/forms/FieldCheckbox'
 import FieldCurrency from '../../../components/forms/FieldCurrency'
 import FieldRadialSelect from '../../../components/forms/FieldRadialSelect'
