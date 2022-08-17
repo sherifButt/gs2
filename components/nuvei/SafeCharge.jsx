@@ -1,3 +1,5 @@
+// eslint-disable-next-line react/display-name
+
 import React, { memo, useEffect, useState } from 'react'
 import ButtonPrimary from '../buttons/ButtonPrimary'
 import FieldText from '../forms/FieldText'
