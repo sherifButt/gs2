@@ -73,7 +73,7 @@ export const signin = {
    fields: [
       {
          name: 'email',
-         value: 'ant@there.com',
+         value: '',
          description: '',
          error: '',
          valid: '',
@@ -87,7 +87,7 @@ export const signin = {
       },
       {
          name: 'password',
-         value: '@Ahandsomepassword333',
+         value: '',
          description: '',
          error: '',
          valid: '',
