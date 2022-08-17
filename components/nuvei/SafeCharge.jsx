@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNotification } from '../../features/notificationSlice'
 import { useRouter } from 'next/router'
 
-export const SafeChargeCC = memo(
+ const SafeChargeCC = memo(
    ({
       safeCharge,
       donationId,
@@ -240,3 +240,5 @@ export const SafeChargeCC = memo(
       )
    }
 )
+
+export default SafeChargeCC

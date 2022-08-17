@@ -37,19 +37,19 @@ const Basecamp = ({ name }) => {
    )
 
    const createSomething = (
-      <div class='flex flex-col gap-6 justify-start items-center max-w-[18.94rem] mx-auto'>
-         <div class='flex flex-row gap-5 justify-start items-start'>
+      <div className='flex flex-col gap-6 justify-start items-center max-w-[18.94rem] mx-auto'>
+         <div className='flex flex-row gap-5 justify-start items-start'>
             <div>
                <img
-                  class='block'
+                  className='block'
                   src='/assets/images/givestar-fetured-01.png'
                />
             </div>
          </div>
-         <p class='block text-center text-2xl text-black  font-light'>
+         <p className='block text-center text-2xl text-black  font-light'>
             Start Something Today
          </p>
-         <p class='block w-[18.94rem] text-center text-lg text-black  font-light'>
+         <p className='block w-[18.94rem] text-center text-lg text-black  font-light'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
             dapibus sapien.
          </p>

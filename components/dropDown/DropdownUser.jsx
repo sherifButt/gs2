@@ -13,27 +13,6 @@ import { signin } from '../../features/auth/authSlice'
 
 import DropdownUserMenu from './DropdownUserMenu'
 
-const menu = [
-   {
-      title: 'Account settings',
-      href: '#',
-      icon: SettingsIcon,
-      active: false,
-   },
-   {
-      title: 'User Profile',
-      href: '#',
-      icon: UserIcon,
-      active: false,
-   },
-   {
-      title: 'Help & support',
-      href: '#',
-      icon: InfoIcon,
-      active: false,
-   },
-]
-
 export default function Example() {
    const dispatch = useDispatch()
 

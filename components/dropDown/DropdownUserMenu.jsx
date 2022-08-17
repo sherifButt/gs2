@@ -15,24 +15,24 @@ import { logOut } from '../../features/auth/authSlice'
 import { removeUser } from '../../features/user/userSlice'
 
 const menu = [
-   {
-      title: 'Account settings',
-      href: '#',
-      icon: SettingsIcon,
-      active: false,
-   },
-   {
-      title: 'User Profile',
-      href: '/your-account/profile',
-      icon: UserIcon,
-      active: false,
-   },
-   {
-      title: 'Help & support',
-      href: '#',
-      icon: InfoIcon,
-      active: false,
-   },
+   // {
+   //    title: 'Account settings',
+   //    href: '#',
+   //    icon: SettingsIcon,
+   //    active: false,
+   // },
+   // {
+   //    title: 'User Profile',
+   //    href: '/your-account/profile',
+   //    icon: UserIcon,
+   //    active: false,
+   // },
+   // {
+   //    title: 'Help & support',
+   //    href: '#',
+   //    icon: InfoIcon,
+   //    active: false,
+   // },
 ]
 
 export default function DropdownUserMenu ( open ) {
