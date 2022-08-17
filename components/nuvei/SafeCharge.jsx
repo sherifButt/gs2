@@ -243,4 +243,6 @@ const SafeChargeCC = memo(
    }
 )
 
+SafeChargeCC.displayName = 'SafeChargeCC'
+
 export default SafeChargeCC
