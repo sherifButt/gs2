@@ -1,23 +1,19 @@
 import React from 'react'
+import Footer from './Footer'
 import Header from './Header'
-import Navbar from '../navbar-2'
+import Nav from './Navbar'
 
-
-const Layout = ({
-   children,
-   rightSidebar,
-   leftSidebar,
-   footer,
-   bannerImagePath,
-}) => {
-   
-
-   console.log('bannerImagePath', bannerImagePath)
+const Layout = ({ children }) => {
    return (
-      <div className='relative bg-gray-100 flex flex-col grow z-0'>
+      <div className=' h-screen flex flex-col'>
          <Header />
-         <Navbar className=' bg-yellow-400 w-full flex justify-between h-20 fixed top-0 items-center shadow z-10' />
-         {children}
+         <Nav />
+         <div className='container mx-auto'>
+            <main className='relative   py-4 px-4   flex-grow h-screen'>
+               {children}
+            </main>
+            <Footer />
+         </div>
       </div>
    )
 }

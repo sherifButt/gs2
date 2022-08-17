@@ -1,16 +1,19 @@
 import React from 'react'
 
-const Navbar = props => {
+const navigation = [
+   { name: 'Solutions', href: '#' },
+   { name: 'Pricing', href: '#' },
+   { name: 'Docs', href: '#' },
+   { name: 'Company', href: '#' },
+]
+
+const Navbar = () => {
    return (
-      <header {...props}>
+      <header className='sticky top-0 bg-indigo-200 z-50'>
          <nav
-            className='w-full flex justify-between px-4 sm:px-6 lg:px-8 '
+            className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
             aria-label='Top'>
-            <div>Navbar</div>
-            <div>Navbar</div>
-            <div>Navbar</div>
-            <div>Navbar</div>
-            <div>Navbar</div>
+            Navbar
          </nav>
       </header>
    )
