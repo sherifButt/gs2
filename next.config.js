@@ -5,6 +5,7 @@ const nextConfig = {
       baseUrl: 'https://api.givestar.io/api/v1',
       MERCHANT_ID: '1122647993193803847',
       MERCHANT_SITE_ID: '233636',
+      
    },
 }
 
