@@ -100,10 +100,10 @@ const SafeChargeCC = memo(
                      console.log('sucess', resp)
                      dispatch(
                         addNotification({
-                           isSuccess: resp?.result == 'ERROR' ? false : true,
+                           isSuccess: resp?.result != 'APPROVED' ? false : true,
                            message: resp?.result,
                            description:
-                              resp?.result == 'ERROR'
+                              resp?.result != 'APPROVED'
                                  ? resp?.errorDescription
                                     ? resp?.errorDescription
                                     : 'Your payment Failed!'
