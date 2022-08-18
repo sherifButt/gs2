@@ -61,7 +61,7 @@ const Basecamp = ({ name }) => {
    useEffect(() => {
       // console.log('campaignListData', campaignListData)
 
-      campaignListData &&
+      campaignListData && 
          setYourCampaigns(
             <>
                <EventBloc
@@ -77,7 +77,7 @@ const Basecamp = ({ name }) => {
          {/* {yourCampaigns} */}
          <Tab>
             <Panel title='Your Campaigns' current>
-               {campaignListData? <EventBloc
+               {campaignListData && campaignListData.length>0? <EventBloc
                   data={campaignListData}
                   isLoading={campaignListDataIsLoading}
                />:<div>{createSomething}</div>}

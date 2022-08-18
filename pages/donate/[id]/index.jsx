@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import  SafeChargeCC  from '../../../components/nuvei/SafeCharge'
+import SafeChargeCC from '../../../components/nuvei/SafeCharge'
 import FieldCheckbox from '../../../components/forms/FieldCheckbox'
 import FieldCurrency from '../../../components/forms/FieldCurrency'
 import FieldRadialSelect from '../../../components/forms/FieldRadialSelect'
@@ -22,7 +22,6 @@ import { selectCurrentUser } from '../../../features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNotification } from '../../../features/notificationSlice'
 import FieldText from '../../../components/forms/FieldText'
-
 
 const loadScript = src =>
    new Promise((resolve, reject) => {
@@ -160,7 +159,7 @@ const Donate = ({ data: campaignData }) => {
       ).then(() => {
          setSafeCharge(
             window.SafeCharge({
-               // env: 'int', removed for production 
+               // env: 'int', removed for production
                merchantId: process.env.MERCHANT_ID,
                merchantSiteId: process.env.MERCHANT_SITE_ID,
             })
@@ -431,7 +430,7 @@ const Donate = ({ data: campaignData }) => {
                   <ButtonPrimary
                      text='Yes'
                      actionHandler={() => {
-                        // setPage(3)
+                        setPage(3)
                         setGiftAid(true)
                         setFormData({ ...formData, giftAid: true })
                      }}
@@ -447,14 +446,15 @@ const Donate = ({ data: campaignData }) => {
                            giftAidRequest: null,
                            giftAid: false,
                         })
-                        setDonationSummery( !donationSummery )
-                       
+                        setDonationSummery(!donationSummery)
+
                         setPage(4)
                      }}
                   />
                </div>
             </div>
          )}
+
          {/* Gift Aid Information */}
          {giftAid && (
             <div className='flex flex-col gap-3 justify-start items-center py-8 '>
@@ -556,7 +556,7 @@ const Donate = ({ data: campaignData }) => {
                </div>
             </div>
          )}
-         {/*4. Donation Summery */}
+         {/* 4. Donation Summery */}
          {donationSummery && (
             <div className='items-center py-8 '>
                <p className='block  text-xl text-stone-800   font-bold py-4'>
@@ -637,9 +637,7 @@ const Donate = ({ data: campaignData }) => {
                            addDonationData?.data?.paymentResponse.merchantSiteId
                         }
                         donationAmount={formData?.amount}
-                        volounTarlyContrubution={
-                           formData.voluntaryContribution
-                        }
+                        volounTarlyContrubution={formData.voluntaryContribution}
                         currencySymbol={formData.baseCurrency.displaySymbol}
                      />
                   )}
@@ -651,9 +649,10 @@ const Donate = ({ data: campaignData }) => {
             <ButtonPrimary
                className='w-60'
                text={`Continue`}
-               actionHandler={ ( e ) => {
+               actionHandler={e => {
                   e.preventDefault()
-                  setPage(page + 1)
+                  setPage( page + 1 )
+                  if(giftAid && page==3) setDonationSummery(true) 
                }}
             />
          )}
@@ -700,7 +699,7 @@ const Donate = ({ data: campaignData }) => {
 export const getServerSideProps = async context => {
    // console.log('context', context)
    const res = await fetch(
-      `https://api.gs2dev.co.uk/api/v1/Campaign/GetByQuickCode/?quickCode=${context.query.id}`
+      `${process.env.baseUrl}/Campaign/GetByQuickCode/?quickCode=${context.query.id}`
    )
    const data = await res.json()
 

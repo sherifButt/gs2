@@ -5,7 +5,7 @@ const initialState = {
       id: '',
       forename: '',
       surname: '',
-      fullName: 'Natasha ',
+      fullName: '',
       email: '',
       selfBio: '',
       phone: '',
