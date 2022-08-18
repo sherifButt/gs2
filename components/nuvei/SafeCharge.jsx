@@ -124,7 +124,7 @@ const SafeChargeCC = memo(
                   dispatch(
                      addNotification({
                         isSuccess: false,
-                        message: 'Failed!',
+                        message: 'Failed!', 
                         description: 'Your payment Failed!!',
                      })
                   )
