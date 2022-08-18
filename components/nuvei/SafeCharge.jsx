@@ -120,7 +120,7 @@ const SafeChargeCC = memo(
             } catch (e) {
                console.error(e)
                resp => {
-                  console.log('error', resp) 
+                  console.log('error', resp)  
                   dispatch(
                      addNotification({
                         isSuccess: false,
