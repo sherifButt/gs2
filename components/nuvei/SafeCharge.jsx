@@ -1,4 +1,3 @@
-// eslint-disable-next-line react/display-name
 
 import React, { memo, useEffect, useState } from 'react'
 import ButtonPrimary from '../buttons/ButtonPrimary'
@@ -8,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNotification } from '../../features/notificationSlice'
 import { useRouter } from 'next/router'
 
+// eslint-disable-next-line react/display-name
 const SafeChargeCC = memo(
    ({
       safeCharge,

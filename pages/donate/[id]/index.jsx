@@ -160,7 +160,7 @@ const Donate = ({ data: campaignData }) => {
       ).then(() => {
          setSafeCharge(
             window.SafeCharge({
-               env: 'int',
+               // env: 'int', removed for production 
                merchantId: process.env.MERCHANT_ID,
                merchantSiteId: process.env.MERCHANT_SITE_ID,
             })
