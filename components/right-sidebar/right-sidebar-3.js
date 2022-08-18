@@ -56,7 +56,7 @@ const RightSidebar = props => {
                      router.push('/basecamp/giv-now')
                   }}
                />
-               <Event />
+               {/* <Event /> */}
             </div>
             {/* /Moving footer */}
          </div>

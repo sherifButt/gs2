@@ -14,8 +14,6 @@ const RightSidebar = props => {
             <div className='w-full px-4 lg:px-0 '>
                {/* Call To Action stays on mobile*/}
 
-               
-
                {/* /Call To Action */}
                {/* Moving element */}
                <div className='  flex-col justify-between  hidden md:block'></div>
@@ -24,14 +22,16 @@ const RightSidebar = props => {
 
             {/* Fixed footer */}
             <div className='sticky top-28 hidden md:block z-10'>
-<ButtonPrimary
+               <ButtonPrimary
                   text='CREATE CAMPAIGN'
                   className='lg:mb-8 w-full lg:w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg '
-                  actionHandler={()=>{router.push('/basecamp/create-campaign')}}
+                  actionHandler={() => {
+                     router.push('/basecamp/create-campaign')
+                  }}
                />
-               
-            {/* <Event /> */}
-            {/* <PostLastUpdate /> */}
+
+               {/* <Event /> */}
+               {/* <PostLastUpdate /> */}
             </div>
             {/* /Fixed footer */}
          </div>
