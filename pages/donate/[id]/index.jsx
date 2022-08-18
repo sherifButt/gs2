@@ -164,7 +164,7 @@ const Donate = ({ data: campaignData }) => {
                merchantSiteId: process.env.MERCHANT_SITE_ID,
             })
          )
-      })
+      }) 
    }, [])
 
    return (
