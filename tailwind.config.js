@@ -3,6 +3,7 @@ const colors = require('tailwindcss/colors')
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
+   important: true,
    carkMode: 'class',
    content: [
       './pages/**/*.{js,ts,jsx,tsx}',

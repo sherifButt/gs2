@@ -24,6 +24,7 @@
       "redux-devtools-extension": "^2.13.9",
       "redux-persist": "^6.0.0",
       "reduxjs-toolkit-persist": "^7.2.1",
+      "tailwind-override": "^0.6.1",
       "tailwind-scrollbar-hide": "^1.1.7"
    },
    "devDependencies": {

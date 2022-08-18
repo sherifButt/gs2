@@ -14,6 +14,7 @@ import Footer from '../../../../components/footer/Footer1'
 import LeftSidebar from '../../../../components/left-sidebar/left-sidebar-1'
 import RightSidebar from '../../../../components/right-sidebar/right-sidebar-3'
 import bg from '../../../../public/assets/images/giveStar_stock_Image.jpg'
+import AvatarUser from '../../../../components/avatar/AvatarUser'
 
 const Campaign = () => {
    const router = useRouter()
@@ -36,7 +37,9 @@ const Campaign = () => {
       <>
          <div
             style={{
-               backgroundImage: `url(${campaignData?.bannerImagePath || bg.src})`,
+               backgroundImage: `url(${
+                  campaignData?.bannerImagePath || bg.src
+               })`,
             }}
             className='mx-auto max-auto flex grow bg-cover bg-center lg:bg-fixed pt-20 w-full h-80 lg:h-96 bg-yellow-50 '></div>
          <div className='md:container mx-auto max-auto flex grow '>
@@ -47,10 +50,22 @@ const Campaign = () => {
                <div className='w-full sm:w-600 -mt-28   order-3 md:order-none mb-12'>
                   <main className='flex flex-col order-1 md:mt-8 px-4'>
                      <div className=''>
-                        <CampaignProfileImage
-                           rounded
-                           imgUrl={campaignData?.supporter.profileImagePath}
-                        />
+                        
+                        
+                           <div
+                              className=' w-full '>
+                              <div className='mx-auto'>
+                                 <AvatarUser
+                                    className='w-40 h-40 text-7xl '
+                                    profileImage={
+                                       campaignData?.supporter.profileImagePath
+                                    }
+                                    forename={campaignData?.supporter.forename}
+                                    surname={campaignData?.supporter.surname}
+                                 />
+                              </div>
+                           </div>
+                       
                         <SimpleCard
                            title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
                            subTitle={campaignData?.campaignCharities.map(
