@@ -42,7 +42,7 @@ const RightSidebar = props => {
                {/* <PostLastUpdate /> */}
                
                   <ButtonPrimary
-                     text='GIVE NOW'
+                     text='GIVE NOWs'
                      className='lg:mb-4 w-full bg-orange-400 text-white font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
                      actionHandler={() => {
                          router.push(props.giveNowLink || '/donate')
