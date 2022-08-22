@@ -626,10 +626,11 @@ const Donate = ({ data: campaignData }) => {
                               .clientRequestId
                         }
                         emailAddress={
-                           addDonationData?.data?.paymentResponse.donatorEmail
+                           addDonationData?.data?.preFlightResponse.donationRequest.donatorEmail
                         }
                         donatorName={
-                           addDonationData?.data?.paymentResponse.donatorName
+                           addDonationData?.data?.preFlightResponse
+                              .donationRequest.donatorName
                         }
                         sessionToken={
                            addDonationData?.data?.paymentResponse.sessionToken
@@ -640,8 +641,9 @@ const Donate = ({ data: campaignData }) => {
                         merchantSiteId={
                            addDonationData?.data?.paymentResponse.merchantSiteId
                         }
-                        donationAmount={addDonationData?.data?.paymentResponse
-                              .amount}
+                        donationAmount={
+                           addDonationData?.data?.preFlightResponse.totalToPay
+                        }
                         volounTarlyContrubution={formData.voluntaryContribution}
                         currencySymbol={formData.baseCurrency.displaySymbol}
                      />
