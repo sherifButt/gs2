@@ -432,7 +432,8 @@ const Donate = ({ data: campaignData }) => {
                      actionHandler={() => {
                         setPage(3)
                         setGiftAid(true)
-                        setFormData({ ...formData, giftAid: true })
+                        setFormData( { ...formData, giftAid: true,giftValue:formData.amount*1.25 } )
+                        
                      }}
                   />
 
