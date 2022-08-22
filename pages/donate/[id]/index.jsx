@@ -625,8 +625,12 @@ const Donate = ({ data: campaignData }) => {
                            addDonationData?.data?.paymentResponse
                               .clientRequestId
                         }
-                        emailAddress={formData?.donatorEmail}
-                        donatorName={formData?.donatorName}
+                        emailAddress={
+                           addDonationData?.data?.paymentResponse.donatorEmail
+                        }
+                        donatorName={
+                           addDonationData?.data?.paymentResponse.donatorName
+                        }
                         sessionToken={
                            addDonationData?.data?.paymentResponse.sessionToken
                         }
@@ -636,7 +640,8 @@ const Donate = ({ data: campaignData }) => {
                         merchantSiteId={
                            addDonationData?.data?.paymentResponse.merchantSiteId
                         }
-                        donationAmount={formData?.amount}
+                        donationAmount={addDonationData?.data?.paymentResponse
+                              .amount}
                         volounTarlyContrubution={formData.voluntaryContribution}
                         currencySymbol={formData.baseCurrency.displaySymbol}
                      />
@@ -651,8 +656,8 @@ const Donate = ({ data: campaignData }) => {
                text={`Continue`}
                actionHandler={e => {
                   e.preventDefault()
-                  setPage( page + 1 )
-                  if(giftAid && page==3) setDonationSummery(true) 
+                  setPage(page + 1)
+                  if (giftAid && page == 3) setDonationSummery(true)
                }}
             />
          )}
