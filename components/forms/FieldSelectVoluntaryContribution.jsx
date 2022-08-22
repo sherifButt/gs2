@@ -94,9 +94,8 @@ const FieldText = ({
       setFieldData(initialDonationList)
       setFormData({
          ...formData,
-         voluntaryContribution: 
-            selectedFormData *formData.amount
-         ,
+         voluntaryContribution: selectedFormData * formData.amount,
+         giftValue: selectedFormData * formData.amount,
       })
    }, [ donationAmount ] )
    

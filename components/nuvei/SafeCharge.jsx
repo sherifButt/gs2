@@ -220,7 +220,7 @@ const SafeChargeCC = memo(
                </button> */}
                   <ButtonPrimary
                      text={`Donate ${currencySymbol}${(
-                        donationAmount + volounTarlyContrubution
+                        donationAmount 
                      ).toFixed(2)} Securely`}
                      actionHandler={e => {
                         e.preventDefault()

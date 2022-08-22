@@ -354,9 +354,11 @@ const Donate = ({ data: campaignData }) => {
                            voluntaryContribution: Number(
                               e.target.value * formData.amount
                            ),
+
                            voluntaryContributionValueHolder: Number(
                               e.target.value
                            ),
+                           giftValue: Number(e.target.value * formData.amount),
                         })
                      }}
                      value={formData.voluntaryContributionValueHolder}
@@ -432,7 +434,7 @@ const Donate = ({ data: campaignData }) => {
                      actionHandler={() => {
                         setPage(3)
                         setGiftAid(true)
-                        setFormData( { ...formData, giftAid: true,giftValue:formData.amount*1.25 } )
+                        setFormData( { ...formData, giftAid: true} )
                         
                      }}
                   />
@@ -645,7 +647,7 @@ const Donate = ({ data: campaignData }) => {
                         donationAmount={
                            addDonationData?.data?.preFlightResponse.totalToPay
                         }
-                        volounTarlyContrubution={formData.voluntaryContribution}
+                        volounTarlyContrubution={formData.giftValue}
                         currencySymbol={formData.baseCurrency.displaySymbol}
                      />
                   )}
