@@ -130,7 +130,8 @@ const Campaign = () => {
                         />
 
                         */}
-                        <div class=" flex items-center">
+                        {/*  
+                         <div class=" flex items-center">
                            {
                               campaignData?.campaignCharities.map(
                                  charity => (
@@ -140,6 +141,8 @@ const Campaign = () => {
                               )
                            }
                         </div>
+                        */}
+                       
 
                          { renderCharityText()}
                         <SimpleCard
