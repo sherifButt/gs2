@@ -65,10 +65,27 @@ const Campaign = () => {
                         </div>
 
                         <SimpleCard
+
+                           title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
+                           subTitle={campaignData?.campaignCharities.map(
+                              (charity, i) => {
+                                 return (
+                                    <>
+                                    {charity?.charityName}
+                                    {campaignData?.campaignCharities?.length !== i + 1
+                                       ? ","
+                                       : null}
+                                    </>
+                                 );
+                              }
+                           )}
+                           description={campaignData?.description}
+
                            title={`${campaignData?.name}`}
                            subTitle={campaignData? HTMLReactParser(campaignData?.description) : ''}
                            description=''
                            className='bg-white p-4 rounded-xl '
+
                         />
                         <Thermometer
                            max={campaignData?.donationTarget}

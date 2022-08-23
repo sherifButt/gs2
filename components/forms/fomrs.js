@@ -362,8 +362,8 @@ export const restorePassword = {
 }
 
 export const createCampaign = {
-   title: '← Create Campaign',
-   subtitle: '',
+   title: 'Create Campaign',
+   backButton: true,
    button: {
       icon: '',
       idle: 'Create Campaign',

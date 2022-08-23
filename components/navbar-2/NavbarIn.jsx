@@ -82,7 +82,7 @@ const NavbarIn = ({ className }) => {
       exit: { opacity: 0 },
    }
    return (
-      <div className={`bg-menu-texture   ${className}`}>
+      <div className={`${className}`}>
          {/* mobile menu */}
          <AnimatePresence>
             {open && (
@@ -101,7 +101,7 @@ const NavbarIn = ({ className }) => {
                      animate='animate'
                      exit='exit'
                      key='menu'
-                     className=' absolute top-20 rounded-b-xl pb-8 flex flex-col flex-grow w-full bg-yellow-400 bg-menu-texture'
+                     className=' absolute top-20 rounded-b-xl pb-8 flex flex-col flex-grow w-full bg-yellow-400'
                      onClick={() => setOpen(!open)}>
                      <motion.div
                         variants={menuItem}
@@ -119,7 +119,7 @@ const NavbarIn = ({ className }) => {
                </div>
             )}
          </AnimatePresence>
-         <div className=' z-10 lg:container flex flex-row justify-between items-center gap-4 mx-auto w-full p-5 lg:p-0 bg-menu-texture lg:bg-empty-texture'>
+         <div className=' z-10 lg:container flex flex-row justify-between items-center gap-4 mx-auto w-full p-5 lg:p-0 lg:bg-empty-texture'>
             <div className='flex flex-row gap-4 justify-start items-center '>
                <div className='flex-shrink-1'>
                   <GivestarIcon

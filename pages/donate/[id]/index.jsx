@@ -173,7 +173,7 @@ const Donate = ({ data: campaignData }) => {
                            }
                         />
                      </div>
-                     <p className='block w-[3.13rem]   text-center text-xs text-stone-800  font-medium'>
+                     <p className='block w-[3.13rem] text-center text-xs text-stone-800  font-medium line-clamp-2'>
                         {item.charityName || '33'}
                      </p>
                   </div>
@@ -266,7 +266,7 @@ const Donate = ({ data: campaignData }) => {
                   id='email'
                   name='email'
                   className='my-6 '
-                  placeholder='Donator Email (for receipts)'
+                  placeholder='Donor Email (for receipts)'
                   type='text'
                   inputHandler={e => {
                      setFormData({
