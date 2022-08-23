@@ -69,9 +69,16 @@ const Campaign = () => {
                         <SimpleCard
                            title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
                            subTitle={campaignData?.campaignCharities.map(
-                              charity => (
-                                 <>{charity?.charityName}, </>
-                              )
+                              (charity, i) => {
+                                 return (
+                                    <>
+                                    {charity?.charityName}
+                                    {campaignData?.campaignCharities?.length !== i + 1
+                                       ? ","
+                                       : null}
+                                    </>
+                                 );
+                              }
                            )}
                            description={campaignData?.description}
                         />
