@@ -1,27 +1,19 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import SafeChargeCC from '../../../components/nuvei/SafeCharge'
 import FieldCheckbox from '../../../components/forms/FieldCheckbox'
 import FieldCurrency from '../../../components/forms/FieldCurrency'
 import FieldRadialSelect from '../../../components/forms/FieldRadialSelect'
-import FieldTextarea from '../../../components/forms/FieldTextarea'
 import FieldSelectVoluntaryContribution from '../../../components/forms/FieldSelectVoluntaryContribution'
-import FieldLabel from '../../../components/forms/FieldLabel'
-import { useRouter } from 'next/router'
-import { wrapper } from '../../../app/store'
-import {
-   getRunningOperationPromises,
-   getByQuickCode,
-} from '../../../features/campaign/campaignApiSlice'
+import FieldTextarea from '../../../components/forms/FieldTextarea'
+import SafeChargeCC from '../../../components/nuvei/SafeCharge'
 //Data
-import { useLoadCurrencyListQuery } from '../../../features/currency/currencyApiSlice'
-import { useGetByQuickCodeQuery } from '../../../features/campaign/campaignApiSlice'
-import { useAddDonationMutation } from '../../../features/donation/donationApiSlice'
+import { useSelector } from 'react-redux'
 import ButtonPrimary from '../../../components/buttons/ButtonPrimary'
+import FieldText from '../../../components/forms/FieldText'
+import { useLoadCurrencyListQuery } from '../../../features/currency/currencyApiSlice'
+import { useAddDonationMutation } from '../../../features/donation/donationApiSlice'
 import { useLoadUserQuery } from '../../../features/user/userApiSlice'
 import { selectCurrentUser } from '../../../features/user/userSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { addNotification } from '../../../features/notificationSlice'
-import FieldText from '../../../components/forms/FieldText'
 
 const loadScript = src =>
    new Promise((resolve, reject) => {
@@ -43,14 +35,6 @@ const Donate = ({ data: campaignData }) => {
    const user = useSelector(selectCurrentUser)
    const { data: userData } = useLoadUserQuery()
    const router = useRouter()
-
-   // console.log('router.query.id', router.query.id)
-   // const {
-   //    data: campaignData,
-   //    isLoading: campaignDataIsLoading,
-   //    error: campaignDataError,
-   // } = useGetByQuickCodeQuery({ query: router.query.id })
-   // console.log('campaignData', campaignData)
 
    const [
       addDonation,
@@ -143,8 +127,6 @@ const Donate = ({ data: campaignData }) => {
    }
 
    const [formData, setFormData] = useState(formInitialData)
-   // const MERCHANT_ID = '1122647993193803847'
-   // const MERCHANT_SITE_ID = '233636'
 
    useEffect(() => {
       // console.log('donationAmount', donationAmount)
@@ -164,7 +146,7 @@ const Donate = ({ data: campaignData }) => {
                merchantSiteId: process.env.MERCHANT_SITE_ID,
             })
          )
-      }) 
+      })
    }, [])
 
    return (
@@ -249,7 +231,6 @@ const Donate = ({ data: campaignData }) => {
                />
 
                <FieldText
-                  // hidden={user?.forename}
                   id='donatorName'
                   name='donatorName'
                   className='my-6'
@@ -263,6 +244,8 @@ const Donate = ({ data: campaignData }) => {
                            ...formData.giftAidRequest,
                            donatorName: e.target.value,
                         },
+                        firstName: e.target.value.split(' ')[0],
+                        lastName: e.target.value.split(' ')[1],
                      })
                   }}
                   value={formData.donatorName}
@@ -282,7 +265,6 @@ const Donate = ({ data: campaignData }) => {
                />
 
                <FieldText
-                  // hidden={user?.forename}
                   id='email'
                   name='email'
                   className='my-6 '
@@ -434,8 +416,7 @@ const Donate = ({ data: campaignData }) => {
                      actionHandler={() => {
                         setPage(3)
                         setGiftAid(true)
-                        setFormData( { ...formData, giftAid: true} )
-                        
+                        setFormData({ ...formData, giftAid: true })
                      }}
                   />
 
@@ -629,7 +610,8 @@ const Donate = ({ data: campaignData }) => {
                               .clientRequestId
                         }
                         emailAddress={
-                           addDonationData?.data?.preFlightResponse.donationRequest.donatorEmail
+                           addDonationData?.data?.preFlightResponse
+                              .donationRequest.donatorEmail
                         }
                         donatorName={
                            addDonationData?.data?.preFlightResponse
@@ -647,7 +629,6 @@ const Donate = ({ data: campaignData }) => {
                         donationAmount={
                            addDonationData?.data?.preFlightResponse.totalToPay
                         }
-                        volounTarlyContrubution={formData.giftValue}
                         currencySymbol={formData.baseCurrency.displaySymbol}
                      />
                   )}
@@ -670,9 +651,6 @@ const Donate = ({ data: campaignData }) => {
          {donationSummery && page != 5 && (
             <ButtonPrimary
                className='w-60'
-               // text={`Donate ${formData?.baseCurrency?.displaySymbol}${(
-               //    formData?.voluntaryContribution + formData.amount
-               // ).toFixed(2)} Securely`
                text={`Continue to Payment`}
                isLoading={addDonationIsLoading}
                actionHandler={e => {
@@ -682,12 +660,6 @@ const Donate = ({ data: campaignData }) => {
                }}
             />
          )}
-
-         {/* {page >= 4 && (
-            <p className='my-8' onClick={() => setPage(page - 1)}>
-               ←previous
-            </p>
-         )} */}
       </form>
    )
 }
@@ -707,7 +679,6 @@ const Donate = ({ data: campaignData }) => {
 // )
 
 export const getServerSideProps = async context => {
-   // console.log('context', context)
    const res = await fetch(
       `${process.env.baseUrl}/Campaign/GetByQuickCode/?quickCode=${context.query.id}`
    )

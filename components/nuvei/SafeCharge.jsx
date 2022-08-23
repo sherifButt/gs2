@@ -1,4 +1,3 @@
-
 import React, { memo, useEffect, useState } from 'react'
 import ButtonPrimary from '../buttons/ButtonPrimary'
 import FieldText from '../forms/FieldText'
@@ -18,21 +17,18 @@ const SafeChargeCC = memo(
       merchantSiteId,
       donatorName,
       donationAmount,
-      volounTarlyContrubution,
+      
       currencySymbol,
    }) => {
       const route = useRouter()
       const dispatch = useDispatch()
       const [cardN, setCardN] = useState(null)
-      // const [sessionToken, setSessionToken] = useState('')
+
       const [cardHolderName, setCardHolderName] = useState(donatorName)
-      // const[_sessionToken,setSessionToken]=useState(sessionToken)
 
       useEffect(() => {
-         // setSessionToken(sessionToken)
          if (safeCharge) {
             const safeChargeFields = safeCharge.fields({
-               // fonts: [{ cssUrl: '' }],
                fontSize: '16px',
                fontWeight: '200',
             })
@@ -120,11 +116,11 @@ const SafeChargeCC = memo(
             } catch (e) {
                console.error(e)
                resp => {
-                  console.log('error', resp)  
-                  dispatch( 
+                  console.log('error', resp)
+                  dispatch(
                      addNotification({
                         isSuccess: false,
-                        message: 'Failed!', 
+                        message: 'Failed!',
                         description: 'Your payment Failed!!',
                      })
                   )
@@ -219,9 +215,9 @@ const SafeChargeCC = memo(
                   Create Payment
                </button> */}
                   <ButtonPrimary
-                     text={`Donate ${currencySymbol}${(
-                        donationAmount 
-                     ).toFixed(2)} Securely`}
+                     text={`Donate ${currencySymbol}${donationAmount.toFixed(
+                        2
+                     )} Securely`}
                      actionHandler={e => {
                         e.preventDefault()
                         createPayment()
