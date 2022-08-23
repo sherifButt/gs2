@@ -391,7 +391,7 @@ export const createCampaign = {
    },
    confirmation: {
       isConfirmation: true,
-      message: 'Your Campaign been created!',
+      message: 'Your campaign has been created!',
       messageMarginTop: '',
       description: '',
       href: '/basecamp',
@@ -534,7 +534,7 @@ export const createCampaign = {
          title: 'Your page where you will launch your campaign',
          placeholder: 'Add a Photo',
          type: 'file',
-         mediaType:1,
+         mediaType: 1,
          required: false,
          component: FieldFileupload,
          disabled: false,
