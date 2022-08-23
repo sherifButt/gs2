@@ -8,7 +8,7 @@ const initialState = {
    notification: {
       show: true,
       isSuccess: true,
-      message: 'Successfully Logged in!',
+      message: 'Successfully logged in!',
       description: 'Anyone with a link can now view this page.',
       href: '#',
    },
