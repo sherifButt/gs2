@@ -5,19 +5,19 @@ const Thermometer = ( { current, max, currency, text,small } ) => {
   return (
      <div>
         <div
-           className={`flex flex-col gap-3.5 justify-center items-center max-w-[32.11rem] mx-auto`}>
+           className={`flex flex-col gap-5 justify-center items-center max-w-[32.11rem] mx-auto`}>
            <div
               className={`flex ${
                  small ? 'flex-col' : 'flex-row items-center '
               } justify-between w-full`}>
               <p className='block text-2xl text-army-500  font-light'>
-                 {currency}{current}
+                 {currency}{current.toLocaleString(undefined, {maximumFractionDigits:2})}
               </p>
               <p
                  className={`block ${
                     small ? 'text-md' : 'text-2xl'
                  } text-gray-600  font-light`}>
-                 {text} {currency}{max}
+                 {text} {currency}{max.toLocaleString(undefined, {maximumFractionDigits:2})}
               </p>
            </div>
            <div className={`flex flex-col justify-center items-center w-full`}>
