@@ -13,11 +13,11 @@ const Header = ({title,description,keywords}) => {
   )
 }
  Header.defaultProps = {
-<<<<<<< HEAD
-    title: 'GiveStar',
-=======
+
+ 
+
     title: 'GiveStar Supporter Application',
->>>>>>> 40f0aaf7058b2ba74e94fbc6e0109400e3c4efff
+
     description: '',
     keywords:''
 }
