@@ -2,8 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import EventSimpleCard from '../cards/EventSimpleCard'
 
-const EventBloc = ( { data, isLoading, className } ) => {
-   
+const EventBloc = ({ data, isLoading, className }) => {
    return (
       <div
          className={`flex flex-col gap-[0.56rem] justify-start items-start max-w-[33.75rem] mx-auto ${className}`}>
@@ -18,18 +17,16 @@ const EventBloc = ( { data, isLoading, className } ) => {
             </div>
          </div> */}
          <ul className='grid grid-cols-2 gap-4 my-8'>
-            {data
-               
-               ?.map((item, idx) => (
-                  <li key={item.name}>
-                     <Link
-                        href={`/basecamp/fundraiser-campaign/${item?.quickCode}`}>
-                        <a>
-                           <EventSimpleCard data={item} />
-                        </a>
-                     </Link>
-                  </li>
-               ))}
+            {data?.map((item, idx) => (
+               <li key={item.name}>
+                  <Link
+                     href={`/basecamp/fundraiser-campaign/${item?.quickCode}`}>
+                     <a>
+                        <EventSimpleCard data={item} />
+                     </a>
+                  </Link>
+               </li>
+            ))}
          </ul>
       </div>
    )
