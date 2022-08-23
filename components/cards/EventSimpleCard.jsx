@@ -7,10 +7,13 @@ const EventSimpleCard = ( { className,data,isLoading},{...props}) => {
          className={`flex flex-col gap-[0.56rem] justify-start items-start max-w-[33.75rem] mx-auto ${className}`}>
          <div>
             <div>
-               <div className='bg-white rounded-xl'>
+               <div className='bg-white rounded-xl '>
                   <img
-                     className='block h-32'
-                     src={data?.bannerImagePath||`/assets/images/assets/image-28603.66708819022.png`}
+                     className='block h-32 rounded-xl '
+                     src={
+                        data?.bannerImagePath ||
+                        `/assets/images/givestar-fetured-01.png`
+                     }
                   />
                </div>
             </div>
@@ -33,7 +36,7 @@ const EventSimpleCard = ( { className,data,isLoading},{...props}) => {
                   <Thermometer
                      max={data?.donationTarget}
                      current={data?.donationSummary?.netDonations}
-                     currency={ data?.donationSummary?.currency.displaySymbol }
+                     currency={data?.donationSummary?.currency.displaySymbol}
                      small
                   />
                </div>
