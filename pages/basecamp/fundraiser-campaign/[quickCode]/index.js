@@ -164,7 +164,7 @@ const Campaign = () => {
           {/* /Middle */}
           <RightSidebar
             giveNowLink={`/donate/${campaignData?.quickCode}`}
-            className="flex  grow  w-full  md:w-auto lg:w-350 mt-8  order-2 md:order-none "
+            className="flex  grow  w-full  md:w-auto lg:w-450 mt-8  order-2 md:order-none "
           />
         </div>
       </div>
