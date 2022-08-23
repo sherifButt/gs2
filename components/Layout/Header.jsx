@@ -13,7 +13,7 @@ const Header = ({title,description,keywords}) => {
   )
 }
  Header.defaultProps = {
-    title: 'Give Star Supporter Application',
+    title: 'GiveStar',
     description: '',
     keywords:''
 }

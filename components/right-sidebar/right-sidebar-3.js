@@ -17,12 +17,13 @@ const RightSidebar = props => {
                <div className=' fixed top-20 lg:hidden shadow-xl w-full flex flex-row pt-1 rounded-b-xl pb-3 px-3 gap-2 bg-yellow-400'>
                   <ButtonPrimary
                      textColor='text-white'
-                     text='GIVE NOW'
+                     text='Give Now'
                      className='lg:mb-4 w-full bg-orange-400 text-white   font-thin lg:min-w-64 bg-no-repeat bg-contain bg-[left-20px] text-md py-3'
                      actionHandler={() => {
                         router.push(props.giveNowLink||'/donate')
                      }}
                   />
+                  {/*   
                   <ButtonPrimary
                      textColor='text-white'
                      text='FUNDRAISE'
@@ -31,6 +32,8 @@ const RightSidebar = props => {
                         router.push('/basecamp/giv-now')
                      }}
                   />
+                  */}
+                  
                </div>
                {/* /Call To Action */}
                <div className='  flex-col justify-between  hidden md:block'>
@@ -42,20 +45,29 @@ const RightSidebar = props => {
                {/* <PostLastUpdate /> */}
                
                   <ButtonPrimary
-                     text='GIVE NOWs'
+                     text='GIVE NOW'
                      className='lg:mb-4 w-full bg-orange-400 text-white font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
                      actionHandler={() => {
                          router.push(props.giveNowLink || '/donate')
                      }}
                   />
                
+               
+                 
                <ButtonPrimary
                   text='FUNDRAISE'
+                  hidden='hidden'
                   className='lg:mb-4 w-full font-thin lg:min-w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg py-3'
                   actionHandler={() => {
                      router.push('/basecamp/giv-now')
                   }}
                />
+              
+                
+              
+              
+                  
+               
                {/* <Event /> */}
             </div>
             {/* /Moving footer */}
