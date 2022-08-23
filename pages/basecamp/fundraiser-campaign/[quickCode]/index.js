@@ -15,6 +15,7 @@ import LeftSidebar from '../../../../components/left-sidebar/left-sidebar-1'
 import RightSidebar from '../../../../components/right-sidebar/right-sidebar-3'
 import bg from '../../../../public/assets/images/giveStar_stock_Image.jpg'
 import AvatarUser from '../../../../components/avatar/AvatarUser'
+import HTMLReactParser from 'html-react-parser'
 
 const Campaign = () => {
    const router = useRouter()
@@ -37,9 +38,8 @@ const Campaign = () => {
       <>
          <div
             style={{
-               backgroundImage: `url(${
-                  campaignData?.bannerImagePath || bg.src
-               })`,
+               backgroundImage: `url(${campaignData?.bannerImagePath || bg.src
+                  })`,
             }}
             className='mx-auto max-auto flex grow bg-cover bg-center lg:bg-fixed pt-20 w-full h-80 lg:h-96 bg-yellow-50 '></div>
          <div className='md:container mx-auto max-auto flex grow '>
@@ -50,30 +50,27 @@ const Campaign = () => {
                <div className='w-full sm:w-600 -mt-28   order-3 md:order-none mb-12'>
                   <main className='flex flex-col order-1 md:mt-8 px-4'>
                      <div className=''>
-                        
-                        
-                           <div
-                              className=' w-full '>
-                              <div className='mx-auto'>
-                                 <AvatarUser
-                                    className='w-40 h-40 text-7xl '
-                                    profileImage={
-                                       campaignData?.supporter.profileImagePath
-                                    }
-                                    forename={campaignData?.supporter.forename}
-                                    surname={campaignData?.supporter.surname}
-                                 />
-                              </div>
+
+
+                        <div
+                           className=' w-full '>
+                           <div className='mx-auto'>
+                              <AvatarUser
+                                 className='w-40 h-40 text-7xl '
+                                 profileImage={
+                                    campaignData?.supporter.profileImagePath
+                                 }
+                                 forename={campaignData?.supporter.forename}
+                                 surname={campaignData?.supporter.surname}
+                              />
                            </div>
-                       
+                        </div>
+
                         <SimpleCard
-                           title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
-                           subTitle={campaignData?.campaignCharities.map(
-                              charity => (
-                                 <>{charity?.charityName}, </>
-                              )
-                           )}
-                           description={campaignData?.description}
+                           title={`${campaignData?.name}`}
+                           subTitle={campaignData? HTMLReactParser(campaignData?.description) : ''}
+                           description=''
+                           className='bg-white p-4 rounded-xl '
                         />
                         <Thermometer
                            max={campaignData?.donationTarget}
@@ -83,20 +80,45 @@ const Campaign = () => {
                                  .displaySymbol
                            }
                         />
+                        {/*  
                         <SimpleCard
                            title='About this Campaign'
-                           subTitle=''
+                           subTitle={HTMLReactParser(campaignData?.description)}
                            className='bg-white p-4 rounded-xl '
                         />
+
+                        */}
+                        
+
+                        <SimpleCard
+                           title='Supporting'
+                           subTitle={campaignData?.campaignCharities.map(
+                              charity => (
+                                 <>{charity?.charityName}, </>
+                              )
+                           )}
+                           description=''
+                           className='bg-white p-4 rounded-xl '
+                        />
+                        {/* 
+                        <div className='bg-white rounded-xl p-4 my-4 '>
+
                         {/* <div className='bg-white rounded-xl p-4 my-4 '>
+
                            <p className='text-2xl'>Latest Updates</p>
 
                            <PostLastUpdate />
                            <PostLastUpdate />
                            <PostLastUpdate />
+
+                        </div>
+                        */}
+                       
+
                         </div> */}
+
                         <div className='bg-white rounded-xl p-4 my-4 '>
-                           <p className='text-2xl'>Donations</p>
+                           <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
                            {donationData?.map(donation => (
                               <div key={donation.name}>
                                  <DonationCard data={donation} />
