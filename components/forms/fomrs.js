@@ -14,7 +14,7 @@ import {useLoadCurrencyListQuery} from '../../features/currency/currencyApiSlice
 import { useGetByQuickCodeQuery } from '../../features/campaign/campaignApiSlice'
 
 export const signin = {
-   title: 'Sign in to Give Star',
+   title: 'Sign in to GiveStar',
    subtitle: '',
    button: {
       icon: '',
@@ -103,7 +103,7 @@ export const signin = {
 }
 
 export const signup = {
-   title: 'Sign up to Give Star',
+   title: 'Sign up to GiveStar',
    subtitle: '',
    button: {
       icon: '',
