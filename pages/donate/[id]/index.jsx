@@ -234,7 +234,7 @@ const Donate = ({ data: campaignData }) => {
                   id='donatorName'
                   name='donatorName'
                   className='my-6'
-                  placeholder='Donator Name'
+                  placeholder='Donor Name'
                   type='text'
                   inputHandler={e => {
                      setFormData({
