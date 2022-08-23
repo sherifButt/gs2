@@ -86,6 +86,7 @@ const Campaign = () => {
                            subTitle={HTMLReactParser(campaignData?.description)}
                            className='bg-white p-4 rounded-xl '
                         />
+<<<<<<< HEAD
                         */}
                         
 
@@ -101,14 +102,21 @@ const Campaign = () => {
                         />
                         {/* 
                         <div className='bg-white rounded-xl p-4 my-4 '>
+=======
+                        {/* <div className='bg-white rounded-xl p-4 my-4 '>
+>>>>>>> 40f0aaf7058b2ba74e94fbc6e0109400e3c4efff
                            <p className='text-2xl'>Latest Updates</p>
 
                            <PostLastUpdate />
                            <PostLastUpdate />
                            <PostLastUpdate />
+<<<<<<< HEAD
                         </div>
                         */}
                        
+=======
+                        </div> */}
+>>>>>>> 40f0aaf7058b2ba74e94fbc6e0109400e3c4efff
                         <div className='bg-white rounded-xl p-4 my-4 '>
                            <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
                            {donationData?.map(donation => (
