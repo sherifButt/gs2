@@ -36,7 +36,7 @@ const PostLastUpdate = ({ data },{...props}) => {
                   </p>
                   <p className='block text-right text-neutral-500  font-light '>
                    
-                     {_data?.giftAidValue>0?'+'+data?.currecySymbol+data?.giftAidValue.toFixed(2)+' GiftAid':''}
+                     {_data?.giftAidValue>0?'+'+data?.currencySymbol+data?.giftAidValue.toFixed(2)+' GiftAid':''}
                   </p>
                </div>
             </div>
