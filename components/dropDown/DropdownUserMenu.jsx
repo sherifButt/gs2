@@ -82,7 +82,7 @@ export default function DropdownUserMenu ( open ) {
                         router.push('/')
                      }}
                      type='submit'
-                     className='uppercase block w-full text-left  px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
+                     className='block w-full text-left  px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900'>
                      Sign out
                   </button>
                </div>
