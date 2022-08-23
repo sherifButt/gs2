@@ -5,6 +5,7 @@ import DonationCard from '../../../../components/cards/DonationCard'
 import DonationStream from '../../../../components/blocs/DonationStream'
 import PostLastUpdate from '../../../../components/cards/PostLastUpdate'
 import SimpleCard from '../../../../components/cards/SimpleCard'
+import ThumbnailCard from '../../../../components/cards/ThumbnailCard'
 import Thermometer from '../../../../components/stats/Thermometer'
 import { useGetByQuickCodeQuery } from '../../../../features/campaign/campaignApiSlice'
 import { useLoadSupporterQuery } from '../../../../features/supporter/supporterApiSlice'
@@ -32,6 +33,7 @@ const Campaign = () => {
    })
 
    var charityText='';
+   var charityLogos='';
 
   function renderCharityText() {
      
@@ -52,6 +54,8 @@ const Campaign = () => {
             charityText = charityText.slice(0, -2)
          }      
    }
+
+  
 
    const { data: donationData, isLoading: donationIsLoading } =
       useGetDonationsQuery({ query: campaignData?.id, count: 10 })
@@ -126,6 +130,17 @@ const Campaign = () => {
                         />
 
                         */}
+                        <div class=" flex items-center">
+                           {
+                              campaignData?.campaignCharities.map(
+                                 charity => (
+                                    <ThumbnailCard imgSrc={charity.profileImagePath} subText={charity.charityName} subText2={charity.donationSplit+'%'}/>
+                     
+                                 )
+                              )
+                           }
+                        </div>
+
                          { renderCharityText()}
                         <SimpleCard
                            title='Supporting'
