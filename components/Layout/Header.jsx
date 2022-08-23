@@ -16,7 +16,7 @@ const Header = ({title,description,keywords}) => {
 
  
 
-    title: 'GiveStar Supporter Application',
+    title: 'GiveStar',
 
     description: '',
     keywords:''

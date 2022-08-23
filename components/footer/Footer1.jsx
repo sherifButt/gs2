@@ -64,7 +64,7 @@ const Footer = () => {
             
          </div>
          <p className='block opacity-50 text-xs text-gray-600 font-light'>
-            Copyright (c) 2022 GiveStar Ltd.All rights reserved.
+            Copyright © 2022 GiveStar Ltd.  All rights reserved.
          </p>
       </div>
    )

@@ -49,9 +49,7 @@ const Campaign = () => {
                {/* Middle */}
                <div className='w-full sm:w-600 -mt-28   order-3 md:order-none mb-12'>
                   <main className='flex flex-col order-1 md:mt-8 px-4'>
-                     <div className=''>
-
-
+                    
                         <div
                            className=' w-full '>
                            <div className='mx-auto'>
@@ -115,7 +113,6 @@ const Campaign = () => {
                        
                        
 
-                        </div> */}
 
                         <div className='bg-white rounded-xl p-4 my-4 '>
                            <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
@@ -126,7 +123,7 @@ const Campaign = () => {
                            ))}
                         </div>
                         {/* <DonationStream /> */}
-                     </div>
+                    
                   </main>
                </div>
                {/* /Middle */}
