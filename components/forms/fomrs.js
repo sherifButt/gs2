@@ -21,7 +21,7 @@ export const signin = {
       idle: 'Sign in',
       action: 'signing...',
       success: 'Signed in!',
-      error: 'Tray Signing in again!',
+      error: 'Try signing in again!',
    },
 
    method: 'post',
@@ -43,7 +43,7 @@ export const signin = {
    },
    confirmation: {
       isConfirmation: true,
-      message: 'Your are Logged in!',
+      message: "Let's Do Some Good!",
       messageMarginTop: '',
       description: '',
       href: '/basecamp',
