@@ -103,7 +103,7 @@ const Campaign = () => {
                         {/* 
                         <div className='bg-white rounded-xl p-4 my-4 '>
 
-                        {/* <div className='bg-white rounded-xl p-4 my-4 '>
+                        <div className='bg-white rounded-xl p-4 my-4 '>
 
                            <p className='text-2xl'>Latest Updates</p>
 
@@ -112,7 +112,7 @@ const Campaign = () => {
                            <PostLastUpdate />
 
                         </div>
-                        */}
+                       
                        
 
                         </div> */}
