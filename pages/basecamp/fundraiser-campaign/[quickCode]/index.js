@@ -88,13 +88,13 @@ const Campaign = () => {
                            subTitle=''
                            className='bg-white p-4 rounded-xl '
                         />
-                        <div className='bg-white rounded-xl p-4 my-4 '>
+                        {/* <div className='bg-white rounded-xl p-4 my-4 '>
                            <p className='text-2xl'>Latest Updates</p>
 
                            <PostLastUpdate />
                            <PostLastUpdate />
                            <PostLastUpdate />
-                        </div>
+                        </div> */}
                         <div className='bg-white rounded-xl p-4 my-4 '>
                            <p className='text-2xl'>Donations</p>
                            {donationData?.map(donation => (
