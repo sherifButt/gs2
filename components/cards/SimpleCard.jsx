@@ -8,6 +8,7 @@ const SimpleCard = ({title,subTitle,description,cta,className}, {...props}) => {
             <p className='block text-2xl lg:text-3xl text-black  font-semibold'>
                {title}
             </p>
+            <br/>
               <p className='block text-xl lg:text-2xl text-gray-600  font-light'>{ subTitle}</p>
         </div>
         <p className='block w-full text-black  font-light'>
@@ -18,9 +19,9 @@ const SimpleCard = ({title,subTitle,description,cta,className}, {...props}) => {
   )
 }
 SimpleCard.defaultProps = {
-   title: 'Run for Macmillan',
-   subTitle: 'Nationwide',
-   description: 'This June we are asking our supporters to don their running shoes and Run for Macmillan! Whether you do 5k or 50k, the distance is up to you. So lace your trainers and raise as much as you can for Macmillan this summer.',
+   title: '',
+   subTitle: '',
+   description: '',
    cta: {},
 }
 export default SimpleCard

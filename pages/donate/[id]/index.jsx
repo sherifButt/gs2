@@ -74,7 +74,7 @@ const Donate = ({ data: campaignData }) => {
       lastName: user?.surname,
       message: '',
       amount: campaignData?.defaultDonationSizes[2].value,
-      anonymous: true,
+      anonymous: false,
       paymentProviderId: '1e400bd7-ce58-4de1-9d04-92ff539f87e8',
       supporterId: user?.id || '00000000-0000-0000-0000-000000000000',
       feesCovered: true,
@@ -82,7 +82,6 @@ const Donate = ({ data: campaignData }) => {
       paymentProviderRef: '',
       donationSource: 1,
       donationType: 1,
-      privateDonation: true,
       donatorEmail: user?.email,
       voluntaryContribution: donationAmount * 0.1,
       voluntaryContributionValueHolder: 0.1,
@@ -105,7 +104,7 @@ const Donate = ({ data: campaignData }) => {
       donatorName: 'sheirf',
       message: 'the good message',
       amount: 20,
-      anonymous: true,
+      anonymous: false,
       paymentProviderId: '1e400bd7-ce58-4de1-9d04-92ff539f87e8',
       supporterId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       feesCovered: true,
@@ -113,7 +112,6 @@ const Donate = ({ data: campaignData }) => {
       paymentProviderRef: 'string',
       donationSource: 1,
       donationType: 2,
-      privateDonation: true,
       donatorEmail: 'sherif@give_star.com',
       charityContact: true,
       giveStarContact: true,
@@ -154,7 +152,7 @@ const Donate = ({ data: campaignData }) => {
          <div className='flex flex-col gap-3 justify-start items-center py-2 -mt-4 sm:mt-0'>
             <div>
                <p className='block text-center text-2xl text-stone-800  font-bold'>
-                  Donate to {campaignData?.supporter.forename} &apos;s{' '}
+                  Donate to{' '}
                   {campaignData?.name}
                </p>
                <p className='block opacity-[0.80] text-center text-xs text-stone-800  font-medium'>
@@ -291,18 +289,6 @@ const Donate = ({ data: campaignData }) => {
                      setFormData({ ...formData, message: e.target.value })
                   }}
                   value={formData.message}
-               />
-
-               <FieldCheckbox
-                  className='my-6 text-left'
-                  terms='Make my donation and message anonymous from public view'
-                  inputHandler={e =>
-                     setFormData({
-                        ...formData,
-                        anonymous: e.target.checked,
-                     })
-                  }
-                  value={formData.anonymous}
                />
             </div>
          </div>
@@ -544,7 +530,7 @@ const Donate = ({ data: campaignData }) => {
          {donationSummery && (
             <div className='items-center py-8 '>
                <p className='block  text-xl text-stone-800   font-bold py-4'>
-                  Your donation summery
+                  Your donation summary
                </p>
                <div className='flex flex-col  gap-1 mx-8'>
                   <div className='flex flex-row justify-between'>
@@ -582,7 +568,7 @@ const Donate = ({ data: campaignData }) => {
                      </p>
                   </div>
                   <div className='flex flex-row justify-between'>
-                     <p>Charities recivere</p>
+                     <p>Charities receive</p>
                      <p>
                         {formData?.baseCurrency?.displaySymbol}
                         {(formData.amount * (giftAid ? 1.25 : 1)).toFixed(2)}
@@ -594,7 +580,7 @@ const Donate = ({ data: campaignData }) => {
          {/*5. Payment Method */}
          {page >= 5 && (
             <div className='items-center py-8 '>
-               {addDonationIsLoading && <p>/</p>}
+               {addDonationIsLoading && <p></p>}
                <p className='block  text-xl text-stone-800   font-bold py-4'>
                   Payment method
                </p>

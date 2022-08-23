@@ -50,8 +50,7 @@ const Basecamp = ({ name }) => {
             Start Something Today
          </p>
          <p className='block w-[18.94rem] text-center text-lg text-black  font-light'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
-            dapibus sapien.
+           
          </p>
       </div>
    )

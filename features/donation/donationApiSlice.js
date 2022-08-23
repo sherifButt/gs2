@@ -17,7 +17,7 @@ export const donationApiSlice = apiSlice.injectEndpoints({
          query: arg => {
             const { query: campaignId, count } = arg
             return {
-               url: `/Donation/CampaignTopN`,
+               url: `/Donation/CampaignTopNGroup`,
                method: 'GET',
                params: { campaignId, count },
             }

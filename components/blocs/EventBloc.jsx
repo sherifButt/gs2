@@ -18,7 +18,7 @@ const EventBloc = ({ data, isLoading, className }) => {
          </div> */}
          <ul className='grid grid-cols-2 gap-4 my-8'>
             {data?.map((item, idx) => (
-               <li key={item.name}>
+               <li key={item.id}>
                   <Link
                      href={`/basecamp/fundraiser-campaign/${item?.quickCode}`}>
                      <a>
