@@ -31,10 +31,33 @@ const Campaign = () => {
       query: router.query.quickCode,
    })
 
+   var charityText='';
+
+  function renderCharityText() {
+     
+         charityText = ''
+         if (campaignData && campaignData.campaignCharities)
+         {
+            campaignData.campaignCharities ? campaignData.campaignCharities.map(
+               charity => (
+                  charityText = charityText + charity.charityName + ' ,'
+   
+               )
+            ) : ''
+         }
+        
+         console.log(charityText);
+
+         if (charityText.endsWith(' ,')) {
+            charityText = charityText.slice(0, -2)
+         }      
+   }
+
    const { data: donationData, isLoading: donationIsLoading } =
       useGetDonationsQuery({ query: campaignData?.id, count: 10 })
 
    return (
+    
       <>
          <div
             style={{
@@ -103,18 +126,29 @@ const Campaign = () => {
                         />
 
                         */}
-                        
-
+                         { renderCharityText()}
                         <SimpleCard
+                           title='Supporting'
+                           subTitle={charityText}
+                           description=''
+                           className='bg-white p-4 rounded-xl '
+                        />
+
+
+                        {/*  
+                         <SimpleCard
                            title='Supporting'
                            subTitle={campaignData?.campaignCharities.map(
                               charity => (
+
                                  <>{charity?.charityName}, </>
                               )
                            )}
                            description=''
                            className='bg-white p-4 rounded-xl '
                         />
+                        */}
+                       
                         {/* 
                         <div className='bg-white rounded-xl p-4 my-4 '>
 
@@ -130,7 +164,7 @@ const Campaign = () => {
                        
                        
 
-
+                        {donationData?.length>0?
                         <div className='bg-white rounded-xl p-4 my-4 '>
                            <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
                            {donationData?.map(donation => (
@@ -138,7 +172,12 @@ const Campaign = () => {
                                  <DonationCard data={donation} />
                               </div>
                            ))}
-                        </div>
+                        </div>:
+                        <div className='bg-white rounded-xl p-4 my-4 '>
+                        <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
+                        <p className="text-center text-md my-4"><i>Let's get the ball rolling!<br/>Be the first to support this cause by pressing Give Now!</i></p>
+                     </div>
+                        }
                         {/* <DonationStream /> */}
                     
                   </main>
