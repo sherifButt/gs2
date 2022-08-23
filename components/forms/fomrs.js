@@ -363,7 +363,7 @@ export const restorePassword = {
 
 export const createCampaign = {
    title: 'Create Campaign',
-   subtitle: '',
+   backButton: true,
    button: {
       icon: '',
       idle: 'Create Campaign',
