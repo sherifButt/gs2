@@ -58,12 +58,15 @@ const Campaign = () => {
                   />
                 </div>
               </div>
-
-              <Thermometer
-                max={campaignData?.donationTarget}
-                current={campaignData?.donationSummary.netDonations}
-                currency={campaignData?.donationSummary.currency.displaySymbol}
-              />
+              <div className="mt-6">
+                <Thermometer
+                  max={campaignData?.donationTarget}
+                  current={campaignData?.donationSummary.netDonations}
+                  currency={
+                    campaignData?.donationSummary.currency.displaySymbol
+                  }
+                />
+              </div>
 
               <SimpleCard
                 // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
@@ -88,7 +91,7 @@ const Campaign = () => {
                 description=""
                 className="bg-white p-4 rounded-xl "
               />
-              
+
               {/*  
                         <SimpleCard
                            title='About this Campaign'
