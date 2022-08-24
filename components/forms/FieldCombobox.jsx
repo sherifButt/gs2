@@ -208,7 +208,7 @@ const FieldCombobox = ({
       <>
          {!hidden && (
             <div className='relative'>
-               <ul className='flex flex-col gap-4 py-4 divide-y-2'>
+               <ul className='flex flex-col gap-4  divide-y-2'>
                   {selectedOptions.map((item, i) => (
                      <li key={item.name + '_' + i} className=''>
                         <FieldComboboxSelectedItems
