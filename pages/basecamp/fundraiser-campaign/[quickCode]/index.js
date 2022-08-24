@@ -58,6 +58,15 @@ const Campaign = () => {
                   />
                 </div>
               </div>
+              <div className="mt-6">
+                <Thermometer
+                  max={campaignData?.donationTarget}
+                  current={campaignData?.donationSummary.netDonations}
+                  currency={
+                    campaignData?.donationSummary.currency.displaySymbol
+                  }
+                />
+              </div>
 
               <SimpleCard
                 // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
@@ -82,11 +91,7 @@ const Campaign = () => {
                 description=""
                 className="bg-white p-4 rounded-xl "
               />
-              <Thermometer
-                max={campaignData?.donationTarget}
-                current={campaignData?.donationSummary.netDonations}
-                currency={campaignData?.donationSummary.currency.displaySymbol}
-              />
+
               {/*  
                         <SimpleCard
                            title='About this Campaign'
@@ -114,6 +119,7 @@ const Campaign = () => {
                   <div className="flex" key={i}>
                     <img className="h-8 mr-2" src={charity.profileImagePath} />
                     {charity?.charityName}
+
                   </div>
                 ))}
                 description=""
