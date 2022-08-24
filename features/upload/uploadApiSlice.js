@@ -5,13 +5,12 @@ export const uploadApiSlice = apiSlice.injectEndpoints({
       uploadFile: builder.mutation({
          query: args => {
             const { entityId, mediaType, file } = args
-            console.log('args', args)
             return {
                url: '/Upload/Stream',
                method: 'POST',
                body:  file ,
                params: { entityId, mediaType },
-               // headers: { 'Content-Type': 'multipart/form-data' },
+               headers: { 'Content-Type': 'multipart/form-data' },
             }
          },
       }),
