@@ -32,11 +32,11 @@ const PostLastUpdate = ({ data },{...props}) => {
                <div className='max-w-[8rem] mx-auto w-full'>
                   <p className='block text-right text-[1.56rem] text-army-500  font-light'>
                      {_data?.currencySymbol}
-                     {_data?.donationValue.toFixed(2)}
+                     {_data?.donationValue.toLocaleString(undefined, {maximumFractionDigits:2})}
                   </p>
                   <p className='block text-right text-neutral-500  font-light '>
                   
-                     {_data?.giftAidValue>0?'+'+data?.currencySymbol+data?.giftAidValue.toFixed(2)+' GiftAid':''}
+                     {_data?.giftAidValue>0?'+'+data?.currencySymbol+data?.giftAidValue.toLocaleString(undefined, {maximumFractionDigits:2})+' GiftAid':''}
                   </p>
                </div>
             </div>

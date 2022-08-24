@@ -6,6 +6,7 @@ import DonationStream from '../../../../components/blocs/DonationStream'
 import PostLastUpdate from '../../../../components/cards/PostLastUpdate'
 import SimpleCard from '../../../../components/cards/SimpleCard'
 import ThumbnailCard from '../../../../components/cards/ThumbnailCard'
+//import CampaignCharityCard from '../../../../components/cards/CampaignCharityCard'
 import Thermometer from '../../../../components/stats/Thermometer'
 import { useGetByQuickCodeQuery } from '../../../../features/campaign/campaignApiSlice'
 import { useLoadSupporterQuery } from '../../../../features/supporter/supporterApiSlice'
@@ -32,36 +33,35 @@ const Campaign = () => {
       query: router.query.quickCode,
    })
 
-   var charityText='';
-   var charityLogos='';
+   var charityText = '';
+   var charityLogos = '';
 
-  function renderCharityText() {
-     
-         charityText = ''
-         if (campaignData && campaignData.campaignCharities)
-         {
-            campaignData.campaignCharities ? campaignData.campaignCharities.map(
-               charity => (
-                  charityText = charityText + charity.charityName + ' ,'
-   
-               )
-            ) : ''
-         }
-        
-         console.log(charityText);
+   function renderCharityText() {
 
-         if (charityText.endsWith(' ,')) {
-            charityText = charityText.slice(0, -2)
-         }      
+      charityText = ''
+      if (campaignData && campaignData.campaignCharities) {
+         campaignData.campaignCharities ? campaignData.campaignCharities.map(
+            charity => (
+               charityText = charityText + charity.charityName + ' ,'
+
+            )
+         ) : ''
+      }
+
+      console.log(charityText);
+
+      if (charityText.endsWith(' ,')) {
+         charityText = charityText.slice(0, -2)
+      }
    }
 
-  
+
 
    const { data: donationData, isLoading: donationIsLoading } =
       useGetDonationsQuery({ query: campaignData?.id, count: 10 })
 
    return (
-    
+
       <>
          <div
             style={{
@@ -76,53 +76,53 @@ const Campaign = () => {
                {/* Middle */}
                <div className='w-full sm:w-600 -mt-28   order-3 md:order-none mb-12'>
                   <main className='flex flex-col order-1 md:mt-8 px-4'>
-                    
-                        <div
-                           className=' w-full '>
-                           <div className='mx-auto'>
-                              <AvatarUser
-                                 className='w-40 h-40 text-7xl '
-                                 profileImage={
-                                    campaignData?.supporter.profileImagePath
-                                 }
-                                 forename={campaignData?.supporter.forename}
-                                 surname={campaignData?.supporter.surname}
-                              />
-                           </div>
+
+                     <div
+                        className=' w-full '>
+                        <div className='mx-auto'>
+                           <AvatarUser
+                              className='w-40 h-40 text-7xl '
+                              profileImage={
+                                 campaignData?.supporter.profileImagePath
+                              }
+                              forename={campaignData?.supporter.forename}
+                              surname={campaignData?.supporter.surname}
+                           />
                         </div>
+                     </div>
 
-                        <SimpleCard
+                     <SimpleCard
 
-                           // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
-                           // subTitle={campaignData?.campaignCharities.map(
-                           //    (charity, i) => {
-                           //       return (
-                           //          <>
-                           //          {charity?.charityName}
-                           //          {campaignData?.campaignCharities?.length !== i + 1
-                           //             ? ","
-                           //             : null}
-                           //          </>
-                           //       );
-                           //    }
-                           // )}
-                           // description={campaignData?.description}
+                        // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
+                        // subTitle={campaignData?.campaignCharities.map(
+                        //    (charity, i) => {
+                        //       return (
+                        //          <>
+                        //          {charity?.charityName}
+                        //          {campaignData?.campaignCharities?.length !== i + 1
+                        //             ? ","
+                        //             : null}
+                        //          </>
+                        //       );
+                        //    }
+                        // )}
+                        // description={campaignData?.description}
 
-                           title={`${campaignData?.name}`}
-                           subTitle={campaignData? HTMLReactParser(campaignData?.description) : ''}
-                           description=''
-                           className='bg-white p-4 rounded-xl '
+                        title={`${campaignData?.name}`}
+                        subTitle={campaignData ? HTMLReactParser(campaignData?.description) : ''}
+                        description=''
+                        className='bg-white p-4 rounded-xl '
 
-                        />
-                        <Thermometer
-                           max={campaignData?.donationTarget}
-                           current={campaignData?.donationSummary.netDonations}
-                           currency={
-                              campaignData?.donationSummary.currency
-                                 .displaySymbol
-                           }
-                        />
-                        {/*  
+                     />
+                     <Thermometer
+                        max={campaignData?.donationTarget}
+                        current={campaignData?.donationSummary.netDonations}
+                        currency={
+                           campaignData?.donationSummary.currency
+                              .displaySymbol
+                        }
+                     />
+                     {/*  
                         <SimpleCard
                            title='About this Campaign'
                            subTitle={HTMLReactParser(campaignData?.description)}
@@ -130,7 +130,10 @@ const Campaign = () => {
                         />
 
                         */}
-                        {/*  
+                     {/*}
+                        <CampaignCharityCard charities={campaignData?.campaignCharities} className='bg-white p-4 rounded-xl ' />
+                     */}
+                     {/*  
                          <div class=" flex items-center">
                            {
                               campaignData?.campaignCharities.map(
@@ -142,18 +145,18 @@ const Campaign = () => {
                            }
                         </div>
                         */}
-                       
-
-                         { renderCharityText()}
-                        <SimpleCard
-                           title='Supporting'
-                           subTitle={charityText}
-                           description=''
-                           className='bg-white p-4 rounded-xl '
-                        />
 
 
-                        {/*  
+                     {renderCharityText()}
+                     <SimpleCard
+                        title='Supporting'
+                        subTitle={charityText}
+                        description=''
+                        className='bg-white p-4 rounded-xl '
+                     />
+
+
+                     {/*  
                          <SimpleCard
                            title='Supporting'
                            subTitle={campaignData?.campaignCharities.map(
@@ -166,8 +169,8 @@ const Campaign = () => {
                            className='bg-white p-4 rounded-xl '
                         />
                         */}
-                       
-                        {/* 
+
+                     {/* 
                         <div className='bg-white rounded-xl p-4 my-4 '>
 
                         <div className='bg-white rounded-xl p-4 my-4 '>
@@ -179,10 +182,10 @@ const Campaign = () => {
                            <PostLastUpdate />
 
                         </div>*/}
-                       
-                       
 
-                        {donationData?.length>0?
+
+
+                     {donationData?.length > 0 ?
                         <div className='bg-white rounded-xl p-4 my-4 '>
                            <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
                            {donationData?.map(donation => (
@@ -190,14 +193,14 @@ const Campaign = () => {
                                  <DonationCard data={donation} />
                               </div>
                            ))}
-                        </div>:
+                        </div> :
                         <div className='bg-white rounded-xl p-4 my-4 '>
-                        <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
-                        <p className="text-center text-md my-4"><i>Let's get the ball rolling!<br/>Be the first to support this cause by pressing Give Now!</i></p>
-                     </div>
-                        }
-                        {/* <DonationStream /> */}
-                    
+                           <p className='block text-2xl lg:text-3xl text-black  font-semibold'>Donations</p>
+                           <p className="text-center text-md my-4"><i>Let's get the ball rolling!<br />Be the first to support this cause by pressing Give Now!</i></p>
+                        </div>
+                     }
+                     {/* <DonationStream /> */}
+
                   </main>
                </div>
                {/* /Middle */}
