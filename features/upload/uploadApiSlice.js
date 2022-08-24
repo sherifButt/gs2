@@ -16,10 +16,14 @@ export const uploadApiSlice = apiSlice.injectEndpoints({
          },
       }),
    }),
-})
+} )
+
 
 export const {
    useUploadFileMutation,
    
    
 } = uploadApiSlice
+
+// Export endpoint for use in SSR
+export const {uploadFile}=uploadApiSlice.endpoints
