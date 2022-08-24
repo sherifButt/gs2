@@ -151,7 +151,7 @@ const Campaign = () => {
                   </p>
                   <p className="text-center text-md my-4">
                     <i>
-                      Let's get the ball rolling!
+                      Let&apos;s get the ball rolling!
                       <br />
                       Be the first to support this cause by pressing Give Now!
                     </i>
