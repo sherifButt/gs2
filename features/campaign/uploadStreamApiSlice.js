@@ -5,11 +5,12 @@ export const uploadStreamSlice = apiSlice.injectEndpoints({
       uploadStream: builder.mutation({
          query: args => {
               console.log( args )
-              const {}
+              const {entityId,meditType}= args
             return {
-               url: '/Campaign/Create',
+               url: '/upload/stream',
                method: 'POST',
                body: { ...args },
+               params:{entityId,meditType}
             }
          },
          providesTags: ['Campaign'],
