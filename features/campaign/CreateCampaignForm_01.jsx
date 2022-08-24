@@ -64,7 +64,7 @@ const CreateCampaignForm = () => {
       ],
    }
 
-   const createCampaignHandler = async e => {
+   const createCampaignHandler = async e => { 
       e.preventDefault()
 
       const createCampaignResponse = await createCampaign(formData).unwrap()

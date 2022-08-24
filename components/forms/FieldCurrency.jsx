@@ -44,7 +44,7 @@ const FieldCurrency = (
    } = data()
 
    const [_baseCurrency, setBaseCurrency] = useState(baseCurrency)
-   const [selectedCurrencyId, setSelectedCurrencyId] = useState(baseCurrency.id)
+   const [selectedCurrencyId, setSelectedCurrencyId] = useState(baseCurrency?.id)
    const [_fieldData, setFieldData] = useState([baseCurrency])
 
    
