@@ -30,7 +30,7 @@ const Campaign = () => {
   } = useGetByQuickCodeQuery({
     query: router.query.quickCode,
   });
-  
+
   const { data: donationData, isLoading: donationIsLoading } =
     useGetDonationsQuery({ query: campaignData?.id, count: 10 });
 
@@ -111,10 +111,10 @@ const Campaign = () => {
               <SimpleCard
                 title="Supporting"
                 subTitle={campaignData?.campaignCharities.map((charity, i) => (
-                  <>
+                  <div className="flex" key={i}>
+                    <img className="h-8 mr-2" src={charity.profileImagePath} />
                     {charity?.charityName}
-                    {campaignData?.campaignCharities.length !== i + 1 ? ", " : ""}
-                  </>
+                  </div>
                 ))}
                 description=""
                 className="bg-white p-4 rounded-xl "

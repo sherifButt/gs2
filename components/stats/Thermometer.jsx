@@ -9,7 +9,7 @@ const Thermometer = ({ current, max, currency, text, small }) => {
           className={`flex ${
             small ? "flex-col" : "flex-row items-center "
           } justify-between w-full`}>
-          <p className="block text-2xl text-army-500  font-light">
+          <p className="block text-2xl text-army-500  font-semibold">
             {currency}
             {current.toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </p>

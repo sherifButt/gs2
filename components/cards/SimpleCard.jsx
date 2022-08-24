@@ -9,7 +9,7 @@ const SimpleCard = ({title,subTitle,description,cta,className}, {...props}) => {
                {title}
             </p>
             <br/>
-              <p className='block text-xl lg:text-2xl text-gray-600  font-light'>{ subTitle}</p>
+              <p className='block text-xl lg:text-1xl text-gray-600  font-light'>{ subTitle}</p>
         </div>
         <p className='block w-full text-black  font-light'>
            {description}
