@@ -30,7 +30,7 @@ const Campaign = () => {
   } = useGetByQuickCodeQuery({
     query: router.query.quickCode,
   });
-  
+
   const { data: donationData, isLoading: donationIsLoading } =
     useGetDonationsQuery({ query: campaignData?.id, count: 10 });
 
@@ -58,6 +58,15 @@ const Campaign = () => {
                   />
                 </div>
               </div>
+              <div className="mt-6">
+                <Thermometer
+                  max={campaignData?.donationTarget}
+                  current={campaignData?.donationSummary.netDonations}
+                  currency={
+                    campaignData?.donationSummary.currency.displaySymbol
+                  }
+                />
+              </div>
 
               <SimpleCard
                 // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
@@ -82,11 +91,7 @@ const Campaign = () => {
                 description=""
                 className="bg-white p-4 rounded-xl "
               />
-              <Thermometer
-                max={campaignData?.donationTarget}
-                current={campaignData?.donationSummary.netDonations}
-                currency={campaignData?.donationSummary.currency.displaySymbol}
-              />
+
               {/*  
                         <SimpleCard
                            title='About this Campaign'
@@ -113,7 +118,9 @@ const Campaign = () => {
                 subTitle={campaignData?.campaignCharities.map((charity, i) => (
                   <>
                     {charity?.charityName}
-                    {campaignData?.campaignCharities.length !== i + 1 ? ", " : ""}
+                    {campaignData?.campaignCharities.length !== i + 1
+                      ? ", "
+                      : ""}
                   </>
                 ))}
                 description=""
