@@ -40,7 +40,7 @@ const CreateCampaignForm = () => {
       createdBy: user?.id || '',
       description: '',
       target: null,
-      currencyId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      currencyId: '9d6494c0-e364-43f0-b76c-52251df71133',
       private: true,
       status: 0,
       type: 1,
@@ -54,7 +54,7 @@ const CreateCampaignForm = () => {
       ],
       defaultDonationSizes: [
          {
-            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6', 
             value: 0,
             name: 'string',
             description: 'string',
