@@ -86,22 +86,28 @@ const Donate = ({ data: campaignData }) => {
       voluntaryContribution: donationAmount * 0.1,
       voluntaryContributionValueHolder: 0.1,
       sessionToken: '',
+      gaCheckOwnMoney: false, //Gift Aid Declaration checkbox 1
+      gaCheckNoReturn: false, //Gift Aid Declaration checkbox 2
+      charityContact: false, //Charity can contact
+      giveStarContact: false, //GiveStar can contact
+
    }
 
+   /*
    const formInitialDataII = {
       id: '00000000-0000-0000-0000-000000000000',
       campaignId: '227615ec-a36a-47cd-8357-3b4946d61225',
       giftAid: false,
       giftAidRequest: {
-         donatorName: 'sheif',
-         postZipCode: 'Cf843nb',
-         addressLine1: 'string',
-         addressLine2: 'string',
-         addressLine3: 'string',
-         donatorEmail: 'sherif@give-star.com',
+         donatorName: '',
+         postZipCode: '',
+         addressLine1: '',
+         addressLine2: '',
+         addressLine3: '',
+         donatorEmail: '',
       },
       currencyId: '9d6494c0-e364-43f0-b76c-52251df71133',
-      donatorName: 'sheirf',
+      donatorName: '',
       message: 'the good message',
       amount: 20,
       anonymous: false,
@@ -112,10 +118,10 @@ const Donate = ({ data: campaignData }) => {
       paymentProviderRef: 'string',
       donationSource: 1,
       donationType: 2,
-      donatorEmail: 'sherif@give_star.com',
+      donatorEmail: '',
       charityContact: true,
       giveStarContact: true,
-      stuff: 'sutff',
+      stuff: '',
       baseCurrency: {
          id: '9d6494c0-e364-43f0-b76c-52251df71133',
          name: 'British Pound',
@@ -123,14 +129,15 @@ const Donate = ({ data: campaignData }) => {
          shortCode: 'GBP',
       },
    }
+   */
 
    const [formData, setFormData] = useState(formInitialData)
 
    useEffect(() => {
       // console.log('donationAmount', donationAmount)
-      console.log('user', user)
-      console.table('formData', formData)
-      console.log('page', page)
+      //console.log('user', user)
+      //console.table('formData', formData)
+      //console.log('page', page)
    }, [donationAmount, user, formData, page])
 
    useEffect(() => {
@@ -247,12 +254,12 @@ const Donate = ({ data: campaignData }) => {
                      })
                   }}
                   value={formData.donatorName}
-                  validationHandler={e => {}}
+                  validationHandler={e => { }}
                />
 
                <FieldCheckbox
                   className='mb-10 text-left'
-                  terms='Make my name anonymous'
+                  terms='Keep my donation anonymous'
                   inputHandler={e =>
                      setFormData({
                         ...formData,
@@ -265,7 +272,7 @@ const Donate = ({ data: campaignData }) => {
                <FieldText
                   id='email'
                   name='email'
-                  className='my-6 '
+                  className='mb-10 '
                   placeholder='Donor Email (for receipts)'
                   type='text'
                   inputHandler={e => {
@@ -279,10 +286,10 @@ const Donate = ({ data: campaignData }) => {
                      })
                   }}
                   value={formData.donatorEmail}
-                  validationHandler={e => {}}
+                  validationHandler={e => { }}
                />
                <FieldTextarea
-                  className='my-6'
+                  className='mb-10'
                   placeholder='Write a message of support...'
                   rows={4}
                   inputHandler={e => {
@@ -345,7 +352,7 @@ const Donate = ({ data: campaignData }) => {
                         })
                      }}
                      value={formData.voluntaryContribution}
-                     validationHandler={e => {}}
+                     validationHandler={e => { }}
                      step={1}
                      // min={ 0 }
                      rightText={formData.baseCurrency?.displaySymbol}
@@ -428,8 +435,13 @@ const Donate = ({ data: campaignData }) => {
          {/* Gift Aid Information */}
          {giftAid && (
             <div className='flex flex-col gap-3 justify-start items-center py-8 '>
+               <img
+                  className='mx-auto'
+                  src='/assets/images/giftaidit.png'
+                  alt=''
+               />
                <p className='block  text-xl text-stone-800  font-bold py-4'>
-                  Please accept and read these statements
+                  Please read and accept these statements
                </p>
                <FieldCheckbox
                   className='my-4 text-left text-stone-800'
@@ -437,10 +449,10 @@ const Donate = ({ data: campaignData }) => {
                   inputHandler={e =>
                      setFormData({
                         ...formData,
-                        anonymous: e.target.checked,
+                        gaCheckOwnMoney: e.target.checked,
                      })
                   }
-                  value={formData.anonymous}
+                  value={formData.gaCheckOwnMoney}
                />
                <FieldCheckbox
                   className='my-4 text-left text-stone-800'
@@ -448,88 +460,98 @@ const Donate = ({ data: campaignData }) => {
                   inputHandler={e =>
                      setFormData({
                         ...formData,
-                        anonymous: e.target.checked,
+                        gaCheckNoReturn: e.target.checked,
                      })
                   }
-                  value={formData.anonymous}
+                  value={formData.gaCheckNoReturn}
                />
-               <div className='grid grid-cols-2 gap-4 justify-between my-8'>
-                  <FieldText
-                     // hidden={user?.forename}
-                     id='firstName'
-                     name='firstName'
-                     className='my-4'
-                     placeholder='First Name'
-                     type='text'
-                     inputHandler={e => {
-                        setFormData({
-                           ...formData,
-                           firstName: e.target.value,
-                        })
-                     }}
-                     value={formData.firstName}
-                     validationHandler={e => {}}
-                  />
-                  <FieldText
-                     // hidden={user?.surname}
-                     id='lastName'
-                     name='lastName'
-                     className='my-4'
-                     placeholder='Last Name'
-                     type='text'
-                     inputHandler={e => {
-                        setFormData({
-                           ...formData,
-                           lastName: e.target.value,
-                        })
-                     }}
-                     value={formData.lastName}
-                     validationHandler={e => {}}
-                  />
-                  <FieldText
-                     // hidden={user?.surname}
-                     id='addressLine1'
-                     name='addressLine1'
-                     className='my-4'
-                     placeholder='Address First Line'
-                     type='text'
-                     inputHandler={e => {
-                        setFormData({
-                           ...formData,
-                           giftAidRequest: {
-                              ...formData.giftAidRequest,
-                              addressLine1: e.target.value,
-                           },
-                        })
-                     }}
-                     value={formData.giftAidRequest.addressLine1}
-                     validationHandler={e => {}}
-                  />
-                  <FieldText
-                     id='postcode'
-                     name='postcode'
-                     className='my-4'
-                     placeholder='Post Code'
-                     type='text'
-                     inputHandler={e => {
-                        setFormData({
-                           ...formData,
-                           giftAidRequest: {
-                              ...formData.giftAidRequest,
-                              postZipCode: e.target.value,
-                           },
-                        })
-                     }}
-                     value={formData.giftAidRequest.postZipCode}
-                     validationHandler={e => {}}
-                  />
-               </div>
+               <div hidden={!(formData?.gaCheckNoReturn && formData?.gaCheckOwnMoney)}> {/* Need both checkboxes for gift aid checked before we can proceed */}
+                  <div className='grid grid-cols-1 gap-4 justify-between my-8'>
+                     <FieldText
+                        // hidden={user?.forename}
+                        id='gaName'
+                        name='gaName'
+                        className='my-4'
+                        placeholder='Name (Required)'
+                        type='text'
+                        inputHandler={e => {
+                           setFormData({
+                              ...formData,
+                              giftAidRequest:{
+                                 ...formData.giftAidRequest,
+                                 donatorName:e.target.value,                                 
+                              }                            
+                           })
+                        }}
+                        value={formData.giftAidRequest.donatorName}
+                        validationHandler={e => { }}
+                     />
+                     <FieldText
+                        // hidden={user?.surname}
+                        id='gaEmail'
+                        name='gaEmail'
+                        className='my-4'
+                        placeholder='Email (optional)'
+                        type='text'
+                        inputHandler={e => {
+                           setFormData({
+                              ...formData,
+                              giftAidRequest:{
+                                 ...formData.giftAidRequest,
+                                 donatorEmail:e.target.value
+                              }                              
+                           })
+                        }}
+                        value={formData.giftAidRequest.donatorEmail}
+                        validationHandler={e => { }}
+                     />
+                     </div>
+                     <div className='grid grid-cols-2 gap-4 justify-between my-8'>
+                     <FieldText
+                        // hidden={user?.surname}
+                        id='addressLine1'
+                        name='addressLine1'
+                        className='my-4'
+                        placeholder='Address First Line'
+                        type='text'
+                        inputHandler={e => {
+                           setFormData({
+                              ...formData,
+                              giftAidRequest: {
+                                 ...formData.giftAidRequest,
+                                 addressLine1: e.target.value,
+                              },
+                           })
+                        }}
+                        value={formData.giftAidRequest.addressLine1}
+                        validationHandler={e => { }}
+                     />
+                     <FieldText
+                        id='postcode'
+                        name='postcode'
+                        className='my-4'
+                        placeholder='Post Code'
+                        type='text'
+                        inputHandler={e => {
+                           setFormData({
+                              ...formData,
+                              giftAidRequest: {
+                                 ...formData.giftAidRequest,
+                                 postZipCode: e.target.value,
+                              },
+                           })
+                        }}
+                        value={formData.giftAidRequest.postZipCode}
+                        validationHandler={e => { }}
+                     />
+                  </div>
+               </div> {/* end hide of area if give aid decs are not both checked */}
             </div>
          )}
-         {/* 4. Donation Summery */}
+         {/* 4. Donation Summary */}
          {donationSummery && (
             <div className='items-center py-8 '>
-               <p className='block  text-xl text-stone-800   font-bold py-4'>
+               <p className='block text-xl text-stone-800 font-bold py-4'>
                   Your donation summary
                </p>
                <div className='flex flex-col  gap-1 mx-8'>
@@ -568,7 +590,7 @@ const Donate = ({ data: campaignData }) => {
                      </p>
                   </div>
                   <div className='flex flex-row justify-between'>
-                     <p>Charities receive</p>
+                     <p>Charity(s) receive</p>
                      <p>
                         {formData?.baseCurrency?.displaySymbol}
                         {(formData.amount * (giftAid ? 1.25 : 1)).toFixed(2)}
@@ -586,7 +608,7 @@ const Donate = ({ data: campaignData }) => {
                </p>
 
                <div className='flex flex-col  p-8 pt-12  border rounded-3xl bg-gray-50 shadow-xl'>
-                  {console.log('ADD DONATION DATA', addDonationData?.data)}
+                  {/*console.log('ADD DONATION DATA', addDonationData?.data)*/}
 
                   {addDonationData?.data && (
                      <SafeChargeCC

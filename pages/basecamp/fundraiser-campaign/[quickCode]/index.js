@@ -117,7 +117,7 @@ const Campaign = () => {
                 title="Supporting"
                 subTitle={campaignData?.campaignCharities.map((charity, i) => (
                   <div className="flex" key={i}>
-                    <img className="h-8 mr-2" src={charity.profileImagePath} />
+                    <img className="h-12 mr-2" src={charity.profileImagePath} />
                     {charity?.charityName}
                   </div>
                 ))}
