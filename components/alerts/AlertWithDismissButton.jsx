@@ -76,6 +76,6 @@ export default function AlertWithDismissButton({ isAlert, isSuccess, message, de
 AlertWithDismissButton.defaultProps = {
    isAlert: false,
    isSuccess: true,
-   message: 'Successfully Logged in!',
-   description: 'Anyone with a link can now view this page.',
+   message: '',
+   description: '',
 }
