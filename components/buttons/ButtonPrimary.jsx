@@ -26,7 +26,7 @@ const ButtonPrimary = ({
                isLoading
                   ? `${bgColor} shadow-none text-white`
                   : `bg-yellow-400 hover:scale-105 active:scale-100 hover:shadow-md ${textColor}`
-            } rounded-xl ease-in-out duration-300 active:shadow-none text-center  font-semibold uppercase ${_className}`}>
+            } rounded-xl ease-in-out duration-300 active:shadow-none text-center  font-semibold uppercase px-8 ${_className}`}>
             {isLoading ? (
                <div className='inline-flex'>
                     
