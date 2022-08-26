@@ -36,7 +36,6 @@ const Donate = ({ data: campaignData }) => {
   const { data: userData } = useLoadUserQuery();
   const router = useRouter();
 
-  console.log("campaignData", campaignData);
   const [
     addDonation,
     {
@@ -156,6 +155,12 @@ const Donate = ({ data: campaignData }) => {
   return (
     <form className="divide-y mx-4 text-center">
       <div className="flex flex-col gap-3 justify-start items-center py-2 -mt-4 sm:mt-0">
+        <div
+          className="flex items-center underline cursor-pointer self-start mb-5"
+          onClick={() => router.back()}>
+          <img className="h-4 mr-2" src="/assets/images/arrow-back.svg" />
+          Back
+        </div>
         <div>
           <p className="block text-center text-2xl text-stone-800  font-bold">
             Donate to {campaignData?.name}
@@ -601,6 +606,7 @@ const Donate = ({ data: campaignData }) => {
                   addDonationData?.data?.paymentResponse.clientRequestId
                 }
                 quickCode={campaignData?.quickCode}
+
                 emailAddress={
                   addDonationData?.data?.preFlightResponse.donationRequest
                     .donatorEmail
