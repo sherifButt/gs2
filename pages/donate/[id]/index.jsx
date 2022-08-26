@@ -136,7 +136,6 @@ const Donate = ({ data: campaignData }) => {
     // console.log('donationAmount', donationAmount)
     //console.log('user', user)
     //console.table('formData', formData)
-    //console.log('page', page)
   }, [donationAmount, user, formData, page]);
 
   useEffect(() => {
@@ -145,7 +144,7 @@ const Donate = ({ data: campaignData }) => {
     ).then(() => {
       setSafeCharge(
         window.SafeCharge({
-          env: "prod", // env: 'int', removed for production
+          env: process.env.NODE_ENV === "development" ? "int" : "prod", // env: 'int', removed for production
           merchantId: process.env.MERCHANT_ID,
           merchantSiteId: process.env.MERCHANT_SITE_ID,
         })
@@ -606,6 +605,8 @@ const Donate = ({ data: campaignData }) => {
                 donationId={
                   addDonationData?.data?.paymentResponse.clientRequestId
                 }
+                quickCode={campaignData?.quickCode}
+
                 emailAddress={
                   addDonationData?.data?.preFlightResponse.donationRequest
                     .donatorEmail
