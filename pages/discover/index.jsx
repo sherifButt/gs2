@@ -6,6 +6,7 @@ const Discover = () => {
    return (
       <>
          {/* <HomePage/> */}
+         <p>Discover</p>
          <PostLastUpdate />
          <PostLastUpdate />
          <PostLastUpdate />

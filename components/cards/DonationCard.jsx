@@ -19,12 +19,12 @@ const PostLastUpdate = ({ data }, { ...props }) => {
 
             <img
               className="block rounded-full w-16 border-2 border-white"
-              src="https://media.givestar.io/static/anon-user.png"
+              src={_data?.fromSupporterProfileImagePath} alt=""
             />
           </div>
           <div className="flex flex-col gap-2.5 justify-start items-start w-full  pl-0 sm:pl-5 pb-5">
             <p className="block text-lg text-block italic font-normal scratch">
-              {_data?.donatorName === "" ? "Anonymous" : _data?.donatorName}
+              {_data?.displayName === "" ? "Anonymous" : _data?.displayName}
             </p>
             <p className="block text-neutral-500 ">{data?.donationAgeText}</p>
             <p className="block  text-black ">{_data?.donatorMessage}</p>
