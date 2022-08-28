@@ -23,7 +23,7 @@ const FieldCheckbox = ({
 }) => {
   return (
     <div className={`${className}`}>
-      <div className="flex   justify-between relative">
+      <div className="flex relative">
         <input
           id={name}
           name={name}

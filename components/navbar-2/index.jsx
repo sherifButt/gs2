@@ -17,7 +17,7 @@ const Navbar = ( { className } ) => {
    useEffect(() => {
       // loadUser()
       dispatch( setUser( data ) )
-      console.log( 'loadUser', data )
+      //console.log( 'loadUser', data )
    }, [ data ] )
    
    return token ? (

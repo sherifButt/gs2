@@ -16,9 +16,12 @@ import LeftSidebar from "../../../../components/left-sidebar/left-sidebar-1";
 import RightSidebar from "../../../../components/right-sidebar/right-sidebar-3";
 import bg from "../../../../public/assets/images/giveStar_stock_Image.jpg";
 import AvatarUser from "../../../../components/avatar/AvatarUser";
+import ButtonPrimary from "../../../../components/buttons/ButtonPrimary";
 import HTMLReactParser from "html-react-parser";
+import { useSelector } from "react-redux";
 
 const Campaign = () => {
+  const { isAuthenticated } = useSelector((state) => state.auth);
   const router = useRouter();
   const {
     data: campaignData,
@@ -31,68 +34,126 @@ const Campaign = () => {
     query: router.query.quickCode,
   });
 
+  if (isError) {
+    //console.log("iSError", isError);
+  }
+
+
+
+
   const { data: donationData, isLoading: donationIsLoading } =
     useGetDonationsQuery({ query: campaignData?.id, count: 10 });
 
+
+
   return (
     <>
-      <div
-        style={{
-          backgroundImage: `url(${campaignData?.bannerImagePath || bg.src})`,
-        }}
-        className="mx-auto max-auto flex grow bg-cover bg-center lg:bg-fixed pt-20 w-full h-80 lg:h-96 bg-yellow-50 "></div>
-      <div className="md:container mx-auto max-auto flex grow ">
-        <div className=" flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl ">
-          <LeftSidebar className="w-80 pt-20  xs:w-88 xl:w-96 hidden lg:block  -mt-20 h-screen mb-auto   sticky top-0" />
 
-          {/* Middle */}
-          <div className="w-full sm:w-600 -mt-28   order-3 md:order-none mb-12">
-            <main className="flex flex-col order-1 md:mt-8 px-4">
-              <div className=" w-full ">
-                <div className="mx-auto">
-                  <AvatarUser
-                    className="w-40 h-40 text-7xl "
-                    profileImage={campaignData?.supporter.profileImagePath}
-                    forename={campaignData?.supporter.forename}
-                    surname={campaignData?.supporter.surname}
+      <div className={isError ? '' : 'hidden'}>
+        <div class="flex h-screen">
+          <div class="m-auto">
+            <div className="text-center">
+              <h3>Hmm, we can't seem to find that...</h3>
+              <h3>Please check the link, to return, click the button below...</h3>
+              <br/>
+              {isAuthenticated && (
+                <ButtonPrimary
+                  text="BaseCamp"
+                  className="lg:mb-8 w-full lg:w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg "
+                  actionHandler={() => {
+                    router.push("/basecamp");
+                  }}
+                />
+              )}
+
+              {!isAuthenticated && (
+                 <ButtonPrimary
+                 text="Home Page"
+                 className="lg:mb-8 w-full lg:w-64 bg-button-texture bg-no-repeat bg-contain bg-[left-20px] text-lg "
+                 actionHandler={() => {
+                   router.push("/");
+                 }}
+               />
+              )}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {/*
+      <div id="campaignLoader" className={ (campaignData && !isError) ? 'hidden' : ''}>
+        <div class="flex h-screen">
+          <div class="m-auto">
+            <h3>Just a second, loading campaign...</h3>
+          </div>
+        </div>
+
+      </div>
+  */}
+
+      {/* Main Campaign Banner Area */}
+      <div className={campaignData ? '' : 'hidden'}>
+        <div
+          style={{
+            backgroundImage: `url(${campaignData?.bannerImagePath})`,
+          }}
+          className="mx-auto max-auto flex grow bg-cover bg-center lg:bg-fixed pt-20 w-full h-80 lg:h-96 bg-yellow-50 "></div>
+      </div>
+
+
+      <div id="campaignContent" className={campaignData ? '' : 'hidden'}>
+        <div className="md:container mx-auto max-auto flex grow ">
+          <div className=" flex flex-row mx-auto grow justify-center gap-4 flex-wrap md:flex-nowrap h-full max-w-5xl ">
+            <LeftSidebar className="w-80 pt-20  xs:w-88 xl:w-96 hidden lg:block  -mt-20 h-screen mb-auto   sticky top-0" />
+
+            {/* Middle */}
+            <div className="w-full sm:w-600 -mt-28   order-3 md:order-none mb-12">
+              <main className="flex flex-col order-1 md:mt-8 px-4">
+                <div className=" w-full ">
+                  <div className="mx-auto">
+                    <AvatarUser
+                      className="w-40 h-40 text-7xl "
+                      profileImage={campaignData?.supporter.profileImagePath}
+                      forename={campaignData?.supporter.forename}
+                      surname={campaignData?.supporter.surname}
+                    />
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <Thermometer
+                    max={campaignData?.donationTarget}
+                    current={campaignData?.donationSummary.netDonations}
+                    currency={
+                      campaignData?.donationSummary.currency.displaySymbol
+                    }
                   />
                 </div>
-              </div>
-              <div className="mt-6">
-                <Thermometer
-                  max={campaignData?.donationTarget}
-                  current={campaignData?.donationSummary.netDonations}
-                  currency={
-                    campaignData?.donationSummary.currency.displaySymbol
+
+                <SimpleCard
+                  // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
+                  // subTitle={campaignData?.campaignCharities.map(
+                  //    (charity, i) => {
+                  //       return (
+                  //          <>
+                  //          {charity?.charityName}
+                  //          {campaignData?.campaignCharities?.length !== i + 1
+                  //             ? ","
+                  //             : null}
+                  //          </>
+                  //       );
+                  //    }
+                  // )}
+                  // description={campaignData?.description}
+
+                  title={`${campaignData?.name}`}
+                  subTitle={
+                    campaignData ? HTMLReactParser(campaignData?.description) : ""
                   }
+                  description=""
+                  className="bg-white p-4 rounded-xl "
                 />
-              </div>
 
-              <SimpleCard
-                // title={`${campaignData?.supporter.forename}’s Run for ${campaignData?.name}`}
-                // subTitle={campaignData?.campaignCharities.map(
-                //    (charity, i) => {
-                //       return (
-                //          <>
-                //          {charity?.charityName}
-                //          {campaignData?.campaignCharities?.length !== i + 1
-                //             ? ","
-                //             : null}
-                //          </>
-                //       );
-                //    }
-                // )}
-                // description={campaignData?.description}
-
-                title={`${campaignData?.name}`}
-                subTitle={
-                  campaignData ? HTMLReactParser(campaignData?.description) : ""
-                }
-                description=""
-                className="bg-white p-4 rounded-xl "
-              />
-
-              {/*  
+                {/*  
                         <SimpleCard
                            title='About this Campaign'
                            subTitle={HTMLReactParser(campaignData?.description)}
@@ -100,7 +161,7 @@ const Campaign = () => {
                         />
 
                         */}
-              {/*  
+                {/*  
                          <div class=" flex items-center">
                            {
                               campaignData?.campaignCharities.map(
@@ -113,19 +174,19 @@ const Campaign = () => {
                         </div>
                         */}
 
-              <SimpleCard
-                title="Supporting"
-                subTitle={campaignData?.campaignCharities.map((charity, i) => (
-                  <div className="flex" key={i}>
-                    <img className="h-12 mr-2" src={charity.profileImagePath} />
-                    {charity?.charityName}
-                  </div>
-                ))}
-                description=""
-                className="bg-white p-4 rounded-xl "
-              />
+                <SimpleCard
+                  title="Supporting"
+                  subTitle={campaignData?.campaignCharities.map((charity, i) => (
+                    <div className="flex" key={i}>
+                      <img className="h-12 mr-2" src={charity.profileImagePath} />
+                      {charity?.charityName}
+                    </div>
+                  ))}
+                  description=""
+                  className="bg-white p-4 rounded-xl "
+                />
 
-              {/* 
+                {/* 
                         <div className='bg-white rounded-xl p-4 my-4 '>
 
                         <div className='bg-white rounded-xl p-4 my-4 '>
@@ -138,33 +199,34 @@ const Campaign = () => {
 
                         </div>*/}
 
-              {donationData?.length > 0 ? (
-                <div className="bg-white rounded-xl p-4 my-4 ">
-                  <p className="block text-2xl lg:text-3xl text-black  font-semibold">
-                    Donations
-                  </p>
-                  {donationData?.map((donation) => (
-                    <div key={donation.name}>
-                      <DonationCard data={donation} />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="bg-white rounded-xl p-4 my-4 ">
-                  <p className="block text-2xl lg:text-3xl text-black  font-semibold">
-                    Donations
-                  </p>
-                  <p className="text-center text-md my-4">
-                    <i>
-                      Let&apos;s get the ball rolling!
-                      <br />
-                      Be the first to support this cause by pressing Give Now!
-                    </i>
-                  </p>
-                </div>
-              )}
-              {/* <DonationStream /> */}
-            </main>
+                {donationData?.length > 0 ? (
+                  <div className="bg-white rounded-xl p-4 my-4 ">
+                    <p className="block text-2xl lg:text-3xl text-black  font-semibold">
+                      Donations
+                    </p>
+                    {donationData?.map((donation) => (
+                      <div key={donation.name}>
+                        <DonationCard data={donation} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-xl p-4 my-4 ">
+                    <p className="block text-2xl lg:text-3xl text-black  font-semibold">
+                      Donations
+                    </p>
+                    <p className="text-center text-md my-4">
+                      <i>
+                        Let&apos;s get the ball rolling!
+                        <br />
+                        Be the first to support this cause by pressing Give Now!
+                      </i>
+                    </p>
+                  </div>
+                )}
+                {/* <DonationStream /> */}
+              </main>
+            </div>
           </div>
           {/* /Middle */}
           <RightSidebar
@@ -173,6 +235,7 @@ const Campaign = () => {
           />
         </div>
       </div>
+
     </>
   );
 };
@@ -181,7 +244,7 @@ Campaign.layout = "L1";
 export default Campaign;
 
 export async function getServerSideProps(context) {
-  console.log("context", context.query.id);
+  //console.log("context", context.query.id);
 
   return {
     props: {},

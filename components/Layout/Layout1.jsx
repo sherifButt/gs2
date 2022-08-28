@@ -12,7 +12,7 @@ const Layout = ({
 }) => {
    
 
-   console.log('bannerImagePath', bannerImagePath)
+   //console.log('bannerImagePath', bannerImagePath)
    return (
       <div className='relative bg-gray-100 flex flex-col grow z-0'>
          <Header />

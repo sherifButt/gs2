@@ -353,7 +353,7 @@ const Donate = ({ data: campaignData }) => {
               step={1}
               // min={ 0 }
               rightText={formData.baseCurrency?.displaySymbol}
-              rightTextPadding="pl-8"
+              rightTextPadding="pl-10"
             />
           </div>
         </div>
