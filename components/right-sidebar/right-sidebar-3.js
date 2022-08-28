@@ -1,12 +1,18 @@
 import { useRouter } from "next/router";
 import React from "react";
 import ButtonPrimary from "../buttons/ButtonPrimary";
-import Share from "../share/share";
+import ShareWidget from "../share/ShareWidget";
 import PostLastUpdate from "../cards/PostLastUpdate1";
 import VerticalMenu from "../v-menu-1";
 import Event from "../cards/EventSimpleCard";
+
 const RightSidebar = (props) => {
   const router = useRouter();
+
+  const url = process.env.publicUrl + router.asPath;
+
+  console.log(url);
+
   return (
     <aside {...props}>
       {props.children}
@@ -52,7 +58,7 @@ const RightSidebar = (props) => {
             }}
           />
 
-          <Share />
+          <ShareWidget url={url} />
 
           {/* <Event /> */}
         </div>
