@@ -340,19 +340,22 @@ const Donate = ({ data: campaignData }) => {
               name="Other"
               className="my-6"
               placeholder="Enter contribution amount"
-              type="text"
+              type="number"
               inputHandler={(e) => {
                 setFormData({
                   ...formData,
                   voluntaryContribution: Number(e.target.value),
                 });
               }}
-              value={formData.voluntaryContribution}
-              validationHandler={(e) => {}}
+              value={formData.voluntaryContribution || 0.10*formData.amount}
+              validationHandler={(e) => {
+                
+
+              }}
               step={1}
               // min={ 0 }
               rightText={formData.baseCurrency?.displaySymbol}
-              rightTextPadding="pl-10"
+              rightTextPadding="pl-8"
             />
           </div>
         </div>
