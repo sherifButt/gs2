@@ -34,11 +34,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
          invalidatesTags: ['Email'],
       }),
       activateUser: builder.mutation({
-         query: body => {
+         query: actUserBody => {
             return {
                url: '/Users/Activate',
                method: 'POST',
-               body,
+               body:actUserBody,
             }
          },
       }),
