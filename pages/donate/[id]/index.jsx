@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import FieldCheckbox from "../../../components/forms/FieldCheckbox";
 import FieldCurrency from "../../../components/forms/FieldCurrency";
 import FieldRadialSelect from "../../../components/forms/FieldRadialSelect";
@@ -36,6 +36,7 @@ const Donate = ({ data: campaignData }) => {
   const { data: userData } = useLoadUserQuery();
   const router = useRouter();
 
+
   const [
     addDonation,
     {
@@ -54,6 +55,15 @@ const Donate = ({ data: campaignData }) => {
   const [donationAmount, setDonationAmount] = useState(
     campaignData?.defaultDonationSizes[2].value
   );
+
+  const scrollTo = (ref) => {
+    console.log("Scroll Start", ref);
+    if (ref && ref.current) {
+      console.log("Scrolling..", ref);
+      ref.current.scrollIntoView({ alignToTop: true, behaviour: 'smooth', block: 'start' });
+    }
+
+  }
 
   const formInitialData = {
     id: "00000000-0000-0000-0000-000000000000",
@@ -152,6 +162,11 @@ const Donate = ({ data: campaignData }) => {
     });
   }, []);
 
+  //Paging references (for scroll)
+  const dws1 = useRef(); //voluntary contribution section
+  const dws2 = useRef(); //gift aid ask
+  const dws3 = useRef(); //donation summary
+
   return (
     <form className="divide-y mx-4 text-center">
       <div className="flex flex-col gap-3 justify-start items-center py-2 -mt-4 sm:mt-0">
@@ -184,13 +199,14 @@ const Donate = ({ data: campaignData }) => {
                 />
               </div>
               <p className="block w-[3.13rem] text-center text-xs text-stone-800  font-medium line-clamp-2">
-                {item.charityName || "33"}
+                {item.charityName || ""}
               </p>
             </div>
           ))}
         </div>
       </div>
 
+    
       <div className="flex flex-col gap-3 justify-start items-center py-4 ">
         <div>
           <div>
@@ -253,7 +269,7 @@ const Donate = ({ data: campaignData }) => {
               });
             }}
             value={formData.donatorName}
-            validationHandler={(e) => {}}
+            validationHandler={(e) => { }}
           />
 
           <FieldCheckbox
@@ -285,7 +301,7 @@ const Donate = ({ data: campaignData }) => {
               });
             }}
             value={formData.donatorEmail}
-            validationHandler={(e) => {}}
+            validationHandler={(e) => { }}
           />
           <FieldTextarea
             className="mb-10"
@@ -298,9 +314,12 @@ const Donate = ({ data: campaignData }) => {
           />
         </div>
       </div>
+
       {/* Voluntary contribution */}
+   
       {page >= 1 && (
         <div className="flex flex-col gap-3 justify-start items-center py-8 ">
+          
           <div>
             <div>
               <p className="block text-center text-xl text-stone-800  font-bold py-4">
@@ -347,9 +366,9 @@ const Donate = ({ data: campaignData }) => {
                   voluntaryContribution: Number(e.target.value),
                 });
               }}
-              value={formData.voluntaryContribution || 0.10*formData.amount}
+              value={formData.voluntaryContribution || 0.10 * formData.amount}
               validationHandler={(e) => {
-                
+
 
               }}
               step={1}
@@ -360,7 +379,9 @@ const Donate = ({ data: campaignData }) => {
           </div>
         </div>
       )}
+         <div ref={dws1}></div>
       {/* Gift Aid */}
+      
       {page == 2 && (
         <div
           className="flex flex-col gap-3 justify-between
@@ -426,6 +447,8 @@ const Donate = ({ data: campaignData }) => {
         </div>
       )}
 
+<div ref={dws2}></div>
+
       {/* Gift Aid Information */}
       {giftAid && (
         <div className="flex flex-col gap-3 justify-start items-center py-8 ">
@@ -477,7 +500,7 @@ const Donate = ({ data: campaignData }) => {
                   });
                 }}
                 value={formData.giftAidRequest.donatorName}
-                validationHandler={(e) => {}}
+                validationHandler={(e) => { }}
               />
               <FieldText
                 // hidden={user?.surname}
@@ -496,7 +519,7 @@ const Donate = ({ data: campaignData }) => {
                   });
                 }}
                 value={formData.giftAidRequest.donatorEmail}
-                validationHandler={(e) => {}}
+                validationHandler={(e) => { }}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 justify-between my-8">
@@ -517,7 +540,7 @@ const Donate = ({ data: campaignData }) => {
                   });
                 }}
                 value={formData.giftAidRequest.addressLine1}
-                validationHandler={(e) => {}}
+                validationHandler={(e) => { }}
               />
               <FieldText
                 id="postcode"
@@ -535,13 +558,14 @@ const Donate = ({ data: campaignData }) => {
                   });
                 }}
                 value={formData.giftAidRequest.postZipCode}
-                validationHandler={(e) => {}}
+                validationHandler={(e) => { }}
               />
             </div>
           </div>{" "}
           {/* end hide of area if give aid decs are not both checked */}
         </div>
       )}
+      <div ref={dws3}></div>
       {/* 4. Donation Summary */}
       {donationSummery && (
         <div className="items-center py-8 ">
@@ -641,8 +665,36 @@ const Donate = ({ data: campaignData }) => {
           text={`Continue`}
           actionHandler={(e) => {
             e.preventDefault();
+
+
+
             setPage(page + 1);
-            if (giftAid && page == 3) setDonationSummery(true);
+
+            console.log("Page", page);
+
+            switch (page) {
+              case 0:
+                //Scroll to voluntary contribution section
+               // scrollTo(dws1);
+                break;
+              case 1:
+                //scrollTo(dws1);
+                break;
+              case 2:
+                //scrollTo(dws3);
+                break;
+
+              default:
+                break;
+            }
+
+
+
+
+            if (giftAid && page == 3) {
+              
+              setDonationSummery(true);
+            }
           }}
         />
       )}
