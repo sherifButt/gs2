@@ -79,8 +79,8 @@ const FieldCurrency = (
                      {fieldData
                         ? fieldData?.filter(
                              item => item.id == selectedCurrencyId
-                          )[0].displaySymbol
-                        : _baseCurrency.displaySymbol}
+                          )[0]?.displaySymbol
+                        : _baseCurrency?.displaySymbol}
                   </span>
                </div>
                {error && (
@@ -137,7 +137,7 @@ const FieldCurrency = (
                      className=' h-full py-0 pl-2 pr-10 border-transparent bg-transparent text-gray-500  pt-1 rounded-md text-xl'>
                      {(fieldData || _fieldData)?.map((item, idx) => {
                         return (
-                           <option key={item.id} value={item.id}>
+                           <option key={item?.id} value={item?.id}>
                               {item.shortCode}
                            </option>
                         )

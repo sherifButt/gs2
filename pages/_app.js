@@ -33,6 +33,14 @@ const layouts = {
    L6: Layout6,
 }
 
+// replace console.* for disable log on production
+if ( process.env.NODE_ENV === 'production' )
+{
+   console.log = ()=>{}
+   console.error = ()=>{}
+   console.debug = ()=>{}
+}
+
 function MyApp({ Component, pageProps }) {
    const Layout =
       typeof Component.layout === 'function'

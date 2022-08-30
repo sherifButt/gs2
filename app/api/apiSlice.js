@@ -1,18 +1,27 @@
+import cc from 'cookie-cutter'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logOut } from '../../features/auth/authSlice'
+
 // import { REHYDRATE } from 'redux-persist'
 import { HYDRATE } from 'next-redux-wrapper'
 
-const baseQuery = fetchBaseQuery( {
+const baseQuery = fetchBaseQuery({
    baseUrl: process.env.baseUrl,
    // send cookie
    // credentials: 'include',
 
-   prepareHeaders: (headers, { getState }) => {
+   prepareHeaders: (headers, { getState, endpoint }) => {
       // const userLocalStorage = JSON.parse(localStorage.getItem( 'user' ))
-      
+      if (endpoint === 'uploadFile') {
+         headers.set('Content-Type', 'multipart/form-data')
+         headers.set('Accept', 'application/json')
+      } else {
+         headers.set('Content-Type', 'application/json')
+      }
+
       const token = getState().auth.token
       // if(!token&&userLocalStorage) token = userLocalStorage.token
+
       if (token) {
          headers.set('authorization', `Bearer ${token}`)
       }
@@ -28,11 +37,20 @@ const baseQuery = fetchBaseQuery( {
 const baseQueryWithReauth = async (args, api, extraOptions) => {
    let result = await baseQuery(args, api, extraOptions)
 
-   if (result?.error?.originalStatus === 403) {
+   if (result?.error && result?.error?.originalStatus === 401) {
       console.log('sending refresh token ✓')
       // send refresh token to get new access token
+      const auth = api.getState()
+      
       const refreshResult = await baseQuery(
-         '/Users/Refresh_Token',
+         {
+            url: '/Users/Refresh_Token',
+            method: 'POST',
+            body: {
+               userId: auth.user ?? '',
+               refreshToken: auth.refreshToken ?? '',
+            },
+         },
          api,
          extraOptions
       )
@@ -53,7 +71,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
    baseQuery: baseQueryWithReauth,
-   
+
    tagTypes: ['Auth', 'User', 'Campaign', 'Charity'],
    endpoints: builder => ({}),
 })

@@ -19,7 +19,13 @@ const SigninForm_00 = ({ className, href }) => {
    const auth = useSelector(selectCurrentAuth)
    const [signinUser, { data, isLoading, isSuccess, isError, error }] =
       useSigninUserMutation()
-   const {data:userData,isLoading:userIsLoading,isSuccess:userIsSuccess,isError:userIsError,error:userError} = useLoadUserQuery(auth?auth.token:skipToken)
+   const {
+      data: userData,
+      isLoading: userIsLoading,
+      isSuccess: userIsSuccess,
+      isError: userIsError,
+      error: userError,
+   } = useLoadUserQuery(auth ? auth.token : skipToken)
 
    // FIX:
    // is there data
@@ -31,27 +37,17 @@ const SigninForm_00 = ({ className, href }) => {
             console.log('-------> data:', data)
             // load user data using id
             const loadUserData = async () => {
-               console.log('auth0', auth)
-               await dispatch( setCredentials( data ) )
-               console.log('auth1', auth)
-               // const user = userData.data
-              
+               await dispatch(setCredentials(data))
             }
             loadUserData()
          }
       }
-   }, [ auth.token ] )
-   
+   }, [auth.token])
+
    useEffect(() => {
-     
-    console.log('-------> user:', userData)
-    // const userData = userData.data
-    // set  user data
-    dispatch(setUser(userData))
-    console.log('-------> userData:', userData)
-     
+      // set user data
+      dispatch(setUser(userData))
    }, [userData])
-   
 
    return (
       <DefaultForm

@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { removeUser } from '../user/userSlice'
+import cookieCutter from 'cookie-cutter'
+
 const initialState = {
    authError: false,
    authMessage: '',
@@ -9,7 +11,7 @@ const initialState = {
    refreshToken: null,
 }
 
-const authSlice = createSlice({
+const authSlice = createSlice( {
    name: 'auth',
    initialState,
    reducers: {
@@ -22,37 +24,37 @@ const authSlice = createSlice({
       ) => {
          localStorage.setItem(
             'user',
-            JSON.stringify({
+            JSON.stringify( {
                isAuthenticated: true,
                user: userId,
                token: accessToken,
                refreshToken,
-            })
+            } )
          )
+         cookieCutter.set('isAuthenticated',true)
          state.isAuthenticated = true
          state.user = userId
          state.token = accessToken
          state.refreshToken = refreshToken
       },
-      logOut: (state) => {
+      logOut: state => {
          localStorage.setItem(
             'user',
-            JSON.stringify({
+            JSON.stringify( {
                isAuthenticated: false,
                user: null,
                token: null,
-               refreshToken:null,
-            })
+               refreshToken: null,
+            } )
          )
+         cookieCutter.set('isAuthenticated', false)
          state.isAuthenticated = false
          state.user = null
          state.token = null
          state.refreshToken = null
-
-         
       },
    },
-})
+} )
 
 export const { signin, setCredentials, logOut } = authSlice.actions
 export default authSlice.reducer
