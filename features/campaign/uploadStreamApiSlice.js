@@ -4,7 +4,7 @@ export const uploadStreamSlice = apiSlice.injectEndpoints({
    endpoints: builder => ({
       uploadStream: builder.mutation({
          query: args => {
-              console.log( args )
+              //console.log( args )
               const {entityId,meditType}= args
             return {
                url: '/upload/stream',

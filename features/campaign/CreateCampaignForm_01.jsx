@@ -157,7 +157,7 @@ const CreateCampaignForm = () => {
           setFormData({ ...formData, name: e.target.value });
         }}
         validationHandler={() => {}}
-        title="The Campaign Name or Event Name."
+        title="Enter a name for your campaign."
         placeholder="Campaign/event name"
         type="text"
         required={true}
@@ -187,7 +187,7 @@ const CreateCampaignForm = () => {
           setFormData({ ...formData, target: Number(e.target.value) });
         }}
         validationHandler={() => {}}
-        title="Your page where you will launch your campaign"
+        title="Enter an initial target to raise for this campaign, you can always change this later if needed."
         placeholder="Fundraising Target"
         type="number"
         required={true}
@@ -204,8 +204,8 @@ const CreateCampaignForm = () => {
           setFormData({ ...formData, description: e.target.value });
         }}
         validationHandler={() => {}}
-        title="Your campaign description, this will help your supporters connect with your cause."
-        placeholder="Description ..."
+        title="Tell people what you are raising for and how you are going to do it."
+        placeholder="About this campaign"
         type="textarea"
         required={true}
         rows={6}

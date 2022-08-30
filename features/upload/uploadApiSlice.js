@@ -10,7 +10,7 @@ export const uploadApiSlice = apiSlice.injectEndpoints({
                method: 'POST',
                body:  file ,
                params: { entityId, mediaType },
-               headers: { 'Content-Type': 'multipart/form-data' },
+               headers: {mimeType: 'multipart/form-data', contentType:false },
             }
          },
       }),
