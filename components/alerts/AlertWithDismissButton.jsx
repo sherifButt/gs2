@@ -3,20 +3,49 @@ import { CheckCircleIcon, XIcon, XCircleIcon } from '@heroicons/react/solid'
 import { Transition } from '@headlessui/react'
 import { motion } from 'framer-motion'
 
-export default function AlertWithDismissButton({ isAlert, isSuccess, message, description }) {
+export default function AlertWithDismissButton({isDefaultShown=false, isAlert, isSuccess, message, description, timeout=1500 }) {
+   
+   const [isShown, setIsShown] = useState(isDefaultShown);
+   const [isLeaving, setIsLeaving] = useState(false);
+
+   let timeoutId = null;
+   
    const [alert, setAlert] = useState({
       isAlert,
       isSuccess,
       message,
       description,
+      timeout,
    })
+
+   const closeAlert =() => {
+      setIsLeaving(true);
+      timeoutId = setTimeout(()=> {
+         setIsLeaving(false);
+         setIsShown(false);
+      }, timeout);
+   }
+
+
+
+
 
    const [show, setShow] = useState(isAlert)
    useEffect(() => {
-      setAlert({ isAlert, isSuccess, message, description })
-   }, [isAlert, isSuccess, message, description])
+      setIsShown(true);
+      return () => {
+         clearTimeout(timeoutId);
+      };
+      //setAlert({ isAlert, isSuccess, message, description, timeout });
+   
+
+   }, [isAlert, isSuccess, message, description, timeout])
+
+
    return (
+      isShown && (
       <>
+      
          <motion.div
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}>
@@ -61,7 +90,7 @@ export default function AlertWithDismissButton({ isAlert, isSuccess, message, de
                            <XIcon
                               className='h-5 w-5'
                               aria-hidden='true'
-                              onClick={() => setShow(!show)}
+                              onClick={() => {closeAlert}}
                            />
                         </button>
                      </div>
@@ -70,6 +99,7 @@ export default function AlertWithDismissButton({ isAlert, isSuccess, message, de
             </div>
          </motion.div>
       </>
+      )
    )
 }
 
@@ -78,4 +108,5 @@ AlertWithDismissButton.defaultProps = {
    isSuccess: true,
    message: '',
    description: '',
+   timeout:5000
 }

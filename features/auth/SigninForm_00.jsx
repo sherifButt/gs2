@@ -28,12 +28,12 @@ const SigninForm_00 = ({ className, href }) => {
          if (data.accessToken) {
             // get user id
             const id = data.useId
-            console.log('-------> data:', data)
+            //console.log('-------> data:', data)
             // load user data using id
             const loadUserData = async () => {
                console.log('auth0', auth)
                await dispatch( setCredentials( data ) )
-               console.log('auth1', auth)
+              // console.log('auth1', auth)
                // const user = userData.data
               
             }
@@ -44,11 +44,11 @@ const SigninForm_00 = ({ className, href }) => {
    
    useEffect(() => {
      
-    console.log('-------> user:', userData)
+    //console.log('-------> user:', userData)
     // const userData = userData.data
     // set  user data
     dispatch(setUser(userData))
-    console.log('-------> userData:', userData)
+    //console.log('-------> userData:', userData)
      
    }, [userData])
    

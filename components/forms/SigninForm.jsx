@@ -103,12 +103,12 @@ const SignupForm = () => {
     });
 
     await signinUser(dataObject);
-    console.log("Form Submitted successfully");
+    //console.log("Form Submitted successfully");
   };
   // manage Global state and notifications
   useEffect(() => {
     if (data?.accessToken) {
-      console.log("data", data);
+      //console.log("data", data);
       localStorage.setItem(
         "login",
         JSON.stringify({ userLogin: true, token: data.accessToken })

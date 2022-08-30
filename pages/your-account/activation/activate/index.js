@@ -46,13 +46,11 @@ const FaillActivationAlert = ({ message }) => {
             </div>
             <div className='ml-3'>
                <h3 className='text-sm font-medium text-red-800'>
-                  Your account <u>Failed</u> to Activate!
+                  Sorry, we couldn&apos;t activate this account...
                </h3>
                <div className='mt-2 text-sm text-red-700'>
                   <p>
-                     <b>{message}</b>, go to your email and copy the
-                     verification link then paste it in your browser. and click
-                     enter.
+                     Please check the activation link sent to you in the email, if you still have problems logging in, just contact us!
                   </p>
                </div>
             </div>
@@ -96,6 +94,6 @@ function Activation() {
    )
 }
 Activation.layout = Layout
-Activation.rightSidebar = RightSidebar
+//Activation.rightSidebar = RightSidebar
 Activation.leftSidebar = LeftSidebar
 export default Activation

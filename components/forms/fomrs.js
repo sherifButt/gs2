@@ -27,7 +27,7 @@ export const signin = {
   method: "post",
   nextForm: {
     isNextForm: true,
-    title: "Do not you have an account?",
+    title: "Don't have an account?",
     cta: "Sign up now →",
     action: "",
     href: "#",
@@ -37,7 +37,7 @@ export const signin = {
   },
   helpForm: {
     isHelpForm: true,
-    title: "TROUBLE SIGNING IN?",
+    title: "Trouble signing in?",
     action: "",
     href: "#",
   },
@@ -138,7 +138,7 @@ export const signup = {
         <h1 className="text-xl font-bold">Welcome to GiveStar!</h1>
 
         <p>
-          We are excited to have you get started. First, you need to confirm
+          We are excited to get you started! First, you need to confirm
           your account. Just go to your email and click the activation link.
         </p>
         <p>The GiveStar Team</p>
@@ -373,7 +373,7 @@ export const createCampaign = {
   method: "post",
   nextForm: {
     isNextForm: false,
-    title: "Do not you have an account?",
+    title: "Don't have an account?",
     cta: "Sign up now →",
     action: "",
     href: "#",
@@ -383,7 +383,7 @@ export const createCampaign = {
   },
   helpForm: {
     isHelpForm: false,
-    title: "TROUBLE SIGNING IN?",
+    title: "Trouble signing in?",
     action: "",
     href: "#",
   },
@@ -403,7 +403,7 @@ export const createCampaign = {
       isNotification: false,
       isSuccess: true,
       message: "Success!",
-      description: "Your are Logged in!",
+      description: "Your are logged in!",
       href: "",
       delay: "",
     },
@@ -448,7 +448,7 @@ export const createCampaign = {
       error: "",
       valid: "",
       title: "The Charity Name.",
-      placeholder: "+ Add Charity Name",
+      placeholder: "+ Add charity name",
       type: "selectmultiple",
       required: false,
       component: FieldCombobox,
@@ -472,7 +472,7 @@ export const createCampaign = {
       description: "",
       error: "",
       valid: "",
-      title: "The Campaign Name or Event Name.",
+      title: "The campaign name or event name.",
       placeholder: "Campaign/event name",
       type: "text",
       required: true,

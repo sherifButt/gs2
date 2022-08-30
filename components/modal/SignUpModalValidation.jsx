@@ -288,7 +288,7 @@ export default function SignUpModal() {
             addNotification({
                isSuccess: false,
                message: 'Signing up Failed!',
-               description: 'Please fix worng fields',
+               description: 'Please fix wrong fields',
             })
          )
          return
