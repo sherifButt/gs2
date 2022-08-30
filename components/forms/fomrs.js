@@ -110,7 +110,7 @@ export const signup = {
     idle: "Sign up",
     action: "signing...",
     success: "Signed up!",
-    error: "Tray Signing up again!",
+    error: "Try signing up again!",
   },
 
   method: "post",
@@ -147,7 +147,7 @@ export const signup = {
     messageMarginTop: "-mt-4",
     description: "",
     href: "",
-    delay: "3700",
+    delay: "50000",
     lottiePath: "email-sent.json",
     lottieSize: "w-72 h-72",
 
@@ -181,10 +181,10 @@ export const signup = {
       title: "",
       placeholder: "Full Name",
       type: "text",
-      required: true,
+      required: false,
       component: FieldText,
       disabled: false,
-      hidden: false,
+      hidden: true,
     },
 
     {
@@ -196,10 +196,10 @@ export const signup = {
       title: "",
       placeholder: "First Name",
       type: "text",
-      required: false,
+      required: true,
       component: FieldText,
       disabled: false,
-      hidden: true,
+      hidden: false,
     },
     {
       name: "LastName",
@@ -210,10 +210,10 @@ export const signup = {
       title: "",
       placeholder: "Last Name",
       type: "text",
-      required: false,
+      required: true,
       component: FieldText,
       disabled: false,
-      hidden: true,
+      hidden: false,
     },
     {
       name: "Email",

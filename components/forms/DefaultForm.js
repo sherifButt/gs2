@@ -137,7 +137,7 @@ function Form({
             isSuccess: false,
             message: form.notification?.error?.message || "Failed!",
             description:
-              "All marked Fields are required! Please fill in required empty fields and try again.",
+              "All marked fields are required! Please fill in required empty fields and try again.",
           })
         );
       return;
